@@ -25,6 +25,11 @@ export const SITE = {
     label: 'Reserve a Table',
   },
 
+  order: {
+    url: 'https://cococabanaoside.com/order',
+    label: 'Order Online',
+  },
+
   hours: [
     { day: 'Monday',    open: false, hours: 'Closed' },
     { day: 'Tuesday',   open: true,  hours: '3:00 PM – 9:00 PM' },

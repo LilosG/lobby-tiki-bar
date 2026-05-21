@@ -32,6 +32,10 @@ const pathname = Astro.url.pathname;
         class="font-[family-name:var(--font-stamp)] text-sm tracking-wider text-sand-muted hover:text-[var(--color-amber)] transition-colors">
         {SITE.phone.display}
       </a>
+      <a href={SITE.order.url} target="_blank" rel="noopener noreferrer"
+        class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-4 py-2 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors duration-200">
+        Order
+      </a>
       <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
         class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-5 py-2 hover:bg-[var(--color-sand)] transition-colors duration-200">
         Reserve
@@ -61,8 +65,12 @@ const pathname = Astro.url.pathname;
       {item.label}
     </a>
   ))}
+  <a href={SITE.order.url} target="_blank" rel="noopener noreferrer"
+    class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
+    Order Online
+  </a>
   <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-    class="mt-4 bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
+    class="mt-2 bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
     Reserve a Table
   </a>
 </div>
