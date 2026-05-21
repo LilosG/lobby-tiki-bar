@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-espresso:       #2C1A0E;
+  --color-espresso-light: #4A2E18;
+  --color-sand:           #F5E6C8;
+  --color-sand-dark:      #E8D5A8;
+  --color-amber:          #E8863A;
+  --color-jungle:         #1B4A3F;
+  --color-teal:           #7ECFBF;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-script:  "Dancing Script", cursive;
+  --font-body:    "DM Sans", sans-serif;
+  --font-stamp:   "Oswald", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-amber);
+    color: var(--color-espresso);
+  }
+
+  body {
+    background-color: var(--color-espresso);
+    color: var(--color-sand);
+    font-family: var(--font-body);
+  }
+}
+
+@layer utilities {
+  .bg-espresso-scroll {
+    background-color: rgba(44, 26, 14, 0.95);
+  }
+  .border-sand-faint {
+    border-color: rgba(245, 230, 200, 0.1);
+  }
+}
+
+  .nav-scrolled {
+    background-color: rgba(44, 26, 14, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(245, 230, 200, 0.1);
+  }
+  .text-sand-muted {
+    color: rgba(245, 230, 200, 0.7);
+  }
+
+  .nav-scrolled {
+    background-color: rgba(44, 26, 14, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(245, 230, 200, 0.1);
+  }
+  .text-sand-muted {
+    color: rgba(245, 230, 200, 0.7);
+  }

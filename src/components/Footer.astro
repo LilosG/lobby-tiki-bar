@@ -1,0 +1,103 @@
+---
+import { SITE } from '../data/site';
+const year = new Date().getFullYear();
+const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const todayName = dayNames[new Date().getDay()];
+---
+
+<footer class="bg-[var(--color-espresso)] border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+    <div>
+      <a href="/" aria-label="The Lobby Tiki Bar">
+        <img src="/images/logo-cream.png" alt="The Lobby Tiki Bar Oceanside California"
+          class="h-16 w-auto mb-6" width="200" height="64" loading="lazy" />
+      </a>
+      <p class="text-[var(--color-sand)]/60 text-sm leading-relaxed font-[family-name:var(--font-body)]">
+        Craft tiki cocktails and island-inspired food in the heart of Oceanside.
+        Inside The Brick Hotel on Pier View Way.
+      </p>
+      <div class="flex gap-4 mt-6">
+        <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer"
+          aria-label="Instagram" class="text-[var(--color-sand)]/40 hover:text-[var(--color-amber)] transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+        </a>
+        <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer"
+          aria-label="Facebook" class="text-[var(--color-sand)]/40 hover:text-[var(--color-amber)] transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        <a href={SITE.social.yelp} target="_blank" rel="noopener noreferrer"
+          aria-label="Yelp" class="text-[var(--color-sand)]/40 hover:text-[var(--color-amber)] transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.16 12.594l-4.995 1.433c-.96.275-1.755-.57-1.383-1.504l2.308-5.888c.348-.888 1.353-1.026 2.057-.3l2.587 2.632c.698.71.393 1.902-.574 1.627zm-4.573 5.288l2.957 4.083c.552.763.186 1.77-.737 2.03l-3.486 1.004c-.921.265-1.789-.378-1.789-1.256V19.32c0-.999 1.002-1.611 1.88-1.138l1.175.7zm-6.18 2.254c0 .878-.868 1.52-1.789 1.256L4.13 20.388c-.923-.26-1.289-1.267-.737-2.03l2.957-4.083c.878-.573 1.88.039 1.88 1.138v4.723zm-4.99-9.943L.424 8.56c-.967.274-1.272-1.043-.574-1.754l2.587-2.633c.704-.726 1.709-.588 2.057.3l2.308 5.888c.372.934-.423 1.779-1.383 1.504zm5.417-7.22V.498C9.834-.38 10.903-.38 11.302.498l2.257 5.475c.372.934-.423 1.779-1.383 1.504L7.18 6.044c-.96-.275-1.255-1.462-.288-1.736l2.942-.335z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase text-[var(--color-amber)] mb-6">Explore</h3>
+      <ul class="space-y-3">
+        {SITE.nav.map((item) => (
+          <li>
+            <a href={item.href}
+              class="text-[var(--color-sand)]/60 hover:text-[var(--color-sand)] text-sm font-[family-name:var(--font-body)] transition-colors">
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li><a href="/blog" class="text-[var(--color-sand)]/60 hover:text-[var(--color-sand)] text-sm font-[family-name:var(--font-body)] transition-colors">Blog</a></li>
+        <li><a href="/contact" class="text-[var(--color-sand)]/60 hover:text-[var(--color-sand)] text-sm font-[family-name:var(--font-body)] transition-colors">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase text-[var(--color-amber)] mb-6">Hours</h3>
+      <ul class="space-y-2">
+        {SITE.hours.map((h) => (
+          <li class:list={[
+            'flex justify-between text-sm gap-4',
+            h.day === todayName ? 'text-[var(--color-sand)] font-medium' : 'text-[var(--color-sand)]/60'
+          ]}>
+            <span class="font-[family-name:var(--font-body)]">{h.day.slice(0,3)}</span>
+            <span class="font-[family-name:var(--font-body)]">{h.hours}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase text-[var(--color-amber)] mb-6">Find Us</h3>
+      <address class="not-italic space-y-3 text-sm text-[var(--color-sand)]/60 font-[family-name:var(--font-body)]">
+        <p>
+          <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
+            class="hover:text-[var(--color-sand)] transition-colors">
+            {SITE.address.street}<br />{SITE.address.city}, {SITE.address.state} {SITE.address.zip}
+          </a>
+        </p>
+        <p><a href={`tel:${SITE.phone.tel}`} class="hover:text-[var(--color-sand)] transition-colors">{SITE.phone.display}</a></p>
+      </address>
+      <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
+        class="inline-block mt-6 bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-sand)] transition-colors w-full text-center">
+        Reserve a Table
+      </a>
+    </div>
+
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-[var(--color-sand)]/30 text-xs font-[family-name:var(--font-body)]">
+        &copy; {year} The Lobby Tiki Bar &bull; 408 Pier View Way, Oceanside, CA 92054
+      </p>
+      <div class="flex gap-6">
+        <a href="/sitemap-index.xml" class="text-[var(--color-sand)]/30 hover:text-[var(--color-sand)]/60 text-xs transition-colors">Sitemap</a>
+        <a href="/contact" class="text-[var(--color-sand)]/30 hover:text-[var(--color-sand)]/60 text-xs transition-colors">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
