@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import PageHero from "../../components/PageHero.astro";
+import CTASection from "../../components/CTASection.astro";
+import { SITE } from "../../data/site";
+---
+<BaseLayout
+  title="The Bar | The Lobby Tiki Bar | Inside The Brick Hotel Oceanside CA"
+  description="The Lobby Tiki Bar is inside The Brick Hotel at 408 Pier View Way in Oceanside CA. Tiki decor, extensive rum program, full cocktail bar. Open Tue-Sun."
+  image="/images/venue-interior-1.jpg"
+>
+  <Nav />
+  <PageHero
+    label="The Venue"
+    title="The Bar"
+    subtitle="Inside The Brick Hotel on Pier View Way. Tiki decor, an extensive rum program, and a space built to transport you."
+    image="/images/venue-interior-1.jpg"
+    imageAlt="The Lobby Tiki Bar interior — tiki decor, bamboo, rum program Oceanside CA"
+    overlay="gradient"
+  />
+
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Space</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">A Tiki Bar Built Right</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
+          The Lobby occupies the ground floor of The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The space is designed to feel like a destination — bamboo, tiki carvings, beaded curtains, tropical foliage, and warm golden light that sets the tone from the moment you walk in.
+        </p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
+          The bar program is anchored by an extensive rum selection. Every spirit is chosen to serve a role in the cocktail program — nothing is here by accident.
+        </p>
+        <ul class="space-y-3">
+          {["Extensive rum program", "Craft tiki cocktails", "Island-inspired food menu", "200+ capacity", "Private event space", "Daily happy hour"].map((item) => (
+            <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm">
+              <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="relative">
+        <img src="/images/venue-interior-2.jpg" alt="Inside The Lobby Tiki Bar Oceanside — bamboo beads, tiki decor"
+          class="w-full aspect-[4/5] object-cover" width="700" height="875" loading="lazy" />
+        <div class="absolute -bottom-4 -right-4 w-full h-full border border-[var(--color-teal)]/20 -z-10"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-[var(--color-jungle)]/30 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Location</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-4">Inside The Brick Hotel</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 mb-2">{SITE.address.full}</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-8">Steps from the Oceanside Pier</p>
+      <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
+        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
+        Get Directions
+      </a>
+    </div>
+  </section>
+
+  <CTASection
+    title="Come See For Yourself"
+    subtitle="Reserve a table or walk in. Open Tuesday through Sunday."
+    primaryLabel="Reserve a Table"
+    primaryHref={SITE.reservations.url}
+    secondaryLabel="View the Menu"
+    secondaryHref="/menu"
+  />
+  <Footer />
+</BaseLayout>

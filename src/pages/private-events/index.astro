@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import PageHero from "../../components/PageHero.astro";
+import CTASection from "../../components/CTASection.astro";
+import { SITE } from "../../data/site";
+
+const eventTypes = [
+  { name: "Birthday Parties", href: "/private-events/birthday-parties", description: "Mark the occasion somewhere memorable. Full bar program, custom packages, and a space that delivers.", image: "/images/venue-interior-1.jpg" },
+  { name: "Corporate Events", href: "/private-events/corporate-events", description: "Team dinners, client entertaining, and company celebrations that people actually want to attend.", image: "/images/venue-interior-2.jpg" },
+  { name: "Bar Buyouts", href: "/private-events/bar-buyouts", description: "The whole space, all yours. Full bar buyouts for groups who want the run of the place.", image: "/images/drink-dsc01014.jpg" },
+  { name: "Rehearsal Dinners", href: "/private-events/rehearsal-dinners", description: "Pre-wedding gatherings with the full tiki experience. An evening your wedding party will remember.", image: "/images/drink-dsc06150.jpg" },
+];
+---
+<BaseLayout
+  title="Private Events Oceanside | The Lobby Tiki Bar | Group Bookings & Buyouts"
+  description="Book a private event at The Lobby Tiki Bar in Oceanside CA. Birthdays, corporate events, bar buyouts, rehearsal dinners. 408 Pier View Way inside The Brick Hotel."
+  image="/images/venue-interior-2.jpg"
+>
+  <Nav />
+  <PageHero
+    label="Group Bookings"
+    title="Private Events in Oceanside"
+    subtitle="The Lobby provides a private event space your guests will actually talk about. Full bar program, island-inspired food, and tiki atmosphere that handles the ambiance."
+    image="/images/venue-interior-2.jpg"
+    imageAlt="Private event venue at The Lobby Tiki Bar Oceanside"
+    overlay="dark"
+  />
+
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12 text-center">What We Host</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {eventTypes.map((event) => (
+          <div class="group flex gap-6 p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+            <div class="w-24 h-24 flex-shrink-0 overflow-hidden">
+              <img src={event.image} alt={event.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                width="96" height="96" loading="lazy" />
+            </div>
+            <div>
+              <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-base tracking-wide mb-2">{event.name}</h3>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{event.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-[var(--color-jungle)]/30 px-6">
+    <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+      {[
+        { label: "Capacity", value: "200+", note: "Full venue" },
+        { label: "Bar Program", value: "Full", note: "Tiki cocktails + rum" },
+        { label: "Location", value: "Pier View Way", note: "Oceanside CA" },
+      ].map((item) => (
+        <div class="border border-white/10 p-8">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{item.label}</p>
+          <p class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-amber)] mb-1">{item.value}</p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">{item.note}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    title="Plan Your Event"
+    subtitle="Tell us what you have in mind. We will put together a package that works for your group."
+    primaryLabel="Email Us"
+    primaryHref={`mailto:${SITE.email}?subject=Private Event Inquiry`}
+    secondaryLabel={SITE.phone.display}
+    secondaryHref={`tel:${SITE.phone.tel}`}
+  />
+  <Footer />
+</BaseLayout>

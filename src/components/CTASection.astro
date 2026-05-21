@@ -1,0 +1,40 @@
+---
+import { SITE } from "../data/site";
+interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  background?: "jungle" | "espresso" | "amber";
+}
+const {
+  title = "Ready to Visit?",
+  subtitle = "Reserve your table or come on in.",
+  primaryLabel = "Reserve a Table",
+  primaryHref = SITE.reservations.url,
+  secondaryLabel,
+  secondaryHref,
+  background = "jungle",
+} = Astro.props;
+const bgClass = { jungle: "bg-[var(--color-jungle)]/30", espresso: "bg-[var(--color-espresso-light)]/20", amber: "bg-[var(--color-amber)]/10" }[background];
+---
+<section class:list={["py-20 px-6 text-center", bgClass]}>
+  <div class="max-w-2xl mx-auto">
+    <h2 class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-sand)] mb-4">{title}</h2>
+    {subtitle && <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 mb-8 leading-relaxed">{subtitle}</p>}
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href={primaryHref} target={primaryHref.startsWith("http") ? "_blank" : undefined} rel={primaryHref.startsWith("http") ? "noopener noreferrer" : undefined}
+        class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
+        {primaryLabel}
+      </a>
+      {secondaryLabel && secondaryHref && (
+        <a href={secondaryHref} target={secondaryHref.startsWith("http") ? "_blank" : undefined} rel={secondaryHref.startsWith("http") ? "noopener noreferrer" : undefined}
+          class="border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
+          {secondaryLabel}
+        </a>
+      )}
+    </div>
+  </div>
+</section>

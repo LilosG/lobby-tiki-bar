@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import CTASection from "../components/CTASection.astro";
+import { SITE } from "../data/site";
+---
+<BaseLayout
+  title="About | The Lobby Tiki Bar | Oceanside CA Tiki Bar Inside The Brick Hotel"
+  description="The Lobby Tiki Bar is Oceanside's craft tiki destination inside The Brick Hotel on Pier View Way. Extensive rum program, signature cocktails, island-inspired food."
+  image="/images/venue-interior-1.jpg"
+>
+  <Nav />
+  <PageHero
+    label="Our Story"
+    title="About The Lobby"
+    subtitle="Craft tiki culture on Pier View Way. Inside The Brick Hotel, steps from the Oceanside pier."
+    image="/images/venue-interior-1.jpg"
+    imageAlt="The Lobby Tiki Bar interior Oceanside CA"
+    overlay="gradient"
+  />
+
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Concept</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">Where Tiki Meets Craft</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
+          The Lobby Tiki Bar is Oceanside's dedicated tiki destination. Situated inside The Brick Hotel on Pier View Way, we built a space that takes the rum program seriously and the atmosphere even more so.
+        </p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
+          Every cocktail on the menu is crafted with intention — house rum blends, fresh juices, house-made syrups, and spirits chosen for the role they play. The food is island-inspired and built to complement what's in the glass.
+        </p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed">
+          Tiki Taco Tuesdays, daily happy hour, live events, and private bookings. The Lobby is built for Oceanside to come as they are and drink well.
+        </p>
+      </div>
+      <div class="relative">
+        <img src="/images/venue-interior-2.jpg" alt="Tiki bar atmosphere at The Lobby Oceanside"
+          class="w-full aspect-[4/5] object-cover" width="700" height="875" loading="lazy" />
+        <div class="absolute -top-4 -left-4 w-full h-full border border-[var(--color-teal)]/20 -z-10"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-[var(--color-jungle)]/30 px-6">
+    <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {[
+        { value: "408", label: "Pier View Way" },
+        { value: "20+", label: "Tiki Cocktails" },
+        { value: "4.7★", label: "Google Rating" },
+        { value: "Tue–Sun", label: "Open Weekly" },
+      ].map((s) => (
+        <div class="border border-white/10 p-6">
+          <p class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-amber)] mb-2">{s.value}</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-60 text-xs tracking-widest uppercase">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    title="Come Experience It"
+    subtitle="408 Pier View Way, Oceanside. Inside The Brick Hotel."
+    primaryLabel="Reserve a Table"
+    primaryHref={SITE.reservations.url}
+    secondaryLabel="Get Directions"
+    secondaryHref={SITE.address.mapsUrl}
+  />
+  <Footer />
+</BaseLayout>

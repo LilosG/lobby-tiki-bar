@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
+import CTASection from "../components/CTASection.astro";
+import { SITE } from "../data/site";
+---
+<BaseLayout
+  title="Happy Hour Oceanside | The Lobby Tiki Bar | Tue-Fri 3-6 PM"
+  description="Best happy hour in Oceanside CA. The Lobby Tiki Bar: discounted cocktails, beer and bites Tuesday through Friday 3-6 PM. Plus 30% off all rum every Tiki Taco Tuesday."
+  image="/images/drink-dsc06150.jpg"
+>
+  <Nav />
+  <PageHero
+    label="Daily Deals"
+    title="Happy Hour"
+    subtitle="Discounted cocktails, beers, wine and bites. Tuesday through Friday on Pier View Way."
+    image="/images/drink-dsc06150.jpg"
+    imageAlt="Happy hour cocktails at The Lobby Tiki Bar Oceanside"
+    overlay="jungle"
+  >
+    <div class="mt-8">
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl">in Oceanside</p>
+    </div>
+  </PageHero>
+
+  <section class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="text-center border border-white/10 p-8">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Days</p>
+          <p class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)]">{SITE.happyHour.days}</p>
+        </div>
+        <div class="text-center border border-[var(--color-amber)]/30 p-8 bg-[var(--color-amber)]/5">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Hours</p>
+          <p class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)]">{SITE.happyHour.hours}</p>
+        </div>
+        <div class="text-center border border-white/10 p-8">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Tuesday</p>
+          <p class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-amber)]">30% Off Rum</p>
+        </div>
+      </div>
+      <div class="max-w-2xl mx-auto">
+        <h2 class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-sand)] mb-4">Oceanside's Best Happy Hour</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
+          The Lobby Tiki Bar runs one of the best happy hours on Pier View Way. Tuesday through Friday from 3 to 6 PM, we discount cocktails, beers, wine, and select bites so you can settle in before the evening picks up.
+        </p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-10">
+          Every Tuesday is Tiki Taco Tuesday — 30% off all rum drinks all night. The weekly ritual Oceanside needed.
+        </p>
+        <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">What to Order</h3>
+        <ul class="space-y-3 mb-10">
+          {["Lobby Mai Tai — the house standard", "Cobra Kai — if you want to commit", "Painkiller Level 1 — start easy", "Draft beers — all $8"].map((item) => (
+            <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm">
+              <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-[var(--color-jungle)]/30 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Tuesday</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-4">Tiki Taco Tuesday</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-xl mx-auto mb-8">
+        30% off all rum drinks. All night. Every Tuesday. Pair with island-inspired tacos and make it a proper evening.
+      </p>
+      <a href="/events/tiki-taco-tuesday"
+        class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
+        Learn More
+      </a>
+    </div>
+  </section>
+
+  <CTASection
+    title="Join Us for Happy Hour"
+    subtitle="Reserve your spot or walk in. Pier View Way, Oceanside."
+    primaryLabel="Reserve a Table"
+    primaryHref={SITE.reservations.url}
+    secondaryLabel="See Full Menu"
+    secondaryHref="/menu"
+  />
+  <Footer />
+</BaseLayout>

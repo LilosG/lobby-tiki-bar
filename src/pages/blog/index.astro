@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import PageHero from "../../components/PageHero.astro";
+
+const posts = [
+  { slug: "best-tiki-bars-oceanside", title: "Best Tiki Bars in Oceanside CA", excerpt: "Oceanside has become a destination for tiki culture on the SoCal coast. Here is the definitive guide to tiki bars in Oceanside and why The Lobby belongs at the top of your list.", date: "2026-05-01", image: "/images/venue-interior-1.jpg" },
+  { slug: "best-tiki-bars-san-diego", title: "Best Tiki Bars in San Diego 2026", excerpt: "San Diego's tiki bar scene has grown significantly. From North County to downtown, here's where to find the best rum programs and signature tiki cocktails in America's Finest City.", date: "2026-04-15", image: "/images/drink-cobra-kai.jpg" },
+  { slug: "happy-hour-oceanside", title: "Best Happy Hour in Oceanside CA | 2026 Guide", excerpt: "Finding the right happy hour in Oceanside takes knowing where to look. We've rounded up the best deals, best vibes, and best cocktails on Pier View Way.", date: "2026-04-01", image: "/images/drink-dsc06150.jpg" },
+  { slug: "things-to-do-oceanside", title: "Things to Do in Oceanside CA | Local Guide", excerpt: "Oceanside is more than a beach town. From the pier to Pier View Way, craft cocktail bars to coastal dining — here's how locals spend time in Oceanside.", date: "2026-03-15", image: "/images/venue-interior-2.jpg" },
+  { slug: "best-bars-oceanside", title: "Best Bars in Oceanside CA 2026", excerpt: "A full guide to the best bars in Oceanside California. Tiki bars, craft cocktail spots, rooftop venues, and the places worth making a night of.", date: "2026-03-01", image: "/images/drink-dsc07144.jpg" },
+];
+---
+<BaseLayout
+  title="Blog | The Lobby Tiki Bar | Oceanside Bars, Tiki Cocktails & Local Guides"
+  description="Tiki bar guides, Oceanside bar recommendations, happy hour guides and local content from The Lobby Tiki Bar on Pier View Way, Oceanside CA."
+>
+  <Nav />
+  <PageHero
+    label="Guides & Stories"
+    title="The Blog"
+    subtitle="Tiki culture, Oceanside bar guides, happy hour recommendations, and local content from The Lobby."
+  />
+
+  <section class="py-16 px-6">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      {posts.map((post, i) => (
+        <a href={`/blog/${post.slug}`}
+          class:list={["group block border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors overflow-hidden", i === 0 ? "md:col-span-2" : ""]}>
+          <div class:list={["overflow-hidden", i === 0 ? "aspect-[21/9]" : "aspect-video"]}>
+            <img src={post.image} alt={post.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70"
+              width={i === 0 ? 1200 : 600} height={i === 0 ? 514 : 338}
+              loading={i === 0 ? "eager" : "lazy"} />
+          </div>
+          <div class="p-6">
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-70 text-xs tracking-widest uppercase mb-2">
+              {new Date(post.date).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+            </p>
+            <h2 class:list={["font-[family-name:var(--font-display)] text-[var(--color-sand)] group-hover:text-[var(--color-amber)] transition-colors mb-3", i === 0 ? "text-3xl" : "text-xl"]}>
+              {post.title}
+            </h2>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{post.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>
