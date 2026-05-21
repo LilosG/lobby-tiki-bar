@@ -56,28 +56,29 @@ const todayHours = (() => {
   </section>
 
   <!-- QUICK INFO BAR -->
-  <section class="bg-[var(--color-jungle)] border-y border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-5 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-      <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-1">Hours Today</p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm">{todayHours}</p>
+  <section class="bg-[var(--color-jungle)] border-y border-white/10 relative">
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-[var(--color-amber)] opacity-30"></div>
+    <div class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-2 lg:grid-cols-4">
+      <div class="text-center py-2 border-r border-white/10 px-4">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Hours Today</p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium">{todayHours}</p>
       </div>
-      <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-1">Happy Hour</p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm">{SITE.happyHour.days}</p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 text-xs">{SITE.happyHour.hours}</p>
+      <div class="text-center py-2 border-r border-white/10 px-4">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Happy Hour</p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium">{SITE.happyHour.days}</p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-xs opacity-60 mt-0.5">{SITE.happyHour.hours}</p>
       </div>
-      <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-1">Location</p>
+      <div class="text-center py-2 border-r border-white/10 px-4">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Location</p>
         <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
-          class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm hover:text-[var(--color-amber)] transition-colors">
+          class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium hover:text-[var(--color-amber)] transition-colors">
           {SITE.address.street}, Oceanside
         </a>
       </div>
-      <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-1">Reservations</p>
+      <div class="text-center py-2 px-4">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Reservations</p>
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-          class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm hover:text-[var(--color-amber)] transition-colors">
+          class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium hover:text-[var(--color-amber)] transition-colors">
           Book Online
         </a>
       </div>
@@ -100,7 +101,7 @@ const todayHours = (() => {
           Inside The Brick Hotel, steps from the Oceanside pier. Come for happy hour. Stay for the Cobra Kai.
         </p>
         <a href="/the-lobby"
-          class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
+          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
           Discover The Bar
         </a>
       </div>
