@@ -3,22 +3,49 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import PageHero from "../../components/PageHero.astro";
-import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
 
 const eventTypes = [
-  { name: "Birthday Parties", href: "/private-events/birthday-parties", description: "Mark the occasion somewhere memorable. Full bar program, custom packages, and a space that delivers.", image: "/images/venue-interior-1.jpg" },
-  { name: "Corporate Events", href: "/private-events/corporate-events", description: "Team dinners, client entertaining, and company celebrations that people actually want to attend.", image: "/images/venue-interior-2.jpg" },
-  { name: "Bar Buyouts", href: "/private-events/bar-buyouts", description: "The whole space, all yours. Full bar buyouts for groups who want the run of the place.", image: "/images/drink-dsc01014.jpg" },
-  { name: "Rehearsal Dinners", href: "/private-events/rehearsal-dinners", description: "Pre-wedding gatherings with the full tiki experience. An evening your wedding party will remember.", image: "/images/drink-dsc06150.jpg" },
+  {
+    name: "Birthday Parties",
+    description: "Mark the occasion somewhere memorable. Full bar program, custom packages, and a space that delivers.",
+    image: "/images/venue-interior-1.jpg",
+    imageAlt: "Birthday party venue at The Lobby Tiki Bar Oceanside",
+  },
+  {
+    name: "Corporate Events",
+    description: "Team dinners, client entertaining, and company celebrations that people actually want to attend.",
+    image: "/images/venue-interior-2.jpg",
+    imageAlt: "Corporate event space at The Lobby Tiki Bar Oceanside",
+  },
+  {
+    name: "Bar Buyouts",
+    description: "The whole space, all yours. Full bar buyouts for groups who want the run of the place.",
+    image: "/images/drink-dsc01014.jpg",
+    imageAlt: "Bar buyout at The Lobby Tiki Bar Oceanside — full venue",
+  },
+  {
+    name: "Rehearsal Dinners",
+    description: "Pre-wedding gatherings with the full tiki experience. An evening your wedding party will remember.",
+    image: "/images/drink-dsc06150.jpg",
+    imageAlt: "Rehearsal dinner at The Lobby Tiki Bar Oceanside",
+  },
+];
+
+const stats = [
+  { label: "Capacity",     value: "200+",           note: "Full venue"         },
+  { label: "Bar Program",  value: "Full",            note: "Tiki cocktails + rum" },
+  { label: "Location",     value: "Pier View Way",   note: "Oceanside CA"       },
 ];
 ---
+
 <BaseLayout
   title="Private Events Oceanside | The Lobby Tiki Bar | Group Bookings & Buyouts"
   description="Book a private event at The Lobby Tiki Bar in Oceanside CA. Birthdays, corporate events, bar buyouts, rehearsal dinners. 408 Pier View Way inside The Brick Hotel."
   image="/images/venue-interior-2.jpg"
 >
   <Nav />
+
   <PageHero
     label="Group Bookings"
     title="Private Events in Oceanside"
@@ -28,19 +55,27 @@ const eventTypes = [
     overlay="dark"
   />
 
+  <!-- Event type cards — full bleed -->
   <section class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12 text-center">What We Host</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4 text-center">What We Host</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12 text-center">Events Worth Talking About</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {eventTypes.map((event) => (
-          <div class="group flex gap-6 p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
-            <div class="w-24 h-24 flex-shrink-0 overflow-hidden">
-              <img src={event.image} alt={event.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                width="96" height="96" loading="lazy" />
+          <div class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+            <div class="aspect-video overflow-hidden">
+              <img
+                src={event.image}
+                alt={event.imageAlt}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
+                width="800" height="450"
+                loading="lazy"
+              />
             </div>
-            <div>
-              <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-base tracking-wide mb-2">{event.name}</h3>
-              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{event.description}</p>
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-8">
+              <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{event.name}</h3>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm leading-relaxed">{event.description}</p>
             </div>
           </div>
         ))}
@@ -48,29 +83,59 @@ const eventTypes = [
     </div>
   </section>
 
-  <section class="py-20 bg-[var(--color-jungle)]/30 px-6">
-    <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-      {[
-        { label: "Capacity", value: "200+", note: "Full venue" },
-        { label: "Bar Program", value: "Full", note: "Tiki cocktails + rum" },
-        { label: "Location", value: "Pier View Way", note: "Oceanside CA" },
-      ].map((item) => (
-        <div class="border border-white/10 p-8">
+  <!-- Stats bar -->
+  <section class="py-16 px-6 bg-[var(--color-jungle)]/30">
+    <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
+      {stats.map((item) => (
+        <div class="bg-[var(--color-espresso)] py-10 px-6 text-center">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{item.label}</p>
-          <p class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-amber)] mb-1">{item.value}</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">{item.note}</p>
+          <p class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-sand)] mb-1">{item.value}</p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm">{item.note}</p>
         </div>
       ))}
     </div>
   </section>
 
-  <CTASection
-    title="Plan Your Event"
-    subtitle="Tell us what you have in mind. We will put together a package that works for your group."
-    primaryLabel="Email Us"
-    primaryHref={`mailto:${SITE.email}?subject=Private Event Inquiry`}
-    secondaryLabel={SITE.phone.display}
-    secondaryHref={`tel:${SITE.phone.tel}`}
-  />
+  <!-- Inquiry section -->
+  <section class="py-24 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Get in Touch</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-4">Plan Your Event</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed">
+          Tell us what you have in mind — group size, occasion, date, and anything else that matters. We'll put together a package that works.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href={`mailto:${SITE.email}?subject=Private Event Inquiry`}
+          class="group flex items-center gap-6 border border-white/10 p-6 hover:border-[var(--color-amber)]/40 transition-colors">
+          <div class="w-12 h-12 border border-[var(--color-amber)]/30 flex items-center justify-center flex-shrink-0 group-hover:border-[var(--color-amber)] transition-colors">
+            <svg class="w-5 h-5 text-[var(--color-amber)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-xs tracking-widest uppercase mb-1">Email Us</p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">{SITE.email}</p>
+          </div>
+        </a>
+
+        <a href={`tel:${SITE.phone.tel}`}
+          class="group flex items-center gap-6 border border-white/10 p-6 hover:border-[var(--color-amber)]/40 transition-colors">
+          <div class="w-12 h-12 border border-[var(--color-amber)]/30 flex items-center justify-center flex-shrink-0 group-hover:border-[var(--color-amber)] transition-colors">
+            <svg class="w-5 h-5 text-[var(--color-amber)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-xs tracking-widest uppercase mb-1">Call Us</p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">{SITE.phone.display}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <Footer />
 </BaseLayout>
