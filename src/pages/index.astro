@@ -102,7 +102,7 @@ const todayHours = (() => {
         </p>
         <a href="/the-lobby"
           class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
-          Discover The Bar
+          Discover The Venue
         </a>
       </div>
       <div class="relative">
@@ -133,13 +133,7 @@ const todayHours = (() => {
               </div>
             )}
             <div class="p-6">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-base tracking-wide">{drink.name}</h3>
-                {'priceNote' in drink
-                  ? <span class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs ml-2 flex-shrink-0">See menu</span>
-                  : <span class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm ml-2 flex-shrink-0">${drink.price}</span>
-                }
-              </div>
+              <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-base tracking-wide mb-2">{drink.name}</h3>
               <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/50 text-xs leading-relaxed">{drink.description}</p>
             </div>
           </div>
@@ -175,8 +169,8 @@ const todayHours = (() => {
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">{SITE.happyHour.hours}</p>
         </div>
         <div class="border border-[var(--color-amber)]/40 p-6 bg-[var(--color-amber)]/10">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Tuesday</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">30% Off All Rum</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Thursday</p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">$6 Mai Tais</p>
         </div>
       </div>
       <a href="/happy-hour"
@@ -229,7 +223,8 @@ const todayHours = (() => {
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {RECURRING_EVENTS.map((event) => (
-          <div class="relative overflow-hidden group">
+          <a href={`/events/${event.slug}`}
+            class="relative overflow-hidden group block border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
             <div class="aspect-video overflow-hidden">
               <img src={event.image} alt={`${event.name} at The Lobby Tiki Bar Oceanside`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
@@ -244,7 +239,7 @@ const todayHours = (() => {
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-wider uppercase mb-3">{event.day} &bull; {event.time}</p>
               <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 text-sm leading-relaxed">{event.description}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       <div class="text-center mt-10">
@@ -291,10 +286,10 @@ const todayHours = (() => {
   <section class="py-16 bg-[var(--color-jungle)]/40 border-y border-white/10 px-6">
     <div class="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
       {[
-        { number: '4.7★', label: 'Google Rating' },
-        { number: '200+', label: 'Seats Available' },
-        { number: '20+', label: 'Tiki Cocktails' },
-        { number: 'Tue–Sun', label: 'Open Weekly' },
+        { number: '4.7★',    label: 'Google Rating'   },
+        { number: '200+',    label: 'Seats Available'  },
+        { number: '20+',     label: 'Tiki Cocktails'   },
+        { number: 'Tue–Sun', label: 'Open Weekly'      },
       ].map((stat) => (
         <div>
           <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-amber)] mb-2">{stat.number}</p>
@@ -310,7 +305,8 @@ const todayHours = (() => {
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">Get Here</p>
       <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">Find Us on Pier View Way</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-2">
-        <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-amber)] transition-colors">{SITE.address.full}</a>
+        <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
+          class="hover:text-[var(--color-amber)] transition-colors">{SITE.address.full}</a>
       </p>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-10">Inside The Brick Hotel &bull; Steps from the Oceanside Pier</p>
       <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
