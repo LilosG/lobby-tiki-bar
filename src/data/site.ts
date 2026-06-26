@@ -46,6 +46,11 @@ export const SITE = {
     note: 'Daily specials all week. See happy hour page for full schedule.',
   },
 
+  brunch: {
+    days: 'Saturday & Sunday',
+    hours: '10:00 AM – 3:00 PM',
+  },
+
   social: {
     instagram: 'https://instagram.com/lobbytikibar',
     facebook:  'https://facebook.com/lobbytikibar',
@@ -53,13 +58,14 @@ export const SITE = {
   },
 
   nav: [
-    { label: 'Menu',           href: '/menu' },
-    { label: 'Happy Hour',     href: '/happy-hour' },
-    { label: 'Events',         href: '/events' },
+    { label: 'Menu',           href: '/menu'           },
+    { label: 'Brunch',         href: '/brunch'         },
+    { label: 'Happy Hour',     href: '/happy-hour'     },
+    { label: 'Events',         href: '/events'         },
     { label: 'Private Events', href: '/private-events' },
-    { label: 'Venue',          href: '/the-lobby' },
-    { label: 'About',          href: '/about' },
-    { label: 'Blog',           href: '/blog' },
+    { label: 'Venue',          href: '/the-lobby'      },
+    { label: 'About',          href: '/about'          },
+    { label: 'Blog',           href: '/blog'           },
   ],
 
   schema: {

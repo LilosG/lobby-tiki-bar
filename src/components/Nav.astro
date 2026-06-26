@@ -11,12 +11,12 @@ const pathname = Astro.url.pathname;
         class="h-12 w-auto" width="180" height="48" />
     </a>
 
-    <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+    <nav class="hidden lg:flex items-center gap-5" aria-label="Main navigation">
       {SITE.nav.map((item) => (
         <a
           href={item.href}
           class:list={[
-            'font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase transition-colors duration-200',
+            'font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase transition-colors duration-200',
             pathname === item.href || pathname.startsWith(item.href + '/')
               ? 'text-[var(--color-amber)]'
               : 'text-[var(--color-sand)] hover:text-[var(--color-amber)]',
@@ -29,15 +29,15 @@ const pathname = Astro.url.pathname;
 
     <div class="hidden lg:flex items-center gap-4">
       <a href={`tel:${SITE.phone.tel}`}
-        class="font-[family-name:var(--font-stamp)] text-sm tracking-wider text-sand-muted hover:text-[var(--color-amber)] transition-colors">
+        class="font-[family-name:var(--font-stamp)] text-xs tracking-wider text-sand-muted hover:text-[var(--color-amber)] transition-colors">
         {SITE.phone.display}
       </a>
       <a href={SITE.order.url} target="_blank" rel="noopener noreferrer"
-        class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-4 py-2 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors duration-200">
+        class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-4 py-2 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors duration-200">
         Order
       </a>
       <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-        class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-5 py-2 hover:bg-[var(--color-sand)] transition-colors duration-200">
+        class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-5 py-2 hover:bg-[var(--color-sand)] transition-colors duration-200">
         Reserve
       </a>
     </div>
@@ -52,7 +52,7 @@ const pathname = Astro.url.pathname;
 </header>
 
 <div id="mobile-menu"
-  class="fixed inset-0 z-40 bg-[var(--color-espresso)] flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-300 lg:hidden"
+  class="fixed inset-0 z-40 bg-[var(--color-espresso)] flex flex-col items-center justify-center gap-6 translate-x-full transition-transform duration-300 lg:hidden"
   aria-hidden="true">
   <button id="mobile-menu-close" class="absolute top-6 right-6 text-[var(--color-sand)] p-2" aria-label="Close menu">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,16 +61,16 @@ const pathname = Astro.url.pathname;
   </button>
   {SITE.nav.map((item) => (
     <a href={item.href}
-      class="font-[family-name:var(--font-stamp)] text-2xl tracking-widest uppercase text-[var(--color-sand)] hover:text-[var(--color-amber)] transition-colors">
+      class="font-[family-name:var(--font-stamp)] text-xl tracking-widest uppercase text-[var(--color-sand)] hover:text-[var(--color-amber)] transition-colors">
       {item.label}
     </a>
   ))}
   <a href={SITE.order.url} target="_blank" rel="noopener noreferrer"
-    class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
+    class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
     Order Online
   </a>
   <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-    class="mt-2 bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
+    class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
     Reserve a Table
   </a>
 </div>
