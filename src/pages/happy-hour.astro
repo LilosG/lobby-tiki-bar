@@ -18,88 +18,180 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
   <PageHero
     label="Daily Deals"
     title="Happy Hour"
-    subtitle="Daily specials Monday through Friday on Pier View Way."
+    subtitle="Something different every day. Monday through Friday on Pier View Way."
     image="/images/drink-dsc06150.jpg"
     imageAlt="Happy hour cocktails at The Lobby Tiki Bar Oceanside"
     overlay="jungle"
   >
-    <div class="mt-8">
+    <div class="mt-6">
       <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl">in Oceanside</p>
     </div>
   </PageHero>
 
-  <!-- Weekly Specials -->
-  <section class="py-24 px-6">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Mon – Fri</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Weekly Specials</h2>
+  <!-- QUICK STATS -->
+  <section class="bg-[var(--color-jungle)] border-y border-white/10">
+    <div class="max-w-4xl mx-auto px-6 grid grid-cols-3 divide-x divide-white/10">
+      <div class="text-center py-8 px-6">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Days</p>
+        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">Mon – Fri</p>
       </div>
+      <div class="text-center py-8 px-6">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Hours</p>
+        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">3 – 5 PM</p>
+      </div>
+      <div class="text-center py-8 px-6">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Location</p>
+        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">Pier View Way</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-20">
-        {WEEKLY_SPECIALS.map((item) => (
-          <div class="border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors p-6 text-center">
-            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">
-              {item.short}
-            </p>
-            <p class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] leading-snug mb-1">
-              {item.deal}
-            </p>
+  <!-- WEEKLY SPECIALS -->
+  <section class="py-28 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Something Different Every Day</p>
+        <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">Weekly Specials</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-5 border border-white/10">
+        {WEEKLY_SPECIALS.map((item, i) => (
+          <div class:list={[
+            "p-8 sm:p-10 text-center border-b sm:border-b-0 sm:border-r border-white/10 last:border-0",
+            "hover:bg-[var(--color-amber)]/5 transition-colors duration-300",
+          ]}>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-5">{item.short}</p>
+            <p class="font-[family-name:var(--font-display)] text-2xl sm:text-3xl text-[var(--color-sand)] leading-tight mb-2">{item.deal}</p>
             {item.note && (
-              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">
-                {item.note}
-              </p>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mt-2">{item.note}</p>
             )}
           </div>
         ))}
       </div>
+    </div>
+  </section>
 
-      <!-- Happy Hour Deals -->
-      <div class="border border-[var(--color-amber)]/20 bg-[var(--color-amber)]/5 p-8 sm:p-12">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4 text-center">Happy Hour Menu</p>
-        <h3 class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-sand)] text-center mb-10">Drinks & Bites</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-          <div>
-            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">Drinks</p>
-            <ul class="space-y-3">
-              {HAPPY_HOUR_DEALS.drinks.map((item) => (
-                <li class="flex justify-between items-center border-b border-white/10 pb-3">
-                  <span class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-80">{item.label}</span>
-                  <span class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] tracking-wider">{item.price}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">
-              Food — {HAPPY_HOUR_DEALS.food.price} Each
-            </p>
-            <ul class="space-y-3">
-              {HAPPY_HOUR_DEALS.food.items.map((item) => (
-                <li class="flex items-center gap-3 border-b border-white/10 pb-3">
-                  <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
-                  <span class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-80">{item}</span>
-                </li>
-              ))}
-            </ul>
+  <!-- SPLIT: COCKTAIL IMAGE + HH DEALS -->
+  <section class="border-t border-white/10">
+    <div class="grid lg:grid-cols-2 min-h-[600px]">
+
+      <!-- Image side -->
+      <div class="relative overflow-hidden min-h-[400px] lg:min-h-0">
+        <img
+          src="/images/drink-dsc01014.jpg"
+          alt="Lobby Mai Tai — The Lobby Tiki Bar Oceanside happy hour cocktail"
+          class="w-full h-full object-cover absolute inset-0"
+          width="900" height="900"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[var(--color-espresso)]/60 lg:to-[var(--color-espresso)]/80"></div>
+        <div class="absolute bottom-8 left-8">
+          <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-4xl">Lobby Mai Tai</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase mt-1">The house standard</p>
+        </div>
+      </div>
+
+      <!-- Deals side -->
+      <div class="bg-[var(--color-jungle)]/20 flex items-center px-10 py-16 lg:px-16">
+        <div class="w-full max-w-sm">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Happy Hour Menu</p>
+          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-10">Drinks &amp; Bites</h2>
+
+          <div class="space-y-8">
+            <div>
+              <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">Drinks</p>
+              <ul class="space-y-4">
+                {HAPPY_HOUR_DEALS.drinks.map((item) => (
+                  <li class="flex justify-between items-center pb-4 border-b border-white/10">
+                    <span class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">{item.label}</span>
+                    <span class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xl tracking-wider">{item.price}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">
+                Bites — {HAPPY_HOUR_DEALS.food.price} each
+              </p>
+              <ul class="space-y-3">
+                {HAPPY_HOUR_DEALS.food.items.map((item) => (
+                  <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70">
+                    <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Tiki Taco Tuesday callout -->
-  <section class="py-20 bg-[var(--color-jungle)]/30 px-6">
-    <div class="max-w-3xl mx-auto text-center">
+  <!-- TIKI TACO TUESDAY -->
+  <section class="relative py-28 overflow-hidden px-6">
+    <div class="absolute inset-0">
+      <img
+        src="/images/venue-interior-1.jpg"
+        alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside"
+        class="w-full h-full object-cover opacity-20"
+        width="1800" height="900"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-[var(--color-espresso)]/80"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Tuesday</p>
-      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-4">Tiki Taco Tuesday</h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-xl mx-auto mb-8">
+      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] mb-2">Tiki Taco</h2>
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-5xl sm:text-6xl mb-8">Tuesday</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-lg mx-auto mb-10 leading-relaxed text-lg">
         $6 Tacos and $5 Wells all evening. The weekly ritual Oceanside needed.
       </p>
       <a href="/events/tiki-taco-tuesday"
-        class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
+        class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
         Event Details
       </a>
+    </div>
+  </section>
+
+  <!-- FEATURED COCKTAILS -->
+  <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">What to Order</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Start Here</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { name: 'Lobby Mai Tai',  image: '/images/drink-dsc01014.jpg',  note: 'The house standard'  },
+          { name: 'Cobra Kai',      image: '/images/drink-cobra-kai.jpg',  note: 'If you want to commit' },
+          { name: 'Painkiller',     image: '/images/drink-dsc07144.jpg',   note: 'Three levels of intensity' },
+          { name: 'Toucan Slam',    image: '/images/drink-toucan-slam.jpg', note: 'Dark rum float'       },
+        ].map((drink) => (
+          <a href="/menu#cocktails" class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors">
+            <div class="aspect-square overflow-hidden">
+              <img
+                src={drink.image}
+                alt={`${drink.name} at The Lobby Tiki Bar Oceanside`}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                width="400" height="400"
+                loading="lazy"
+              />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/30 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <h3 class="font-[family-name:var(--font-display)] text-base sm:text-lg text-[var(--color-sand)] leading-tight">{drink.name}</h3>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs mt-0.5">{drink.note}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/menu"
+          class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
+          Full Menu
+        </a>
+      </div>
     </div>
   </section>
 

@@ -5,6 +5,9 @@ import Footer from "../../components/Footer.astro";
 import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
 import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "../../data/menu";
+
+const imagedCocktails  = COCKTAILS.filter((c) => c.image !== null);
+const textCocktails    = COCKTAILS.filter((c) => c.image === null);
 ---
 
 <BaseLayout
@@ -14,15 +17,23 @@ import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "
 >
   <Nav />
 
-  <section class="relative pt-32 pb-12 px-6 text-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso-light)]/30 to-[var(--color-espresso)]"></div>
-    <div class="relative z-10">
+  <!-- HERO -->
+  <section class="relative pt-40 pb-20 px-6 overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="/images/drink-cobra-kai.jpg"
+        alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+        class="w-full h-full object-cover opacity-30"
+        width="1800" height="900" fetchpriority="high" />
+      <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/60 via-[var(--color-espresso)]/70 to-[var(--color-espresso)]"></div>
+    </div>
+    <div class="relative z-10 text-center">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">It's Lei'd Back</p>
-      <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">The Menu</h1>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-xl mx-auto mt-4">Craft tiki cocktails, island-inspired plates, and all the happy hour specials.</p>
+      <h1 class="font-[family-name:var(--font-display)] text-6xl sm:text-7xl text-[var(--color-sand)] mb-4">The Menu</h1>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-xl mx-auto">Craft tiki cocktails, island-inspired plates, and all the happy hour specials.</p>
     </div>
   </section>
 
+  <!-- STICKY NAV -->
   <div class="sticky top-16 z-30 bg-[var(--color-espresso)] border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 flex gap-8 overflow-x-auto py-4">
       {[["cocktails","Cocktails"],["food","Food"],["beer-wine","Beer & Wine"],["non-alcoholic","Non-Alcoholic"]].map(([id, label]) => (
@@ -34,54 +45,77 @@ import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-6 py-16 space-y-24">
+  <div class="max-w-7xl mx-auto px-6 py-20 space-y-28">
 
     <!-- COCKTAILS -->
     <section id="cocktails">
-      <div class="mb-2">
-        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)]">Tiki Cocktails</h2>
+      <div class="mb-4">
+        <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)]">Tiki Cocktails</h2>
       </div>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-10">An ID may be required with specialty vessels.</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {COCKTAILS.map((drink) => (
-          <div class="flex gap-4 p-5 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors group">
-            {drink.image
-              ? (
-                <img src={drink.image} alt={drink.name}
-                  class="w-20 h-20 object-cover flex-shrink-0"
-                  width="80" height="80" loading="lazy" />
-              )
-              : (
-                <div class="w-20 h-20 flex-shrink-0 bg-[var(--color-espresso-light)] border border-white/10 flex items-center justify-center">
-                  <span class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-lg">TL</span>
-                </div>
-              )
-            }
-            <div class="flex-1 min-w-0">
-              <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-sm tracking-wide mb-1">{drink.name}</h3>
-              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{drink.description}</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">An ID may be required with specialty vessels.</p>
+
+      <!-- Full-bleed image cards for cocktails with photos -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+        {imagedCocktails.map((drink) => (
+          <div class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+            <div class="aspect-[3/4] overflow-hidden">
+              <img
+                src={drink.image!}
+                alt={`${drink.name} tiki cocktail at The Lobby Tiki Bar Oceanside`}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                width="500" height="667"
+                loading="lazy"
+              />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+              <h3 class="font-[family-name:var(--font-display)] text-lg sm:text-xl text-[var(--color-sand)] mb-1 leading-tight">{drink.name}</h3>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-xs leading-relaxed hidden sm:block">{drink.description}</p>
               {'note' in drink && (
-                <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-60 text-xs mt-2 tracking-wide">{drink.note}</p>
+                <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-70 text-xs mt-2 tracking-wide">{drink.note}</p>
               )}
             </div>
           </div>
         ))}
       </div>
+
+      <!-- Remaining cocktails (no image) — clean list -->
+      {textCocktails.length > 0 && (
+        <div>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Also on the Menu</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {textCocktails.map((drink) => (
+              <div class="p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+                <h3 class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)] mb-2">{drink.name}</h3>
+                <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{drink.description}</p>
+                {'note' in drink && (
+                  <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-60 text-xs mt-2 tracking-wide">{drink.note}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
 
     <!-- FOOD -->
     <section id="food">
-      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-10">Island Kitchen</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">Island Kitchen</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">Island-inspired plates built to complement the rum program.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {FOOD.map((item) => (
           <div class="group overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
             <div class="aspect-square overflow-hidden">
-              <img src={item.image} alt={item.name}
+              <img
+                src={item.image}
+                alt={`${item.name} at The Lobby Tiki Bar Oceanside CA`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                width="300" height="300" loading="lazy" />
+                width="400" height="400"
+                loading="lazy"
+              />
             </div>
-            <div class="p-4">
-              <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-sm tracking-wide mb-1">{item.name}</h3>
+            <div class="p-5">
+              <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-1">{item.name}</h3>
               <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{item.description}</p>
             </div>
           </div>
@@ -91,29 +125,29 @@ import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "
 
     <!-- BEER & WINE -->
     <section id="beer-wine">
-      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-10">Beer &amp; Wine</h2>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-12">Beer &amp; Wine</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">Draft Beer</h3>
-          <ul class="space-y-2">
+        <div class="border border-white/10 p-8">
+          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Draft Beer</h3>
+          <ul class="space-y-3">
             {DRAFT_BEER.map((b) => (
-              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm border-b border-white/10 pb-2">{b}</li>
+              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">{b}</li>
             ))}
           </ul>
         </div>
-        <div>
-          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">Cans &amp; Bottles</h3>
-          <ul class="space-y-2">
+        <div class="border border-white/10 p-8">
+          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Cans &amp; Bottles</h3>
+          <ul class="space-y-3">
             {CANS_BOTTLES.map((b) => (
-              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm border-b border-white/10 pb-2">{b.name}</li>
+              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">{b.name}</li>
             ))}
           </ul>
         </div>
-        <div>
-          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">Wine</h3>
-          <ul class="space-y-2">
+        <div class="border border-white/10 p-8">
+          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Wine</h3>
+          <ul class="space-y-3">
             {WINE.map((w) => (
-              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm border-b border-white/10 pb-2">{w.name}</li>
+              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">{w.name}</li>
             ))}
           </ul>
         </div>
@@ -122,12 +156,13 @@ import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "
 
     <!-- NON-ALCOHOLIC -->
     <section id="non-alcoholic">
-      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-10">Non-Alcoholic</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">Non-Alcoholic</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">All the flavor. None of the rum.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {NON_ALCOHOLIC.map((d) => (
-          <div class="p-5 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
-            <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-sm tracking-wide mb-2">{d.name}</h3>
-            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{d.description}</p>
+          <div class="p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+            <h3 class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)] mb-2">{d.name}</h3>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{d.description}</p>
           </div>
         ))}
       </div>

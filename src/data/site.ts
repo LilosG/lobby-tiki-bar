@@ -40,8 +40,6 @@ export const SITE = {
     { day: 'Sunday',    open: true,  hours: '10:00 AM – 8:00 PM' },
   ],
 
-  // NOTE: Monday hours pending confirmation — weekly specials show Mon as All Day Happy Hour
-  // but hours above still show Closed. Update hours[0] when confirmed.
   happyHour: {
     days: 'Monday – Friday',
     hours: '3:00 PM – 5:00 PM',
@@ -61,6 +59,7 @@ export const SITE = {
     { label: 'Private Events', href: '/private-events' },
     { label: 'Venue',          href: '/the-lobby' },
     { label: 'About',          href: '/about' },
+    { label: 'Blog',           href: '/blog' },
   ],
 
   schema: {
