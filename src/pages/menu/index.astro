@@ -6,8 +6,8 @@ import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
 import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "../../data/menu";
 
-const imagedCocktails = COCKTAILS.filter((c) => c.image !== null);
-const textCocktails   = COCKTAILS.filter((c) => c.image === null);
+const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
+const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
 ---
 
 <BaseLayout
@@ -21,9 +21,9 @@ const textCocktails   = COCKTAILS.filter((c) => c.image === null);
   <section class="relative pt-40 pb-20 px-6 overflow-hidden">
     <div class="absolute inset-0">
       <img
-        src="/images/drink-bar-lineup.jpg"
-        alt="The full tiki cocktail program at The Lobby Tiki Bar Oceanside CA"
-        class="w-full h-full object-cover opacity-30"
+        src="/images/drink-cobra-kai.jpg"
+        alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+        class="w-full h-full object-cover opacity-25"
         width="1800" height="900"
         fetchpriority="high"
       />
@@ -52,12 +52,10 @@ const textCocktails   = COCKTAILS.filter((c) => c.image === null);
 
     <!-- COCKTAILS -->
     <section id="cocktails">
-      <div class="mb-4">
-        <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)]">Tiki Cocktails</h2>
-      </div>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-2">Tiki Cocktails</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-10">An ID may be required with specialty vessels.</p>
 
-      <!-- Cinematic full-lineup showcase -->
+      <!-- Full-lineup banner -->
       <div class="relative w-full overflow-hidden mb-10 border border-white/10">
         <div class="aspect-[21/8]">
           <img
@@ -72,19 +70,19 @@ const textCocktails   = COCKTAILS.filter((c) => c.image === null);
         <div class="absolute left-0 top-0 bottom-0 flex items-center px-8 sm:px-14">
           <div>
             <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">The Bar Program</p>
-            <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl lg:text-5xl text-[var(--color-sand)] leading-tight">
+            <p class="font-[family-name:var(--font-display)] text-3xl sm:text-5xl text-[var(--color-sand)] leading-tight">
               20+ Tiki<br />Cocktails
             </p>
             <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm max-w-xs leading-relaxed mt-4 hidden sm:block">
-              House rum blends, fresh juice, house-made syrups.<br />Nothing on this menu is here by accident.
+              House rum blends, fresh juice,<br />house-made syrups.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Full-bleed image cards for cocktails with photos -->
+      <!-- Featured cocktail cards — 6 only -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-        {imagedCocktails.map((drink) => (
+        {featuredCocktails.map((drink) => (
           <div class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
             <div class="aspect-[3/4] overflow-hidden">
               <img
@@ -107,43 +105,19 @@ const textCocktails   = COCKTAILS.filter((c) => c.image === null);
         ))}
       </div>
 
-      <!-- Remaining cocktails (no image) -->
-      {textCocktails.length > 0 && (
-        <div>
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Also on the Menu</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {textCocktails.map((drink) => (
-              <div class="p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
-                <h3 class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)] mb-2">{drink.name}</h3>
-                <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{drink.description}</p>
-                {'note' in drink && (
-                  <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-60 text-xs mt-2 tracking-wide">{drink.note}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <!-- Atmosphere bar shot divider -->
-      <div class="mt-12 grid grid-cols-2 gap-3">
-        <div class="relative overflow-hidden aspect-[4/3] border border-white/10">
-          <img
-            src="/images/drink-skull-mugs.jpg"
-            alt="Tiki cocktails at The Lobby Tiki Bar Oceanside"
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            width="800" height="600"
-            loading="lazy"
-          />
-        </div>
-        <div class="relative overflow-hidden aspect-[4/3] border border-white/10">
-          <img
-            src="/images/drink-rooster.jpg"
-            alt="Specialty tiki vessels at The Lobby Tiki Bar Oceanside"
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            width="800" height="600"
-            loading="lazy"
-          />
+      <!-- Remaining cocktails — clean text list -->
+      <div>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Also on the Menu</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {remainingCocktails.map((drink) => (
+            <div class="p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+              <h3 class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)] mb-2">{drink.name}</h3>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{drink.description}</p>
+              {'note' in drink && (
+                <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-60 text-xs mt-2 tracking-wide">{drink.note}</p>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
