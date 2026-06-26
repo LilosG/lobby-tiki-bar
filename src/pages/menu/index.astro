@@ -6,8 +6,8 @@ import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
 import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "../../data/menu";
 
-const imagedCocktails  = COCKTAILS.filter((c) => c.image !== null);
-const textCocktails    = COCKTAILS.filter((c) => c.image === null);
+const imagedCocktails = COCKTAILS.filter((c) => c.image !== null);
+const textCocktails   = COCKTAILS.filter((c) => c.image === null);
 ---
 
 <BaseLayout
@@ -20,10 +20,13 @@ const textCocktails    = COCKTAILS.filter((c) => c.image === null);
   <!-- HERO -->
   <section class="relative pt-40 pb-20 px-6 overflow-hidden">
     <div class="absolute inset-0">
-      <img src="/images/drink-cobra-kai.jpg"
-        alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+      <img
+        src="/images/drink-bar-lineup.jpg"
+        alt="The full tiki cocktail program at The Lobby Tiki Bar Oceanside CA"
         class="w-full h-full object-cover opacity-30"
-        width="1800" height="900" fetchpriority="high" />
+        width="1800" height="900"
+        fetchpriority="high"
+      />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/60 via-[var(--color-espresso)]/70 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center">
@@ -52,7 +55,32 @@ const textCocktails    = COCKTAILS.filter((c) => c.image === null);
       <div class="mb-4">
         <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)]">Tiki Cocktails</h2>
       </div>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">An ID may be required with specialty vessels.</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-10">An ID may be required with specialty vessels.</p>
+
+      <!-- Cinematic full-lineup showcase -->
+      <div class="relative w-full overflow-hidden mb-10 border border-white/10">
+        <div class="aspect-[21/8]">
+          <img
+            src="/images/drink-bar-lineup.jpg"
+            alt="The full tiki cocktail lineup at The Lobby Tiki Bar Oceanside CA"
+            class="w-full h-full object-cover object-center"
+            width="1800" height="686"
+            loading="lazy"
+          />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-espresso)]/90 via-[var(--color-espresso)]/20 to-transparent"></div>
+        <div class="absolute left-0 top-0 bottom-0 flex items-center px-8 sm:px-14">
+          <div>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">The Bar Program</p>
+            <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl lg:text-5xl text-[var(--color-sand)] leading-tight">
+              20+ Tiki<br />Cocktails
+            </p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm max-w-xs leading-relaxed mt-4 hidden sm:block">
+              House rum blends, fresh juice, house-made syrups.<br />Nothing on this menu is here by accident.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <!-- Full-bleed image cards for cocktails with photos -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
@@ -79,7 +107,7 @@ const textCocktails    = COCKTAILS.filter((c) => c.image === null);
         ))}
       </div>
 
-      <!-- Remaining cocktails (no image) — clean list -->
+      <!-- Remaining cocktails (no image) -->
       {textCocktails.length > 0 && (
         <div>
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Also on the Menu</p>
@@ -96,6 +124,28 @@ const textCocktails    = COCKTAILS.filter((c) => c.image === null);
           </div>
         </div>
       )}
+
+      <!-- Atmosphere bar shot divider -->
+      <div class="mt-12 grid grid-cols-2 gap-3">
+        <div class="relative overflow-hidden aspect-[4/3] border border-white/10">
+          <img
+            src="/images/drink-skull-mugs.jpg"
+            alt="Tiki cocktails at The Lobby Tiki Bar Oceanside"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            width="800" height="600"
+            loading="lazy"
+          />
+        </div>
+        <div class="relative overflow-hidden aspect-[4/3] border border-white/10">
+          <img
+            src="/images/drink-rooster.jpg"
+            alt="Specialty tiki vessels at The Lobby Tiki Bar Oceanside"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            width="800" height="600"
+            loading="lazy"
+          />
+        </div>
+      </div>
     </section>
 
     <!-- FOOD -->
@@ -120,6 +170,12 @@ const textCocktails    = COCKTAILS.filter((c) => c.image === null);
             </div>
           </div>
         ))}
+      </div>
+      <div class="mt-8 text-center">
+        <a href="/brunch"
+          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
+          Weekend Brunch Menu →
+        </a>
       </div>
     </section>
 

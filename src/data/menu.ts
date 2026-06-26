@@ -1,16 +1,16 @@
 export const COCKTAILS = [
-  { name: 'Lobby Mai Tai',        description: 'House rum blend, orange curacao, fresh lime juice, orgeat, rock candy',                                                                                         featured: true,  image: '/images/drink-dsc01014.jpg'        },
-  { name: 'Cobra Kai',            description: 'Jamaican pineapple pot stilled rum, Barbados rum, Falernum, fresh lime juice, fresh orange juice, Fashionola mix, dash of absinthe, Angostura bitters',         featured: true,  image: '/images/drink-cobra-kai.jpg'        },
-  { name: 'Temple of Doom',       description: 'Bourbon, house rum blend, Demerara, Falernum, macadamia nut, fresh pineapple juice, fresh lemon juice',                                                         featured: true,  image: '/images/drink-temple-of-doom.jpg'   },
-  { name: 'Jet Ski Money',        description: 'Tequila blanco, Falernum, fresh lime juice, cucumber, mint',                                                                                                    featured: true,  image: '/images/drink-jet-ski-money.jpg'    },
-  { name: 'Concrete Jungle Bird', description: 'Mezcal, strawberry Aperol, fresh pineapple juice, fresh lime juice, Demerara',                                                                                  featured: false, image: null                                 },
-  { name: 'Painkiller',           description: 'House rum blend, pineapple orange cordial, coconut cream, nutmeg',                                            note: 'Available in three levels of intensity',  featured: true,  image: '/images/drink-painkiller.jpg'       },
-  { name: 'Purple Church',        description: 'Gin, Chinola, velvet Falernum, orgeat, lemon',                                                                                                                  featured: false, image: null                                 },
-  { name: 'Astro Chimp',          description: 'House rum blend, coffee & banana liqueur, Coco Lopez, orgeat, cold brew',                                                                                       featured: false, image: null                                 },
-  { name: 'Toucan Slam',          description: 'Dr. Bird, banana liqueur, Coco Lopez, pineapple, lime, dark rum float',                                                                                         featured: true,  image: '/images/drink-toucan-slam.jpg'      },
-  { name: 'Hoot & Hollar',        description: 'White rum, Fassionola, lemon, cinnamon',                                                                                                                        featured: false, image: '/images/drink-hoot-hollar.jpg'      },
-  { name: 'Level Up',             description: '10 or 12 oz Painkiller — pineapple, orange, Coco Lopez, fresh grated nutmeg',                                 note: 'Big Gulp — 10oz or 12oz',                featured: false, image: null                                 },
-  { name: 'Havana Good Time',     description: 'Mango vodka, guava, lemon, simple, cava, soda',                                                               note: 'Big Gulp',                               featured: false, image: '/images/drink-havana-good-time.jpg' },
+  { name: 'Lobby Mai Tai',        description: 'House rum blend, orange curacao, fresh lime juice, orgeat, rock candy',                                                                                         featured: true,  image: '/images/drink-dsc01014.jpg'          },
+  { name: 'Cobra Kai',            description: 'Jamaican pineapple pot stilled rum, Barbados rum, Falernum, fresh lime juice, fresh orange juice, Fashionola mix, dash of absinthe, Angostura bitters',         featured: true,  image: '/images/drink-cobra-kai.jpg'          },
+  { name: 'Temple of Doom',       description: 'Bourbon, house rum blend, Demerara, Falernum, macadamia nut, fresh pineapple juice, fresh lemon juice',                                                         featured: true,  image: '/images/drink-temple-of-doom-2.jpg'   },
+  { name: 'Jet Ski Money',        description: 'Tequila blanco, Falernum, fresh lime juice, cucumber, mint',                                                                                                    featured: true,  image: '/images/drink-lobby-glass.jpg'        },
+  { name: 'Concrete Jungle Bird', description: 'Mezcal, strawberry Aperol, fresh pineapple juice, fresh lime juice, Demerara',                                                                                  featured: false, image: null                                   },
+  { name: 'Painkiller',           description: 'House rum blend, pineapple orange cordial, coconut cream, nutmeg',                                            note: 'Available in three levels of intensity',  featured: true,  image: '/images/drink-painkiller.jpg'         },
+  { name: 'Purple Church',        description: 'Gin, Chinola, velvet Falernum, orgeat, lemon',                                                                                                                  featured: false, image: null                                   },
+  { name: 'Astro Chimp',          description: 'House rum blend, coffee & banana liqueur, Coco Lopez, orgeat, cold brew',                                                                                       featured: false, image: null                                   },
+  { name: 'Toucan Slam',          description: 'Dr. Bird, banana liqueur, Coco Lopez, pineapple, lime, dark rum float',                                                                                         featured: true,  image: '/images/drink-toucan-slam.jpg'        },
+  { name: 'Hoot & Hollar',        description: 'White rum, Fassionola, lemon, cinnamon',                                                                                                                        featured: false, image: '/images/drink-hoot-hollar.jpg'        },
+  { name: 'Level Up',             description: '10 or 12 oz Painkiller — pineapple, orange, Coco Lopez, fresh grated nutmeg',                                 note: 'Big Gulp — 10oz or 12oz',                featured: false, image: null                                   },
+  { name: 'Havana Good Time',     description: 'Mango vodka, guava, lemon, simple, cava, soda',                                                               note: 'Big Gulp',                               featured: false, image: '/images/drink-havana-good-time.jpg'   },
 ] as const;
 
 export const NON_ALCOHOLIC = [
@@ -56,9 +56,9 @@ export const FOOD = [
 ] as const;
 
 export const BRUNCH = [
-  { name: 'Kalua Scramble',           description: 'Slow-roasted kalua pork, scrambled eggs, rice, and island seasonings',                              image: '/images/brunch-kalua-scramble.jpg'   },
-  { name: 'Avocado Toast',            description: 'Smashed avocado, everything bagel seasoning, poached egg, microgreens on toasted sourdough',         image: '/images/brunch-avocado-toast.jpg'    },
-  { name: 'Basic Breaky',             description: 'Two eggs any style, island potatoes, choice of protein, toast',                                      image: '/images/brunch-basic-breaky.jpg'     },
+  { name: 'Kalua Scramble',           description: 'Slow-roasted kalua pork, scrambled eggs, rice, and island seasonings',                              image: '/images/brunch-kalua-scramble.jpg'     },
+  { name: 'Avocado Toast',            description: 'Smashed avocado, everything bagel seasoning, poached egg, microgreens on toasted sourdough',         image: '/images/brunch-avocado-toast.jpg'      },
+  { name: 'Basic Breaky',             description: 'Two eggs any style, island potatoes, choice of protein, toast',                                      image: '/images/brunch-basic-breaky.jpg'       },
   { name: 'Coconut Rum French Toast', description: 'Thick-cut brioche, coconut rum custard, tropical fruit compote, powdered sugar',                     image: '/images/food-coconut-french-toast.jpg' },
-  { name: 'Loco Moco',               description: 'Rice, beef patty, sunny-side egg, brown gravy, island seasoning',                                    image: '/images/food-loco-moco.jpg'          },
+  { name: 'Loco Moco',               description: 'Rice, beef patty, sunny-side egg, brown gravy, island seasoning',                                    image: '/images/food-loco-moco.jpg'            },
 ] as const;
