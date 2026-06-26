@@ -40,10 +40,12 @@ export const SITE = {
     { day: 'Sunday',    open: true,  hours: '10:00 AM – 8:00 PM' },
   ],
 
+  // NOTE: Monday hours pending confirmation — weekly specials show Mon as All Day Happy Hour
+  // but hours above still show Closed. Update hours[0] when confirmed.
   happyHour: {
-    days: 'Tuesday – Friday',
-    hours: '3:00 PM – 6:00 PM',
-    tikTacoNote: '30% off all rum every Tuesday',
+    days: 'Monday – Friday',
+    hours: '3:00 PM – 5:00 PM',
+    note: 'Daily specials all week. See happy hour page for full schedule.',
   },
 
   social: {
@@ -57,7 +59,7 @@ export const SITE = {
     { label: 'Happy Hour',     href: '/happy-hour' },
     { label: 'Events',         href: '/events' },
     { label: 'Private Events', href: '/private-events' },
-    { label: 'The Bar',        href: '/the-lobby' },
+    { label: 'Venue',          href: '/the-lobby' },
     { label: 'About',          href: '/about' },
   ],
 

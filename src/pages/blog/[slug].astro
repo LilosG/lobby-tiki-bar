@@ -1,0 +1,146 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import CTASection from '../../components/CTASection.astro';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.mdx$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title={`${post.data.title} | The Lobby Tiki Bar`}
+  description={post.data.description}
+  image={post.data.image}
+>
+  <Nav />
+
+  <section class="relative pt-32 pb-20 px-6 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src={post.data.image}
+        alt={post.data.imageAlt ?? post.data.title}
+        class="w-full h-full object-cover"
+        width="1800" height="600"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-[var(--color-espresso)]/80"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">
+        {formattedDate}
+      </p>
+      <h1 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl lg:text-6xl text-[var(--color-sand)] leading-tight">
+        {post.data.title}
+      </h1>
+    </div>
+  </section>
+
+  <article class="py-16 px-6">
+    <div class="max-w-2xl mx-auto article-body">
+      <Content />
+    </div>
+  </article>
+
+  <CTASection
+    title="Come See For Yourself"
+    subtitle="408 Pier View Way, Oceanside. Inside The Brick Hotel."
+    primaryLabel="Reserve a Table"
+    primaryHref={SITE.reservations.url}
+    secondaryLabel="View the Menu"
+    secondaryHref="/menu"
+  />
+
+  <Footer />
+</BaseLayout>
+
+<style is:global>
+  .article-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-sand);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-sand);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-body p {
+    font-family: var(--font-body);
+    color: rgba(245, 230, 200, 0.7);
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+  }
+
+  .article-body a {
+    color: var(--color-amber);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .article-body a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+
+  .article-body strong {
+    color: var(--color-sand);
+    font-weight: 500;
+  }
+
+  .article-body ul {
+    margin-bottom: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .article-body ul li {
+    font-family: var(--font-body);
+    color: rgba(245, 230, 200, 0.7);
+    line-height: 1.85;
+    margin-bottom: 0.4rem;
+    list-style: none;
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .article-body ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 5px;
+    height: 5px;
+    background-color: var(--color-amber);
+    border-radius: 50%;
+  }
+
+  .article-body hr {
+    border: none;
+    border-top: 1px solid rgba(245, 230, 200, 0.1);
+    margin: 2rem 0;
+  }
+</style>

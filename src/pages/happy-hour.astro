@@ -1,21 +1,24 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Nav from "../components/Nav.astro";
-import Footer from "../components/Footer.astro";
-import PageHero from "../components/PageHero.astro";
-import CTASection from "../components/CTASection.astro";
-import { SITE } from "../data/site";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import { SITE } from '../data/site';
+import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
 ---
+
 <BaseLayout
-  title="Happy Hour Oceanside | The Lobby Tiki Bar | Tue-Fri 3-6 PM"
-  description="Best happy hour in Oceanside CA. The Lobby Tiki Bar: discounted cocktails, beer and bites Tuesday through Friday 3-6 PM. Plus 30% off all rum every Tiki Taco Tuesday."
+  title="Happy Hour Oceanside | The Lobby Tiki Bar | Daily Specials Mon–Fri"
+  description="Daily happy hour specials at The Lobby Tiki Bar in Oceanside CA. $6 Mai Tais on Thursdays, $6 Tacos on Tuesdays, All Day Happy Hour Mondays. 408 Pier View Way."
   image="/images/drink-dsc06150.jpg"
 >
   <Nav />
+
   <PageHero
     label="Daily Deals"
     title="Happy Hour"
-    subtitle="Discounted cocktails, beers, wine and bites. Tuesday through Friday on Pier View Way."
+    subtitle="Daily specials Monday through Friday on Pier View Way."
     image="/images/drink-dsc06150.jpg"
     imageAlt="Happy hour cocktails at The Lobby Tiki Bar Oceanside"
     overlay="jungle"
@@ -25,53 +28,77 @@ import { SITE } from "../data/site";
     </div>
   </PageHero>
 
-  <section class="py-20 px-6">
-    <div class="max-w-4xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        <div class="text-center border border-white/10 p-8">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Days</p>
-          <p class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)]">{SITE.happyHour.days}</p>
-        </div>
-        <div class="text-center border border-[var(--color-amber)]/30 p-8 bg-[var(--color-amber)]/5">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Hours</p>
-          <p class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)]">{SITE.happyHour.hours}</p>
-        </div>
-        <div class="text-center border border-white/10 p-8">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Tuesday</p>
-          <p class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-amber)]">30% Off Rum</p>
-        </div>
+  <!-- Weekly Specials -->
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Mon – Fri</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Weekly Specials</h2>
       </div>
-      <div class="max-w-2xl mx-auto">
-        <h2 class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-sand)] mb-4">Oceanside's Best Happy Hour</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The Lobby Tiki Bar runs one of the best happy hours on Pier View Way. Tuesday through Friday from 3 to 6 PM, we discount cocktails, beers, wine, and select bites so you can settle in before the evening picks up.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-10">
-          Every Tuesday is Tiki Taco Tuesday — 30% off all rum drinks all night. The weekly ritual Oceanside needed.
-        </p>
-        <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">What to Order</h3>
-        <ul class="space-y-3 mb-10">
-          {["Lobby Mai Tai — the house standard", "Cobra Kai — if you want to commit", "Painkiller Level 1 — start easy", "Draft beers — all $8"].map((item) => (
-            <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm">
-              <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
-              {item}
-            </li>
-          ))}
-        </ul>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-20">
+        {WEEKLY_SPECIALS.map((item) => (
+          <div class="border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors p-6 text-center">
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">
+              {item.short}
+            </p>
+            <p class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] leading-snug mb-1">
+              {item.deal}
+            </p>
+            {item.note && (
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">
+                {item.note}
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <!-- Happy Hour Deals -->
+      <div class="border border-[var(--color-amber)]/20 bg-[var(--color-amber)]/5 p-8 sm:p-12">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4 text-center">Happy Hour Menu</p>
+        <h3 class="font-[family-name:var(--font-display)] text-3xl text-[var(--color-sand)] text-center mb-10">Drinks & Bites</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">Drinks</p>
+            <ul class="space-y-3">
+              {HAPPY_HOUR_DEALS.drinks.map((item) => (
+                <li class="flex justify-between items-center border-b border-white/10 pb-3">
+                  <span class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-80">{item.label}</span>
+                  <span class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] tracking-wider">{item.price}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">
+              Food — {HAPPY_HOUR_DEALS.food.price} Each
+            </p>
+            <ul class="space-y-3">
+              {HAPPY_HOUR_DEALS.food.items.map((item) => (
+                <li class="flex items-center gap-3 border-b border-white/10 pb-3">
+                  <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
+                  <span class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-80">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- Tiki Taco Tuesday callout -->
   <section class="py-20 bg-[var(--color-jungle)]/30 px-6">
     <div class="max-w-3xl mx-auto text-center">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Tuesday</p>
       <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-4">Tiki Taco Tuesday</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-xl mx-auto mb-8">
-        30% off all rum drinks. All night. Every Tuesday. Pair with island-inspired tacos and make it a proper evening.
+        $6 Tacos and $5 Wells all evening. The weekly ritual Oceanside needed.
       </p>
       <a href="/events/tiki-taco-tuesday"
         class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
-        Learn More
+        Event Details
       </a>
     </div>
   </section>
@@ -84,5 +111,6 @@ import { SITE } from "../data/site";
     secondaryLabel="See Full Menu"
     secondaryHref="/menu"
   />
+
   <Footer />
 </BaseLayout>
