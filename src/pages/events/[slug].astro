@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { RECURRING_EVENTS } from '../../data/events';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
@@ -19,19 +20,14 @@ const { event } = Astro.props;
 <BaseLayout
   title={`${event.name} | The Lobby Tiki Bar | Oceanside CA`}
   description={event.description}
-  image={event.image}
+  image={`/images/${event.image.src.split('/').pop()}`}
 >
   <Nav />
 
   <section class="relative pt-32 pb-20 px-6 overflow-hidden">
     <div class="absolute inset-0">
-      <img
-        src={event.image}
-        alt={`${event.name} at The Lobby Tiki Bar Oceanside`}
-        class="w-full h-full object-cover"
-        width="1800" height="600"
-        fetchpriority="high"
-      />
+      <Image src={event.image} alt={`${event.name} at The Lobby Tiki Bar Oceanside`}
+        class="w-full h-full object-cover" width={1800} height={600} loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/80 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 max-w-4xl mx-auto text-center">
@@ -52,9 +48,7 @@ const { event } = Astro.props;
       <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         <div>
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">About This Event</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed text-lg">
-            {event.description}
-          </p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed text-lg">{event.description}</p>
         </div>
         <div class="space-y-6">
           <div class="border border-white/10 p-6">
@@ -65,9 +59,7 @@ const { event } = Astro.props;
           <div class="border border-white/10 p-6">
             <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Where</p>
             <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">The Lobby Tiki Bar</p>
-            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm mt-1">
-              408 Pier View Way<br />Oceanside, CA 92054
-            </p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm mt-1">408 Pier View Way<br />Oceanside, CA 92054</p>
           </div>
           <div class="border border-white/10 p-6">
             <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">The Deal</p>

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -6,11 +7,14 @@ import PageHero from "../components/PageHero.astro";
 import CTASection from "../components/CTASection.astro";
 import { SITE } from "../data/site";
 
+import venueInterior1 from '../assets/images/venue-interior-1.jpg';
+import venueInterior2 from '../assets/images/venue-interior-2.jpg';
+
 const stats = [
-  { value: "200+",    label: "Seats Available"  },
-  { value: "20+",     label: "Tiki Cocktails"   },
-  { value: "4.7★",    label: "Google Rating"    },
-  { value: "Tue–Sun", label: "Open Weekly"      },
+  { value: "200+",    label: "Seats Available" },
+  { value: "20+",     label: "Tiki Cocktails"  },
+  { value: "4.7★",    label: "Google Rating"   },
+  { value: "Tue–Sun", label: "Open Weekly"     },
 ];
 ---
 
@@ -25,12 +29,11 @@ const stats = [
     label="Our Story"
     title="About The Lobby"
     subtitle="Craft tiki culture on Pier View Way. Inside The Brick Hotel, steps from the Oceanside pier."
-    image="/images/venue-interior-1.jpg"
+    image={venueInterior1}
     imageAlt="The Lobby Tiki Bar interior Oceanside CA"
     overlay="gradient"
   />
 
-  <!-- Main narrative -->
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
@@ -47,19 +50,17 @@ const stats = [
         </p>
       </div>
       <div class="relative">
-        <img
-          src="/images/venue-interior-2.jpg"
+        <Image
+          src={venueInterior2}
           alt="Tiki bar atmosphere at The Lobby Oceanside — bamboo, warm light, tiki decor"
           class="w-full aspect-[4/5] object-cover"
-          width="700" height="875"
-          loading="lazy"
+          width={700} height={875}
         />
         <div class="absolute -top-4 -left-4 w-full h-full border border-[var(--color-teal)]/20 -z-10"></div>
       </div>
     </div>
   </section>
 
-  <!-- Stats bar -->
   <section class="py-16 px-6 bg-[var(--color-jungle)]/30">
     <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
       {stats.map((s) => (
@@ -71,7 +72,6 @@ const stats = [
     </div>
   </section>
 
-  <!-- GPH context -->
   <section class="py-24 px-6">
     <div class="max-w-3xl mx-auto text-center">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Part of the Portfolio</p>

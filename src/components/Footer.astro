@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
+import logoCrema from '../assets/images/logo-cream.png';
 const year = new Date().getFullYear();
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const todayName = dayNames[new Date().getDay()];
@@ -10,8 +12,8 @@ const todayName = dayNames[new Date().getDay()];
 
     <div>
       <a href="/" aria-label="The Lobby Tiki Bar">
-        <img src="/images/logo-cream.png" alt="The Lobby Tiki Bar Oceanside California"
-          class="h-16 w-auto mb-6" width="200" height="64" loading="lazy" />
+        <Image src={logoCrema} alt="The Lobby Tiki Bar Oceanside California"
+          class="h-16 w-auto mb-6" width={200} height={64} />
       </a>
       <p class="text-[var(--color-sand)]/60 text-sm leading-relaxed font-[family-name:var(--font-body)]">
         Craft tiki cocktails and island-inspired food in the heart of Oceanside.
@@ -50,7 +52,6 @@ const todayName = dayNames[new Date().getDay()];
             </a>
           </li>
         ))}
-        <li><a href="/blog" class="text-[var(--color-sand)]/60 hover:text-[var(--color-sand)] text-sm font-[family-name:var(--font-body)] transition-colors">Blog</a></li>
         <li><a href="/contact" class="text-[var(--color-sand)]/60 hover:text-[var(--color-sand)] text-sm font-[family-name:var(--font-body)] transition-colors">Contact</a></li>
       </ul>
     </div>

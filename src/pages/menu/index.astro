@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
@@ -6,8 +7,15 @@ import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
 import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "../../data/menu";
 
+import drinkCobraKai  from '../../assets/images/drink-cobra-kai.jpg';
+import drinkBarLineup from '../../assets/images/drink-bar-lineup.jpg';
+import foodSpread2    from '../../assets/images/food-spread-2.jpg';
+
 const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
 const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
+const starters = FOOD.filter((f) => f.category === 'starters');
+const tacos    = FOOD.filter((f) => f.category === 'tacos');
+const entrees  = FOOD.filter((f) => f.category === 'entrees');
 ---
 
 <BaseLayout
@@ -20,14 +28,9 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
   <!-- HERO -->
   <section class="relative pt-40 pb-20 px-6 overflow-hidden">
     <div class="absolute inset-0">
-      <img
-        src="/images/drink-cobra-kai.jpg"
-        alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
-        class="w-full h-full object-cover opacity-25"
-        width="1800" height="900"
-        fetchpriority="high"
-      />
-      <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/60 via-[var(--color-espresso)]/70 to-[var(--color-espresso)]"></div>
+      <Image src={drinkCobraKai} alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+        class="w-full h-full object-cover" width={1800} height={900} loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/30 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">It's Lei'd Back</p>
@@ -48,6 +51,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
     </div>
   </div>
 
+  <!-- COCKTAILS + FOOD -->
   <div class="max-w-7xl mx-auto px-6 py-20 space-y-28">
 
     <!-- COCKTAILS -->
@@ -55,16 +59,10 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
       <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-2">Tiki Cocktails</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-10">An ID may be required with specialty vessels.</p>
 
-      <!-- Full-lineup banner -->
       <div class="relative w-full overflow-hidden mb-10 border border-white/10">
         <div class="aspect-[21/8]">
-          <img
-            src="/images/drink-bar-lineup.jpg"
-            alt="The full tiki cocktail lineup at The Lobby Tiki Bar Oceanside CA"
-            class="w-full h-full object-cover object-center"
-            width="1800" height="686"
-            loading="lazy"
-          />
+          <Image src={drinkBarLineup} alt="The full tiki cocktail lineup at The Lobby Tiki Bar Oceanside CA"
+            class="w-full h-full object-cover object-center" width={1800} height={686} />
         </div>
         <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-espresso)]/90 via-[var(--color-espresso)]/20 to-transparent"></div>
         <div class="absolute left-0 top-0 bottom-0 flex items-center px-8 sm:px-14">
@@ -80,24 +78,19 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
         </div>
       </div>
 
-      <!-- Featured cocktail cards — 6 only -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         {featuredCocktails.map((drink) => (
           <div class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
             <div class="aspect-[3/4] overflow-hidden">
-              <img
-                src={drink.image!}
-                alt={`${drink.name} tiki cocktail at The Lobby Tiki Bar Oceanside`}
+              <Image src={drink.image!} alt={`${drink.name} tiki cocktail at The Lobby Tiki Bar Oceanside`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                width="500" height="667"
-                loading="lazy"
-              />
+                width={500} height={667} />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
               <h3 class="font-[family-name:var(--font-display)] text-lg sm:text-xl text-[var(--color-sand)] mb-1 leading-tight">{drink.name}</h3>
               <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-xs leading-relaxed hidden sm:block">{drink.description}</p>
-              {'note' in drink && (
+              {drink.note && (
                 <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-70 text-xs mt-2 tracking-wide">{drink.note}</p>
               )}
             </div>
@@ -105,7 +98,6 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
         ))}
       </div>
 
-      <!-- Remaining cocktails — clean text list -->
       <div>
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Also on the Menu</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -113,7 +105,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
             <div class="p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
               <h3 class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)] mb-2">{drink.name}</h3>
               <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{drink.description}</p>
-              {'note' in drink && (
+              {drink.note && (
                 <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-60 text-xs mt-2 tracking-wide">{drink.note}</p>
               )}
             </div>
@@ -126,26 +118,65 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
     <section id="food">
       <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">Island Kitchen</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">Island-inspired plates built to complement the rum program.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {FOOD.map((item) => (
-          <div class="group overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
-            <div class="aspect-square overflow-hidden">
-              <img
-                src={item.image}
-                alt={`${item.name} at The Lobby Tiki Bar Oceanside CA`}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                width="400" height="400"
-                loading="lazy"
-              />
+
+      <div class="mb-14">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6 pb-3 border-b border-white/10">Starters</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {starters.map((item) => (
+            <div class="group overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+              <div class="aspect-square overflow-hidden">
+                <Image src={item.image} alt={`${item.name} at The Lobby Tiki Bar Oceanside CA`}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  width={400} height={400} />
+              </div>
+              <div class="p-5">
+                <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-1">{item.name}</h3>
+                <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{item.description}</p>
+              </div>
             </div>
-            <div class="p-5">
-              <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-1">{item.name}</h3>
-              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{item.description}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-      <div class="mt-8 text-center">
+
+      <div class="mb-14">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6 pb-3 border-b border-white/10">Tacos</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {tacos.map((item) => (
+            <div class="group overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+              <div class="aspect-square overflow-hidden">
+                <Image src={item.image} alt={`${item.name} at The Lobby Tiki Bar Oceanside CA`}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  width={400} height={400} />
+              </div>
+              <div class="p-5">
+                <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-1">{item.name}</h3>
+                <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6 pb-3 border-b border-white/10">Plates &amp; Entrees</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {entrees.map((item) => (
+            <div class="group overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+              <div class="aspect-square overflow-hidden">
+                <Image src={item.image} alt={`${item.name} at The Lobby Tiki Bar Oceanside CA`}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  width={400} height={400} />
+              </div>
+              <div class="p-5">
+                <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-1">{item.name}</h3>
+                <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="text-center">
         <a href="/brunch"
           class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
           Weekend Brunch Menu →
@@ -153,7 +184,31 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
       </div>
     </section>
 
-    <!-- BEER & WINE -->
+  </div>
+
+  <!-- TIKI TACO TUESDAY — full-bleed editorial banner -->
+  <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0">
+      <Image src={foodSpread2} alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside CA"
+        class="w-full h-full object-cover" width={1800} height={900} />
+      <div class="absolute inset-0 bg-[var(--color-espresso)]/65"></div>
+    </div>
+    <div class="relative z-10 text-center px-6 py-24">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Tuesday</p>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-4">
+        Tiki Taco<br />Tuesday
+      </h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-base mb-8">$6 Tacos · $5 Wells · All Day</p>
+      <a href="/happy-hour"
+        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
+        View Happy Hour Specials
+      </a>
+    </div>
+  </section>
+
+  <!-- BEER & WINE + NON-ALCOHOLIC -->
+  <div class="max-w-7xl mx-auto px-6 pt-20 pb-20 space-y-28">
+
     <section id="beer-wine">
       <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-12">Beer &amp; Wine</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -184,7 +239,6 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
       </div>
     </section>
 
-    <!-- NON-ALCOHOLIC -->
     <section id="non-alcoholic">
       <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">Non-Alcoholic</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">All the flavor. None of the rum.</p>

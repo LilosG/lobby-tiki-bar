@@ -1,10 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
 import { SITE } from '../../data/site';
 import { BRUNCH } from '../../data/menu';
+
+import brunchSpread    from '../../assets/images/brunch-spread.jpg';
+import drinkMaiTai     from '../../assets/images/drink-mai-tai-glass.jpg';
+import brunchEggs      from '../../assets/images/brunch-eggs.jpg';
+import brunchPlate     from '../../assets/images/brunch-plate.jpg';
+import brunchPlate2    from '../../assets/images/brunch-plate-2.jpg';
+import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
 ---
 
 <BaseLayout
@@ -14,16 +22,10 @@ import { BRUNCH } from '../../data/menu';
 >
   <Nav />
 
-  <!-- HERO -->
   <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
-      <img
-        src="/images/brunch-spread.jpg"
-        alt="Weekend brunch at The Lobby Tiki Bar Oceanside"
-        class="w-full h-full object-cover"
-        width="1800" height="1000"
-        fetchpriority="high"
-      />
+      <Image src={brunchSpread} alt="Weekend brunch at The Lobby Tiki Bar Oceanside"
+        class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/60 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
@@ -46,7 +48,6 @@ import { BRUNCH } from '../../data/menu';
     </div>
   </section>
 
-  <!-- QUICK INFO BAR -->
   <section class="bg-[var(--color-jungle)] border-y border-white/10">
     <div class="max-w-4xl mx-auto px-6 grid grid-cols-3 divide-x divide-white/10">
       <div class="text-center py-8 px-6">
@@ -64,7 +65,6 @@ import { BRUNCH } from '../../data/menu';
     </div>
   </section>
 
-  <!-- BRUNCH PLATES -->
   <section class="py-28 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -74,7 +74,6 @@ import { BRUNCH } from '../../data/menu';
           Island-inspired morning plates. Built for the atmosphere, designed to hold up against the rum program.
         </p>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {BRUNCH.map((item, i) => (
           <div class:list={[
@@ -82,11 +81,11 @@ import { BRUNCH } from '../../data/menu';
             i === 0 ? "md:col-span-2 lg:col-span-1" : ""
           ]}>
             <div class="aspect-[4/3] overflow-hidden">
-              <img
+              <Image
                 src={item.image}
                 alt={`${item.name} at The Lobby Tiki Bar Oceanside brunch`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                width="600" height="450"
+                width={600} height={450}
                 loading={i === 0 ? "eager" : "lazy"}
               />
             </div>
@@ -100,16 +99,12 @@ import { BRUNCH } from '../../data/menu';
     </div>
   </section>
 
-  <!-- SPLIT: COCKTAILS + NARRATIVE -->
   <section class="border-t border-white/10">
     <div class="grid lg:grid-cols-2 min-h-[600px]">
-
       <div class="bg-[var(--color-jungle)]/20 flex items-center px-10 py-16 lg:px-20 order-2 lg:order-1">
         <div class="max-w-md">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Brunch Cocktails</p>
-          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">
-            Tiki Before Noon
-          </h2>
+          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">Tiki Before Noon</h2>
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6">
             The full cocktail program runs through brunch. Painkillers, Mai Tais, and the Cobra Kai don't care what time it is. Neither should you.
           </p>
@@ -122,21 +117,14 @@ import { BRUNCH } from '../../data/menu';
           </a>
         </div>
       </div>
-
       <div class="relative overflow-hidden min-h-[400px] order-1 lg:order-2">
-        <img
-          src="/images/drink-mai-tai-glass.jpg"
-          alt="Lobby Mai Tai cocktail at The Lobby Tiki Bar weekend brunch"
-          class="w-full h-full object-cover absolute inset-0"
-          width="900" height="900"
-          loading="lazy"
-        />
+        <Image src={drinkMaiTai} alt="Lobby Mai Tai cocktail at The Lobby Tiki Bar weekend brunch"
+          class="w-full h-full object-cover absolute inset-0" width={900} height={900} />
         <div class="absolute inset-0 bg-[var(--color-espresso)]/30"></div>
       </div>
     </div>
   </section>
 
-  <!-- BRUNCH ATMOSPHERE GRID -->
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
@@ -145,19 +133,15 @@ import { BRUNCH } from '../../data/menu';
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { image: '/images/brunch-eggs.jpg',       alt: 'Brunch plate at The Lobby Tiki Bar Oceanside' },
-          { image: '/images/brunch-plate.jpg',      alt: 'Island brunch dish at The Lobby Oceanside' },
-          { image: '/images/venue-interior-2.jpg',  alt: 'The Lobby Tiki Bar interior Oceanside CA' },
-          { image: '/images/brunch-plate-2.jpg',    alt: 'Weekend brunch at The Lobby Tiki Bar' },
-        ].map((img) => (
+          { img: brunchEggs,     alt: 'Brunch plate at The Lobby Tiki Bar Oceanside'    },
+          { img: brunchPlate,    alt: 'Island brunch dish at The Lobby Oceanside'       },
+          { img: venueInterior3, alt: 'The Lobby Tiki Bar interior Oceanside CA'        },
+          { img: brunchPlate2,   alt: 'Weekend brunch at The Lobby Tiki Bar'            },
+        ].map((item) => (
           <div class="aspect-square overflow-hidden">
-            <img
-              src={img.image}
-              alt={img.alt}
+            <Image src={item.img} alt={item.alt}
               class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              width="400" height="400"
-              loading="lazy"
-            />
+              width={400} height={400} />
           </div>
         ))}
       </div>

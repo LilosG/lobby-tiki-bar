@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -6,6 +7,18 @@ import PageHero from '../components/PageHero.astro';
 import CTASection from '../components/CTASection.astro';
 import { SITE } from '../data/site';
 import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
+import { COCKTAILS } from '../data/menu';
+
+import drinkDsc06150  from '../assets/images/drink-dsc06150.jpg';
+import drinkDsc01014  from '../assets/images/drink-dsc01014.jpg';
+import venueInterior1 from '../assets/images/venue-interior-1.jpg';
+
+const hhFeatured = [
+  { name: 'Lobby Mai Tai',  drink: COCKTAILS.find(c => c.name === 'Lobby Mai Tai')!,  note: 'The house standard'       },
+  { name: 'Cobra Kai',      drink: COCKTAILS.find(c => c.name === 'Cobra Kai')!,       note: 'If you want to commit'    },
+  { name: 'Painkiller',     drink: COCKTAILS.find(c => c.name === 'Painkiller')!,      note: 'Three levels of intensity'},
+  { name: 'Toucan Slam',    drink: COCKTAILS.find(c => c.name === 'Toucan Slam')!,     note: 'Dark rum float'           },
+];
 ---
 
 <BaseLayout
@@ -19,7 +32,7 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
     label="Daily Deals"
     title="Happy Hour"
     subtitle="Something different every day. Monday through Friday on Pier View Way."
-    image="/images/drink-dsc06150.jpg"
+    image={drinkDsc06150}
     imageAlt="Happy hour cocktails at The Lobby Tiki Bar Oceanside"
     overlay="jungle"
   >
@@ -28,7 +41,6 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
     </div>
   </PageHero>
 
-  <!-- QUICK STATS -->
   <section class="bg-[var(--color-jungle)] border-y border-white/10">
     <div class="max-w-4xl mx-auto px-6 grid grid-cols-3 divide-x divide-white/10">
       <div class="text-center py-8 px-6">
@@ -46,7 +58,6 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
     </div>
   </section>
 
-  <!-- WEEKLY SPECIALS -->
   <section class="py-28 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
@@ -54,11 +65,8 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
         <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">Weekly Specials</h2>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-5 border border-white/10">
-        {WEEKLY_SPECIALS.map((item, i) => (
-          <div class:list={[
-            "p-8 sm:p-10 text-center border-b sm:border-b-0 sm:border-r border-white/10 last:border-0",
-            "hover:bg-[var(--color-amber)]/5 transition-colors duration-300",
-          ]}>
+        {WEEKLY_SPECIALS.map((item) => (
+          <div class="p-8 sm:p-10 text-center border-b sm:border-b-0 sm:border-r border-white/10 last:border-0 hover:bg-[var(--color-amber)]/5 transition-colors duration-300">
             <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-5">{item.short}</p>
             <p class="font-[family-name:var(--font-display)] text-2xl sm:text-3xl text-[var(--color-sand)] leading-tight mb-2">{item.deal}</p>
             {item.note && (
@@ -70,32 +78,21 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
     </div>
   </section>
 
-  <!-- SPLIT: COCKTAIL IMAGE + HH DEALS -->
   <section class="border-t border-white/10">
     <div class="grid lg:grid-cols-2 min-h-[600px]">
-
-      <!-- Image side -->
       <div class="relative overflow-hidden min-h-[400px] lg:min-h-0">
-        <img
-          src="/images/drink-dsc01014.jpg"
-          alt="Lobby Mai Tai — The Lobby Tiki Bar Oceanside happy hour cocktail"
-          class="w-full h-full object-cover absolute inset-0"
-          width="900" height="900"
-          loading="lazy"
-        />
+        <Image src={drinkDsc01014} alt="Lobby Mai Tai — The Lobby Tiki Bar Oceanside happy hour cocktail"
+          class="w-full h-full object-cover absolute inset-0" width={900} height={900} />
         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[var(--color-espresso)]/60 lg:to-[var(--color-espresso)]/80"></div>
         <div class="absolute bottom-8 left-8">
           <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-4xl">Lobby Mai Tai</p>
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase mt-1">The house standard</p>
         </div>
       </div>
-
-      <!-- Deals side -->
       <div class="bg-[var(--color-jungle)]/20 flex items-center px-10 py-16 lg:px-16">
         <div class="w-full max-w-sm">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Happy Hour Menu</p>
           <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-10">Drinks &amp; Bites</h2>
-
           <div class="space-y-8">
             <div>
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">Drinks</p>
@@ -108,7 +105,6 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
                 ))}
               </ul>
             </div>
-
             <div>
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">
                 Bites — {HAPPY_HOUR_DEALS.food.price} each
@@ -128,16 +124,10 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
     </div>
   </section>
 
-  <!-- TIKI TACO TUESDAY -->
   <section class="relative py-28 overflow-hidden px-6">
     <div class="absolute inset-0">
-      <img
-        src="/images/venue-interior-1.jpg"
-        alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside"
-        class="w-full h-full object-cover opacity-20"
-        width="1800" height="900"
-        loading="lazy"
-      />
+      <Image src={venueInterior1} alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside"
+        class="w-full h-full object-cover opacity-20" width={1800} height={900} />
       <div class="absolute inset-0 bg-[var(--color-espresso)]/80"></div>
     </div>
     <div class="relative z-10 max-w-3xl mx-auto text-center">
@@ -154,7 +144,6 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
     </div>
   </section>
 
-  <!-- FEATURED COCKTAILS -->
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
@@ -162,26 +151,17 @@ import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
         <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Start Here</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { name: 'Lobby Mai Tai',  image: '/images/drink-dsc01014.jpg',  note: 'The house standard'  },
-          { name: 'Cobra Kai',      image: '/images/drink-cobra-kai.jpg',  note: 'If you want to commit' },
-          { name: 'Painkiller',     image: '/images/drink-dsc07144.jpg',   note: 'Three levels of intensity' },
-          { name: 'Toucan Slam',    image: '/images/drink-toucan-slam.jpg', note: 'Dark rum float'       },
-        ].map((drink) => (
+        {hhFeatured.map(({ drink, note }) => drink.image && (
           <a href="/menu#cocktails" class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors">
             <div class="aspect-square overflow-hidden">
-              <img
-                src={drink.image}
-                alt={`${drink.name} at The Lobby Tiki Bar Oceanside`}
+              <Image src={drink.image} alt={`${drink.name} at The Lobby Tiki Bar Oceanside`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                width="400" height="400"
-                loading="lazy"
-              />
+                width={400} height={400} />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/30 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-4">
               <h3 class="font-[family-name:var(--font-display)] text-base sm:text-lg text-[var(--color-sand)] leading-tight">{drink.name}</h3>
-              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs mt-0.5">{drink.note}</p>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs mt-0.5">{note}</p>
             </div>
           </a>
         ))}

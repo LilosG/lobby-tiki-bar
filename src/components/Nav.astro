@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
+import logoCrema from '../assets/images/logo-cream.png';
 const pathname = Astro.url.pathname;
 ---
 
@@ -7,8 +9,8 @@ const pathname = Astro.url.pathname;
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
     <a href="/" aria-label="The Lobby Tiki Bar — Home" class="flex-shrink-0">
-      <img src="/images/logo-cream.png" alt="The Lobby Tiki Bar Oceanside California"
-        class="h-12 w-auto" width="180" height="48" />
+      <Image src={logoCrema} alt="The Lobby Tiki Bar Oceanside California"
+        class="h-12 w-auto" width={180} height={48} loading="eager" />
     </a>
 
     <nav class="hidden lg:flex items-center gap-5" aria-label="Main navigation">
@@ -16,10 +18,10 @@ const pathname = Astro.url.pathname;
         <a
           href={item.href}
           class:list={[
-            'font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase transition-colors duration-200',
-            pathname === item.href || pathname.startsWith(item.href + '/')
-              ? 'text-[var(--color-amber)]'
-              : 'text-[var(--color-sand)] hover:text-[var(--color-amber)]',
+            "font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase transition-colors duration-200",
+            pathname === item.href || pathname.startsWith(item.href + "/")
+              ? "text-[var(--color-amber)]"
+              : "text-[var(--color-sand)] hover:text-[var(--color-amber)]",
           ]}
         >
           {item.label}
@@ -29,7 +31,7 @@ const pathname = Astro.url.pathname;
 
     <div class="hidden lg:flex items-center gap-4">
       <a href={`tel:${SITE.phone.tel}`}
-        class="font-[family-name:var(--font-stamp)] text-xs tracking-wider text-sand-muted hover:text-[var(--color-amber)] transition-colors">
+        class="font-[family-name:var(--font-stamp)] text-xs tracking-wider text-[var(--color-sand)]/60 hover:text-[var(--color-amber)] transition-colors">
         {SITE.phone.display}
       </a>
       <a href={SITE.order.url} target="_blank" rel="noopener noreferrer"
@@ -76,28 +78,28 @@ const pathname = Astro.url.pathname;
 </div>
 
 <script>
-  const header = document.getElementById('site-header');
-  const btn = document.getElementById('mobile-menu-btn');
-  const closeBtn = document.getElementById('mobile-menu-close');
-  const menu = document.getElementById('mobile-menu');
+  const header = document.getElementById("site-header");
+  const btn = document.getElementById("mobile-menu-btn");
+  const closeBtn = document.getElementById("mobile-menu-close");
+  const menu = document.getElementById("mobile-menu");
 
-  window.addEventListener('scroll', () => {
+  window.addEventListener("scroll", () => {
     if (window.scrollY > 60) {
-      header?.classList.add('nav-scrolled');
+      header?.classList.add("nav-scrolled");
     } else {
-      header?.classList.remove('nav-scrolled');
+      header?.classList.remove("nav-scrolled");
     }
   });
 
-  btn?.addEventListener('click', () => {
-    menu?.classList.remove('translate-x-full');
-    menu?.setAttribute('aria-hidden', 'false');
-    btn.setAttribute('aria-expanded', 'true');
+  btn?.addEventListener("click", () => {
+    menu?.classList.remove("translate-x-full");
+    menu?.setAttribute("aria-hidden", "false");
+    btn.setAttribute("aria-expanded", "true");
   });
 
-  closeBtn?.addEventListener('click', () => {
-    menu?.classList.add('translate-x-full');
-    menu?.setAttribute('aria-hidden', 'true');
-    btn?.setAttribute('aria-expanded', 'false');
+  closeBtn?.addEventListener("click", () => {
+    menu?.classList.add("translate-x-full");
+    menu?.setAttribute("aria-hidden", "true");
+    btn?.setAttribute("aria-expanded", "false");
   });
 </script>

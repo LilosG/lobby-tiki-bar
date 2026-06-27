@@ -1,41 +1,36 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import PageHero from "../../components/PageHero.astro";
 import { SITE } from "../../data/site";
 
-const eventTypes = [
-  {
-    name: "Birthday Parties",
-    description: "Mark the occasion somewhere memorable. Full bar program, custom packages, and a space that delivers.",
-    image: "/images/venue-interior-1.jpg",
-    imageAlt: "Birthday party venue at The Lobby Tiki Bar Oceanside",
-  },
-  {
-    name: "Corporate Events",
-    description: "Team dinners, client entertaining, and company celebrations that people actually want to attend.",
-    image: "/images/venue-interior-2.jpg",
-    imageAlt: "Corporate event space at The Lobby Tiki Bar Oceanside",
-  },
-  {
-    name: "Bar Buyouts",
-    description: "The whole space, all yours. Full bar buyouts for groups who want the run of the place.",
-    image: "/images/drink-dsc01014.jpg",
-    imageAlt: "Bar buyout at The Lobby Tiki Bar Oceanside — full venue",
-  },
-  {
-    name: "Rehearsal Dinners",
-    description: "Pre-wedding gatherings with the full tiki experience. An evening your wedding party will remember.",
-    image: "/images/drink-dsc06150.jpg",
-    imageAlt: "Rehearsal dinner at The Lobby Tiki Bar Oceanside",
-  },
+import venueInterior1 from '../../assets/images/venue-interior-1.jpg';
+import venueInterior2 from '../../assets/images/venue-interior-2.jpg';
+import drinkDsc01014  from '../../assets/images/drink-dsc01014.jpg';
+import drinkDsc06150  from '../../assets/images/drink-dsc06150.jpg';
+
+import type { ImageMetadata } from 'astro';
+
+interface EventType {
+  name: string;
+  description: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+const eventTypes: EventType[] = [
+  { name: "Birthday Parties",    description: "Mark the occasion somewhere memorable. Full bar program, custom packages, and a space that delivers.",             image: venueInterior1, imageAlt: "Birthday party venue at The Lobby Tiki Bar Oceanside"      },
+  { name: "Corporate Events",    description: "Team dinners, client entertaining, and company celebrations that people actually want to attend.",                  image: venueInterior2, imageAlt: "Corporate event space at The Lobby Tiki Bar Oceanside"    },
+  { name: "Bar Buyouts",         description: "The whole space, all yours. Full bar buyouts for groups who want the run of the place.",                            image: drinkDsc01014,  imageAlt: "Bar buyout at The Lobby Tiki Bar Oceanside — full venue"  },
+  { name: "Rehearsal Dinners",   description: "Pre-wedding gatherings with the full tiki experience. An evening your wedding party will remember.",                image: drinkDsc06150,  imageAlt: "Rehearsal dinner at The Lobby Tiki Bar Oceanside"         },
 ];
 
 const stats = [
-  { label: "Capacity",     value: "200+",           note: "Full venue"         },
-  { label: "Bar Program",  value: "Full",            note: "Tiki cocktails + rum" },
-  { label: "Location",     value: "Pier View Way",   note: "Oceanside CA"       },
+  { label: "Capacity",    value: "200+",         note: "Full venue"           },
+  { label: "Bar Program", value: "Full",          note: "Tiki cocktails + rum" },
+  { label: "Location",    value: "Pier View Way", note: "Oceanside CA"         },
 ];
 ---
 
@@ -50,12 +45,11 @@ const stats = [
     label="Group Bookings"
     title="Private Events in Oceanside"
     subtitle="The Lobby provides a private event space your guests will actually talk about. Full bar program, island-inspired food, and tiki atmosphere that handles the ambiance."
-    image="/images/venue-interior-2.jpg"
+    image={venueInterior2}
     imageAlt="Private event venue at The Lobby Tiki Bar Oceanside"
     overlay="dark"
   />
 
-  <!-- Event type cards — full bleed -->
   <section class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4 text-center">What We Host</p>
@@ -64,13 +58,9 @@ const stats = [
         {eventTypes.map((event) => (
           <div class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
             <div class="aspect-video overflow-hidden">
-              <img
-                src={event.image}
-                alt={event.imageAlt}
+              <Image src={event.image} alt={event.imageAlt}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
-                width="800" height="450"
-                loading="lazy"
-              />
+                width={800} height={450} />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-8">
@@ -83,7 +73,6 @@ const stats = [
     </div>
   </section>
 
-  <!-- Stats bar -->
   <section class="py-16 px-6 bg-[var(--color-jungle)]/30">
     <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
       {stats.map((item) => (
@@ -96,7 +85,6 @@ const stats = [
     </div>
   </section>
 
-  <!-- Inquiry section -->
   <section class="py-24 px-6">
     <div class="max-w-3xl mx-auto">
       <div class="text-center mb-12">
@@ -106,7 +94,6 @@ const stats = [
           Tell us what you have in mind — group size, occasion, date, and anything else that matters. We'll put together a package that works.
         </p>
       </div>
-
       <div class="grid md:grid-cols-2 gap-6">
         <a href={`mailto:${SITE.email}?subject=Private Event Inquiry`}
           class="group flex items-center gap-6 border border-white/10 p-6 hover:border-[var(--color-amber)]/40 transition-colors">
@@ -120,7 +107,6 @@ const stats = [
             <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">{SITE.email}</p>
           </div>
         </a>
-
         <a href={`tel:${SITE.phone.tel}`}
           class="group flex items-center gap-6 border border-white/10 p-6 hover:border-[var(--color-amber)]/40 transition-colors">
           <div class="w-12 h-12 border border-[var(--color-amber)]/30 flex items-center justify-center flex-shrink-0 group-hover:border-[var(--color-amber)] transition-colors">
