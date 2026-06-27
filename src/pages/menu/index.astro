@@ -11,11 +11,13 @@ import drinkCobraKai  from '../../assets/images/drink-cobra-kai.jpg';
 import drinkCobraKaiVessel from '../../assets/images/drink-cobra-kai-vessel.jpg';
 import drinkBarLineup from '../../assets/images/drink-bar-lineup.jpg';
 import foodKaluaTacos3 from '../../assets/images/food-kalua-tacos-3.jpg';
+import drinkCollection from '../../assets/images/drink-collection.jpg';
+import foodSpread1 from '../../assets/images/food-spread-1.jpg';
+import brunchSpread from '../../assets/images/brunch-spread.jpg';
 
 const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
 const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
 const starters = FOOD.filter((f) => f.category === 'starters' || f.category === 'tacos');
-const tacos    = FOOD.filter((f) => f.category === 'tacos');
 const entrees  = FOOD.filter((f) => f.category === 'entrees');
 ---
 
@@ -27,16 +29,20 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
   <Nav />
 
   <!-- HERO -->
-  <section class="relative pt-40 pb-20 px-6 overflow-hidden">
+  <section class="relative min-h-[85vh] flex items-end overflow-hidden">
     <div class="absolute inset-0">
       <Image src={drinkCobraKaiVessel} alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
-        class="w-full h-full object-cover" width={1800} height={900} loading="eager" />
-      <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/30 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
+        class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)] via-[var(--color-espresso)]/40 to-transparent"></div>
     </div>
-    <div class="relative z-10 text-center">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">It's Lei'd Back</p>
-      <h1 class="font-[family-name:var(--font-display)] text-6xl sm:text-7xl text-[var(--color-sand)] mb-4">The Menu</h1>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-xl mx-auto">Craft tiki cocktails, island-inspired plates, and all the happy hour specials.</p>
+    <div class="relative z-10 px-8 sm:px-14 pb-16 max-w-2xl">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">408 Pier View Way · Oceanside</p>
+      <h1 class="font-[family-name:var(--font-display)] text-7xl sm:text-8xl text-[var(--color-sand)] leading-none mb-4">The Menu</h1>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 max-w-md leading-relaxed mb-8">Craft tiki cocktails, island-inspired plates, and all the happy hour specials.</p>
+      <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
+        class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
+        Reserve a Table
+      </a>
     </div>
   </section>
 
@@ -51,6 +57,52 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
       ))}
     </div>
   </div>
+
+  <!-- EXPLORE THE BAR -->
+  <section class="max-w-7xl mx-auto px-6 pt-20 pb-0">
+    <div class="mb-10">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">The Lobby Tiki Bar</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Explore the Bar</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="#cocktails" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+        <div class="aspect-[3/2] overflow-hidden">
+          <Image src={drinkCollection} alt="Tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            width={700} height={467} />
+        </div>
+        <div class="p-6">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">The Bar Program</p>
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Tiki Cocktails</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">20+ craft tiki cocktails. House rum blends, fresh juice, house-made syrups.</p>
+        </div>
+      </a>
+      <a href="#food" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+        <div class="aspect-[3/2] overflow-hidden">
+          <Image src={foodSpread1} alt="Island-inspired food at The Lobby Tiki Bar Oceanside CA"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            width={700} height={467} />
+        </div>
+        <div class="p-6">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">The Kitchen</p>
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Island Kitchen</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">Island-inspired plates built to complement the rum program.</p>
+        </div>
+      </a>
+      <a href="/brunch" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+        <div class="aspect-[3/2] overflow-hidden">
+          <Image src={brunchSpread} alt="Weekend brunch at The Lobby Tiki Bar Oceanside CA"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            width={700} height={467} />
+        </div>
+        <div class="p-6">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">Saturday &amp; Sunday</p>
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Weekend Brunch</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">10 AM &ndash; 3 PM. Island plates, morning cocktails, and the full bar program.</p>
+        </div>
+      </a>
+    </div>
+  </section>
 
   <!-- COCKTAILS + FOOD -->
   <div class="max-w-7xl mx-auto px-6 py-20 space-y-28">
@@ -139,24 +191,6 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
         </div>
       </div>
 
-      <div class="mb-14">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6 pb-3 border-b border-white/10">Tacos</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {tacos.map((item) => (
-            <div class="group overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
-              <div class="aspect-square overflow-hidden">
-                <Image src={item.image} alt={`${item.name} at The Lobby Tiki Bar Oceanside CA`}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  width={400} height={400} />
-              </div>
-              <div class="p-5">
-                <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-1">{item.name}</h3>
-                <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-xs leading-relaxed">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       <div class="mb-8">
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6 pb-3 border-b border-white/10">Plates &amp; Entrees</p>
