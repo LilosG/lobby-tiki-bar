@@ -1,6 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
 import drinkDsc01014       from '../assets/images/drink-dsc01014.jpg';
+import drinkRoosterVessel  from '../assets/images/drink-rooster-vessel.jpg';
 import drinkCobraKai       from '../assets/images/drink-cobra-kai.jpg';
 import drinkTempleOfDoom2  from '../assets/images/drink-temple-of-doom-2.jpg';
 import drinkLobbyGlass     from '../assets/images/drink-lobby-glass.jpg';
@@ -36,7 +37,7 @@ export interface CocktailItem {
 }
 
 export const COCKTAILS: CocktailItem[] = [
-  { name: 'Lobby Mai Tai',        description: 'House rum blend, orange curacao, fresh lime juice, orgeat, rock candy',                                                                                         featured: true,  image: drinkDsc01014       },
+  { name: 'Lobby Mai Tai',        description: 'House rum blend, orange curacao, fresh lime juice, orgeat, rock candy',                                                                                         featured: true,  image: drinkRoosterVessel  },
   { name: 'Cobra Kai',            description: 'Jamaican pineapple pot stilled rum, Barbados rum, Falernum, fresh lime juice, fresh orange juice, Fashionola mix, dash of absinthe, Angostura bitters',         featured: true,  image: drinkCobraKai       },
   { name: 'Temple of Doom',       description: 'Bourbon, house rum blend, Demerara, Falernum, macadamia nut, fresh pineapple juice, fresh lemon juice',                                                         featured: true,  image: drinkTempleOfDoom2  },
   { name: 'Jet Ski Money',        description: 'Tequila blanco, Falernum, fresh lime juice, cucumber, mint',                                                                                                    featured: true,  image: drinkLobbyGlass     },

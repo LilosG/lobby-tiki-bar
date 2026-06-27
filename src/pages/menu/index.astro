@@ -7,13 +7,12 @@ import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
 import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "../../data/menu";
 
-import drinkCobraKai  from '../../assets/images/drink-cobra-kai.jpg';
-import drinkBarLineup from '../../assets/images/drink-bar-lineup.jpg';
 import drinkCollection from '../../assets/images/drink-collection.jpg';
-import brunchSpread from '../../assets/images/brunch-spread.jpg';
 import drinkDsc06150Page from '../../assets/images/drink-dsc06150.jpg';
-import foodCollage from '../../assets/images/food-collage.jpg';
 import foodKaluaTacos2 from '../../assets/images/food-kalua-tacos-2.jpg';
+import drinkSkullLobby from '../../assets/images/drink-skull-lobby.jpg';
+import drinkCopperPineapple from '../../assets/images/drink-copper-pineapple.jpg';
+import drinkBarLifestyle from '../../assets/images/drink-bar-lifestyle.jpg';
 
 const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
 const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
@@ -77,21 +76,21 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">20+ craft tiki cocktails. House rum blends, fresh juice, house-made syrups.</p>
         </div>
       </a>
-      <a href="#food" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+      <a href="/happy-hour" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
         <div class="aspect-[3/2] overflow-hidden">
-          <Image src={foodCollage} alt="Island-inspired food at The Lobby Tiki Bar Oceanside CA"
+          <Image src={drinkSkullLobby} alt="Happy hour at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
         <div class="p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">The Kitchen</p>
-          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Island Kitchen</h3>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">Island-inspired plates built to complement the rum program.</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">Tue &ndash; Fri</p>
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Happy Hour</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">3 PM &ndash; 5 PM. Discounted cocktails, wells, and bites every weekday.</p>
         </div>
       </a>
       <a href="/brunch" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
         <div class="aspect-[3/2] overflow-hidden">
-          <Image src={brunchSpread} alt="Weekend brunch at The Lobby Tiki Bar Oceanside CA"
+          <Image src={drinkCopperPineapple} alt="Weekend brunch cocktails at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
@@ -115,7 +114,7 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
   <!-- COCKTAIL LINEUP — full-bleed -->
   <section class="relative w-full overflow-hidden">
     <div class="aspect-[21/7]">
-      <Image src={drinkBarLineup} alt="The full tiki cocktail lineup at The Lobby Tiki Bar Oceanside CA"
+      <Image src={drinkBarLifestyle} alt="The Lobby Tiki Bar craft cocktail program Oceanside CA"
         class="w-full h-full object-cover object-center" width={1800} height={686} />
     </div>
     <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-espresso)]/80 via-[var(--color-espresso)]/20 to-transparent"></div>
