@@ -34,7 +34,7 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
         class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)] via-[var(--color-espresso)]/40 to-transparent"></div>
     </div>
-    <div class="relative z-10 px-8 sm:px-14 pb-16 max-w-2xl">
+    <div class="relative z-10 w-full px-8 sm:px-16 pb-20"><div class="max-w-xl">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">408 Pier View Way · Oceanside</p>
       <h1 class="font-[family-name:var(--font-display)] text-7xl sm:text-8xl text-[var(--color-sand)] leading-none mb-4">The Menu</h1>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 max-w-md leading-relaxed mb-8">Craft tiki cocktails, island-inspired plates, and all the happy hour specials.</p>
@@ -42,7 +42,7 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
         class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
         Reserve a Table
       </a>
-    </div>
+    </div></div>
   </section>
 
   <!-- STICKY NAV -->
@@ -65,9 +65,9 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <a href="#cocktails" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
-        <div class="aspect-[3/2] overflow-hidden">
+        <div class="aspect-video overflow-hidden">
           <Image src={drinkDsc06150Page} alt="Tiki cocktails at The Lobby Tiki Bar Oceanside CA"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
         <div class="p-6">
@@ -77,9 +77,9 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
         </div>
       </a>
       <a href="/happy-hour" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
-        <div class="aspect-[3/2] overflow-hidden">
+        <div class="aspect-video overflow-hidden">
           <Image src={drinkSkullLobby} alt="Happy hour at The Lobby Tiki Bar Oceanside CA"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
         <div class="p-6">
@@ -89,9 +89,9 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
         </div>
       </a>
       <a href="/brunch" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
-        <div class="aspect-[3/2] overflow-hidden">
+        <div class="aspect-video overflow-hidden">
           <Image src={drinkCopperPineapple} alt="Weekend brunch cocktails at The Lobby Tiki Bar Oceanside CA"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
         <div class="p-6">
@@ -102,14 +102,6 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
       </a>
     </div>
   </section>
-
-  <!-- COCKTAILS HEADER -->
-  <div class="max-w-7xl mx-auto px-6 pt-20 pb-10">
-    <section id="cocktails">
-      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-2">Tiki Cocktails</h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm">An ID may be required with specialty vessels.</p>
-    </section>
-  </div>
 
   <!-- COCKTAIL LINEUP — full-bleed -->
   <section class="relative w-full overflow-hidden">
@@ -133,14 +125,16 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
 
   <!-- COCKTAILS GRID + FOOD -->
   <div class="max-w-7xl mx-auto px-6 pt-16 pb-20 space-y-28">
-    <section>
+    <section id="cocktails">
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-2">Tiki Cocktails</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-10">An ID may be required with specialty vessels.</p>
 
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         {featuredCocktails.map((drink) => (
           <div class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
             <div class="aspect-[3/4] overflow-hidden">
               <Image src={drink.image!} alt={`${drink.name} tiki cocktail at The Lobby Tiki Bar Oceanside`}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 width={500} height={667} />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
