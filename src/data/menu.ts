@@ -16,11 +16,12 @@ import foodCeviche           from '../assets/images/food-ceviche.jpg';
 import foodPineappleSkewers  from '../assets/images/food-pineapple-skewers.jpg';
 import foodHuliWings         from '../assets/images/food-huli-wings.jpg';
 import foodWings             from '../assets/images/food-wings.jpg';
-import foodKaluaTacos        from '../assets/images/food-kalua-tacos.jpg';
+import foodKaluaTacos        from '../assets/images/food-kalua-tacos-plate.jpg';
 import foodHuliHuliChicken   from '../assets/images/food-huli-huli-chicken.jpg';
 import foodLocoMoco          from '../assets/images/food-loco-moco.jpg';
 import foodTropicana         from '../assets/images/food-tropicana-burger.jpg';
 import foodIslandCatch       from '../assets/images/food-island-catch.jpg';
+import foodCubano            from '../assets/images/food-cubano.jpg';
 import foodCoconutFrench     from '../assets/images/food-coconut-french-toast.jpg';
 
 import brunchKaluaScramble from '../assets/images/brunch-kalua-scramble.jpg';
@@ -97,6 +98,7 @@ export const FOOD: FoodItem[] = [
   { name: 'Loco Moco',                 description: 'Rice, beef patty, sunny-side egg, brown gravy, island seasoning',                                 category: 'entrees',  image: foodLocoMoco         },
   { name: 'Tropicana Burger',          description: 'Beef patty, grilled pineapple, teriyaki glaze, lettuce, tomato on a brioche bun',                 category: 'entrees',  image: foodTropicana        },
   { name: 'Island Style Catch',        description: 'Fresh catch prepared island-style with seasonal accompaniments',                                   category: 'entrees',  image: foodIslandCatch      },
+  { name: 'Cuban Sandwich',             description: 'Slow-roasted kalua pork, ham, Swiss, pickles, mustard on pressed Cuban bread',                    category: 'entrees',  image: foodCubano           },
 ];
 
 export interface BrunchItem {

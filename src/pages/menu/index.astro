@@ -8,12 +8,13 @@ import { SITE } from "../../data/site";
 import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "../../data/menu";
 
 import drinkCobraKai  from '../../assets/images/drink-cobra-kai.jpg';
+import drinkCobraKaiVessel from '../../assets/images/drink-cobra-kai-vessel.jpg';
 import drinkBarLineup from '../../assets/images/drink-bar-lineup.jpg';
-import foodSpread2    from '../../assets/images/food-spread-2.jpg';
+import foodKaluaTacos3 from '../../assets/images/food-kalua-tacos-3.jpg';
 
 const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
 const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
-const starters = FOOD.filter((f) => f.category === 'starters');
+const starters = FOOD.filter((f) => f.category === 'starters' || f.category === 'tacos');
 const tacos    = FOOD.filter((f) => f.category === 'tacos');
 const entrees  = FOOD.filter((f) => f.category === 'entrees');
 ---
@@ -28,7 +29,7 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
   <!-- HERO -->
   <section class="relative pt-40 pb-20 px-6 overflow-hidden">
     <div class="absolute inset-0">
-      <Image src={drinkCobraKai} alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+      <Image src={drinkCobraKaiVessel} alt="Craft tiki cocktails at The Lobby Tiki Bar Oceanside CA"
         class="w-full h-full object-cover" width={1800} height={900} loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/30 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
@@ -189,7 +190,7 @@ const entrees  = FOOD.filter((f) => f.category === 'entrees');
   <!-- TIKI TACO TUESDAY — full-bleed editorial banner -->
   <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
-      <Image src={foodSpread2} alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside CA"
+      <Image src={foodKaluaTacos3} alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside CA"
         class="w-full h-full object-cover" width={1800} height={900} />
       <div class="absolute inset-0 bg-[var(--color-espresso)]/65"></div>
     </div>
