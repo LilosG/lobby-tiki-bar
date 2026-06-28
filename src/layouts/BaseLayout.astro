@@ -42,6 +42,14 @@ const schema = {
   servesCuisine: SITE.schema.servesCuisine,
   hasMap: SITE.address.mapsUrl,
   sameAs: Object.values(SITE.social),
+  openingHoursSpecification: SITE.hours
+    .filter(h => h.open)
+    .map(h => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: `https://schema.org/${h.day}`,
+      opens:  h.hours.split('–')[0].trim(),
+      closes: h.hours.split('–')[1].trim(),
+    })),
 };
 ---
 

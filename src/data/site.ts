@@ -31,12 +31,12 @@ export const SITE = {
   },
 
   hours: [
-    { day: 'Monday',    open: false, hours: 'Closed' },
-    { day: 'Tuesday',   open: true,  hours: '3:00 PM – 9:00 PM' },
-    { day: 'Wednesday', open: true,  hours: '3:00 PM – 9:00 PM' },
-    { day: 'Thursday',  open: true,  hours: '3:00 PM – 10:00 PM' },
-    { day: 'Friday',    open: true,  hours: '3:00 PM – 12:00 AM' },
-    { day: 'Saturday',  open: true,  hours: '10:00 AM – 12:00 AM' },
+    { day: 'Monday',    open: true,  hours: '3:00 PM – 8:00 PM' },
+    { day: 'Tuesday',   open: true,  hours: '3:00 PM – 8:00 PM' },
+    { day: 'Wednesday', open: true,  hours: '3:00 PM – 8:00 PM' },
+    { day: 'Thursday',  open: true,  hours: '3:00 PM – 9:00 PM' },
+    { day: 'Friday',    open: true,  hours: '3:00 PM – 10:00 PM' },
+    { day: 'Saturday',  open: true,  hours: '10:00 AM – 10:00 PM' },
     { day: 'Sunday',    open: true,  hours: '10:00 AM – 8:00 PM' },
   ],
 
