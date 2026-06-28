@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
+import TrustBar from '../../components/TrustBar.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/site';
@@ -37,6 +38,7 @@ const stats = [
   />
 
   <section class="py-24 px-6">
+  <TrustBar />
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">What We Host</p>
