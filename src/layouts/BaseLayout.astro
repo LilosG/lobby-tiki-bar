@@ -7,6 +7,8 @@ interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  heroImage?: string;
+  pageSchema?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -14,17 +16,22 @@ const {
   description = SITE.description,
   image = '/images/venue-interior-1.jpg',
   noindex = false,
+  heroImage,
+  pageSchema,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, SITE.url);
+const ogImageURL   = image.startsWith('http') ? image : `${SITE.url}${image}`;
 
-const schema = {
-  '@context': 'https://schema.org',
+const businessNode = {
   '@type': SITE.schema.type,
+  '@id': SITE.schema.id,
   name: SITE.name,
   description: SITE.description,
   url: SITE.url,
   telephone: SITE.phone.tel,
+  image: SITE.schema.image,
+  hasMenu: SITE.schema.menuUrl,
   address: {
     '@type': 'PostalAddress',
     streetAddress: SITE.address.street,
@@ -47,9 +54,37 @@ const schema = {
     .map(h => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: `https://schema.org/${h.day}`,
-      opens:  h.hours.split('–')[0].trim(),
-      closes: h.hours.split('–')[1].trim(),
+      opens: h.opens,
+      closes: h.closes,
     })),
+};
+
+const websiteNode = {
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  url: SITE.url,
+  name: SITE.name,
+  description: SITE.description,
+  publisher: { '@id': SITE.schema.id },
+};
+
+const webpageNode = {
+  '@type': 'WebPage',
+  '@id': `${canonicalURL}#webpage`,
+  url: canonicalURL.toString(),
+  name: title,
+  description,
+  isPartOf: { '@id': `${SITE.url}/#website` },
+  about: { '@id': SITE.schema.id },
+};
+
+const pageNodes = pageSchema
+  ? Array.isArray(pageSchema) ? pageSchema : [pageSchema]
+  : [];
+
+const fullSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [businessNode, websiteNode, webpageNode, ...pageNodes],
 };
 ---
 
@@ -58,30 +93,36 @@ const schema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content={canonicalURL} />
+    <meta property="og:title"       content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${SITE.url}${image}`} />
-    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:image"       content={ogImageURL} />
+    <meta property="og:site_name"   content={SITE.name} />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${SITE.url}${image}`} />
+    <meta name="twitter:image"       content={ogImageURL} />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Dancing+Script:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <link rel="icon" type="image/png" href="/images/logo-brown.png" />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {heroImage && (
+      <link rel="preload" as="image" href={heroImage} fetchpriority="high" />
+    )}
+
+    <script type="application/ld+json" set:html={JSON.stringify(fullSchema)} />
   </head>
   <body>
     <slot />

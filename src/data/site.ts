@@ -30,14 +30,16 @@ export const SITE = {
     label: 'Order Online',
   },
 
+  // `hours` = display strings used in UI components
+  // `opens` / `closes` = ISO 24h format required by schema.org
   hours: [
-    { day: 'Monday',    open: true,  hours: '3:00 PM – 8:00 PM' },
-    { day: 'Tuesday',   open: true,  hours: '3:00 PM – 8:00 PM' },
-    { day: 'Wednesday', open: true,  hours: '3:00 PM – 8:00 PM' },
-    { day: 'Thursday',  open: true,  hours: '3:00 PM – 9:00 PM' },
-    { day: 'Friday',    open: true,  hours: '3:00 PM – 10:00 PM' },
-    { day: 'Saturday',  open: true,  hours: '10:00 AM – 10:00 PM' },
-    { day: 'Sunday',    open: true,  hours: '10:00 AM – 8:00 PM' },
+    { day: 'Monday',    open: true,  hours: '3:00 PM – 8:00 PM',   opens: '15:00', closes: '20:00' },
+    { day: 'Tuesday',   open: true,  hours: '3:00 PM – 8:00 PM',   opens: '15:00', closes: '20:00' },
+    { day: 'Wednesday', open: true,  hours: '3:00 PM – 8:00 PM',   opens: '15:00', closes: '20:00' },
+    { day: 'Thursday',  open: true,  hours: '3:00 PM – 9:00 PM',   opens: '15:00', closes: '21:00' },
+    { day: 'Friday',    open: true,  hours: '3:00 PM – 10:00 PM',  opens: '15:00', closes: '22:00' },
+    { day: 'Saturday',  open: true,  hours: '10:00 AM – 10:00 PM', opens: '10:00', closes: '22:00' },
+    { day: 'Sunday',    open: true,  hours: '10:00 AM – 8:00 PM',  opens: '10:00', closes: '20:00' },
   ],
 
   happyHour: {
@@ -70,8 +72,11 @@ export const SITE = {
 
   schema: {
     type: 'BarOrPub',
+    id: 'https://lobbytikibar.com/#business',
     priceRange: '$$',
     servesCuisine: ['Tiki', 'Hawaiian', 'American'],
     geo: { lat: 33.1959, lng: -117.3795 },
+    image: 'https://lobbytikibar.com/images/venue-interior-1.jpg',
+    menuUrl: 'https://lobbytikibar.com/menu/',
   },
 } as const;
