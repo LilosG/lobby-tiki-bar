@@ -27,6 +27,7 @@ import foodCoconutFrench     from '../assets/images/food-coconut-french-toast.jp
 import brunchKaluaScramble from '../assets/images/brunch-kalua-scramble.jpg';
 import brunchAvocadoToast  from '../assets/images/brunch-avocado-toast.jpg';
 import brunchBasicBreaky   from '../assets/images/brunch-basic-breaky.jpg';
+import brunchDish          from '../assets/images/brunch-dish.jpg';
 
 export interface CocktailItem {
   name: string;
@@ -112,4 +113,5 @@ export const BRUNCH: BrunchItem[] = [
   { name: 'Basic Breaky',             description: 'Two eggs any style, island potatoes, choice of protein, toast',                                     image: brunchBasicBreaky   },
   { name: 'Coconut Rum French Toast', description: 'Thick-cut brioche, coconut rum custard, tropical fruit compote, powdered sugar',                    image: foodCoconutFrench   },
   { name: 'Loco Moco',                description: 'Rice, beef patty, sunny-side egg, brown gravy, island seasoning',                                   image: foodLocoMoco        },
+  { name: 'Island Brunch Bowl',        description: 'Island-inspired brunch bowl with seasonal accompaniments, fresh herbs, and house sauce',                  image: brunchDish          },
 ];

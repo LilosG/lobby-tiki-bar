@@ -7,10 +7,10 @@ import CTASection from '../../components/CTASection.astro';
 import { SITE } from '../../data/site';
 import { BRUNCH } from '../../data/menu';
 
-import brunchSpread    from '../../assets/images/brunch-spread.jpg';
-import drinkMaiTai     from '../../assets/images/drink-mai-tai-glass.jpg';
-import brunchEggs      from '../../assets/images/brunch-eggs.jpg';
-import brunchPlate     from '../../assets/images/brunch-plate.jpg';
+import brunchPlate2    from '../../assets/images/brunch-plate-2.jpg';
+import drinkLobbyGlass2 from '../../assets/images/drink-lobby-glass-2.jpg';
+import brunchPlate3    from '../../assets/images/brunch-plate-3.jpg';
+import brunchPlate4    from '../../assets/images/brunch-plate-4.jpg';
 import brunchPlate2    from '../../assets/images/brunch-plate-2.jpg';
 import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
 ---
@@ -24,7 +24,7 @@ import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
 
   <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
-      <Image src={brunchSpread} alt="Weekend brunch at The Lobby Tiki Bar Oceanside"
+      <Image src={brunchPlate2} alt="Weekend brunch at The Lobby Tiki Bar Oceanside"
         class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/60 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
@@ -118,7 +118,7 @@ import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
         </div>
       </div>
       <div class="relative overflow-hidden min-h-[400px] order-1 lg:order-2">
-        <Image src={drinkMaiTai} alt="Lobby Mai Tai cocktail at The Lobby Tiki Bar weekend brunch"
+        <Image src={drinkLobbyGlass2} alt="Craft tiki cocktail at The Lobby Tiki Bar weekend brunch"
           class="w-full h-full object-cover absolute inset-0" width={900} height={900} />
         <div class="absolute inset-0 bg-[var(--color-espresso)]/30"></div>
       </div>
@@ -133,8 +133,8 @@ import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { img: brunchEggs,     alt: 'Brunch plate at The Lobby Tiki Bar Oceanside'    },
-          { img: brunchPlate,    alt: 'Island brunch dish at The Lobby Oceanside'       },
+          { img: brunchPlate3,   alt: 'Brunch plate at The Lobby Tiki Bar Oceanside'    },
+          { img: brunchPlate4,   alt: 'Island brunch dish at The Lobby Oceanside'       },
           { img: venueInterior3, alt: 'The Lobby Tiki Bar interior Oceanside CA'        },
           { img: brunchPlate2,   alt: 'Weekend brunch at The Lobby Tiki Bar'            },
         ].map((item) => (
