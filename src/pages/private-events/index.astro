@@ -7,7 +7,11 @@ import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/site';
 import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
 
-import venueInterior2 from '../../assets/images/venue-interior-2.jpg';
+import venueInterior2      from '../../assets/images/venue-interior-2.jpg';
+import venueBoothLandscape from '../../assets/images/venue-booth-landscape.jpg';
+import venueCurtainEdit    from '../../assets/images/venue-curtain-edit.jpg';
+import venueRoomPortrait   from '../../assets/images/venue-room-portrait.jpg';
+import venueBoothPortrait  from '../../assets/images/venue-booth-portrait.jpg';
 
 const stats = [
   { label: 'Capacity',    value: '200+',         note: 'Full venue'           },
@@ -38,24 +42,29 @@ const stats = [
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">What We Host</p>
         <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Events Worth Talking About</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {PRIVATE_EVENT_TYPES.map((event) => (
-          <a href={`/private-events/${event.slug}`}
-            class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors block">
-            <div class="aspect-video overflow-hidden">
-              <Image src={event.heroImage} alt={event.heroImageAlt}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70"
-                width={800} height={450} />
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-8">
-              <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{event.h1}</h3>
-              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm leading-relaxed mb-4">{event.summary}</p>
-              <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase group-hover:underline">Learn More &rarr;</p>
-            </div>
-          </a>
-        ))}
-      </div>
+      {(() => {
+        const cardImages = [venueBoothLandscape, venueCurtainEdit, venueRoomPortrait, venueBoothPortrait];
+        return (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {PRIVATE_EVENT_TYPES.map((event, i) => (
+              <a href={`/private-events/${event.slug}`}
+                class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors block">
+                <div class="aspect-video overflow-hidden">
+                  <Image src={cardImages[i]} alt={event.heroImageAlt}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                    width={800} height={450} />
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-8">
+                  <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{event.h1}</h3>
+                  <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm leading-relaxed mb-4">{event.summary}</p>
+                  <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase group-hover:underline">Learn More &rarr;</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        );
+      })()}
     </div>
   </section>
 

@@ -9,32 +9,48 @@ interface Props {
   image?: ImageMetadata;
   imageAlt?: string;
   overlay?: 'dark' | 'gradient' | 'jungle';
+  align?: 'center' | 'bottom-left';
 }
-const { label, title, subtitle, image, imageAlt = '', overlay = 'dark' } = Astro.props;
+const { label, title, subtitle, image, imageAlt = '', overlay = 'dark', align = 'center' } = Astro.props;
 const overlayClass = {
   dark:     'bg-[var(--color-espresso)]/80',
-  gradient: 'bg-gradient-to-b from-[var(--color-espresso)]/80 to-[var(--color-espresso)]',
+  gradient: 'bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/60 to-transparent',
   jungle:   'bg-[var(--color-jungle)]/80',
 }[overlay];
 ---
-<section class="relative min-h-[70vh] flex items-center px-6 overflow-hidden">
+<section class:list={["relative min-h-[70vh] overflow-hidden", align === 'bottom-left' ? 'flex items-end' : 'flex items-center']}>
   {image && (
     <div class="absolute inset-0">
-      <Image src={image} alt={imageAlt} class="w-full h-full object-cover" width={1800} height={600} loading="eager" />
+      <Image src={image} alt={imageAlt} class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
       <div class:list={["absolute inset-0", overlayClass]}></div>
     </div>
   )}
   {!image && (
     <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso-light)]/30 to-[var(--color-espresso)]"></div>
   )}
-  <div class="relative z-10 max-w-4xl mx-auto text-center">
-    {label && (
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{label}</p>
-    )}
-    <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] leading-tight mb-4">{title}</h1>
-    {subtitle && (
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-lg max-w-2xl mx-auto opacity-60 leading-relaxed">{subtitle}</p>
-    )}
-    <slot />
-  </div>
+  {align === 'bottom-left' ? (
+    <div class="relative z-10 w-full">
+      <div class="max-w-7xl mx-auto px-8 sm:px-16 pb-20">
+        {label && (
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{label}</p>
+        )}
+        <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] leading-tight mb-4 max-w-2xl">{title}</h1>
+        {subtitle && (
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-lg max-w-xl opacity-70 leading-relaxed">{subtitle}</p>
+        )}
+        <slot />
+      </div>
+    </div>
+  ) : (
+    <div class="relative z-10 max-w-4xl mx-auto text-center px-6">
+      {label && (
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{label}</p>
+      )}
+      <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] leading-tight mb-4">{title}</h1>
+      {subtitle && (
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-lg max-w-2xl mx-auto opacity-60 leading-relaxed">{subtitle}</p>
+      )}
+      <slot />
+    </div>
+  )}
 </section>
