@@ -23,6 +23,22 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 const ogImageURL   = image.startsWith('http') ? image : `${SITE.url}${image}`;
 
+// Human-readable labels for URL segments used in breadcrumb parent nodes
+const SEGMENT_LABELS: Record<string, string> = {
+  'menu':           'Menu',
+  'happy-hour':     'Happy Hour',
+  'brunch':         'Brunch',
+  'events':         'Events',
+  'private-events': 'Private Events',
+  'the-lobby':      'The Venue',
+  'about':          'About',
+  'blog':           'Blog',
+  'contact':        'Contact',
+  'reservations':   'Reservations',
+};
+
+// ─── Schema nodes ─────────────────────────────────────────────────────────────
+
 const businessNode = {
   '@type': SITE.schema.type,
   '@id': SITE.schema.id,
@@ -78,13 +94,50 @@ const webpageNode = {
   about: { '@id': SITE.schema.id },
 };
 
-const pageNodes = pageSchema
+// BreadcrumbList — auto-derived from URL pathname, not emitted on homepage
+const pathSegments = canonicalURL.pathname.split('/').filter(Boolean);
+const pageTitle    = title.split('|')[0].trim();
+
+const breadcrumbNode = pathSegments.length > 0
+  ? {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonicalURL}#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${SITE.url}/`,
+        },
+        ...pathSegments.map((seg, i) => {
+          const cumulativePath = '/' + pathSegments.slice(0, i + 1).join('/') + '/';
+          const isLeaf         = i === pathSegments.length - 1;
+          const name           = isLeaf
+            ? pageTitle
+            : (SEGMENT_LABELS[seg] ?? seg.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()));
+          return {
+            '@type': 'ListItem',
+            position: i + 2,
+            name,
+            item: `${SITE.url}${cumulativePath}`,
+          };
+        }),
+      ],
+    }
+  : null;
+
+// Page-specific schema nodes passed from individual pages
+const pageNodes  = pageSchema
   ? Array.isArray(pageSchema) ? pageSchema : [pageSchema]
   : [];
 
+// Assemble @graph — order: business, website, webpage, page-specific, breadcrumb
+const graphNodes = [businessNode, websiteNode, webpageNode, ...pageNodes];
+if (breadcrumbNode) graphNodes.push(breadcrumbNode);
+
 const fullSchema = {
   '@context': 'https://schema.org',
-  '@graph': [businessNode, websiteNode, webpageNode, ...pageNodes],
+  '@graph': graphNodes,
 };
 ---
 

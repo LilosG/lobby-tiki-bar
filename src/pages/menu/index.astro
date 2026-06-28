@@ -14,6 +14,54 @@ import drinkLobbyGlass2 from '../../assets/images/drink-lobby-glass-2.jpg';
 import drinkCopperPineapple from '../../assets/images/drink-copper-pineapple.jpg';
 import drinkBarLifestyle from '../../assets/images/drink-bar-lifestyle.jpg';
 
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/menu/#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What kind of cocktails does The Lobby Tiki Bar serve?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Lobby Tiki Bar serves 20+ craft tiki cocktails including the Lobby Mai Tai, Cobra Kai, Temple of Doom, Painkiller, and Toucan Slam. All cocktails use house rum blends, fresh juice, and house-made syrups.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does The Lobby Tiki Bar serve food?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. The Lobby Tiki Bar serves island-inspired food including Crab Rangoon, Coconut Shrimp, Poke Inari Bombs, Kalua Tacos, Huli Huli Chicken, Loco Moco, and the Tropicana Burger.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does The Lobby Tiki Bar have a brunch menu?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Weekend brunch at The Lobby Tiki Bar is Saturday and Sunday from 10:00 AM to 3:00 PM. Island-inspired brunch plates are served alongside the full cocktail program.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does The Lobby Tiki Bar have non-alcoholic drinks?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. Non-alcoholic tiki cocktails include the No Tai, Painless Killer, and NoJito — crafted with the same ingredients as the full bar program, minus the rum.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Can I see a menu before visiting The Lobby Tiki Bar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. The full menu is available at lobbytikibar.com/menu including tiki cocktails, island food, beer, wine, and non-alcoholic options.',
+      },
+    },
+  ],
+};
+
 const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
 const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
 
@@ -24,6 +72,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
   description="Full menu at The Lobby Tiki Bar in Oceanside CA. Tiki cocktails, island-inspired food, beer and wine. 408 Pier View Way inside The Brick Hotel."
   image="/images/drink-cobra-kai.jpg"
   heroImage={drinkCollection.src}
+  pageSchema={faqSchema}
 >
   <Nav />
 

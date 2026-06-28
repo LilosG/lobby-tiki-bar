@@ -16,6 +16,54 @@ import drinkDsc01014    from '../assets/images/drink-dsc01014.jpg';
 import foodKaluaTacos2  from '../assets/images/food-kalua-tacos-2.jpg';
 import tikiIllustration from '../assets/images/tiki-illustration-volcano.jpg';
 
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/happy-hour/#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What time is happy hour at The Lobby Tiki Bar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Happy hour at The Lobby Tiki Bar runs Monday through Friday from 3:00 PM to 5:00 PM. Monday features all-day happy hour specials from open to close.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What days is happy hour at The Lobby Tiki Bar in Oceanside?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Happy hour is Monday through Friday at The Lobby Tiki Bar, 408 Pier View Way, Oceanside CA. Monday is all-day. Tuesday through Friday runs 3:00 PM to 5:00 PM.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the happy hour drink specials at The Lobby Tiki Bar?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Happy hour specials include discounted tiki cocktails, wells, beer, and wine. Thursday features $6 Mai Tais all day. Tuesday is Tiki Taco Tuesday with 30% off all rum drinks from open to close.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does The Lobby Tiki Bar have happy hour on weekends?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Happy hour at The Lobby Tiki Bar is Monday through Friday only. On weekends, brunch is served Saturday and Sunday from 10:00 AM to 3:00 PM with the full cocktail program available.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Where is The Lobby Tiki Bar happy hour in Oceanside?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The Lobby Tiki Bar is at 408 Pier View Way inside The Brick Hotel in Downtown Oceanside, CA 92054, steps from the Oceanside Pier.',
+      },
+    },
+  ],
+};
+
 const hhFeatured = [
   { drink: COCKTAILS.find(c => c.name === 'Lobby Mai Tai')!,  note: 'The house standard'        },
   { drink: COCKTAILS.find(c => c.name === 'Cobra Kai')!,       note: 'If you want to commit'     },
@@ -29,6 +77,7 @@ const hhFeatured = [
   description="Best happy hour in Oceanside CA. The Lobby Tiki Bar: $6 Mai Tais Thursdays, $6 Tacos Tuesdays, All Day Happy Hour Mondays. 408 Pier View Way inside The Brick Hotel."
   image="/images/drink-dsc06150.jpg"
   heroImage={drinkBarLineup.src}
+  pageSchema={faqSchema}
 >
   <Nav />
 
