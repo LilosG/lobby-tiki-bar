@@ -17,9 +17,9 @@ export function getStaticPaths() {
 
 const { event } = Astro.props;
 
-const faqSchema = {
-  '@context': 'https://schema.org',
+const faqSchemaNode = {
   '@type': 'FAQPage',
+  '@id': `${SITE.url}/private-events/${event.slug}/#faq`,
   mainEntity: event.faqs.map((faq) => ({
     '@type': 'Question',
     name: faq.q,
@@ -32,8 +32,9 @@ const faqSchema = {
   title={event.seoTitle}
   description={event.metaDescription}
   image="/images/venue-interior-1.jpg"
+  heroImage={event.heroImage.src}
+  pageSchema={faqSchemaNode}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Nav />
 
   <!-- HERO -->

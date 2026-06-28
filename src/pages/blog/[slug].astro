@@ -22,12 +22,38 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
   day: 'numeric',
   year: 'numeric',
 });
+
+const slug = post.id.replace(/\.mdx$/, '');
+const pageUrl = `${SITE.url}/blog/${slug}/`;
+
+const blogPostSchema = {
+  '@type': 'BlogPosting',
+  '@id': `${pageUrl}#article`,
+  headline: post.data.title,
+  description: post.data.description,
+  image: post.data.image.startsWith('http') ? post.data.image : `${SITE.url}${post.data.image}`,
+  datePublished: new Date(post.data.date).toISOString(),
+  dateModified: new Date(post.data.date).toISOString(),
+  author: {
+    '@type': 'Organization',
+    '@id': SITE.schema.id,
+    name: SITE.name,
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': SITE.schema.id,
+    name: SITE.name,
+  },
+  mainEntityOfPage: { '@id': `${pageUrl}#webpage` },
+};
 ---
 
 <BaseLayout
   title={`${post.data.title} | The Lobby Tiki Bar`}
   description={post.data.description}
   image={post.data.image}
+  heroImage={post.data.image}
+  pageSchema={blogPostSchema}
 >
   <Nav />
 

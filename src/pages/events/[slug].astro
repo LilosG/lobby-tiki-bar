@@ -15,12 +15,36 @@ export function getStaticPaths() {
 }
 
 const { event } = Astro.props;
+
+const eventSchema = {
+  '@type': 'Event',
+  '@id': `${SITE.url}/events/${event.slug}/#event`,
+  name: event.name,
+  description: event.description,
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  location: {
+    '@type': 'Place',
+    name: SITE.name,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: SITE.address.street,
+      addressLocality: SITE.address.city,
+      addressRegion: SITE.address.state,
+      postalCode: SITE.address.zip,
+      addressCountry: 'US',
+    },
+  },
+  organizer: { '@id': SITE.schema.id },
+};
 ---
 
 <BaseLayout
-  title={`${event.name} | The Lobby Tiki Bar | Oceanside CA`}
+  title={`${event.name} | The Lobby Tiki Bar Oceanside`}
   description={event.description}
   image={`/images/${event.image.src.split('/').pop()}`}
+  heroImage={event.image.src}
+  pageSchema={eventSchema}
 >
   <Nav />
 
