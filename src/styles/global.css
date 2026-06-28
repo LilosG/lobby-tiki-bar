@@ -21,12 +21,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
   ::selection {
     background-color: var(--color-amber);
     color: var(--color-espresso);
   }
-
   body {
     background-color: var(--color-espresso);
     color: var(--color-sand);
@@ -41,22 +39,15 @@
   .border-sand-faint {
     border-color: rgba(245, 230, 200, 0.1);
   }
+  .text-sand-muted {
+    color: rgba(245, 230, 200, 0.7);
+  }
 }
 
+@layer components {
   .nav-scrolled {
     background-color: rgba(44, 26, 14, 0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(245, 230, 200, 0.1);
   }
-  .text-sand-muted {
-    color: rgba(245, 230, 200, 0.7);
-  }
-
-  .nav-scrolled {
-    background-color: rgba(44, 26, 14, 0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(245, 230, 200, 0.1);
-  }
-  .text-sand-muted {
-    color: rgba(245, 230, 200, 0.7);
-  }
+}

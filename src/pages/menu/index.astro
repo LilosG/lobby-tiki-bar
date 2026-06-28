@@ -31,7 +31,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
     <div class="absolute inset-0">
       <Image src={drinkCollection} alt="Tiki cocktails at The Lobby Tiki Bar Oceanside CA"
         class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
-      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)]/90 via-[var(--color-espresso)]/40 to-[var(--color-espresso)]/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)]/90 via-[var(--color-espresso)]/40 to-transparent"></div>
     </div>
     <div class="relative z-10 w-full px-16 sm:px-24 pb-32"><div class="max-w-xl">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">408 Pier View Way · Oceanside</p>
@@ -64,7 +64,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <a href="#cocktails" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
-        <div class="aspect-[4/3] overflow-hidden">
+        <div class="aspect-square overflow-hidden">
           <Image src={drinkDsc06150Page} alt="Tiki cocktails at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
@@ -76,7 +76,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
         </div>
       </a>
       <a href="/happy-hour" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
-        <div class="aspect-[4/3] overflow-hidden">
+        <div class="aspect-square overflow-hidden">
           <Image src={drinkLobbyGlass2} alt="Happy hour at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
@@ -88,7 +88,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
         </div>
       </a>
       <a href="/brunch" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
-        <div class="aspect-[4/3] overflow-hidden">
+        <div class="aspect-square overflow-hidden">
           <Image src={drinkCopperPineapple} alt="Weekend brunch cocktails at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
