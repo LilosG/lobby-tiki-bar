@@ -7,19 +7,22 @@ import PageHero from "../../components/PageHero.astro";
 import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
 
-import venueInterior1     from '../../assets/images/venue-interior-1.jpg';
-import venueInterior2     from '../../assets/images/venue-interior-2.jpg';
+import venueRoomFull      from '../../assets/images/venue-room-full.jpg';
+import venueCurtainWide   from '../../assets/images/venue-curtain-wide.jpg';
+import venueCurtainEdit   from '../../assets/images/venue-curtain-edit.jpg';
+import venueBooth         from '../../assets/images/venue-booth-landscape.jpg';
+import venueRoomPortrait  from '../../assets/images/venue-room-portrait.jpg';
+import venueBoothPortrait from '../../assets/images/venue-booth-portrait.jpg';
 import drinkCobraKai      from '../../assets/images/drink-cobra-kai.jpg';
 import drinkDsc01014      from '../../assets/images/drink-dsc01014.jpg';
 import drinkToucanSlam    from '../../assets/images/drink-toucan-slam.jpg';
 import drinkDsc07144      from '../../assets/images/drink-dsc07144.jpg';
-import foodPokeInariBombs from '../../assets/images/food-poke-inari-bombs.jpg';
 
 const stats = [
   { value: "200+",    label: "Seats"          },
   { value: "20+",     label: "Tiki Cocktails" },
-  { value: "4.7★",    label: "Google Rating"  },
-  { value: "Tue–Sun", label: "Open Weekly"    },
+  { value: "4.7\u2605",    label: "Google Rating"  },
+  { value: "Tue\u2013Sun", label: "Open Weekly"    },
 ];
 ---
 
@@ -34,21 +37,22 @@ const stats = [
     label="The Venue"
     title="The Venue"
     subtitle="Inside The Brick Hotel on Pier View Way. Tiki decor, an extensive rum program, and a space built to transport you."
-    image={venueInterior1}
-    imageAlt="The Lobby Tiki Bar interior — tiki decor, bamboo, rum program Oceanside CA"
+    image={venueRoomFull}
+    imageAlt="The Lobby Tiki Bar interior Oceanside CA — full venue, bamboo ceiling, tiki bar atmosphere"
     overlay="gradient"
   />
 
+  <!-- INTRO SPLIT -->
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Space</p>
         <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">A Tiki Bar Built Right</h2>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The Lobby occupies the ground floor of The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The space is designed to feel like a destination — bamboo, tiki carvings, beaded curtains, tropical foliage, and warm golden light that sets the tone from the moment you walk in.
+          The Lobby occupies the ground floor of The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The space is designed to feel like a destination &mdash; bamboo, tiki carvings, beaded curtains, tropical foliage, and warm golden light that sets the tone from the moment you walk in.
         </p>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
-          The bar program is anchored by an extensive rum selection. Every spirit is chosen to serve a role in the cocktail program — nothing is here by accident. The island-inspired kitchen runs alongside, with plates built to complement what's in the glass.
+          The bar program is anchored by an extensive rum selection. Every spirit is chosen to serve a role in the cocktail program &mdash; nothing is here by accident. The island-inspired kitchen runs alongside, with plates built to complement what&rsquo;s in the glass.
         </p>
         <ul class="space-y-3">
           {["Extensive rum program","Craft tiki cocktails","Island-inspired food menu","200+ capacity","Private event space available","Daily happy hour specials"].map((item) => (
@@ -60,13 +64,15 @@ const stats = [
         </ul>
       </div>
       <div class="relative">
-        <Image src={venueInterior1} alt="The Lobby Tiki Bar interior Oceanside CA — full venue view"
-          class="w-full aspect-[4/5] object-cover" width={700} height={875} />
+        <Image src={venueCurtainWide}
+          alt="The Lobby Tiki Bar Oceanside CA &mdash; beaded curtains, tiki carvings, booth seating"
+          class="w-full aspect-[4/3] object-cover" width={900} height={675} />
         <div class="absolute -bottom-4 -right-4 w-full h-full border border-[var(--color-teal)]/20 -z-10"></div>
       </div>
     </div>
   </section>
 
+  <!-- STATS BAR -->
   <section class="py-16 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
       {stats.map((s) => (
@@ -78,16 +84,17 @@ const stats = [
     </div>
   </section>
 
+  <!-- RUM PROGRAM -->
   <section class="py-24 px-6 bg-[var(--color-jungle)]/20">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Bar Program</p>
         <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">The Rum Program</h2>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The rum selection at The Lobby is built to serve the cocktail menu, not the other way around. Every bottle earns its place — Jamaican pot still rums for the Cobra Kai, aged Barbados rum for depth, agricole for brightness, overproof for float work. House blends are built in-house for the cocktails that call for them.
+          The rum selection at The Lobby is built to serve the cocktail menu, not the other way around. Every bottle earns its place &mdash; Jamaican pot still rums for the Cobra Kai, aged Barbados rum for depth, agricole for brightness, overproof for float work. House blends are built in-house for the cocktails that call for them.
         </p>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
-          Falernum, orgeat, Fassionola, coconut cream — the modifiers are as intentional as the spirits. Fresh juice throughout. This is how tiki is supposed to be done.
+          Falernum, orgeat, Fassionola, coconut cream &mdash; the modifiers are as intentional as the spirits. Fresh juice throughout. This is how tiki is supposed to be done.
         </p>
         <a href="/menu"
           class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
@@ -95,14 +102,39 @@ const stats = [
         </a>
       </div>
       <div class="grid grid-cols-2 gap-3">
-        <Image src={drinkCobraKai}   alt="Cobra Kai cocktail at The Lobby Tiki Bar"       class="w-full aspect-square object-cover" width={350} height={350} />
-        <Image src={drinkDsc01014}   alt="Lobby Mai Tai at The Lobby Tiki Bar"            class="w-full aspect-square object-cover" width={350} height={350} />
-        <Image src={drinkToucanSlam} alt="Toucan Slam at The Lobby Tiki Bar"              class="w-full aspect-square object-cover" width={350} height={350} />
-        <Image src={drinkDsc07144}   alt="Painkiller tiki cocktail at The Lobby Tiki Bar" class="w-full aspect-square object-cover" width={350} height={350} />
+        <Image src={drinkCobraKai}   alt="Cobra Kai cocktail at The Lobby Tiki Bar Oceanside"       class="w-full aspect-square object-cover" width={350} height={350} />
+        <Image src={drinkDsc01014}   alt="Lobby Mai Tai at The Lobby Tiki Bar Oceanside"            class="w-full aspect-square object-cover" width={350} height={350} />
+        <Image src={drinkToucanSlam} alt="Toucan Slam at The Lobby Tiki Bar Oceanside"              class="w-full aspect-square object-cover" width={350} height={350} />
+        <Image src={drinkDsc07144}   alt="Painkiller tiki cocktail at The Lobby Tiki Bar Oceanside" class="w-full aspect-square object-cover" width={350} height={350} />
       </div>
     </div>
   </section>
 
+  <!-- VENUE GALLERY -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Space</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Inside The Lobby</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          { img: venueCurtainEdit,   alt: "The Lobby Tiki Bar Oceanside &mdash; beaded curtains and warm tiki lighting"   },
+          { img: venueBooth,         alt: "Booth seating at The Lobby Tiki Bar Oceanside CA"                              },
+          { img: venueRoomPortrait,  alt: "Full venue interior at The Lobby Tiki Bar Oceanside CA"                         },
+          { img: venueBoothPortrait, alt: "Private booth detail at The Lobby Tiki Bar Oceanside CA"                        },
+        ].map((item) => (
+          <div class="aspect-square overflow-hidden">
+            <Image src={item.img} alt={item.alt}
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              width={500} height={500} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
   <section class="py-20 px-6">
     <div class="max-w-4xl mx-auto text-center">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Location</p>

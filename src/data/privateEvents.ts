@@ -1,12 +1,12 @@
 import type { ImageMetadata } from 'astro';
-import venueInterior1 from '../assets/images/venue-interior-1.jpg';
-import venueInterior2 from '../assets/images/venue-interior-2.jpg';
-import venueInterior3 from '../assets/images/venue-interior-3.jpg';
-import venueInterior4 from '../assets/images/venue-interior-4.jpg';
-import venueBar       from '../assets/images/venue-bar.jpg';
-import venueBar2      from '../assets/images/venue-bar-2.jpg';
-import venueDetail    from '../assets/images/venue-detail.jpg';
-import venueDetail2   from '../assets/images/venue-detail-2.jpg';
+import venueInterior3   from '../assets/images/venue-interior-3.jpg';
+import venueInterior4   from '../assets/images/venue-interior-4.jpg';
+import venueBar2        from '../assets/images/venue-bar-2.jpg';
+import venueDetail      from '../assets/images/venue-detail.jpg';
+import venueDetail2     from '../assets/images/venue-detail-2.jpg';
+import venueRoomFull    from '../assets/images/venue-room-full.jpg';
+import venueBooth       from '../assets/images/venue-booth-landscape.jpg';
+import venueCurtainEdit from '../assets/images/venue-curtain-edit.jpg';
 
 export interface PrivateEventType {
   slug: string;
@@ -31,7 +31,7 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
     heroLabel: 'Private Events',
     h1: 'Birthday Parties in Oceanside',
     summary: 'Full bar program, custom packages, and a tiki atmosphere that handles the ambiance. The Lobby is the birthday venue Oceanside needed.',
-    heroImage: venueInterior1,
+    heroImage: venueRoomFull,
     heroImageAlt: 'Birthday party venue at The Lobby Tiki Bar Oceanside CA',
     intro: [
       "The Lobby Tiki Bar is Oceanside's best venue for birthday parties that people actually talk about. Inside The Brick Hotel on Pier View Way, you get a tiki atmosphere built for celebration — bamboo, warm golden light, craft cocktails, and island-inspired food that sets the tone from the moment guests walk in.",
@@ -51,8 +51,8 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
       { q: 'Can I bring a cake or outside desserts?',                a: "Outside cakes and desserts are welcome. Let us know in advance and we'll make sure there's a plan for it." },
     ],
     gallery: [
-      { img: venueInterior2, alt: 'The Lobby Tiki Bar interior Oceanside — tiki atmosphere for private events' },
-      { img: venueBar,       alt: 'Full bar at The Lobby Tiki Bar Oceanside private event space'               },
+      { img: venueCurtainEdit, alt: 'The Lobby Tiki Bar interior Oceanside — tiki atmosphere for private events' },
+      { img: venueBar2,      alt: 'Full bar at The Lobby Tiki Bar Oceanside private event space'               },
       { img: venueDetail,    alt: 'Tiki detail at The Lobby Tiki Bar Oceanside CA'                             },
     ],
   },
@@ -63,7 +63,7 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
     heroLabel: 'Private Events',
     h1: 'Corporate Events in Oceanside',
     summary: 'Team dinners, client entertainment, and company celebrations that people actually want to attend. Full bar and kitchen program for groups of any size.',
-    heroImage: venueInterior2,
+    heroImage: venueCurtainEdit,
     heroImageAlt: 'Corporate event venue at The Lobby Tiki Bar Oceanside CA',
     intro: [
       "The Lobby Tiki Bar is the Oceanside corporate event venue your team will actually want to attend. Inside The Brick Hotel on Pier View Way, the space delivers tiki atmosphere, craft cocktails, and island-inspired food in a setting built for groups who want something more interesting than a conference room.",
@@ -95,7 +95,7 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
     heroLabel: 'Private Events',
     h1: 'Private Bar Buyout in Oceanside',
     summary: "The whole venue, all yours. Full tiki bar program, island kitchen, and exclusive access to one of Oceanside's most distinct bars.",
-    heroImage: venueBar,
+    heroImage: venueBooth,
     heroImageAlt: 'Private bar buyout at The Lobby Tiki Bar Oceanside CA',
     intro: [
       "The whole venue, all yours. A full bar buyout at The Lobby Tiki Bar means your group gets the entire space — the full tiki bar program, island-inspired kitchen, and an atmosphere on Pier View Way that handles the vibe without any extra effort on your part.",
@@ -115,7 +115,7 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
       { q: 'Are bar buyouts available on weekends?',                  a: 'Yes, including Friday and Saturday nights. Weekend dates book quickly — reach out as early as possible.' },
     ],
     gallery: [
-      { img: venueInterior1, alt: 'The Lobby Tiki Bar full venue Oceanside — bar buyout space'                   },
+      { img: venueRoomFull,  alt: 'The Lobby Tiki Bar full venue Oceanside — bar buyout space'                   },
       { img: venueInterior4, alt: 'Interior of The Lobby Tiki Bar Oceanside CA during private event'             },
       { img: venueDetail,    alt: 'Tiki decor at The Lobby Tiki Bar Oceanside private bar buyout venue'          },
     ],
