@@ -40,16 +40,16 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
         width="1800" height="600"
         fetchpriority="high"
       />
-      <div class="absolute inset-0 bg-[var(--color-espresso)]/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/60 to-transparent"></div>
     </div>
-    <div class="relative z-10 max-w-3xl mx-auto text-center">
+    <div class="relative z-10 w-full"><div class="max-w-7xl mx-auto px-8 sm:px-16 pb-20">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">
         {formattedDate}
       </p>
       <h1 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl lg:text-6xl text-[var(--color-sand)] leading-tight">
         {post.data.title}
       </h1>
-    </div>
+    </div></div>
   </section>
 
   <article class="py-16 px-6">

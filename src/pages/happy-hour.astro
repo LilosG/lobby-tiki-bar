@@ -9,21 +9,22 @@ import { SITE } from '../data/site';
 import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
 import { COCKTAILS } from '../data/menu';
 
-import drinkDsc06150  from '../assets/images/drink-dsc06150.jpg';
-import drinkDsc01014  from '../assets/images/drink-dsc01014.jpg';
-import venueInterior1 from '../assets/images/venue-interior-1.jpg';
+import drinkBarLineup   from '../assets/images/drink-bar-lineup.jpg';
+import drinkDsc01014    from '../assets/images/drink-dsc01014.jpg';
+import foodKaluaTacos2  from '../assets/images/food-kalua-tacos-2.jpg';
+import tikiIllustration from '../assets/images/tiki-illustration-volcano.jpg';
 
 const hhFeatured = [
-  { name: 'Lobby Mai Tai',  drink: COCKTAILS.find(c => c.name === 'Lobby Mai Tai')!,  note: 'The house standard'       },
-  { name: 'Cobra Kai',      drink: COCKTAILS.find(c => c.name === 'Cobra Kai')!,       note: 'If you want to commit'    },
-  { name: 'Painkiller',     drink: COCKTAILS.find(c => c.name === 'Painkiller')!,      note: 'Three levels of intensity'},
-  { name: 'Toucan Slam',    drink: COCKTAILS.find(c => c.name === 'Toucan Slam')!,     note: 'Dark rum float'           },
+  { drink: COCKTAILS.find(c => c.name === 'Lobby Mai Tai')!,  note: 'The house standard'        },
+  { drink: COCKTAILS.find(c => c.name === 'Cobra Kai')!,       note: 'If you want to commit'     },
+  { drink: COCKTAILS.find(c => c.name === 'Painkiller')!,      note: 'Three levels of intensity' },
+  { drink: COCKTAILS.find(c => c.name === 'Toucan Slam')!,     note: 'Dark rum float'            },
 ];
 ---
 
 <BaseLayout
-  title="Happy Hour Oceanside | The Lobby Tiki Bar | Daily Specials Mon–Fri"
-  description="Daily happy hour specials at The Lobby Tiki Bar in Oceanside CA. $6 Mai Tais on Thursdays, $6 Tacos on Tuesdays, All Day Happy Hour Mondays. 408 Pier View Way."
+  title="Happy Hour Oceanside CA | The Lobby Tiki Bar | Daily Specials"
+  description="Best happy hour in Oceanside CA. The Lobby Tiki Bar: $6 Mai Tais Thursdays, $6 Tacos Tuesdays, All Day Happy Hour Mondays. 408 Pier View Way inside The Brick Hotel."
   image="/images/drink-dsc06150.jpg"
 >
   <Nav />
@@ -32,24 +33,25 @@ const hhFeatured = [
     label="Daily Deals"
     title="Happy Hour"
     subtitle="Something different every day. Monday through Friday on Pier View Way."
-    image={drinkDsc06150}
-    imageAlt="Happy hour cocktails at The Lobby Tiki Bar Oceanside"
-    overlay="jungle"
+    image={drinkBarLineup}
+    imageAlt="Happy hour tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+    overlay="gradient"
   >
     <div class="mt-6">
       <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl">in Oceanside</p>
     </div>
   </PageHero>
 
+  <!-- QUICK INFO STRIP -->
   <section class="bg-[var(--color-jungle)] border-y border-white/10">
     <div class="max-w-4xl mx-auto px-6 grid grid-cols-3 divide-x divide-white/10">
       <div class="text-center py-8 px-6">
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Days</p>
-        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">Mon – Fri</p>
+        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">Mon &ndash; Fri</p>
       </div>
       <div class="text-center py-8 px-6">
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Hours</p>
-        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">3 – 5 PM</p>
+        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">3 &ndash; 5 PM</p>
       </div>
       <div class="text-center py-8 px-6">
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Location</p>
@@ -58,6 +60,7 @@ const hhFeatured = [
     </div>
   </section>
 
+  <!-- WEEKLY SPECIALS -->
   <section class="py-28 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
@@ -78,6 +81,7 @@ const hhFeatured = [
     </div>
   </section>
 
+  <!-- DRINKS & BITES SPLIT -->
   <section class="border-t border-white/10">
     <div class="grid lg:grid-cols-2 min-h-[600px]">
       <div class="relative overflow-hidden min-h-[400px] lg:min-h-0">
@@ -107,7 +111,7 @@ const hhFeatured = [
             </div>
             <div>
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">
-                Bites — {HAPPY_HOUR_DEALS.food.price} each
+                Bites &mdash; {HAPPY_HOUR_DEALS.food.price} each
               </p>
               <ul class="space-y-3">
                 {HAPPY_HOUR_DEALS.food.items.map((item) => (
@@ -124,17 +128,18 @@ const hhFeatured = [
     </div>
   </section>
 
-  <section class="relative py-28 overflow-hidden px-6">
+  <!-- TIKI TACO TUESDAY BAND -->
+  <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
-      <Image src={venueInterior1} alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside"
-        class="w-full h-full object-cover opacity-20" width={1800} height={900} />
-      <div class="absolute inset-0 bg-[var(--color-espresso)]/80"></div>
+      <Image src={foodKaluaTacos2} alt="Tiki Taco Tuesday at The Lobby Tiki Bar Oceanside CA"
+        class="w-full h-full object-cover" width={1800} height={900} />
+      <div class="absolute inset-0 bg-[var(--color-espresso)]/65"></div>
     </div>
-    <div class="relative z-10 max-w-3xl mx-auto text-center">
+    <div class="relative z-10 text-center px-6 py-24">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Tuesday</p>
-      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] mb-2">Tiki Taco</h2>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-2">Tiki Taco</h2>
       <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-5xl sm:text-6xl mb-8">Tuesday</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-lg mx-auto mb-10 leading-relaxed text-lg">
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 max-w-lg mx-auto mb-10 leading-relaxed text-lg">
         $6 Tacos and $5 Wells all evening. The weekly ritual Oceanside needed.
       </p>
       <a href="/events/tiki-taco-tuesday"
@@ -144,6 +149,7 @@ const hhFeatured = [
     </div>
   </section>
 
+  <!-- WHAT TO ORDER -->
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
@@ -151,7 +157,7 @@ const hhFeatured = [
         <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Start Here</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {hhFeatured.map(({ drink, note }) => drink.image && (
+        {hhFeatured.map(({ drink, note }) => drink && drink.image && (
           <a href="/menu#cocktails" class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors">
             <div class="aspect-square overflow-hidden">
               <Image src={drink.image} alt={`${drink.name} at The Lobby Tiki Bar Oceanside`}
@@ -171,6 +177,32 @@ const hhFeatured = [
           class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
           Full Menu
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO / ABOUT SECTION -->
+  <section class="py-24 px-6">
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Pier View Way, Oceanside</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">Oceanside&rsquo;s Best Happy Hour</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
+          The Lobby Tiki Bar runs one of the best happy hours in Oceanside, CA. Every weekday we discount cocktails, beers, wine, and select bites so you can settle in before the evening picks up. Monday is all-day happy hour. Thursday brings $6 Mai Tais all night. Tuesday runs $6 tacos and $5 wells from open to close.
+        </p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
+          Inside The Brick Hotel on Pier View Way, steps from the Oceanside Pier. Walk in or reserve ahead &mdash; we&rsquo;ll have a Mai Tai waiting.
+        </p>
+        <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
+          class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
+          Reserve a Table
+        </a>
+      </div>
+      <div class="relative overflow-hidden">
+        <Image src={tikiIllustration}
+          alt="The Lobby Tiki Bar happy hour Oceanside California"
+          class="w-full aspect-[4/5] object-cover object-center" width={800} height={1000} />
+        <div class="absolute inset-0 bg-[var(--color-espresso)]/20"></div>
       </div>
     </div>
   </section>
