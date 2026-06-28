@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE } from '../data/site';
+import MobileStickyBar from '../components/MobileStickyBar.astro';
 
 interface Props {
   title: string;
@@ -178,7 +179,8 @@ const fullSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(fullSchema)} />
   </head>
-  <body>
+  <body class="pb-[60px] lg:pb-0">
     <slot />
+    <MobileStickyBar />
   </body>
 </html>
