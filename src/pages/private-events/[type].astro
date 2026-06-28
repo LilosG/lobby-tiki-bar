@@ -1,0 +1,162 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import CTASection from '../../components/CTASection.astro';
+import { SITE } from '../../data/site';
+import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
+
+export function getStaticPaths() {
+  return PRIVATE_EVENT_TYPES.map((event) => ({
+    params: { type: event.slug },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: event.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={event.seoTitle}
+  description={event.metaDescription}
+  image="/images/venue-interior-1.jpg"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <Nav />
+
+  <!-- HERO -->
+  <section class="relative min-h-[70vh] flex items-end overflow-hidden">
+    <div class="absolute inset-0">
+      <Image src={event.heroImage} alt={event.heroImageAlt}
+        class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/60 to-transparent"></div>
+    </div>
+    <div class="relative z-10 w-full">
+      <div class="max-w-7xl mx-auto px-8 sm:px-16 pb-20">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{event.heroLabel} · The Lobby Tiki Bar</p>
+        <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] leading-tight mb-8 max-w-2xl">{event.h1}</h1>
+        <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
+          class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
+          Inquire About Your Event
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK INFO STRIP -->
+  <section class="bg-[var(--color-jungle)] border-y border-white/10">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-5 divide-x divide-white/10">
+      {event.details.map((d) => (
+        <div class="text-center py-7 px-4">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-1">{d.label}</p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm leading-snug">{d.value}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- INTRO + GALLERY -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+      <div>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Venue</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-8 leading-tight">The Lobby Tiki Bar<br />in Oceanside, CA</h2>
+        {event.intro.map((para) => (
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-5">{para}</p>
+        ))}
+        <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
+          class="inline-block mt-4 border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
+          Start Planning
+        </a>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        {event.gallery.map((item, i) => (
+          <div class:list={["overflow-hidden", i === 0 ? "col-span-2 aspect-video" : "aspect-square"]}>
+            <Image src={item.img} alt={item.alt}
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              width={i === 0 ? 900 : 450} height={i === 0 ? 506 : 450} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Common Questions</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)]">Frequently Asked Questions</h2>
+      </div>
+      <div class="space-y-4">
+        {event.faqs.map((faq) => (
+          <div class="border border-white/10 p-8 hover:border-[var(--color-amber)]/30 transition-colors">
+            <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-3">{faq.q}</h3>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed text-sm">{faq.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="py-24 px-6">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Get in Touch</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-4">Plan Your Event</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed max-w-xl mx-auto">
+          Tell us about your group, occasion, and date. We will put together a package that works.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
+          class="group flex items-center gap-6 border border-white/10 p-6 hover:border-[var(--color-amber)]/40 transition-colors">
+          <div class="w-12 h-12 border border-[var(--color-amber)]/30 flex items-center justify-center flex-shrink-0 group-hover:border-[var(--color-amber)] transition-colors">
+            <svg class="w-5 h-5 text-[var(--color-amber)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-xs tracking-widest uppercase mb-1">Email Us</p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">{SITE.email}</p>
+          </div>
+        </a>
+        <a href={`tel:${SITE.phone.tel}`}
+          class="group flex items-center gap-6 border border-white/10 p-6 hover:border-[var(--color-amber)]/40 transition-colors">
+          <div class="w-12 h-12 border border-[var(--color-amber)]/30 flex items-center justify-center flex-shrink-0 group-hover:border-[var(--color-amber)] transition-colors">
+            <svg class="w-5 h-5 text-[var(--color-amber)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-xs tracking-widest uppercase mb-1">Call Us</p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm">{SITE.phone.display}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Explore the Full Venue"
+    subtitle="See the space, the bar program, and everything The Lobby has to offer."
+    primaryLabel="Explore the Venue"
+    primaryHref="/the-lobby"
+    secondaryLabel="All Private Events"
+    secondaryHref="/private-events"
+  />
+
+  <Footer />
+</BaseLayout>

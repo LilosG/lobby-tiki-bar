@@ -1,36 +1,18 @@
 ---
 import { Image } from 'astro:assets';
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Nav from "../../components/Nav.astro";
-import Footer from "../../components/Footer.astro";
-import PageHero from "../../components/PageHero.astro";
-import { SITE } from "../../data/site";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/site';
+import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
 
-import venueInterior1 from '../../assets/images/venue-interior-1.jpg';
 import venueInterior2 from '../../assets/images/venue-interior-2.jpg';
-import venueInterior3 from '../../assets/images/venue-interior-3.jpg';
-import venueInterior4 from '../../assets/images/venue-interior-4.jpg';
-
-import type { ImageMetadata } from 'astro';
-
-interface EventType {
-  name: string;
-  description: string;
-  image: ImageMetadata;
-  imageAlt: string;
-}
-
-const eventTypes: EventType[] = [
-  { name: "Birthday Parties",    description: "Mark the occasion somewhere memorable. Full bar program, custom packages, and a space that delivers.",             image: venueInterior1, imageAlt: "Birthday party venue at The Lobby Tiki Bar Oceanside"      },
-  { name: "Corporate Events",    description: "Team dinners, client entertaining, and company celebrations that people actually want to attend.",                  image: venueInterior2, imageAlt: "Corporate event space at The Lobby Tiki Bar Oceanside"    },
-  { name: "Bar Buyouts",         description: "The whole space, all yours. Full bar buyouts for groups who want the run of the place.",                            image: venueInterior3, imageAlt: "Bar buyout at The Lobby Tiki Bar Oceanside — full venue"  },
-  { name: "Rehearsal Dinners",   description: "Pre-wedding gatherings with the full tiki experience. An evening your wedding party will remember.",                image: venueInterior4, imageAlt: "Rehearsal dinner at The Lobby Tiki Bar Oceanside"         },
-];
 
 const stats = [
-  { label: "Capacity",    value: "200+",         note: "Full venue"           },
-  { label: "Bar Program", value: "Full",          note: "Tiki cocktails + rum" },
-  { label: "Location",    value: "Pier View Way", note: "Oceanside CA"         },
+  { label: 'Capacity',    value: '200+',         note: 'Full venue'           },
+  { label: 'Bar Program', value: 'Full',          note: 'Tiki cocktails + rum' },
+  { label: 'Location',    value: 'Pier View Way', note: 'Oceanside CA'         },
 ];
 ---
 
@@ -52,22 +34,26 @@ const stats = [
 
   <section class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4 text-center">What We Host</p>
-      <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12 text-center">Events Worth Talking About</h2>
+      <div class="text-center mb-14">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">What We Host</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Events Worth Talking About</h2>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {eventTypes.map((event) => (
-          <div class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
+        {PRIVATE_EVENT_TYPES.map((event) => (
+          <a href={`/private-events/${event.slug}`}
+            class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors block">
             <div class="aspect-video overflow-hidden">
-              <Image src={event.image} alt={event.imageAlt}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
+              <Image src={event.heroImage} alt={event.heroImageAlt}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70"
                 width={800} height={450} />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-8">
-              <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{event.name}</h3>
-              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm leading-relaxed">{event.description}</p>
+              <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{event.h1}</h3>
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm leading-relaxed mb-4">{event.summary}</p>
+              <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase group-hover:underline">Learn More &rarr;</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
@@ -91,7 +77,7 @@ const stats = [
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Get in Touch</p>
         <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-4">Plan Your Event</h2>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed">
-          Tell us what you have in mind — group size, occasion, date, and anything else that matters. We'll put together a package that works.
+          Tell us what you have in mind. Group size, occasion, date. We will put together a package that works.
         </p>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
