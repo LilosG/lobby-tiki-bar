@@ -6,6 +6,8 @@ import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
 import IllustrationBand from '../../components/IllustrationBand.astro';
 import { SITE } from '../../data/site';
+import { BRUNCH_FAQS } from '../../data/faqs';
+import FAQSection from '../../components/FAQSection.astro';
 import { BRUNCH } from '../../data/menu';
 
 import brunchPlate2    from '../../assets/images/brunch-plate-2.jpg';
@@ -13,8 +15,19 @@ import drinkBarLifestyle    from '../../assets/images/drink-bar-lifestyle.jpg';
 import tikiIllustrationLuau from '../../assets/images/tiki-illustration-luau.jpg';
 import brunchPlate3    from '../../assets/images/brunch-plate-3.jpg';
 import brunchPlate4    from '../../assets/images/brunch-plate-4.jpg';
-import brunchPlate2    from '../../assets/images/brunch-plate-2.jpg';
 import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
+
+const faqs = BRUNCH_FAQS;
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/brunch/#faq`,
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -22,6 +35,7 @@ import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
   description="Weekend brunch at The Lobby Tiki Bar in Oceanside CA. Saturday and Sunday 10 AM – 3 PM. Island-inspired brunch plates and tiki cocktails inside The Brick Hotel."
   image="/images/brunch-spread.jpg"
   heroImage={brunchPlate2.src}
+  pageSchema={faqSchema}
 >
   <Nav />
 
@@ -170,6 +184,13 @@ import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
       </div>
     </div>
   </section>
+
+  <FAQSection
+    faqs={faqs}
+    label="Good to Know"
+    title="Brunch FAQ"
+    background="muted"
+  />
 
   <CTASection
     title="Join Us for Weekend Brunch"

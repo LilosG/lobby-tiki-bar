@@ -10,6 +10,8 @@ import SectionHeader from "../../components/SectionHeader.astro";
 import IllustrationBand from "../../components/IllustrationBand.astro";
 import CTASection from "../../components/CTASection.astro";
 import { SITE } from "../../data/site";
+import { VENUE_FAQS } from '../../data/faqs';
+import FAQSection from '../../components/FAQSection.astro';
 
 import venueRoomFull      from '../../assets/images/venue-room-full.jpg';
 import venueCurtainWide   from '../../assets/images/venue-curtain-wide.jpg';
@@ -29,6 +31,18 @@ const stats = [
   { value: "4.7★",    label: "Google Rating"  },
   { value: "Tue–Sun", label: "Open Weekly"    },
 ];
+
+const faqs = VENUE_FAQS;
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/the-lobby/#faq`,
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -36,6 +50,7 @@ const stats = [
   description="The Lobby Tiki Bar is inside The Brick Hotel at 408 Pier View Way in Oceanside CA. Bamboo, tiki carvings, an extensive rum program, and a space built to transport you."
   image="/images/venue-interior-1.jpg"
   heroImage={venueRoomFull.src}
+  pageSchema={faqSchema}
 >
   <Nav />
 
@@ -153,6 +168,13 @@ const stats = [
       </a>
     </div>
   </section>
+
+  <FAQSection
+    faqs={faqs}
+    label="Good to Know"
+    title="Venue FAQ"
+    background="muted"
+  />
 
   <CTASection
     title="Come See For Yourself"

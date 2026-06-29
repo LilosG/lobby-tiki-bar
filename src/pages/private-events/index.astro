@@ -6,6 +6,8 @@ import TrustBar from '../../components/TrustBar.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/site';
+import { PRIVATE_EVENTS_FAQS } from '../../data/faqs';
+import FAQSection from '../../components/FAQSection.astro';
 import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
 import CateringForm from '../../components/CateringForm.astro';
 
@@ -20,6 +22,18 @@ const stats = [
   { label: 'Bar Program', value: 'Full',          note: 'Tiki cocktails + rum' },
   { label: 'Location',    value: 'Pier View Way', note: 'Oceanside CA'         },
 ];
+
+const faqs = PRIVATE_EVENTS_FAQS;
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/private-events/#faq`,
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -27,6 +41,7 @@ const stats = [
   description="Book a private event at The Lobby Tiki Bar in Oceanside CA. Birthdays, corporate events, bar buyouts, rehearsal dinners. 408 Pier View Way inside The Brick Hotel."
   image="/images/venue-interior-2.jpg"
   heroImage={venueInterior2.src}
+  pageSchema={faqSchema}
 >
   <Nav />
 
@@ -84,7 +99,14 @@ const stats = [
     </div>
   </section>
 
-  <CateringForm title="Plan Your Private Event" subtitle="Tell us your occasion, group size, and date. We’ll put together a package that works for you." />
+  <FAQSection
+    faqs={faqs}
+    label="Common Questions"
+    title="Private Events FAQ"
+    background="muted"
+  />
+
+  <CateringForm title="Plan Your Private Event" subtitle="Tell us your occasion, group size, and date. We'll put together a package that works for you." />
 
   <Footer />
 </BaseLayout>

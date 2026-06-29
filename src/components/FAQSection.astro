@@ -1,0 +1,41 @@
+---
+import type { FAQ } from '../data/faqs';
+
+interface Props {
+  faqs: FAQ[];
+  title?: string;
+  label?: string;
+  background?: 'default' | 'muted';
+}
+
+const {
+  faqs,
+  title = 'Frequently Asked Questions',
+  label = 'Need to Know',
+  background = 'muted',
+} = Astro.props;
+---
+
+<section class:list={["py-24 px-6", background === 'muted' ? 'bg-[var(--color-espresso-light)]/20' : '']}>
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-14">
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{title}</h2>
+    </div>
+    <div class="divide-y divide-white/10 border border-white/10">
+      {faqs.map((faq) => (
+        <details class="group">
+          <summary class="flex items-center justify-between gap-6 px-8 py-6 cursor-pointer list-none hover:bg-white/5 transition-colors duration-200">
+            <h3 class="font-[family-name:var(--font-display)] text-lg sm:text-xl text-[var(--color-sand)] leading-snug">{faq.q}</h3>
+            <span class="flex-shrink-0 w-8 h-8 border border-white/20 group-open:border-[var(--color-amber)]/60 group-open:bg-[var(--color-amber)]/10 flex items-center justify-center transition-all duration-200">
+              <svg class="w-3.5 h-3.5 text-[var(--color-amber)] transition-transform duration-300 group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+            </span>
+          </summary>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed px-8 pb-8 text-sm sm:text-base">{faq.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

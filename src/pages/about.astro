@@ -10,6 +10,8 @@ import SectionHeader from "../components/SectionHeader.astro";
 import IllustrationBand from "../components/IllustrationBand.astro";
 import CTASection from "../components/CTASection.astro";
 import { SITE } from "../data/site";
+import { ABOUT_FAQS } from '../data/faqs';
+import FAQSection from '../components/FAQSection.astro';
 
 import venueInterior1    from '../assets/images/venue-interior-1.jpg';
 import venueRoomPortrait from '../assets/images/venue-room-portrait.jpg';
@@ -21,6 +23,18 @@ const stats = [
   { value: "4.7★",    label: "Google Rating"   },
   { value: "Tue–Sun", label: "Open Weekly"     },
 ];
+
+const faqs = ABOUT_FAQS;
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${SITE.url}/about/#faq`,
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
 <BaseLayout
@@ -28,6 +42,7 @@ const stats = [
   description="The Lobby Tiki Bar is Oceanside's craft tiki destination inside The Brick Hotel on Pier View Way. Part of the Grind & Prosper Hospitality portfolio."
   image="/images/venue-interior-1.jpg"
   heroImage={venueInterior1.src}
+  pageSchema={faqSchema}
 >
   <Nav />
 
@@ -96,6 +111,13 @@ const stats = [
       </p>
     </div>
   </section>
+
+  <FAQSection
+    faqs={faqs}
+    label="About The Lobby"
+    title="Common Questions"
+    background="muted"
+  />
 
   <CTASection
     title="Come Experience It"
