@@ -140,6 +140,7 @@ const fullSchema = {
   '@context': 'https://schema.org',
   '@graph': graphNodes,
 };
+import Analytics from '../components/Analytics.astro';
 ---
 
 <!doctype html>
@@ -178,7 +179,8 @@ const fullSchema = {
     )}
 
     <script type="application/ld+json" set:html={JSON.stringify(fullSchema)} />
-  </head>
+    <Analytics />
+</head>
   <body class="pb-[60px] lg:pb-0">
     <slot />
     <MobileStickyBar />
