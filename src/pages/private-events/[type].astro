@@ -5,6 +5,7 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
 import CateringForm from '../../components/CateringForm.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import { SITE } from '../../data/site';
 import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
 
@@ -94,25 +95,14 @@ const faqSchemaNode = {
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
-    <div class="max-w-3xl mx-auto">
-      <div class="text-center mb-14">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Common Questions</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)]">Frequently Asked Questions</h2>
-      </div>
-      <div class="space-y-4">
-        {event.faqs.map((faq) => (
-          <div class="border border-white/10 p-8 hover:border-[var(--color-amber)]/30 transition-colors">
-            <h3 class="font-[family-name:var(--font-display)] text-lg text-[var(--color-sand)] mb-3">{faq.q}</h3>
-            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed text-sm">{faq.a}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <FAQSection
+    faqs={event.faqs}
+    label="Common Questions"
+    title="Frequently Asked Questions"
+    background="muted"
+  />
 
-  <CateringForm title={`Book Your ${event.h1.replace("in Oceanside", "").trim()}`} subtitle="Tell us your date, group size, and occasion. We’ll put together a package that works." />
+  <CateringForm title={`Book Your ${event.h1.replace("in Oceanside", "").trim()}`} subtitle="Tell us your date, group size, and occasion. We'll put together a package that works." />
 
   <CTASection
     title="Explore the Full Venue"
