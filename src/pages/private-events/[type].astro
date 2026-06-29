@@ -3,11 +3,17 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import TrustBar from '../../components/TrustBar.astro';
+import StatsBar from '../../components/StatsBar.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import IllustrationBand from '../../components/IllustrationBand.astro';
 import CTASection from '../../components/CTASection.astro';
 import CateringForm from '../../components/CateringForm.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import { SITE } from '../../data/site';
 import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
+
+import tikiIllustration from '../../assets/images/tiki-illustration-volcano.jpg';
 
 export function getStaticPaths() {
   return PRIVATE_EVENT_TYPES.map((event) => ({
@@ -47,7 +53,7 @@ const faqSchemaNode = {
     </div>
     <div class="relative z-10 w-full">
       <div class="max-w-7xl mx-auto px-8 sm:px-16 pb-20">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{event.heroLabel} · The Lobby Tiki Bar</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{event.heroLabel} &middot; The Lobby Tiki Bar</p>
         <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] leading-tight mb-8 max-w-2xl">{event.h1}</h1>
         <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
           class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
@@ -56,6 +62,8 @@ const faqSchemaNode = {
       </div>
     </div>
   </section>
+
+  <TrustBar />
 
   <!-- QUICK INFO STRIP -->
   <section class="bg-[var(--color-jungle)] border-y border-white/10">
@@ -78,8 +86,16 @@ const faqSchemaNode = {
         {event.intro.map((para) => (
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-5">{para}</p>
         ))}
+        <ul class="space-y-3 mt-8">
+          {event.features.map((feature) => (
+            <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm">
+              <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
+              {feature}
+            </li>
+          ))}
+        </ul>
         <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
-          class="inline-block mt-4 border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
+          class="inline-block mt-10 border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
           Start Planning
         </a>
       </div>
@@ -94,6 +110,60 @@ const faqSchemaNode = {
       </div>
     </div>
   </section>
+
+  <StatsBar stats={event.stats} background="espresso" />
+
+  <!-- WHY SECTION -->
+  <section class="py-24 px-6 bg-[var(--color-jungle)]/20">
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <SectionHeader label="Private Events" title={event.whyTitle} align="left" />
+        {event.whyBody.map((para) => (
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-5">{para}</p>
+        ))}
+        <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
+          class="inline-block mt-4 bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
+          Inquire Now
+        </a>
+      </div>
+      <div class="space-y-4">
+        <div class="border border-white/10 p-8">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">What's Included</p>
+          <ul class="space-y-3">
+            {event.features.map((feature) => (
+              <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">
+                <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="border border-white/10 p-8">
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Get Started</p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm leading-relaxed mb-4">
+            Email us with your date, group size, and occasion. We'll put together a custom package and get back to you quickly.
+          </p>
+          <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
+            class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase hover:text-[var(--color-sand)] transition-colors">
+            {SITE.email} &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <IllustrationBand
+    image={tikiIllustration}
+    imageAlt={`${event.h1} at The Lobby Tiki Bar Oceanside California`}
+    label="408 Pier View Way &middot; Oceanside, CA"
+    title={event.illustrationTitle}
+    scriptLine={event.illustrationScriptLine}
+    subtitle={event.illustrationSubtitle}
+    ctaLabel="Inquire About Your Event"
+    ctaHref={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
+    minHeight="50vh"
+    overlayOpacity={72}
+  />
 
   <FAQSection
     faqs={event.faqs}

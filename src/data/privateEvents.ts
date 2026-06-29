@@ -19,6 +19,13 @@ export interface PrivateEventType {
   heroImageAlt: string;
   intro: string[];
   details: { label: string; value: string }[];
+  features: string[];
+  whyTitle: string;
+  whyBody: string[];
+  stats: { value: string; label: string }[];
+  illustrationTitle: string;
+  illustrationScriptLine: string;
+  illustrationSubtitle: string;
   faqs: { q: string; a: string }[];
   gallery: { img: ImageMetadata; alt: string }[];
 }
@@ -35,25 +42,47 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
     heroImageAlt: 'Birthday party venue at The Lobby Tiki Bar Oceanside CA',
     intro: [
       "The Lobby Tiki Bar is Oceanside's best venue for birthday parties that people actually talk about. Inside The Brick Hotel on Pier View Way, you get a tiki atmosphere built for celebration — bamboo, warm golden light, craft cocktails, and island-inspired food that sets the tone from the moment guests walk in.",
-      "Whether you're looking for a partial venue reservation or a full bar buyout, we'll put together a package built around your group, your occasion, and what you want the night to feel like. Full bar program, custom drink packages, and a kitchen built to feed the whole party.",
+      "Whether you're looking for a partial venue reservation or a full bar buyout, we'll put together a package built around your group, your occasion, and what you want the night to feel like.",
     ],
     details: [
-      { label: 'Capacity',    value: 'Up to 200+ guests'             },
-      { label: 'Location',    value: '408 Pier View Way, Oceanside'  },
-      { label: 'Bar Program', value: 'Full tiki cocktails + rum'     },
-      { label: 'Food',        value: 'Island-inspired plates'        },
-      { label: 'Options',     value: 'Partial or full buyout'        },
+      { label: 'Capacity',    value: 'Up to 200+ guests'            },
+      { label: 'Location',    value: '408 Pier View Way, Oceanside' },
+      { label: 'Bar Program', value: 'Full tiki cocktails + rum'    },
+      { label: 'Food',        value: 'Island-inspired plates'       },
+      { label: 'Options',     value: 'Partial or full buyout'       },
     ],
+    features: [
+      'Full tiki bar program',
+      'Custom cocktail packages',
+      'Island-inspired food menu',
+      'Partial or full venue buyout',
+      '200+ guest capacity',
+      'Steps from the Oceanside Pier',
+    ],
+    whyTitle: 'Why The Lobby for Your Birthday',
+    whyBody: [
+      "A birthday at The Lobby is different because the atmosphere does the work. Bamboo, warm golden light, craft tiki cocktails, and a team that builds packages around your group — not a one-size-fits-all banquet menu.",
+      "Whether you're bringing 20 people for a partial reservation or 200 for a full buyout, we'll make sure the bar is set, the food is right, and the space feels like it was built for your night.",
+    ],
+    stats: [
+      { value: '200+',      label: 'Guest Capacity' },
+      { value: 'Full',      label: 'Bar Program'    },
+      { value: 'Custom',    label: 'Packages'       },
+      { value: 'Pier View', label: 'Location'       },
+    ],
+    illustrationTitle: 'Celebrate at',
+    illustrationScriptLine: 'The Lobby',
+    illustrationSubtitle: 'Craft tiki cocktails, island-inspired food, and a venue on Pier View Way that makes the night worth celebrating. Custom packages for any group size.',
     faqs: [
-      { q: 'How do I book a birthday party at The Lobby?',           a: "Email info@lobbytikibar.com or call (858) 304-7725 with your date, group size, and what you're looking for. We'll respond with availability and package options." },
-      { q: 'What is the venue capacity for a birthday party?',       a: 'The Lobby can accommodate up to 200+ guests for a full buyout. Smaller partial reservations are available depending on the night.' },
-      { q: 'Is there a food and beverage minimum?',                  a: 'Yes, minimums vary by night and group size. Contact us directly for current minimums and custom package pricing.' },
-      { q: 'Can I bring a cake or outside desserts?',                a: "Outside cakes and desserts are welcome. Let us know in advance and we'll make sure there's a plan for it." },
+      { q: 'How do I book a birthday party at The Lobby?',         a: "Email info@lobbytikibar.com or call (858) 304-7725 with your date, group size, and what you're looking for. We'll respond with availability and package options." },
+      { q: 'What is the venue capacity for a birthday party?',     a: 'The Lobby can accommodate up to 200+ guests for a full buyout. Smaller partial reservations are available depending on the night.' },
+      { q: 'Is there a food and beverage minimum?',                a: 'Yes, minimums vary by night and group size. Contact us directly for current minimums and custom package pricing.' },
+      { q: 'Can I bring a cake or outside desserts?',              a: "Outside cakes and desserts are welcome. Let us know in advance and we'll make sure there's a plan for it." },
     ],
     gallery: [
       { img: venueCurtainEdit, alt: 'The Lobby Tiki Bar interior Oceanside — tiki atmosphere for private events' },
-      { img: venueBar2,      alt: 'Full bar at The Lobby Tiki Bar Oceanside private event space'               },
-      { img: venueDetail,    alt: 'Tiki detail at The Lobby Tiki Bar Oceanside CA'                             },
+      { img: venueBar2,        alt: 'Full bar at The Lobby Tiki Bar Oceanside private event space'               },
+      { img: venueDetail,      alt: 'Tiki detail at The Lobby Tiki Bar Oceanside CA'                             },
     ],
   },
   {
@@ -67,20 +96,42 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
     heroImageAlt: 'Corporate event venue at The Lobby Tiki Bar Oceanside CA',
     intro: [
       "The Lobby Tiki Bar is the Oceanside corporate event venue your team will actually want to attend. Inside The Brick Hotel on Pier View Way, the space delivers tiki atmosphere, craft cocktails, and island-inspired food in a setting built for groups who want something more interesting than a conference room.",
-      "Team dinners, client entertainment, company celebrations, and end-of-quarter events — we handle the atmosphere so you can focus on the people. Full bar program, custom food and drink packages, and flexible venue configuration for groups of any size.",
+      "Team dinners, client entertainment, company celebrations, and end-of-quarter events — we handle the atmosphere so you can focus on the people.",
     ],
     details: [
-      { label: 'Capacity',    value: 'Up to 200+ guests'             },
-      { label: 'Location',    value: '408 Pier View Way, Oceanside'  },
-      { label: 'Bar Program', value: 'Full tiki cocktails + rum'     },
-      { label: 'Food',        value: 'Custom island-inspired menus'  },
-      { label: 'Options',     value: 'Partial or full buyout'        },
+      { label: 'Capacity',    value: 'Up to 200+ guests'            },
+      { label: 'Location',    value: '408 Pier View Way, Oceanside' },
+      { label: 'Bar Program', value: 'Full tiki cocktails + rum'    },
+      { label: 'Food',        value: 'Custom island-inspired menus' },
+      { label: 'Options',     value: 'Partial or full buyout'       },
     ],
+    features: [
+      'Full bar and cocktail program',
+      'Custom food and drink packages',
+      'Flexible venue configuration',
+      'Partial or full venue buyout',
+      '200+ guest capacity',
+      '408 Pier View Way, Oceanside',
+    ],
+    whyTitle: 'Corporate Events Worth Attending',
+    whyBody: [
+      "Most corporate event venues feel like corporate event venues. The Lobby doesn't. The tiki atmosphere, craft cocktail program, and island-inspired kitchen give your team something to actually talk about — which is the whole point of getting everyone in a room.",
+      "We work with you on food and drink packages that fit your group, timeline, and budget. Full buyouts for larger groups, partial reservations for team dinners, custom bar programs for client entertainment.",
+    ],
+    stats: [
+      { value: '200+',     label: 'Guest Capacity' },
+      { value: 'Full',     label: 'Bar Program'    },
+      { value: 'Custom',   label: 'Menu Packages'  },
+      { value: 'Flexible', label: 'Venue Config'   },
+    ],
+    illustrationTitle: 'Corporate Events at',
+    illustrationScriptLine: 'The Lobby',
+    illustrationSubtitle: 'Team dinners, client entertainment, and company celebrations inside The Brick Hotel on Pier View Way. Full bar and kitchen program for groups of any size.',
     faqs: [
-      { q: 'Does The Lobby host corporate team dinners?',             a: 'Yes. We regularly host team dinners, client events, and company celebrations. Partial and full venue options available depending on group size.' },
-      { q: 'Can you accommodate dietary restrictions for groups?',    a: "Yes. Our island-inspired menu includes options for common dietary needs. Let us know your group's requirements when booking." },
-      { q: 'How far in advance should we book a corporate event?',    a: 'We recommend booking at least 3–4 weeks in advance for larger groups, earlier for weekend dates which fill quickly.' },
-      { q: 'Is AV equipment available?',                              a: "Basic AV arrangements can be discussed when booking. Contact us with your requirements and we'll let you know what we can accommodate." },
+      { q: 'Does The Lobby host corporate team dinners?',          a: 'Yes. We regularly host team dinners, client events, and company celebrations. Partial and full venue options available depending on group size.' },
+      { q: 'Can you accommodate dietary restrictions for groups?', a: "Yes. Our island-inspired menu includes options for common dietary needs. Let us know your group's requirements when booking." },
+      { q: 'How far in advance should we book a corporate event?', a: 'We recommend booking at least 3–4 weeks in advance for larger groups, earlier for weekend dates which fill quickly.' },
+      { q: 'Is AV equipment available?',                           a: "Basic AV arrangements can be discussed when booking. Contact us with your requirements and we'll let you know what we can accommodate." },
     ],
     gallery: [
       { img: venueInterior3, alt: 'The Lobby Tiki Bar Oceanside interior — corporate event space'         },
@@ -99,25 +150,47 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
     heroImageAlt: 'Private bar buyout at The Lobby Tiki Bar Oceanside CA',
     intro: [
       "The whole venue, all yours. A full bar buyout at The Lobby Tiki Bar means your group gets the entire space — the full tiki bar program, island-inspired kitchen, and an atmosphere on Pier View Way that handles the vibe without any extra effort on your part.",
-      "Bar buyouts work for large birthday groups, milestone celebrations, bachelorette parties, corporate events, and any occasion that calls for exclusive access to one of Oceanside's most distinct bars. We'll work with you on a custom food and drink package that fits what you have in mind.",
+      "Bar buyouts work for large birthday groups, milestone celebrations, bachelorette parties, corporate events, and any occasion that calls for exclusive access to one of Oceanside's most distinct bars.",
     ],
     details: [
-      { label: 'Capacity',    value: 'Up to 200+ guests'             },
-      { label: 'Exclusivity', value: 'Full venue — your group only'  },
-      { label: 'Bar Program', value: 'Full tiki cocktails + rum'     },
-      { label: 'Food',        value: 'Island-inspired plates'        },
-      { label: 'Location',    value: '408 Pier View Way, Oceanside'  },
+      { label: 'Capacity',    value: 'Up to 200+ guests'            },
+      { label: 'Exclusivity', value: 'Full venue — your group only' },
+      { label: 'Bar Program', value: 'Full tiki cocktails + rum'    },
+      { label: 'Food',        value: 'Island-inspired plates'       },
+      { label: 'Location',    value: '408 Pier View Way, Oceanside' },
     ],
+    features: [
+      'Exclusive full venue access',
+      'Full tiki bar program',
+      'Island-inspired kitchen',
+      'Custom food and drink packages',
+      '200+ guest capacity',
+      'Friday and Saturday availability',
+    ],
+    whyTitle: 'The Whole Venue, All Yours',
+    whyBody: [
+      "A full bar buyout at The Lobby means your group gets everything — bar, kitchen, seating, atmosphere. No sharing the space with other tables, no competing for the bar. The Lobby is yours for the duration of your event.",
+      "We build the package around your headcount and what you want the night to look like. Custom cocktail menus, food packages, and a tiki atmosphere on Pier View Way that handles the vibe without any extra effort.",
+    ],
+    stats: [
+      { value: '200+',   label: 'Guest Capacity'   },
+      { value: 'Full',   label: 'Exclusive Access' },
+      { value: 'Custom', label: 'Packages'         },
+      { value: 'Fri–Sat', label: 'Available'       },
+    ],
+    illustrationTitle: 'Exclusive Access at',
+    illustrationScriptLine: 'The Lobby',
+    illustrationSubtitle: 'The whole venue, all yours. Full bar program, island-inspired kitchen, and a tiki atmosphere on Pier View Way built for groups who want something worth showing up for.',
     faqs: [
-      { q: 'What does a full bar buyout at The Lobby include?',       a: "A full buyout gives your group exclusive access to the entire venue — bar, seating, and kitchen — for the duration of your event. Custom food and drink packages are built around your headcount and preferences." },
-      { q: 'What is the minimum spend for a bar buyout?',             a: 'Minimums vary based on the day of the week and expected headcount. Contact us directly for current buyout pricing.' },
-      { q: 'Can we do a partial buyout for a smaller group?',         a: "Yes, partial venue reservations are available for groups that don't need exclusive access to the full space." },
-      { q: 'Are bar buyouts available on weekends?',                  a: 'Yes, including Friday and Saturday nights. Weekend dates book quickly — reach out as early as possible.' },
+      { q: 'What does a full bar buyout at The Lobby include?', a: "A full buyout gives your group exclusive access to the entire venue — bar, seating, and kitchen — for the duration of your event. Custom food and drink packages are built around your headcount and preferences." },
+      { q: 'What is the minimum spend for a bar buyout?',       a: 'Minimums vary based on the day of the week and expected headcount. Contact us directly for current buyout pricing.' },
+      { q: 'Can we do a partial buyout for a smaller group?',   a: "Yes, partial venue reservations are available for groups that don't need exclusive access to the full space." },
+      { q: 'Are bar buyouts available on weekends?',            a: 'Yes, including Friday and Saturday nights. Weekend dates book quickly — reach out as early as possible.' },
     ],
     gallery: [
-      { img: venueRoomFull,  alt: 'The Lobby Tiki Bar full venue Oceanside — bar buyout space'                   },
-      { img: venueInterior4, alt: 'Interior of The Lobby Tiki Bar Oceanside CA during private event'             },
-      { img: venueDetail,    alt: 'Tiki decor at The Lobby Tiki Bar Oceanside private bar buyout venue'          },
+      { img: venueRoomFull,  alt: 'The Lobby Tiki Bar full venue Oceanside — bar buyout space'                  },
+      { img: venueInterior4, alt: 'Interior of The Lobby Tiki Bar Oceanside CA during private event'            },
+      { img: venueDetail,    alt: 'Tiki decor at The Lobby Tiki Bar Oceanside private bar buyout venue'         },
     ],
   },
   {
@@ -131,7 +204,7 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
     heroImageAlt: 'Rehearsal dinner venue at The Lobby Tiki Bar Oceanside CA',
     intro: [
       "Give your wedding party a rehearsal dinner they'll be talking about at the reception. The Lobby Tiki Bar sits inside The Brick Hotel on Pier View Way in Oceanside — steps from the pier, filled with the kind of tiki atmosphere that makes the evening feel like the celebration it is.",
-      "Craft cocktails, island-inspired food, warm tiki lighting, and a space that transports your guests. Whether you're planning an intimate gathering or a full venue buyout for a larger wedding party, we'll build a package around your headcount, timeline, and what you want the night to feel like.",
+      "Craft cocktails, island-inspired food, warm tiki lighting, and a space that transports your guests. Whether you're planning an intimate gathering or a full venue buyout, we'll build a package around your headcount, timeline, and what you want the night to feel like.",
     ],
     details: [
       { label: 'Capacity',    value: 'Up to 200+ guests'             },
@@ -140,6 +213,28 @@ export const PRIVATE_EVENT_TYPES: PrivateEventType[] = [
       { label: 'Bar Program', value: 'Full tiki cocktails + rum'     },
       { label: 'Food',        value: 'Island-inspired dinner plates' },
     ],
+    features: [
+      'Steps from the Oceanside Pier',
+      'Full tiki bar program',
+      'Island-inspired dinner menu',
+      'Intimate or full venue buyout',
+      'Custom packages available',
+      'Inside The Brick Hotel',
+    ],
+    whyTitle: 'A Rehearsal Dinner Worth Remembering',
+    whyBody: [
+      "The Lobby Tiki Bar gives your wedding party a rehearsal dinner setting they'll still be talking about at the reception. Tiki atmosphere, craft cocktails, island-inspired dinner plates, and warm golden light that makes the evening feel like the celebration it is.",
+      "We work around your headcount and timeline — intimate dinners for smaller wedding parties or full venue buyouts for larger groups. Custom food and drink packages built around what you want the night to feel like.",
+    ],
+    stats: [
+      { value: '200+',      label: 'Guest Capacity'   },
+      { value: 'Full',      label: 'Bar Program'      },
+      { value: 'Custom',    label: 'Dinner Packages'  },
+      { value: 'Pier View', label: 'Location'         },
+    ],
+    illustrationTitle: 'Rehearsal Dinner at',
+    illustrationScriptLine: 'The Lobby',
+    illustrationSubtitle: 'Steps from the Oceanside Pier inside The Brick Hotel. Craft cocktails, island-inspired dinner plates, and a tiki atmosphere your wedding party will remember.',
     faqs: [
       { q: 'Is The Lobby a good venue for a rehearsal dinner in Oceanside?', a: "Yes. The Lobby's tiki atmosphere, full bar program, and island-inspired food make it a memorable setting for pre-wedding gatherings. We're steps from the Oceanside Pier inside The Brick Hotel." },
       { q: 'How many guests can you accommodate for a rehearsal dinner?',    a: "The Lobby can host rehearsal dinners from intimate groups of 20 up to full venue buyouts of 200+ guests." },
