@@ -26,7 +26,7 @@ export const SITE = {
   },
 
   order: {
-    url: 'https://cococabanaoside.com/order',
+    url: 'https://thelobbytikibarcococabana.toast.site/order',
     label: 'Order Online',
   },
 
