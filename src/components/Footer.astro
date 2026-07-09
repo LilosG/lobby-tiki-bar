@@ -1,19 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
+import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../data/gphNetwork';
 import logoCrema from '../assets/images/logo-cream.png';
 const year = new Date().getFullYear();
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const todayName = dayNames[new Date().getDay()];
 
-const portfolio = [
-  { name: 'The Lobby Tiki Bar',      url: 'https://lobbytikibar.com'          },
-  { name: 'Coco Cabana',             url: 'https://cococabanaoside.com'        },
-  { name: 'Miss B\'s Coconut Club',  url: 'https://missbcoconutclub.com'       },
-  { name: 'Park 101',                url: 'https://park101carlsbad.com'        },
-  { name: 'Coco Maya',               url: 'https://inlovewiththecoco.com'      },
-  { name: 'Louisiana Purchase',      url: 'https://louisianapurchasesd.com'    },
-];
+const portfolio = GPH_NETWORK.filter((venue) => venue.url !== SITE.url);
 ---
 
 <footer class="bg-[var(--color-espresso)] border-t border-white/10">
@@ -101,7 +95,7 @@ const portfolio = [
   <div class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-6 py-8">
       <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
-        <a href="https://grindprosper.com" target="_blank" rel="noopener noreferrer"
+        <a href={GRIND_AND_PROSPER_URL} target="_blank" rel="noopener noreferrer"
           class="font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase text-[var(--color-sand)]/40 hover:text-[var(--color-amber)] transition-colors whitespace-nowrap">
           Grind &amp; Prosper Hospitality
         </a>
@@ -129,7 +123,7 @@ const portfolio = [
           <a href="/contact" class="text-[var(--color-sand)]/30 hover:text-[var(--color-sand)]/60 text-xs transition-colors">Contact</a>
         </div>
         <a href="https://lilosgrowth.com" target="_blank" rel="noopener noreferrer"
-          class="text-[var(--color-sand)]/20 hover:text-[var(--color-sand)]/50 text-xs font-[family-name:var(--font-body)] transition-colors">
+          class="text-[var(--color-sand)]/50 hover:text-[var(--color-amber)] text-[13px] font-[family-name:var(--font-body)] transition-colors">
           Website by Lilos Growth
         </a>
       </div>
