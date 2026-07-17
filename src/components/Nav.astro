@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { getEntry } from 'astro:content';
 import logoCrema from '../assets/images/logo-cream.png';
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
-const navigation = (await getEntry('navigation', 'navigation'))!.data.links;
+const navigation = (await getEntry('navigation', 'navigation'))!.data.links ?? [];
 const pathname = Astro.url.pathname;
 ---
 

@@ -5,6 +5,7 @@ import Footer from "../components/Footer.astro";
 import { getEntry } from 'astro:content';
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 const content = (await getEntry('reservations', 'reservations'))!.data;
+const hours = SITE.hours ?? [];
 const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const todayName = dayNames[new Date().getDay()];
 ---
@@ -31,7 +32,7 @@ const todayName = dayNames[new Date().getDay()];
     <div class="w-full max-w-sm border border-white/10 p-8">
       <h2 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Hours</h2>
       <ul class="space-y-3">
-        {SITE.hours.map((h) => (
+        {hours.map((h) => (
           <li class:list={["flex justify-between font-[family-name:var(--font-body)] text-sm", h.day === todayName ? "text-[var(--color-sand)]" : "text-[var(--color-sand)] opacity-50"]}>
             <span>{h.day}</span>
             <span>{h.hours}</span>

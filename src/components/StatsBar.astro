@@ -8,13 +8,13 @@ interface Props {
   stats: StatItem[];
   background?: 'jungle' | 'espresso';
 }
-const { stats, background = 'jungle' } = Astro.props;
+const { stats = [], background = 'jungle' } = Astro.props;
 const bgClass = {
   jungle:   'bg-[var(--color-jungle)]/30',
   espresso: 'bg-[var(--color-espresso-light)]/20',
 }[background];
 ---
-<section class:list={["py-16 px-6", bgClass]}>
+{stats.length > 0 && <section class:list={["py-16 px-6", bgClass]}>
   <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
     {stats.map((s) => (
       <div class="bg-[var(--color-espresso)] py-10 px-6 text-center">
@@ -24,4 +24,4 @@ const bgClass = {
       </div>
     ))}
   </div>
-</section>
+</section>}

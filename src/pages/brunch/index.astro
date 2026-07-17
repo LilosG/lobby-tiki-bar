@@ -18,6 +18,10 @@ const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 const content = (await getEntry('brunchPage', 'brunchpage'))!.data;
 const BRUNCH = (await getCollection('brunchItems')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 const faqs = (await getCollection('brunchFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
+const cocktailBody = content.cocktails?.body ?? [];
+const settingGallery = [brunchPlate3, brunchPlate4, venueInterior3, brunchPlate2]
+  .map((img, index) => ({ img, alt: content.setting?.galleryAlts?.[index] }))
+  .filter((item): item is { img: typeof brunchPlate2; alt: string } => Boolean(item.alt));
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -118,8 +122,9 @@ const faqSchema = {
         <div class="max-w-md">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.cocktails.label}</p>
           <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">{content.cocktails.title}</h2>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={`\n${content.cocktails.body[0]}\n`} />
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-10" set:html={`\n${content.cocktails.body[1]}\n`} />
+          {cocktailBody.map((paragraph: string, index: number) => (
+            <p class:list={["font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed", index === cocktailBody.length - 1 ? "mb-10" : "mb-6"]} set:html={`\n${paragraph}\n`} />
+          ))}
           <a href="/menu#cocktails"
             class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
             Full Cocktail Menu
@@ -162,12 +167,7 @@ const faqSchema = {
         <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]" set:html={content.setting.title} />
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {[
-          { img: brunchPlate3,   alt: content.setting.galleryAlts[0] },
-          { img: brunchPlate4,   alt: content.setting.galleryAlts[1] },
-          { img: venueInterior3, alt: content.setting.galleryAlts[2] },
-          { img: brunchPlate2,   alt: content.setting.galleryAlts[3] },
-        ].map((item) => (
+        {settingGallery.map((item) => (
           <div class="aspect-square overflow-hidden">
             <Image src={item.img} alt={item.alt}
               class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"

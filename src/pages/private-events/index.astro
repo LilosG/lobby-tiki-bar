@@ -17,7 +17,7 @@ import venueBoothPortrait  from '../../assets/images/venue-booth-portrait.jpg';
 
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 const content = (await getEntry('privateEventsIndexPage', 'privateeventsindexpage'))!.data;
-const stats = content.stats;
+const stats = content.stats ?? [];
 const PRIVATE_EVENT_TYPES = (await getCollection('privateEventTypes')).map((entry) => entry.data).sort((a, b) => a.order - b.order);
 const faqs = (await getCollection('privateEventsFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 
@@ -83,7 +83,7 @@ const faqSchema = {
     </div>
   </section>
 
-  <section class="py-16 px-6 bg-[var(--color-jungle)]/30">
+  {stats.length > 0 && <section class="py-16 px-6 bg-[var(--color-jungle)]/30">
     <div class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10">
       {stats.map((item: { label: string; value: string; note: string }) => (
         <div class="bg-[var(--color-espresso)] py-10 px-6 text-center">
@@ -93,7 +93,7 @@ const faqSchema = {
         </div>
       ))}
     </div>
-  </section>
+  </section>}
 
   <FAQSection
     faqs={faqs}

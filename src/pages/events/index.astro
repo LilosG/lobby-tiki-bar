@@ -16,6 +16,7 @@ const content = (await getEntry('eventsIndexPage', 'eventsindexpage'))!.data;
 const RECURRING_EVENTS = (await getCollection('recurringEvents')).map((entry) => entry.data).sort((a, b) => a.order - b.order);
 const UPCOMING_EVENTS = (await getCollection('upcomingEvents')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 const faqs = (await getCollection('eventsFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
+const seoCopyBody = content.seoCopy?.body ?? [];
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -108,8 +109,9 @@ const faqSchema = {
       <div>
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.seoCopy.label}</p>
         <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">{content.seoCopy.title}</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={`\n${content.seoCopy.body[0]}\n`} />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8" set:html={`\n${content.seoCopy.body[1]}\n`} />
+        {seoCopyBody.map((paragraph: string, index: number) => (
+          <p class:list={["font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed", index === seoCopyBody.length - 1 ? "mb-8" : "mb-4"]} set:html={`\n${paragraph}\n`} />
+        ))}
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
           class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
           Reserve a Table

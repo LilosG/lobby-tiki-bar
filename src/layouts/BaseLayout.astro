@@ -68,7 +68,7 @@ const businessNode = {
   servesCuisine: SITE.schema.servesCuisine,
   hasMap: SITE.address.mapsUrl,
   sameAs: Object.values(SITE.social),
-  openingHoursSpecification: SITE.hours
+  openingHoursSpecification: (SITE.hours ?? [])
     .filter(h => h.open)
     .map(h => ({
       '@type': 'OpeningHoursSpecification',

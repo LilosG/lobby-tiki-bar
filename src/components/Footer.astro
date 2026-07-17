@@ -4,7 +4,8 @@ import { getEntry } from 'astro:content';
 import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../data/gphNetwork';
 import logoCrema from '../assets/images/logo-cream.png';
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
-const navigation = (await getEntry('navigation', 'navigation'))!.data.links;
+const navigation = (await getEntry('navigation', 'navigation'))!.data.links ?? [];
+const hours = SITE.hours ?? [];
 const year = new Date().getFullYear();
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const todayName = dayNames[new Date().getDay()];
@@ -61,7 +62,7 @@ const portfolio = GPH_NETWORK.filter((venue) => venue.url !== SITE.url);
     <div>
       <h3 class="font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase text-[var(--color-amber)] mb-6">Hours</h3>
       <ul class="space-y-2">
-        {SITE.hours.map((h) => (
+        {hours.map((h) => (
           <li class:list={[
             'flex justify-between text-sm gap-4',
             h.day === todayName ? 'text-[var(--color-sand)] font-medium' : 'text-[var(--color-sand)]/60'

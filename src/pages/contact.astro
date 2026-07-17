@@ -6,6 +6,8 @@ import { getEntry } from 'astro:content';
 
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 const content = (await getEntry('contact', 'contact'))!.data;
+const hours = SITE.hours ?? [];
+const gettingHereItems = content.gettingHere?.items ?? [];
 
 const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const todayName = dayNames[new Date().getDay()];
@@ -48,7 +50,7 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
           <div>
             <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Hours</p>
             <ul class="space-y-2">
-              {SITE.hours.map((h) => (
+              {hours.map((h) => (
                 <li class:list={[
                   "flex gap-8 font-[family-name:var(--font-body)] text-sm",
                   h.day === todayName ? "text-[var(--color-sand)]" : "text-[var(--color-sand)] opacity-50",
@@ -100,7 +102,7 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
         <div class="border border-white/10 p-6">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">{content.gettingHere.title}</p>
           <ul class="space-y-2">
-            {content.gettingHere.items.map((note: string) => (
+            {gettingHereItems.map((note: string) => (
               <li class="flex items-start gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm">
                 <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0 mt-1.5"></span>
                 <Fragment set:html={note} />

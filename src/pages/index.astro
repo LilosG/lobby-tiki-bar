@@ -18,9 +18,13 @@ const RECURRING_EVENTS = (await getCollection('recurringEvents')).map((entry) =>
 const WEEKLY_SPECIALS = (await getCollection('weeklySpecials')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 const featuredCocktails = COCKTAILS.filter((c) => c.featured).slice(0, 4);
 const featuredFood = FOOD.slice(0, 4);
+const siteHours = SITE.hours ?? [];
+const brandBody = content.brand?.body ?? [];
+const privateEventTypes = content.privateEvents?.types ?? [];
+const homeStats = content.stats ?? [];
 const todayHours = (() => {
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const h = SITE.hours.find(d => d.day === days[new Date().getDay()]);
+  const h = siteHours.find(d => d.day === days[new Date().getDay()]);
   return h?.hours ?? 'Closed';
 })();
 ---
@@ -36,10 +40,12 @@ const todayHours = (() => {
   <!-- HERO -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
-      <Image src={venueInterior1}
-        alt={content.hero.imageAlt}
-        class="w-full h-full object-cover object-center"
-        width={1800} height={1200} loading="eager" />
+      {content.hero?.imageAlt && (
+        <Image src={venueInterior1}
+          alt={content.hero.imageAlt}
+          class="w-full h-full object-cover object-center"
+          width={1800} height={1200} loading="eager" />
+      )}
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/70 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -104,8 +110,9 @@ const todayHours = (() => {
           class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6"
           set:html={`\n${content.brand.title}<br> <em class="not-italic font-[family-name:var(--font-script)] text-5xl sm:text-6xl text-[var(--color-amber)]">${content.brand.scriptLine}</em> `}
         />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={`\n${content.brand.body[0]}\n`} />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-8" set:html={`\n${content.brand.body[1]}\n`} />
+        {brandBody.map((paragraph: string, index: number) => (
+          <p class:list={["font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed", index === brandBody.length - 1 ? "mb-8" : "mb-6"]} set:html={`\n${paragraph}\n`} />
+        ))}
         <a href="/the-lobby"
           class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
           Discover The Venue
@@ -265,14 +272,16 @@ const todayHours = (() => {
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.privateEvents.label}</p>
         <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6">{content.privateEvents.title}<br />{content.privateEvents.titleLine2}</h2>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={`\n${content.privateEvents.body}\n`} />
-        <ul class="space-y-3 mb-8">
-          {content.privateEvents.types.map((item: string) => (
-            <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 text-sm">
-              <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
-              {item}
-            </li>
-          ))}
-        </ul>
+        {privateEventTypes.length > 0 && (
+          <ul class="space-y-3 mb-8">
+            {privateEventTypes.map((item: string) => (
+              <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 text-sm">
+                <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
         <a href="/private-events"
           class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
           Inquire About Your Event
@@ -282,16 +291,18 @@ const todayHours = (() => {
   </section>
 
   <!-- STATS -->
-  <section class="py-16 bg-[var(--color-jungle)]/40 border-y border-white/10 px-6">
-    <div class="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-      {content.stats.map((stat: { number: string; label: string }) => (
-        <div>
-          <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-amber)] mb-2">{stat.number}</p>
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase">{stat.label}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+  {homeStats.length > 0 && (
+    <section class="py-16 bg-[var(--color-jungle)]/40 border-y border-white/10 px-6">
+      <div class="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        {homeStats.map((stat: { number: string; label: string }) => (
+          <div>
+            <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-amber)] mb-2">{stat.number}</p>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- FIND US -->
   <section class="py-24 px-6">
