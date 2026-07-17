@@ -22,12 +22,12 @@ import foodHuliHuliChicken   from '../assets/images/food-huli-huli-chicken.jpg';
 import foodLocoMoco          from '../assets/images/food-loco-moco.jpg';
 import foodTropicana         from '../assets/images/food-tropicana-burger.jpg';
 import foodIslandCatch       from '../assets/images/food-island-catch.jpg';
-import foodCoconutFrench     from '../assets/images/food-coconut-french-toast.jpg';
 
 import brunchKaluaScramble from '../assets/images/brunch-kalua-scramble.jpg';
 import brunchAvocadoToast  from '../assets/images/brunch-avocado-toast.jpg';
 import brunchBasicBreaky   from '../assets/images/brunch-basic-breaky.jpg';
-import brunchDish          from '../assets/images/brunch-dish.jpg';
+import brunchBreakfastBurrito from '../assets/images/brunch-breakfast-burrito.jpg';
+import brunchPowerBowl     from '../assets/images/brunch-power-bowl.jpg';
 
 export interface CocktailItem {
   name: string;
@@ -111,7 +111,7 @@ export const BRUNCH: BrunchItem[] = [
   { name: 'Kalua Scramble',           description: 'Slow-roasted kalua pork, scrambled eggs, rice, and island seasonings',                             image: brunchKaluaScramble },
   { name: 'Avocado Toast',            description: 'Smashed avocado, everything bagel seasoning, poached egg, microgreens on toasted sourdough',        image: brunchAvocadoToast  },
   { name: 'Basic Breaky',             description: 'Two eggs any style, island potatoes, choice of protein, toast',                                     image: brunchBasicBreaky   },
-  { name: 'Coconut Rum French Toast', description: 'Thick-cut brioche, coconut rum custard, tropical fruit compote, powdered sugar',                    image: foodCoconutFrench   },
+  { name: 'Breakfast Burrito',        description: 'Choice of bacon or ham, scrambled eggs, pepper and onion potato hash, cheddar jack blend, sriracha aioli, house crema',      image: brunchBreakfastBurrito },
   { name: 'Loco Moco',                description: 'Rice, beef patty, sunny-side egg, brown gravy, island seasoning',                                   image: foodLocoMoco        },
-  { name: 'Island Brunch Bowl',        description: 'Island-inspired brunch bowl with seasonal accompaniments, fresh herbs, and house sauce',                  image: brunchDish          },
+  { name: 'Island Brunch Bowl',        description: 'Island-inspired brunch bowl with seasonal accompaniments, fresh herbs, and house sauce',                  image: brunchPowerBowl          },
 ];
