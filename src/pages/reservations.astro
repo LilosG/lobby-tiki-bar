@@ -2,22 +2,22 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import { SITE } from "../data/site";
+import { getEntry } from 'astro:content';
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+const content = (await getEntry('reservations', 'reservations'))!.data;
 const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const todayName = dayNames[new Date().getDay()];
 ---
 <BaseLayout
-  title="Reservations | The Lobby Tiki Bar | Oceanside CA"
-  description="Reserve a table at The Lobby Tiki Bar in Oceanside CA. Book online or call (858) 304-7725. 408 Pier View Way inside The Brick Hotel."
+  title={content.seo.title}
+  description={content.seo.description}
 >
   <Nav />
   <section class="min-h-screen pt-32 pb-24 px-6 flex flex-col items-center justify-center text-center">
-    <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Book Your Spot</p>
-    <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] mb-4">Reservations</h1>
-    <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl mb-8">at The Lobby</p>
-    <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-lg mx-auto mb-10 leading-relaxed">
-      Reserve your table online. Walk-ins always welcome — we recommend booking ahead on weekends and for Tiki Taco Tuesdays.
-    </p>
+    <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.hero.label}</p>
+    <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] mb-4">{content.hero.title}</h1>
+    <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl mb-8">{content.hero.scriptLine}</p>
+    <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-lg mx-auto mb-10 leading-relaxed" set:html={`\n${content.hero.body}\n`} />
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
       <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
         class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-10 py-4 hover:bg-[var(--color-sand)] transition-colors">

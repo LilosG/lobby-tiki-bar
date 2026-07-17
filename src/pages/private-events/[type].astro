@@ -10,12 +10,12 @@ import IllustrationBand from '../../components/IllustrationBand.astro';
 import CTASection from '../../components/CTASection.astro';
 import CateringForm from '../../components/CateringForm.astro';
 import FAQSection from '../../components/FAQSection.astro';
-import { SITE } from '../../data/site';
-import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
+import { getCollection, getEntry } from 'astro:content';
 
 import tikiIllustration from '../../assets/images/tiki-illustration-volcano.jpg';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const PRIVATE_EVENT_TYPES = (await getCollection('privateEventTypes')).map((entry) => entry.data).sort((a, b) => a.order - b.order);
   return PRIVATE_EVENT_TYPES.map((event) => ({
     params: { type: event.slug },
     props: { event },
@@ -23,6 +23,7 @@ export function getStaticPaths() {
 }
 
 const { event } = Astro.props;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 
 const faqSchemaNode = {
   '@type': 'FAQPage',

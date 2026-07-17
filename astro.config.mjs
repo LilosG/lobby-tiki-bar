@@ -13,6 +13,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      // @ts-expect-error sitemap runtime accepts Date and string changefreq values
       serialize(item) {
         const url = item.url;
 

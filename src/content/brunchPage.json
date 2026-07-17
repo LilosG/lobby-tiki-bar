@@ -1,0 +1,30 @@
+{
+  "seo": {
+    "title": "Brunch Oceanside | The Lobby Tiki Bar | Saturday & Sunday",
+    "description": "Weekend brunch at The Lobby Tiki Bar in Oceanside CA. Saturday and Sunday 10 AM – 3 PM. Island-inspired brunch plates and tiki cocktails inside The Brick Hotel.",
+    "image": "/images/brunch-spread.jpg"
+  },
+  "hero": {
+    "label": "Saturday & Sunday", "title": "Brunch", "scriptLine": "at The Lobby",
+    "body": "Island-inspired brunch plates and craft tiki cocktails every Saturday and Sunday. Inside The Brick Hotel on Pier View Way.",
+    "imageAlt": "Weekend brunch at The Lobby Tiki Bar Oceanside"
+  },
+  "plates": {
+    "label": "The Kitchen", "title": "Brunch Plates",
+    "body": "Island-inspired morning plates. Built for the atmosphere, designed to hold up against the rum program."
+  },
+  "cocktails": {
+    "label": "Brunch Cocktails", "title": "Tiki Before Noon",
+    "body": [
+      "The full cocktail program runs through brunch. Painkillers, Mai Tais, and the Cobra Kai don't care what time it is. Neither should you.",
+      "Weekend brunch is the right time to start with a Lobby Mai Tai and see where the afternoon takes you."
+    ]
+  },
+  "illustration": { "label": "Saturday &amp; Sunday &middot; 10 AM &ndash; 3 PM", "title": "Brunch on", "scriptLine": "Pier View Way", "imageAlt": "Weekend brunch at The Lobby Tiki Bar Oceanside California" },
+  "setting": {
+    "label": "The Setting", "title": "Saturday & Sunday",
+    "galleryAlts": ["Brunch plate at The Lobby Tiki Bar Oceanside", "Island brunch dish at The Lobby Oceanside", "The Lobby Tiki Bar interior Oceanside CA", "Weekend brunch at The Lobby Tiki Bar"]
+  },
+  "faq": { "label": "Good to Know", "title": "Brunch FAQ" },
+  "cta": { "title": "Join Us for Weekend Brunch", "subtitle": "Saturday & Sunday, 10 AM – 3 PM. 408 Pier View Way, Oceanside." }
+}

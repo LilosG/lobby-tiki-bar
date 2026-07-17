@@ -1,5 +1,7 @@
 ---
-import { SITE } from '../data/site';
+import { getEntry } from 'astro:content';
+
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const todayName = dayNames[new Date().getDay()];

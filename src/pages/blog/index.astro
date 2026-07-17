@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import TrustBar from '../../components/TrustBar.astro';
@@ -7,20 +7,21 @@ import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 
 const allPosts = await getCollection('blog');
+const content = (await getEntry('blogIndexPage', 'blogindexpage'))!.data;
 const posts = allPosts.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 ---
 
 <BaseLayout
-  title="Tiki Bar Blog | Oceanside Bar Guides & Local Tips"
-  description="Tiki bar guides, Oceanside bar recommendations, happy hour guides and local content from The Lobby Tiki Bar on Pier View Way, Oceanside CA."
+  title={content.seo.title}
+  description={content.seo.description}
 >
   <Nav />
   <PageHero
-    label="Guides & Stories"
-    title="The Blog"
-    subtitle="Tiki culture, Oceanside bar guides, happy hour recommendations, and local content from The Lobby."
+    label={content.hero.label}
+    title={content.hero.title}
+    subtitle={content.hero.subtitle}
   />
 
   <section class="py-16 px-6">

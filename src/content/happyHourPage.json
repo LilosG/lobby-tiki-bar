@@ -1,0 +1,39 @@
+{
+  "seo": {
+    "title": "Happy Hour Oceanside CA | The Lobby Tiki Bar",
+    "description": "Best happy hour in Oceanside CA. The Lobby Tiki Bar: $6 Mai Tais Thursdays, $6 Tacos Tuesdays, All Day Happy Hour Mondays. 408 Pier View Way inside The Brick Hotel.",
+    "image": "/images/drink-dsc06150.jpg"
+  },
+  "hero": {
+    "label": "Daily Deals", "title": "Happy Hour",
+    "subtitle": "Something different every day. Monday through Friday on Pier View Way.",
+    "scriptLine": "in Oceanside", "imageAlt": "Happy hour tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+  },
+  "weekly": { "label": "Something Different Every Day", "title": "Weekly Specials" },
+  "deals": {
+    "drinks": [
+      { "label": "Cocktails & Wines", "price": "$10" },
+      { "label": "Beers", "price": "$5" }
+    ],
+    "food": { "price": "$15", "items": ["Chicken Caesar Wrap", "Wings", "Ceviche"] }
+  },
+  "menu": { "label": "Happy Hour Menu", "title": "Drinks & Bites", "imageTitle": "Lobby Mai Tai", "imageNote": "The house standard" },
+  "tacoTuesday": {
+    "label": "Every Tuesday", "title": "Tiki Taco", "scriptLine": "Tuesday",
+    "body": "$6 Tacos and $5 Wells all evening. The weekly ritual Oceanside needed."
+  },
+  "featured": [
+    { "name": "Lobby Mai Tai", "note": "The house standard" },
+    { "name": "Cobra Kai", "note": "If you want to commit" },
+    { "name": "Painkiller", "note": "Three levels of intensity" },
+    { "name": "Toucan Slam", "note": "Dark rum float" }
+  ],
+  "order": { "label": "What to Order", "title": "Start Here" },
+  "faq": { "label": "Need to Know", "title": "Happy Hour FAQ" },
+  "illustration": {
+    "imageAlt": "The Lobby Tiki Bar happy hour Oceanside California", "label": "Pier View Way · Oceanside, CA",
+    "title": "Oceanside's Best", "scriptLine": "Happy Hour",
+    "subtitle": "The Lobby Tiki Bar runs one of the best happy hours in Oceanside CA. Every weekday we discount cocktails, beers, wine, and select bites. Monday is all-day happy hour. Thursday brings $6 Mai Tais. Walk in or reserve ahead."
+  },
+  "cta": { "title": "Join Us for Happy Hour", "subtitle": "Reserve your spot or walk in. Pier View Way, Oceanside." }
+}

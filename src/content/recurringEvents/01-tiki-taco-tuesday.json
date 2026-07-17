@@ -1,0 +1,10 @@
+{
+  "order": 1,
+  "slug": "tiki-taco-tuesday",
+  "name": "Tiki Taco Tuesday",
+  "day": "Every Tuesday",
+  "time": "3:00 PM – Close",
+  "highlight": "$6 Tacos · $5 Wells",
+  "description": "$6 tacos and $5 wells every Tuesday. Pair your favorite tiki cocktail with island-inspired tacos. Oceanside's best weekly ritual.",
+  "image": "../../assets/images/food-kalua-tacos-2.jpg"
+}

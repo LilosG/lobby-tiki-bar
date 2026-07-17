@@ -1,0 +1,36 @@
+{
+  "links": [
+    {
+      "label": "Menu",
+      "href": "/menu"
+    },
+    {
+      "label": "Brunch",
+      "href": "/brunch"
+    },
+    {
+      "label": "Happy Hour",
+      "href": "/happy-hour"
+    },
+    {
+      "label": "Events",
+      "href": "/events"
+    },
+    {
+      "label": "Private Events",
+      "href": "/private-events"
+    },
+    {
+      "label": "Venue",
+      "href": "/the-lobby"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    },
+    {
+      "label": "Blog",
+      "href": "/blog"
+    }
+  ]
+}

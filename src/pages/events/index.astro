@@ -5,16 +5,17 @@ import Nav from '../../components/Nav.astro';
 import TrustBar from '../../components/TrustBar.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
-import CTASection from '../../components/CTASection.astro';
-import { SITE } from '../../data/site';
-import { EVENTS_FAQS } from '../../data/faqs';
+import { getCollection, getEntry } from 'astro:content';
 import FAQSection from '../../components/FAQSection.astro';
-import { RECURRING_EVENTS, UPCOMING_EVENTS } from '../../data/events';
 
 import venueCurtainEdit from '../../assets/images/venue-curtain-edit.jpg';
 import venueRoomFull    from '../../assets/images/venue-room-full.jpg';
 
-const faqs = EVENTS_FAQS;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+const content = (await getEntry('eventsIndexPage', 'eventsindexpage'))!.data;
+const RECURRING_EVENTS = (await getCollection('recurringEvents')).map((entry) => entry.data).sort((a, b) => a.order - b.order);
+const UPCOMING_EVENTS = (await getCollection('upcomingEvents')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
+const faqs = (await getCollection('eventsFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -28,20 +29,20 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Tiki Taco Tuesday & Events | The Lobby Tiki Bar Oceanside"
-  description="Weekly events at The Lobby Tiki Bar in Oceanside CA. Tiki Taco Tuesdays, happy hour specials, and private events. 408 Pier View Way inside The Brick Hotel."
-  image="/images/venue-interior-1.jpg"
+  title={content.seo.title}
+  description={content.seo.description}
+  image={content.seo.image}
   heroImage={venueCurtainEdit.src}
   pageSchema={faqSchema}
 >
   <Nav />
 
   <PageHero
-    label="Weekly &amp; Special"
-    title="Events at The Lobby"
-    subtitle="Tiki Taco Tuesdays, happy hour specials, and more. Something happening every week on Pier View Way."
+    label={content.hero.label}
+    title={content.hero.title}
+    subtitle={content.hero.subtitle}
     image={venueCurtainEdit}
-    imageAlt="Events at The Lobby Tiki Bar Oceanside CA — tiki atmosphere and weekly events"
+    imageAlt={content.hero.imageAlt}
     overlay="gradient"
   />
 
@@ -50,8 +51,8 @@ const faqSchema = {
   <section class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Week</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Weekly Events</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.weekly.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{content.weekly.title}</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {RECURRING_EVENTS.map((event) => (
@@ -81,7 +82,7 @@ const faqSchema = {
   {UPCOMING_EVENTS.length > 0 && (
     <section class="py-20 bg-[var(--color-espresso-light)]/20 px-6">
       <div class="max-w-7xl mx-auto">
-        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12">Upcoming Events</h2>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12">{content.upcomingTitle}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {UPCOMING_EVENTS.map((event) => (
             <div class="border border-white/10 p-6 hover:border-[var(--color-amber)]/30 transition-colors">
@@ -105,14 +106,10 @@ const faqSchema = {
   <section class="py-24 px-6 bg-[var(--color-jungle)]/20">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">408 Pier View Way, Oceanside</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">Weekly Events in Oceanside, CA</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The Lobby Tiki Bar keeps the week moving. Every Tuesday is Tiki Taco Tuesday &mdash; $6 tacos and $5 wells from open to close, paired with island-inspired tacos. Monday through Friday we run happy hour with discounted cocktails, beer, wine, and bites &mdash; Monday is all-day happy hour.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
-          Inside The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The kind of weekly ritual a neighborhood bar is supposed to provide.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.seoCopy.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">{content.seoCopy.title}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={`\n${content.seoCopy.body[0]}\n`} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8" set:html={`\n${content.seoCopy.body[1]}\n`} />
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
           class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
           Reserve a Table
@@ -120,7 +117,7 @@ const faqSchema = {
       </div>
       <div class="relative overflow-hidden">
         <Image src={venueRoomFull}
-          alt="The Lobby Tiki Bar Oceanside CA interior during weekly events"
+          alt={content.seoCopy.imageAlt}
           class="w-full aspect-[4/3] object-cover" width={900} height={675} />
         <div class="absolute -bottom-4 -right-4 w-full h-full border border-[var(--color-amber)]/20 -z-10"></div>
       </div>
@@ -129,8 +126,8 @@ const faqSchema = {
 
   <FAQSection
     faqs={faqs}
-    label="Good to Know"
-    title="Events FAQ"
+    label={content.faq.label}
+    title={content.faq.title}
     background="muted"
   />
 
@@ -138,11 +135,9 @@ const faqSchema = {
   <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-[var(--color-espresso-light)]/30"></div>
     <div class="relative z-10 text-center px-6 py-20 max-w-2xl mx-auto">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Group Bookings</p>
-      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">Host a Private Event</h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed mb-10 max-w-lg mx-auto">
-        Book The Lobby for your next birthday, corporate event, bar buyout, or rehearsal dinner. Full bar program, island-inspired food, tiki atmosphere.
-      </p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.privateEvents.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">{content.privateEvents.title}</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed mb-10 max-w-lg mx-auto" set:html={`\n${content.privateEvents.body}\n`} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/private-events"
           class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">

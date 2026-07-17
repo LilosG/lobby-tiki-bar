@@ -1,5 +1,6 @@
 ---
-import { SITE } from "../data/site";
+import { getEntry } from 'astro:content';
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 interface Props {
   title?: string;
   subtitle?: string;

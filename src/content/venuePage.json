@@ -1,0 +1,45 @@
+{
+  "seo": {
+    "title": "Tiki Bar Venue in Oceanside CA | The Lobby",
+    "description": "The Lobby Tiki Bar is inside The Brick Hotel at 408 Pier View Way in Oceanside CA. Bamboo, tiki carvings, an extensive rum program, and a space built to transport you.",
+    "image": "/images/venue-interior-1.jpg"
+  },
+  "hero": {
+    "label": "The Venue", "title": "The Venue",
+    "subtitle": "Inside The Brick Hotel on Pier View Way. Tiki decor, an extensive rum program, and a space built to transport you.",
+    "imageAlt": "The Lobby Tiki Bar interior Oceanside CA — full venue, bamboo ceiling, tiki bar atmosphere"
+  },
+  "space": {
+    "label": "The Space", "title": "A Tiki Bar Built Right",
+    "body": [
+      "The Lobby occupies the ground floor of The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The space is designed to feel like a destination &mdash; bamboo, tiki carvings, beaded curtains, tropical foliage, and warm golden light that sets the tone from the moment you walk in.",
+      "The bar program is anchored by an extensive rum selection. Every spirit is chosen to serve a role in the cocktail program &mdash; nothing is here by accident. The island-inspired kitchen runs alongside, with plates built to complement what&rsquo;s in the glass."
+    ],
+    "features": ["Extensive rum program", "Craft tiki cocktails", "Island-inspired food menu", "200+ capacity", "Private event space available", "Daily happy hour specials"],
+    "imageAlt": "The Lobby Tiki Bar Oceanside CA — beaded curtains, tiki carvings, booth seating"
+  },
+  "stats": [
+    { "value": "200+", "label": "Seats" },
+    { "value": "20+", "label": "Tiki Cocktails" },
+    { "value": "4.7★", "label": "Google Rating" },
+    { "value": "Mon–Sun", "label": "Open Weekly" }
+  ],
+  "rum": {
+    "label": "The Bar Program", "title": "The Rum Program",
+    "body": [
+      "The rum selection at The Lobby is built to serve the cocktail menu, not the other way around. Every bottle earns its place &mdash; Jamaican pot still rums for the Cobra Kai, aged Barbados rum for depth, agricole for brightness, overproof for float work.",
+      "Falernum, orgeat, Fassionola, coconut cream &mdash; the modifiers are as intentional as the spirits. Fresh juice throughout. This is how tiki is supposed to be done."
+    ]
+  },
+  "gallery": {
+    "label": "The Space", "title": "Inside The Lobby",
+    "alts": ["The Lobby Tiki Bar Oceanside — beaded curtains and warm tiki lighting", "Booth seating at The Lobby Tiki Bar Oceanside CA", "Full venue interior at The Lobby Tiki Bar Oceanside CA", "Private booth detail at The Lobby Tiki Bar Oceanside CA"]
+  },
+  "illustration": {
+    "imageAlt": "The Lobby Tiki Bar — craft tiki destination in Oceanside California", "label": "408 Pier View Way · Oceanside, CA",
+    "title": "Inside The", "scriptLine": "Brick Hotel", "subtitle": "Steps from the Oceanside Pier. Open daily. Come for happy hour, stay for the Cobra Kai."
+  },
+  "location": { "label": "Location", "title": "Inside The Brick Hotel", "note": "Steps from the Oceanside Pier" },
+  "faq": { "label": "Good to Know", "title": "Venue FAQ" },
+  "cta": { "title": "Come See For Yourself", "subtitle": "Reserve a table or walk in. Open daily." }
+}

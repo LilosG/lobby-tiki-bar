@@ -4,11 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
-import IllustrationBand from '../../components/IllustrationBand.astro';
-import { SITE } from '../../data/site';
-import { BRUNCH_FAQS } from '../../data/faqs';
+import { getCollection, getEntry } from 'astro:content';
 import FAQSection from '../../components/FAQSection.astro';
-import { BRUNCH } from '../../data/menu';
 
 import brunchPlate2    from '../../assets/images/brunch-plate-2.jpg';
 import drinkBarLifestyle    from '../../assets/images/drink-bar-lifestyle.jpg';
@@ -17,7 +14,10 @@ import brunchPlate3    from '../../assets/images/brunch-plate-3.jpg';
 import brunchPlate4    from '../../assets/images/brunch-plate-4.jpg';
 import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
 
-const faqs = BRUNCH_FAQS;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+const content = (await getEntry('brunchPage', 'brunchpage'))!.data;
+const BRUNCH = (await getCollection('brunchItems')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
+const faqs = (await getCollection('brunchFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -31,9 +31,9 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Brunch Oceanside | The Lobby Tiki Bar | Saturday & Sunday"
-  description="Weekend brunch at The Lobby Tiki Bar in Oceanside CA. Saturday and Sunday 10 AM – 3 PM. Island-inspired brunch plates and tiki cocktails inside The Brick Hotel."
-  image="/images/brunch-spread.jpg"
+  title={content.seo.title}
+  description={content.seo.description}
+  image={content.seo.image}
   heroImage={brunchPlate2.src}
   pageSchema={faqSchema}
 >
@@ -41,17 +41,15 @@ const faqSchema = {
 
   <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
-      <Image src={brunchPlate2} alt="Weekend brunch at The Lobby Tiki Bar Oceanside"
+      <Image src={brunchPlate2} alt={content.hero.imageAlt}
         class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/60 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6">Saturday & Sunday</p>
-      <h1 class="font-[family-name:var(--font-display)] text-6xl sm:text-7xl lg:text-8xl text-[var(--color-sand)] leading-none mb-4">Brunch</h1>
-      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-6">at The Lobby</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 max-w-lg mx-auto leading-relaxed mb-10">
-        Island-inspired brunch plates and craft tiki cocktails every Saturday and Sunday. Inside The Brick Hotel on Pier View Way.
-      </p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6" set:html={content.hero.label} />
+      <h1 class="font-[family-name:var(--font-display)] text-6xl sm:text-7xl lg:text-8xl text-[var(--color-sand)] leading-none mb-4">{content.hero.title}</h1>
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-6">{content.hero.scriptLine}</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 max-w-lg mx-auto leading-relaxed mb-10" set:html={`\n${content.hero.body}\n`} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
           class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
@@ -85,11 +83,9 @@ const faqSchema = {
   <section class="py-28 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Kitchen</p>
-        <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">Brunch Plates</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto leading-relaxed">
-          Island-inspired morning plates. Built for the atmosphere, designed to hold up against the rum program.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.plates.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">{content.plates.title}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto leading-relaxed" set:html={`\n${content.plates.body}\n`} />
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {BRUNCH.map((item, i) => (
@@ -120,14 +116,10 @@ const faqSchema = {
     <div class="grid lg:grid-cols-2 min-h-[600px]">
       <div class="bg-[var(--color-jungle)]/20 flex items-center px-10 py-16 lg:px-20 order-2 lg:order-1">
         <div class="max-w-md">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Brunch Cocktails</p>
-          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">Tiki Before Noon</h2>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6">
-            The full cocktail program runs through brunch. Painkillers, Mai Tais, and the Cobra Kai don't care what time it is. Neither should you.
-          </p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-10">
-            Weekend brunch is the right time to start with a Lobby Mai Tai and see where the afternoon takes you.
-          </p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.cocktails.label}</p>
+          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">{content.cocktails.title}</h2>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={`\n${content.cocktails.body[0]}\n`} />
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-10" set:html={`\n${content.cocktails.body[1]}\n`} />
           <a href="/menu#cocktails"
             class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
             Full Cocktail Menu
@@ -146,15 +138,16 @@ const faqSchema = {
   <section class="relative min-h-[45vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
       <Image src={tikiIllustrationLuau}
-        alt="Weekend brunch at The Lobby Tiki Bar Oceanside California"
+        alt={content.illustration.imageAlt}
         class="w-full h-full object-cover object-center" width={1080} height={1320} />
       <div class="absolute inset-0 bg-[var(--color-espresso)]/70"></div>
     </div>
     <div class="relative z-10 text-center px-6 py-20">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Saturday &amp; Sunday &middot; 10 AM &ndash; 3 PM</p>
-      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-6">
-        Brunch on<br /><em class="not-italic font-[family-name:var(--font-script)] text-6xl text-[var(--color-amber)]">Pier View Way</em>
-      </h2>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4" set:html={content.illustration.label} />
+      <h2
+        class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-6"
+        set:html={`\n${content.illustration.title}<br><em class="not-italic font-[family-name:var(--font-script)] text-6xl text-[var(--color-amber)]">${content.illustration.scriptLine}</em> `}
+      />
       <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
         class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
         Reserve a Table
@@ -165,15 +158,15 @@ const faqSchema = {
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Setting</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Saturday & Sunday</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.setting.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]" set:html={content.setting.title} />
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          { img: brunchPlate3,   alt: 'Brunch plate at The Lobby Tiki Bar Oceanside'    },
-          { img: brunchPlate4,   alt: 'Island brunch dish at The Lobby Oceanside'       },
-          { img: venueInterior3, alt: 'The Lobby Tiki Bar interior Oceanside CA'        },
-          { img: brunchPlate2,   alt: 'Weekend brunch at The Lobby Tiki Bar'            },
+          { img: brunchPlate3,   alt: content.setting.galleryAlts[0] },
+          { img: brunchPlate4,   alt: content.setting.galleryAlts[1] },
+          { img: venueInterior3, alt: content.setting.galleryAlts[2] },
+          { img: brunchPlate2,   alt: content.setting.galleryAlts[3] },
         ].map((item) => (
           <div class="aspect-square overflow-hidden">
             <Image src={item.img} alt={item.alt}
@@ -187,14 +180,14 @@ const faqSchema = {
 
   <FAQSection
     faqs={faqs}
-    label="Good to Know"
-    title="Brunch FAQ"
+    label={content.faq.label}
+    title={content.faq.title}
     background="muted"
   />
 
   <CTASection
-    title="Join Us for Weekend Brunch"
-    subtitle="Saturday & Sunday, 10 AM – 3 PM. 408 Pier View Way, Oceanside."
+    title={content.cta.title}
+    subtitle={content.cta.subtitle}
     primaryLabel="Reserve a Table"
     primaryHref={SITE.reservations.url}
     secondaryLabel="See Full Menu"

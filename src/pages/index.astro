@@ -3,15 +3,19 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { SITE } from '../data/site';
-import { COCKTAILS, FOOD } from '../data/menu';
-import { RECURRING_EVENTS } from '../data/events';
-import { WEEKLY_SPECIALS } from '../data/happyHour';
+import { getCollection, getEntry } from 'astro:content';
 
 import venueInterior1 from '../assets/images/venue-interior-1.jpg';
 import venueInterior2 from '../assets/images/venue-interior-2.jpg';
 import drinkDsc06150  from '../assets/images/drink-dsc06150.jpg';
 
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+const content = (await getEntry('home', 'home'))!.data;
+const COCKTAILS = (await getCollection('cocktails')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
+const foodCollections = await Promise.all(['foodStarters', 'foodTacos', 'foodEntrees'].map((name) => getCollection(name as 'foodStarters')));
+const FOOD = foodCollections.flatMap((collection) => collection.sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data));
+const RECURRING_EVENTS = (await getCollection('recurringEvents')).map((entry) => entry.data).sort((a, b) => a.order - b.order);
+const WEEKLY_SPECIALS = (await getCollection('weeklySpecials')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 const featuredCocktails = COCKTAILS.filter((c) => c.featured).slice(0, 4);
 const featuredFood = FOOD.slice(0, 4);
 const todayHours = (() => {
@@ -22,9 +26,9 @@ const todayHours = (() => {
 ---
 
 <BaseLayout
-  title="The Lobby Tiki Bar | Tiki Cocktails in Oceanside, CA"
-  description="Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. The Lobby Tiki Bar inside The Brick Hotel on Pier View Way. Open daily."
-  image="/images/venue-interior-1.jpg"
+  title={content.seo.title}
+  description={content.seo.description}
+  image={content.seo.image}
   heroImage={venueInterior1.src}
 >
   <Nav />
@@ -33,18 +37,16 @@ const todayHours = (() => {
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
       <Image src={venueInterior1}
-        alt="The Lobby Tiki Bar interior — tiki decor, bamboo, and craft cocktails in Oceanside CA"
+        alt={content.hero.imageAlt}
         class="w-full h-full object-cover object-center"
         width={1800} height={1200} loading="eager" />
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/70 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6">Oceanside, California</p>
-      <h1 class="font-[family-name:var(--font-script)] text-7xl sm:text-8xl lg:text-9xl text-[var(--color-sand)] leading-none mb-4">The Lobby</h1>
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/80 text-lg sm:text-xl tracking-widest uppercase mb-4">Tiki Bar &amp; Grill</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-        Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. Inside The Brick Hotel on Pier View Way.
-      </p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6">{content.hero.label}</p>
+      <h1 class="font-[family-name:var(--font-script)] text-7xl sm:text-8xl lg:text-9xl text-[var(--color-sand)] leading-none mb-4">{content.hero.title}</h1>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/80 text-lg sm:text-xl tracking-widest uppercase mb-4">{content.hero.eyebrow}</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed" set:html={`\n${content.hero.body}\n`} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
           class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors duration-200">
@@ -97,17 +99,13 @@ const todayHours = (() => {
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Where Oceanside Comes to Drink Well</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6">
-          Craft Tiki in the<br />
-          <em class="not-italic font-[family-name:var(--font-script)] text-5xl sm:text-6xl text-[var(--color-amber)]">Heart of Oceanside</em>
-        </h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6">
-          The Lobby Tiki Bar brings serious craft cocktail culture to Oceanside's Pier View Way. An extensive rum program, signature tiki drinks, and island-inspired food served in a space that transports you somewhere worth going.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-8">
-          Inside The Brick Hotel, steps from the Oceanside pier. Come for happy hour. Stay for the Cobra Kai.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4" set:html={content.brand.label} />
+        <h2
+          class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6"
+          set:html={`\n${content.brand.title}<br> <em class="not-italic font-[family-name:var(--font-script)] text-5xl sm:text-6xl text-[var(--color-amber)]">${content.brand.scriptLine}</em> `}
+        />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={`\n${content.brand.body[0]}\n`} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-8" set:html={`\n${content.brand.body[1]}\n`} />
         <a href="/the-lobby"
           class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
           Discover The Venue
@@ -115,7 +113,7 @@ const todayHours = (() => {
       </div>
       <div class="relative">
         <Image src={venueInterior2}
-          alt="Tiki bar interior at The Lobby Oceanside — bamboo beads, tiki masks, tropical decor"
+          alt={content.brand.imageAlt}
           class="w-full aspect-[4/5] object-cover" width={800} height={1000} />
         <div class="absolute -bottom-4 -right-4 w-full h-full border border-[var(--color-amber)]/30 -z-10"></div>
       </div>
@@ -126,9 +124,9 @@ const todayHours = (() => {
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">It's Lei'd Back</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Signature Tiki Cocktails</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto">An extensive rum program and craft tiki drinks that earn their names.</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3" set:html={content.cocktails.label} />
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{content.cocktails.title}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto">{content.cocktails.body}</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {featuredCocktails.map((drink) => (
@@ -159,14 +157,14 @@ const todayHours = (() => {
   <!-- HAPPY HOUR -->
   <section class="relative py-28 overflow-hidden px-6">
     <div class="absolute inset-0">
-      <Image src={drinkDsc06150} alt="Happy hour cocktails at The Lobby Tiki Bar Oceanside"
+      <Image src={drinkDsc06150} alt={content.happyHour.imageAlt}
         class="w-full h-full object-cover opacity-20" width={1400} height={900} />
       <div class="absolute inset-0 bg-[var(--color-jungle)]/80"></div>
     </div>
     <div class="relative z-10 max-w-4xl mx-auto text-center">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Daily Deals</p>
-      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] mb-4">Happy Hour</h2>
-      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-8">in Oceanside</p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.happyHour.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] mb-4">{content.happyHour.title}</h2>
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-8">{content.happyHour.scriptLine}</p>
       <div class="grid grid-cols-1 sm:grid-cols-5 gap-px bg-[var(--color-sand)]/10 mb-10 max-w-3xl mx-auto border border-[var(--color-sand)]/20">
         {WEEKLY_SPECIALS.map((item) => (
           <div class="bg-[var(--color-jungle)] p-5 text-center">
@@ -190,12 +188,10 @@ const todayHours = (() => {
     <div class="max-w-7xl mx-auto">
       <div class="grid lg:grid-cols-2 gap-16 items-center mb-16">
         <div>
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">Island Kitchen</p>
-          <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight">Food Worth<br />Staying For</h2>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">{content.food.label}</p>
+          <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight">{content.food.title}<br />{content.food.titleLine2}</h2>
         </div>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 leading-relaxed">
-          Island-inspired plates built to complement the rum program. Brunch on weekends, bar bites and full plates all week.
-        </p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 leading-relaxed" set:html={`\n${content.food.body}\n`} />
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {featuredFood.map((item) => (
@@ -223,8 +219,8 @@ const todayHours = (() => {
   <section class="py-24 bg-[var(--color-espresso-light)]/20 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">Weekly & Special</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Events at The Lobby</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3" set:html={content.events.label} />
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{content.events.title}</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {RECURRING_EVENTS.map((event) => (
@@ -261,18 +257,16 @@ const todayHours = (() => {
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div class="relative">
         <Image src={venueInterior1}
-          alt="Private event space at The Lobby Tiki Bar Oceanside"
+          alt={content.privateEvents.imageAlt}
           class="w-full aspect-[4/3] object-cover" width={800} height={600} />
         <div class="absolute -top-4 -left-4 w-full h-full border border-[var(--color-amber)]/20 -z-10"></div>
       </div>
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Group Bookings</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6">Private Events<br />in Oceanside</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6">
-          Birthdays, corporate events, bar buyouts, and intimate gatherings. The Lobby provides a setting your guests will actually talk about.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.privateEvents.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6">{content.privateEvents.title}<br />{content.privateEvents.titleLine2}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={`\n${content.privateEvents.body}\n`} />
         <ul class="space-y-3 mb-8">
-          {['Birthday Parties', 'Corporate Events', 'Bar Buyouts', 'Rehearsal Dinners'].map((item) => (
+          {content.privateEvents.types.map((item: string) => (
             <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 text-sm">
               <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
               {item}
@@ -290,12 +284,7 @@ const todayHours = (() => {
   <!-- STATS -->
   <section class="py-16 bg-[var(--color-jungle)]/40 border-y border-white/10 px-6">
     <div class="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-      {[
-        { number: '4.7★',    label: 'Google Rating'  },
-        { number: '200+',    label: 'Seats Available' },
-        { number: '20+',     label: 'Tiki Cocktails'  },
-        { number: 'Mon–Sun', label: 'Open Weekly'     },
-      ].map((stat) => (
+      {content.stats.map((stat: { number: string; label: string }) => (
         <div>
           <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-amber)] mb-2">{stat.number}</p>
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase">{stat.label}</p>
@@ -307,13 +296,13 @@ const todayHours = (() => {
   <!-- FIND US -->
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto text-center">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">Get Here</p>
-      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">Find Us on Pier View Way</h2>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">{content.findUs.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">{content.findUs.title}</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-2">
         <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
           class="hover:text-[var(--color-amber)] transition-colors">{SITE.address.full}</a>
       </p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-10">Inside The Brick Hotel &bull; Steps from the Oceanside Pier</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-10" set:html={content.findUs.body} />
       <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
         class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
         Get Directions

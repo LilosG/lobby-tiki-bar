@@ -1,8 +1,6 @@
 ---
-import type { FAQ } from '../data/faqs';
-
 interface Props {
-  faqs: FAQ[];
+  faqs: { q: string; a: string }[];
   title?: string;
   label?: string;
   background?: 'default' | 'muted';

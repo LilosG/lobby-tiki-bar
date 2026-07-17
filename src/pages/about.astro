@@ -9,22 +9,17 @@ import StatsBar from "../components/StatsBar.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import IllustrationBand from "../components/IllustrationBand.astro";
 import CTASection from "../components/CTASection.astro";
-import { SITE } from "../data/site";
-import { ABOUT_FAQS } from '../data/faqs';
+import { getCollection, getEntry } from 'astro:content';
 import FAQSection from '../components/FAQSection.astro';
 
 import venueInterior1    from '../assets/images/venue-interior-1.jpg';
 import venueRoomPortrait from '../assets/images/venue-room-portrait.jpg';
 import tikiIllustration  from '../assets/images/tiki-illustration-volcano.jpg';
 
-const stats = [
-  { value: "200+",    label: "Seats Available" },
-  { value: "20+",     label: "Tiki Cocktails"  },
-  { value: "4.7★",    label: "Google Rating"   },
-  { value: "Mon–Sun", label: "Open Weekly"     },
-];
-
-const faqs = ABOUT_FAQS;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+const content = (await getEntry('about', 'about'))!.data;
+const stats = content.stats;
+const faqs = (await getCollection('aboutFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -38,20 +33,20 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="About The Lobby Tiki Bar | Oceanside, CA"
-  description="The Lobby Tiki Bar is Oceanside's craft tiki destination inside The Brick Hotel on Pier View Way. Part of the Grind & Prosper Hospitality portfolio."
-  image="/images/venue-interior-1.jpg"
+  title={content.seo.title}
+  description={content.seo.description}
+  image={content.seo.image}
   heroImage={venueInterior1.src}
   pageSchema={faqSchema}
 >
   <Nav />
 
   <PageHero
-    label="Our Story"
-    title="About The Lobby"
-    subtitle="Craft tiki culture on Pier View Way. Inside The Brick Hotel, steps from the Oceanside pier."
+    label={content.hero.label}
+    title={content.hero.title}
+    subtitle={content.hero.subtitle}
     image={venueInterior1}
-    imageAlt="The Lobby Tiki Bar interior Oceanside CA"
+    imageAlt={content.hero.imageAlt}
     overlay="gradient"
     align="bottom-left"
   />
@@ -61,21 +56,15 @@ const faqSchema = {
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <SectionHeader label="The Concept" title="Where Tiki Meets Craft" align="left" />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The Lobby Tiki Bar is Oceanside&rsquo;s dedicated tiki destination. Situated inside The Brick Hotel on Pier View Way, we built a space that takes the rum program seriously and the atmosphere even more so.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          Every cocktail on the menu is crafted with intention &mdash; house rum blends, fresh juices, house-made syrups, and spirits chosen for the role they play. The food is island-inspired and built to complement what&rsquo;s in the glass, not compete with it.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed">
-          Tiki Taco Tuesdays, daily happy hour specials, private events, and a bar program that earns return visits. The Lobby is built for Oceanside to come as they are and drink well.
-        </p>
+        <SectionHeader label={content.concept.label} title={content.concept.title} align="left" />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={`\n${content.concept.body[0]}\n`} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={`\n${content.concept.body[1]}\n`} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed" set:html={`\n${content.concept.body[2]}\n`} />
       </div>
       <div class="relative">
         <Image
           src={venueRoomPortrait}
-          alt="The Lobby Tiki Bar full venue interior &mdash; bar, tiki atmosphere, Oceanside CA"
+          alt={content.concept.imageAlt}
           class="w-full aspect-[4/5] object-cover"
           width={700} height={875}
         />
@@ -88,11 +77,11 @@ const faqSchema = {
 
   <IllustrationBand
     image={tikiIllustration}
-    imageAlt="The Lobby Tiki Bar — craft tiki culture in Oceanside California"
-    label="Oceanside, California"
-    title="Craft Tiki in the"
-    scriptLine="Heart of Oceanside"
-    subtitle="The Lobby Tiki Bar brings serious craft cocktail culture to Oceanside's Pier View Way. An extensive rum program, signature tiki drinks, and island-inspired food served in a space that transports you somewhere worth going."
+    imageAlt={content.illustration.imageAlt}
+    label={content.illustration.label}
+    title={content.illustration.title}
+    scriptLine={content.illustration.scriptLine}
+    subtitle={content.illustration.subtitle}
     ctaLabel="Explore the Venue"
     ctaHref="/the-lobby"
     minHeight="55vh"
@@ -102,26 +91,22 @@ const faqSchema = {
   <!-- GPH SECTION -->
   <section class="py-24 px-6">
     <div class="max-w-3xl mx-auto text-center">
-      <SectionHeader label="Part of the Portfolio" title="Grind & Prosper Hospitality" />
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4 max-w-2xl mx-auto">
-        The Lobby is part of the Grind &amp; Prosper Hospitality portfolio &mdash; a collection of distinct venues at The Brick Hotel on Pier View Way, Oceanside. Each is built with its own identity and program, anchored by the same commitment to craft and atmosphere.
-      </p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed max-w-2xl mx-auto">
-        Above The Lobby, Coco Cabana occupies the rooftop &mdash; an open-air Caribbean-influenced bar with views across Downtown Oceanside to the coast. Two venues, same building, entirely different experiences.
-      </p>
+      <SectionHeader label={content.portfolio.label} title={content.portfolio.title} />
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4 max-w-2xl mx-auto" set:html={`\n${content.portfolio.body[0]}\n`} />
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed max-w-2xl mx-auto" set:html={`\n${content.portfolio.body[1]}\n`} />
     </div>
   </section>
 
   <FAQSection
     faqs={faqs}
-    label="About The Lobby"
-    title="Common Questions"
+    label={content.faq.label}
+    title={content.faq.title}
     background="muted"
   />
 
   <CTASection
-    title="Come Experience It"
-    subtitle="408 Pier View Way, Oceanside. Inside The Brick Hotel."
+    title={content.cta.title}
+    subtitle={content.cta.subtitle}
     primaryLabel="Reserve a Table"
     primaryHref={SITE.reservations.url}
     secondaryLabel="Get Directions"
