@@ -26,7 +26,13 @@ import tikiIllustration   from '../../assets/images/tiki-illustration-volcano.jp
 
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 const content = (await getEntry('venuePage', 'venuepage'))!.data;
-const stats = content.stats;
+const stats = content.stats ?? [];
+const spaceBody = content.space?.body ?? [];
+const spaceFeatures = content.space?.features ?? [];
+const rumBody = content.rum?.body ?? [];
+const venueGallery = [venueCurtainEdit, venueBooth, venueRoomPortrait, venueBoothPortrait]
+  .map((img, index) => ({ img, alt: content.gallery?.alts?.[index] }))
+  .filter((item): item is { img: typeof venueCurtainEdit; alt: string } => Boolean(item.alt));
 const faqs = (await getCollection('venueFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 
 const faqSchema = {
@@ -65,10 +71,11 @@ const faqSchema = {
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
         <SectionHeader label={content.space.label} title={content.space.title} align="left" />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={`\n${content.space.body[0]}\n`} />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8" set:html={`\n${content.space.body[1]}\n`} />
+        {spaceBody.map((paragraph: string, index: number) => (
+          <p class:list={["font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed", index === spaceBody.length - 1 ? "mb-8" : "mb-4"]} set:html={`\n${paragraph}\n`} />
+        ))}
         <ul class="space-y-3">
-          {content.space.features.map((item: string) => (
+          {spaceFeatures.map((item: string) => (
             <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm">
               <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
               {item}
@@ -92,8 +99,9 @@ const faqSchema = {
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
         <SectionHeader label={content.rum.label} title={content.rum.title} align="left" />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={`\n${content.rum.body[0]}\n`} />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8" set:html={`\n${content.rum.body[1]}\n`} />
+        {rumBody.map((paragraph: string, index: number) => (
+          <p class:list={["font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed", index === rumBody.length - 1 ? "mb-8" : "mb-4"]} set:html={`\n${paragraph}\n`} />
+        ))}
         <a href="/menu"
           class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
           View the Full Menu
@@ -113,12 +121,7 @@ const faqSchema = {
     <div class="max-w-7xl mx-auto">
       <SectionHeader label={content.gallery.label} title={content.gallery.title} />
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {[
-          { img: venueCurtainEdit,   alt: content.gallery.alts[0] },
-          { img: venueBooth,         alt: content.gallery.alts[1] },
-          { img: venueRoomPortrait,  alt: content.gallery.alts[2] },
-          { img: venueBoothPortrait, alt: content.gallery.alts[3] },
-        ].map((item) => (
+        {venueGallery.map((item) => (
           <div class="aspect-square overflow-hidden">
             <Image src={item.img} alt={item.alt}
               class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"

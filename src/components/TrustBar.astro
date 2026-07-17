@@ -5,7 +5,7 @@ const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const todayName = dayNames[new Date().getDay()];
-const todayHours = SITE.hours.find(h => h.day === todayName)?.hours ?? 'Closed';
+const todayHours = (SITE.hours ?? []).find(h => h.day === todayName)?.hours ?? 'Closed';
 ---
 <section class="bg-[var(--color-jungle)] border-b border-white/10">
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">

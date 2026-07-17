@@ -41,6 +41,7 @@ const faqSchema = {
 
 const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
 const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
+const exploreCards = content.explore?.cards ?? [];
 
 ---
 
@@ -90,42 +91,42 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
       <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{content.explore.title}</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <a href="#cocktails" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+      {exploreCards[0] && <a href="#cocktails" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
         <div class="aspect-square overflow-hidden">
           <Image src={drinkDsc06150Page} alt="Tiki cocktails at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
         <div class="p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">{content.explore.cards[0].label}</p>
-          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{content.explore.cards[0].title}</h3>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{content.explore.cards[0].body}</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">{exploreCards[0].label}</p>
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{exploreCards[0].title}</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{exploreCards[0].body}</p>
         </div>
-      </a>
-      <a href="/happy-hour" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+      </a>}
+      {exploreCards[1] && <a href="/happy-hour" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
         <div class="aspect-square overflow-hidden">
           <Image src={drinkLobbyGlass2} alt="Happy hour at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
         <div class="p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2" set:html={content.explore.cards[1].label} />
-          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{content.explore.cards[1].title}</h3>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed" set:html={content.explore.cards[1].body} />
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2" set:html={exploreCards[1].label} />
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{exploreCards[1].title}</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed" set:html={exploreCards[1].body} />
         </div>
-      </a>
-      <a href="/brunch" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
+      </a>}
+      {exploreCards[2] && <a href="/brunch" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
         <div class="aspect-square overflow-hidden">
           <Image src={drinkCopperPineapple} alt="Weekend brunch cocktails at The Lobby Tiki Bar Oceanside CA"
             class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
             width={700} height={467} />
         </div>
         <div class="p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2" set:html={content.explore.cards[2].label} />
-          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{content.explore.cards[2].title}</h3>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed" set:html={content.explore.cards[2].body} />
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2" set:html={exploreCards[2].label} />
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{exploreCards[2].title}</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed" set:html={exploreCards[2].body} />
         </div>
-      </a>
+      </a>}
     </div>
   </section>
 

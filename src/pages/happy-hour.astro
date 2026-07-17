@@ -34,9 +34,11 @@ const faqSchema = {
 };
 
 type Cocktail = (typeof COCKTAILS)[number];
-const hhFeatured: { drink: Cocktail; note: string }[] = content.featured.map((item: { name: string; note: string }) => ({
-  drink: COCKTAILS.find((cocktail) => cocktail.name === item.name)!, note: item.note,
+const hhFeatured: { drink: Cocktail | undefined; note: string }[] = (content.featured ?? []).map((item: { name: string; note: string }) => ({
+  drink: COCKTAILS.find((cocktail) => cocktail.name === item.name), note: item.note,
 }));
+const drinkDeals = content.deals?.drinks ?? [];
+const foodDeals = content.deals?.food?.items ?? [];
 ---
 
 <BaseLayout
@@ -121,7 +123,7 @@ const hhFeatured: { drink: Cocktail; note: string }[] = content.featured.map((it
             <div>
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">Drinks</p>
               <ul class="space-y-4">
-                {content.deals.drinks.map((item: { label: string; price: string }) => (
+                {drinkDeals.map((item: { label: string; price: string }) => (
                   <li class="flex justify-between items-center pb-4 border-b border-white/10">
                     <span class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">{item.label}</span>
                     <span class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xl tracking-wider">{item.price}</span>
@@ -134,7 +136,7 @@ const hhFeatured: { drink: Cocktail; note: string }[] = content.featured.map((it
                 Bites &mdash; {content.deals.food.price} each
               </p>
               <ul class="space-y-3">
-                {content.deals.food.items.map((item: string) => (
+                {foodDeals.map((item: string) => (
                   <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70">
                     <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
                     {item}

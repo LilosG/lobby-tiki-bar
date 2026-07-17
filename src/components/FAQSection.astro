@@ -7,14 +7,14 @@ interface Props {
 }
 
 const {
-  faqs,
+  faqs = [],
   title = 'Frequently Asked Questions',
   label = 'Need to Know',
   background = 'muted',
 } = Astro.props;
 ---
 
-<section class:list={["py-24 px-6", background === 'muted' ? 'bg-[var(--color-espresso-light)]/20' : '']}>
+{faqs.length > 0 && <section class:list={["py-24 px-6", background === 'muted' ? 'bg-[var(--color-espresso-light)]/20' : '']}>
   <div class="max-w-3xl mx-auto">
     <div class="text-center mb-14">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{label}</p>
@@ -36,4 +36,4 @@ const {
       ))}
     </div>
   </div>
-</section>
+</section>}
