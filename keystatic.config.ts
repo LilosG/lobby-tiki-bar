@@ -383,7 +383,7 @@ const foodCollection = (
 
 export default config({
   storage: { kind: "cloud" },
-  cloud: { project: "gph-restaurants/lobby-tiki-bar" },
+  cloud: { project: "gph-websites/lobby-tiki-bar" },
   ui: {
     brand: {
       name: "Lobby Tiki Bar Website CMS",
