@@ -1,0 +1,22 @@
+{
+  "seo": {
+    "title": "Contact | The Lobby Tiki Bar | 408 Pier View Way Oceanside CA",
+    "description": "Find The Lobby Tiki Bar at 408 Pier View Way, Oceanside CA 92054. Call (858) 304-7725. Open daily. Inside The Brick Hotel steps from the Oceanside Pier."
+  },
+  "hero": { "label": "Come Find Us", "title": "Contact" },
+  "addressNote": "Inside The Brick Hotel",
+  "privateEvents": {
+    "label": "Private Events",
+    "body": "Looking to book a birthday, buyout, or corporate event? We'd love to hear about it."
+  },
+  "mapTitle": "The Lobby Tiki Bar on Google Maps",
+  "gettingHere": {
+    "title": "Getting Here",
+    "items": [
+      "Steps from the Oceanside Pier",
+      "Ground floor of The Brick Hotel",
+      "Pier View Way, Downtown Oceanside",
+      "Street parking on Pier View Way &amp; nearby lots"
+    ]
+  }
+}

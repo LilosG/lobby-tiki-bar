@@ -1,0 +1,103 @@
+{
+  "order": 2,
+  "slug": "corporate-events-oceanside",
+  "seoTitle": "Corporate Event Venue Oceanside CA | The Lobby Tiki Bar",
+  "metaDescription": "Corporate events and team dinners at The Lobby Tiki Bar in Oceanside CA. Private venue, full bar program, island-inspired food, 200+ capacity. 408 Pier View Way.",
+  "heroLabel": "Private Events",
+  "h1": "Corporate Events in Oceanside",
+  "summary": "Team dinners, client entertainment, and company celebrations that people actually want to attend. Full bar and kitchen program for groups of any size.",
+  "heroImage": "../../assets/images/venue-curtain-edit.jpg",
+  "heroImageAlt": "Corporate event venue at The Lobby Tiki Bar Oceanside CA",
+  "intro": [
+    "The Lobby Tiki Bar is the Oceanside corporate event venue your team will actually want to attend. Inside The Brick Hotel on Pier View Way, the space delivers tiki atmosphere, craft cocktails, and island-inspired food in a setting built for groups who want something more interesting than a conference room.",
+    "Team dinners, client entertainment, company celebrations, and end-of-quarter events — we handle the atmosphere so you can focus on the people."
+  ],
+  "details": [
+    {
+      "label": "Capacity",
+      "value": "Up to 200+ guests"
+    },
+    {
+      "label": "Location",
+      "value": "408 Pier View Way, Oceanside"
+    },
+    {
+      "label": "Bar Program",
+      "value": "Full tiki cocktails + rum"
+    },
+    {
+      "label": "Food",
+      "value": "Custom island-inspired menus"
+    },
+    {
+      "label": "Options",
+      "value": "Partial or full buyout"
+    }
+  ],
+  "features": [
+    "Full bar and cocktail program",
+    "Custom food and drink packages",
+    "Flexible venue configuration",
+    "Partial or full venue buyout",
+    "200+ guest capacity",
+    "408 Pier View Way, Oceanside"
+  ],
+  "whyTitle": "Corporate Events Worth Attending",
+  "whyBody": [
+    "Most corporate event venues feel like corporate event venues. The Lobby doesn't. The tiki atmosphere, craft cocktail program, and island-inspired kitchen give your team something to actually talk about — which is the whole point of getting everyone in a room.",
+    "We work with you on food and drink packages that fit your group, timeline, and budget. Full buyouts for larger groups, partial reservations for team dinners, custom bar programs for client entertainment."
+  ],
+  "stats": [
+    {
+      "value": "200+",
+      "label": "Guest Capacity"
+    },
+    {
+      "value": "Full",
+      "label": "Bar Program"
+    },
+    {
+      "value": "Custom",
+      "label": "Menu Packages"
+    },
+    {
+      "value": "Flexible",
+      "label": "Venue Config"
+    }
+  ],
+  "illustrationTitle": "Corporate Events at",
+  "illustrationScriptLine": "The Lobby",
+  "illustrationSubtitle": "Team dinners, client entertainment, and company celebrations inside The Brick Hotel on Pier View Way. Full bar and kitchen program for groups of any size.",
+  "faqs": [
+    {
+      "q": "Does The Lobby host corporate team dinners?",
+      "a": "Yes. We regularly host team dinners, client events, and company celebrations. Partial and full venue options available depending on group size."
+    },
+    {
+      "q": "Can you accommodate dietary restrictions for groups?",
+      "a": "Yes. Our island-inspired menu includes options for common dietary needs. Let us know your group's requirements when booking."
+    },
+    {
+      "q": "How far in advance should we book a corporate event?",
+      "a": "We recommend booking at least 3–4 weeks in advance for larger groups, earlier for weekend dates which fill quickly."
+    },
+    {
+      "q": "Is AV equipment available?",
+      "a": "Basic AV arrangements can be discussed when booking. Contact us with your requirements and we'll let you know what we can accommodate."
+    }
+  ],
+  "gallery": [
+    {
+      "img": "../../assets/images/venue-interior-3.jpg",
+      "alt": "The Lobby Tiki Bar Oceanside interior — corporate event space"
+    },
+    {
+      "img": "../../assets/images/venue-bar-2.jpg",
+      "alt": "Bar setup at The Lobby Tiki Bar Oceanside corporate event venue"
+    },
+    {
+      "img": "../../assets/images/venue-detail-2.jpg",
+      "alt": "Venue detail at The Lobby Tiki Bar Oceanside CA"
+    }
+  ]
+}

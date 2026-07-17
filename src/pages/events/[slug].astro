@@ -1,13 +1,13 @@
 ---
 import { Image } from 'astro:assets';
-import { RECURRING_EVENTS } from '../../data/events';
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
-import { SITE } from '../../data/site';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const RECURRING_EVENTS = (await getCollection('recurringEvents')).map((entry) => entry.data).sort((a, b) => a.order - b.order);
   return RECURRING_EVENTS.map((event) => ({
     params: { slug: event.slug },
     props: { event },
@@ -15,6 +15,7 @@ export function getStaticPaths() {
 }
 
 const { event } = Astro.props;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 
 const eventSchema = {
   '@type': 'Event',

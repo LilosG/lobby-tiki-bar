@@ -1,0 +1,61 @@
+{
+  "seo": {
+    "title": "The Lobby Tiki Bar | Tiki Cocktails in Oceanside, CA",
+    "description": "Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. The Lobby Tiki Bar inside The Brick Hotel on Pier View Way. Open daily.",
+    "image": "/images/venue-interior-1.jpg"
+  },
+  "hero": {
+    "label": "Oceanside, California",
+    "title": "The Lobby",
+    "eyebrow": "Tiki Bar & Grill",
+    "body": "Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. Inside The Brick Hotel on Pier View Way.",
+    "imageAlt": "The Lobby Tiki Bar interior — tiki decor, bamboo, and craft cocktails in Oceanside CA"
+  },
+  "brand": {
+    "label": "Where Oceanside Comes to Drink Well",
+    "title": "Craft Tiki in the",
+    "scriptLine": "Heart of Oceanside",
+    "body": [
+      "The Lobby Tiki Bar brings serious craft cocktail culture to Oceanside's Pier View Way. An extensive rum program, signature tiki drinks, and island-inspired food served in a space that transports you somewhere worth going.",
+      "Inside The Brick Hotel, steps from the Oceanside pier. Come for happy hour. Stay for the Cobra Kai."
+    ],
+    "imageAlt": "Tiki bar interior at The Lobby Oceanside — bamboo beads, tiki masks, tropical decor"
+  },
+  "cocktails": {
+    "label": "It's Lei'd Back",
+    "title": "Signature Tiki Cocktails",
+    "body": "An extensive rum program and craft tiki drinks that earn their names."
+  },
+  "happyHour": {
+    "label": "Daily Deals",
+    "title": "Happy Hour",
+    "scriptLine": "in Oceanside",
+    "imageAlt": "Happy hour cocktails at The Lobby Tiki Bar Oceanside"
+  },
+  "food": {
+    "label": "Island Kitchen",
+    "title": "Food Worth",
+    "titleLine2": "Staying For",
+    "body": "Island-inspired plates built to complement the rum program. Brunch on weekends, bar bites and full plates all week."
+  },
+  "events": { "label": "Weekly & Special", "title": "Events at The Lobby" },
+  "privateEvents": {
+    "label": "Group Bookings",
+    "title": "Private Events",
+    "titleLine2": "in Oceanside",
+    "body": "Birthdays, corporate events, bar buyouts, and intimate gatherings. The Lobby provides a setting your guests will actually talk about.",
+    "types": ["Birthday Parties", "Corporate Events", "Bar Buyouts", "Rehearsal Dinners"],
+    "imageAlt": "Private event space at The Lobby Tiki Bar Oceanside"
+  },
+  "stats": [
+    { "number": "4.7★", "label": "Google Rating" },
+    { "number": "200+", "label": "Seats Available" },
+    { "number": "20+", "label": "Tiki Cocktails" },
+    { "number": "Mon–Sun", "label": "Open Weekly" }
+  ],
+  "findUs": {
+    "label": "Get Here",
+    "title": "Find Us on Pier View Way",
+    "body": "Inside The Brick Hotel &bull; Steps from the Oceanside Pier"
+  }
+}

@@ -7,10 +7,7 @@ import IllustrationBand from '../components/IllustrationBand.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import CTASection from '../components/CTASection.astro';
-import { SITE } from '../data/site';
-import { WEEKLY_SPECIALS, HAPPY_HOUR_DEALS } from '../data/happyHour';
-import { COCKTAILS } from '../data/menu';
-import { HAPPY_HOUR_FAQS } from '../data/faqs';
+import { getCollection, getEntry } from 'astro:content';
 import FAQSection from '../components/FAQSection.astro';
 
 import drinkBarLineup   from '../assets/images/drink-bar-lineup.jpg';
@@ -20,7 +17,11 @@ import tikiIllustration from '../assets/images/tiki-illustration-volcano.jpg';
 
 
 
-const faqs = HAPPY_HOUR_FAQS;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+const content = (await getEntry('happyHourPage', 'happyhourpage'))!.data;
+const WEEKLY_SPECIALS = (await getCollection('weeklySpecials')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
+const COCKTAILS = (await getCollection('cocktails')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
+const faqs = (await getCollection('happyHourFaqs')).sort((a, b) => a.id.localeCompare(b.id)).map((entry) => entry.data);
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -32,33 +33,31 @@ const faqSchema = {
   })),
 };
 
-const hhFeatured = [
-  { drink: COCKTAILS.find(c => c.name === 'Lobby Mai Tai')!,  note: 'The house standard'        },
-  { drink: COCKTAILS.find(c => c.name === 'Cobra Kai')!,       note: 'If you want to commit'     },
-  { drink: COCKTAILS.find(c => c.name === 'Painkiller')!,      note: 'Three levels of intensity' },
-  { drink: COCKTAILS.find(c => c.name === 'Toucan Slam')!,     note: 'Dark rum float'            },
-];
+type Cocktail = (typeof COCKTAILS)[number];
+const hhFeatured: { drink: Cocktail; note: string }[] = content.featured.map((item: { name: string; note: string }) => ({
+  drink: COCKTAILS.find((cocktail) => cocktail.name === item.name)!, note: item.note,
+}));
 ---
 
 <BaseLayout
-  title="Happy Hour Oceanside CA | The Lobby Tiki Bar"
-  description="Best happy hour in Oceanside CA. The Lobby Tiki Bar: $6 Mai Tais Thursdays, $6 Tacos Tuesdays, All Day Happy Hour Mondays. 408 Pier View Way inside The Brick Hotel."
-  image="/images/drink-dsc06150.jpg"
+  title={content.seo.title}
+  description={content.seo.description}
+  image={content.seo.image}
   heroImage={drinkBarLineup.src}
   pageSchema={faqSchema}
 >
   <Nav />
 
   <PageHero
-    label="Daily Deals"
-    title="Happy Hour"
-    subtitle="Something different every day. Monday through Friday on Pier View Way."
+    label={content.hero.label}
+    title={content.hero.title}
+    subtitle={content.hero.subtitle}
     image={drinkBarLineup}
-    imageAlt="Happy hour tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+    imageAlt={content.hero.imageAlt}
     overlay="gradient"
   >
     <div class="mt-6">
-      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl">in Oceanside</p>
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl">{content.hero.scriptLine}</p>
     </div>
   </PageHero>
   <TrustBar />
@@ -85,8 +84,8 @@ const hhFeatured = [
   <section class="py-28 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Something Different Every Day</p>
-        <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">Weekly Specials</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.weekly.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">{content.weekly.title}</h2>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-5 border border-white/10">
         {WEEKLY_SPECIALS.map((item) => (
@@ -110,19 +109,19 @@ const hhFeatured = [
           class="w-full h-full object-cover absolute inset-0" width={900} height={900} />
         <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[var(--color-espresso)]/60 lg:to-[var(--color-espresso)]/80"></div>
         <div class="absolute bottom-8 left-8">
-          <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-4xl">Lobby Mai Tai</p>
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase mt-1">The house standard</p>
+          <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-4xl">{content.menu.imageTitle}</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase mt-1">{content.menu.imageNote}</p>
         </div>
       </div>
       <div class="bg-[var(--color-jungle)]/20 flex items-center px-10 py-16 lg:px-16">
         <div class="w-full max-w-sm">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Happy Hour Menu</p>
-          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-10">Drinks &amp; Bites</h2>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.menu.label}</p>
+          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-10">{content.menu.title}</h2>
           <div class="space-y-8">
             <div>
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">Drinks</p>
               <ul class="space-y-4">
-                {HAPPY_HOUR_DEALS.drinks.map((item) => (
+                {content.deals.drinks.map((item: { label: string; price: string }) => (
                   <li class="flex justify-between items-center pb-4 border-b border-white/10">
                     <span class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">{item.label}</span>
                     <span class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xl tracking-wider">{item.price}</span>
@@ -132,10 +131,10 @@ const hhFeatured = [
             </div>
             <div>
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-50 text-xs tracking-widest uppercase mb-4">
-                Bites &mdash; {HAPPY_HOUR_DEALS.food.price} each
+                Bites &mdash; {content.deals.food.price} each
               </p>
               <ul class="space-y-3">
-                {HAPPY_HOUR_DEALS.food.items.map((item) => (
+                {content.deals.food.items.map((item: string) => (
                   <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70">
                     <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
                     {item}
@@ -157,12 +156,10 @@ const hhFeatured = [
       <div class="absolute inset-0 bg-[var(--color-espresso)]/65"></div>
     </div>
     <div class="relative z-10 text-center px-6 py-24">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Tuesday</p>
-      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-2">Tiki Taco</h2>
-      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-5xl sm:text-6xl mb-8">Tuesday</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 max-w-lg mx-auto mb-10 leading-relaxed text-lg">
-        $6 Tacos and $5 Wells all evening. The weekly ritual Oceanside needed.
-      </p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.tacoTuesday.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-2">{content.tacoTuesday.title}</h2>
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-5xl sm:text-6xl mb-8">{content.tacoTuesday.scriptLine}</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 max-w-lg mx-auto mb-10 leading-relaxed text-lg" set:html={`\n${content.tacoTuesday.body}\n`} />
       <a href="/events/tiki-taco-tuesday"
         class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
         Event Details
@@ -174,8 +171,8 @@ const hhFeatured = [
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">What to Order</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Start Here</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{content.order.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{content.order.title}</h2>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {hhFeatured.map(({ drink, note }) => drink && drink.image && (
@@ -204,17 +201,17 @@ const hhFeatured = [
 
   <FAQSection
     faqs={faqs}
-    label="Need to Know"
-    title="Happy Hour FAQ"
+    label={content.faq.label}
+    title={content.faq.title}
     background="muted"
   />
   <IllustrationBand
     image={tikiIllustration}
-    imageAlt="The Lobby Tiki Bar happy hour Oceanside California"
-    label="Pier View Way · Oceanside, CA"
-    title="Oceanside's Best"
-    scriptLine="Happy Hour"
-    subtitle="The Lobby Tiki Bar runs one of the best happy hours in Oceanside CA. Every weekday we discount cocktails, beers, wine, and select bites. Monday is all-day happy hour. Thursday brings $6 Mai Tais. Walk in or reserve ahead."
+    imageAlt={content.illustration.imageAlt}
+    label={content.illustration.label}
+    title={content.illustration.title}
+    scriptLine={content.illustration.scriptLine}
+    subtitle={content.illustration.subtitle}
     ctaLabel="Reserve a Table"
     ctaHref={SITE.reservations.url}
     ctaExternal={true}
@@ -223,8 +220,8 @@ const hhFeatured = [
   />
 
   <CTASection
-    title="Join Us for Happy Hour"
-    subtitle="Reserve your spot or walk in. Pier View Way, Oceanside."
+    title={content.cta.title}
+    subtitle={content.cta.subtitle}
     primaryLabel="Reserve a Table"
     primaryHref={SITE.reservations.url}
     secondaryLabel="See Full Menu"

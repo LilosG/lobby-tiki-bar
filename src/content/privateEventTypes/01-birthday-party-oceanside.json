@@ -1,0 +1,103 @@
+{
+  "order": 1,
+  "slug": "birthday-party-oceanside",
+  "seoTitle": "Birthday Party Venue Oceanside CA | The Lobby Tiki Bar",
+  "metaDescription": "Book your birthday party at The Lobby Tiki Bar in Oceanside CA. Private venue, full tiki bar program, island-inspired food, 200+ capacity. 408 Pier View Way inside The Brick Hotel.",
+  "heroLabel": "Private Events",
+  "h1": "Birthday Parties in Oceanside",
+  "summary": "Full bar program, custom packages, and a tiki atmosphere that handles the ambiance. The Lobby is the birthday venue Oceanside needed.",
+  "heroImage": "../../assets/images/venue-room-full.jpg",
+  "heroImageAlt": "Birthday party venue at The Lobby Tiki Bar Oceanside CA",
+  "intro": [
+    "The Lobby Tiki Bar is Oceanside's best venue for birthday parties that people actually talk about. Inside The Brick Hotel on Pier View Way, you get a tiki atmosphere built for celebration — bamboo, warm golden light, craft cocktails, and island-inspired food that sets the tone from the moment guests walk in.",
+    "Whether you're looking for a partial venue reservation or a full bar buyout, we'll put together a package built around your group, your occasion, and what you want the night to feel like."
+  ],
+  "details": [
+    {
+      "label": "Capacity",
+      "value": "Up to 200+ guests"
+    },
+    {
+      "label": "Location",
+      "value": "408 Pier View Way, Oceanside"
+    },
+    {
+      "label": "Bar Program",
+      "value": "Full tiki cocktails + rum"
+    },
+    {
+      "label": "Food",
+      "value": "Island-inspired plates"
+    },
+    {
+      "label": "Options",
+      "value": "Partial or full buyout"
+    }
+  ],
+  "features": [
+    "Full tiki bar program",
+    "Custom cocktail packages",
+    "Island-inspired food menu",
+    "Partial or full venue buyout",
+    "200+ guest capacity",
+    "Steps from the Oceanside Pier"
+  ],
+  "whyTitle": "Why The Lobby for Your Birthday",
+  "whyBody": [
+    "A birthday at The Lobby is different because the atmosphere does the work. Bamboo, warm golden light, craft tiki cocktails, and a team that builds packages around your group — not a one-size-fits-all banquet menu.",
+    "Whether you're bringing 20 people for a partial reservation or 200 for a full buyout, we'll make sure the bar is set, the food is right, and the space feels like it was built for your night."
+  ],
+  "stats": [
+    {
+      "value": "200+",
+      "label": "Guest Capacity"
+    },
+    {
+      "value": "Full",
+      "label": "Bar Program"
+    },
+    {
+      "value": "Custom",
+      "label": "Packages"
+    },
+    {
+      "value": "Pier View",
+      "label": "Location"
+    }
+  ],
+  "illustrationTitle": "Celebrate at",
+  "illustrationScriptLine": "The Lobby",
+  "illustrationSubtitle": "Craft tiki cocktails, island-inspired food, and a venue on Pier View Way that makes the night worth celebrating. Custom packages for any group size.",
+  "faqs": [
+    {
+      "q": "How do I book a birthday party at The Lobby?",
+      "a": "Email info@lobbytikibar.com or call (858) 304-7725 with your date, group size, and what you're looking for. We'll respond with availability and package options."
+    },
+    {
+      "q": "What is the venue capacity for a birthday party?",
+      "a": "The Lobby can accommodate up to 200+ guests for a full buyout. Smaller partial reservations are available depending on the night."
+    },
+    {
+      "q": "Is there a food and beverage minimum?",
+      "a": "Yes, minimums vary by night and group size. Contact us directly for current minimums and custom package pricing."
+    },
+    {
+      "q": "Can I bring a cake or outside desserts?",
+      "a": "Outside cakes and desserts are welcome. Let us know in advance and we'll make sure there's a plan for it."
+    }
+  ],
+  "gallery": [
+    {
+      "img": "../../assets/images/venue-curtain-edit.jpg",
+      "alt": "The Lobby Tiki Bar interior Oceanside — tiki atmosphere for private events"
+    },
+    {
+      "img": "../../assets/images/venue-bar-2.jpg",
+      "alt": "Full bar at The Lobby Tiki Bar Oceanside private event space"
+    },
+    {
+      "img": "../../assets/images/venue-detail.jpg",
+      "alt": "Tiki detail at The Lobby Tiki Bar Oceanside CA"
+    }
+  ]
+}

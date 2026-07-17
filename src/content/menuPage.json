@@ -1,0 +1,28 @@
+{
+  "seo": {
+    "title": "Tiki Cocktails & Island Food Menu | The Lobby Oceanside",
+    "description": "Full menu at The Lobby Tiki Bar in Oceanside CA. Tiki cocktails, island-inspired food, beer and wine. 408 Pier View Way inside The Brick Hotel.",
+    "image": "/images/drink-cobra-kai.jpg"
+  },
+  "hero": {
+    "label": "408 Pier View Way · Oceanside", "title": "The Menu",
+    "body": "Craft tiki cocktails, island-inspired plates, and all the happy hour specials.",
+    "imageAlt": "Tiki cocktails at The Lobby Tiki Bar Oceanside CA"
+  },
+  "explore": {
+    "label": "The Lobby Tiki Bar", "title": "Explore the Bar",
+    "cards": [
+      { "label": "The Bar Program", "title": "Tiki Cocktails", "body": "20+ craft tiki cocktails. House rum blends, fresh juice, house-made syrups." },
+      { "label": "Tue &ndash; Fri", "title": "Happy Hour", "body": "3 PM &ndash; 5 PM. Discounted cocktails, wells, and bites every weekday." },
+      { "label": "Saturday &amp; Sunday", "title": "Weekend Brunch", "body": "10 AM &ndash; 3 PM. Island plates, morning cocktails, and the full bar program." }
+    ]
+  },
+  "barProgram": { "label": "The Bar Program", "title": "20+ Tiki", "titleLine2": "Cocktails", "body": "House rum blends, fresh juice,", "bodyLine2": "house-made syrups." },
+  "cocktails": { "title": "Tiki Cocktails", "note": "An ID may be required with specialty vessels.", "moreLabel": "Also on the Menu" },
+  "food": { "title": "Island Kitchen", "body": "Island-inspired plates built to complement the rum program." },
+  "tacoTuesday": { "label": "Every Tuesday", "title": "Tiki Taco", "titleLine2": "Tuesday", "body": "$6 Tacos · $5 Wells · All Day" },
+  "beerWine": { "title": "Beer & Wine", "draft": "Draft Beer", "cans": "Cans & Bottles", "wine": "Wine" },
+  "nonAlcoholic": { "title": "Non-Alcoholic", "body": "All the flavor. None of the rum." },
+  "faq": { "label": "Common Questions", "title": "Menu FAQ" },
+  "cta": { "title": "Ready to Order?", "subtitle": "Reserve your table or come on in." }
+}

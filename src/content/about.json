@@ -1,0 +1,41 @@
+{
+  "seo": {
+    "title": "About The Lobby Tiki Bar | Oceanside, CA",
+    "description": "The Lobby Tiki Bar is Oceanside's craft tiki destination inside The Brick Hotel on Pier View Way. Part of the Grind & Prosper Hospitality portfolio.",
+    "image": "/images/venue-interior-1.jpg"
+  },
+  "hero": {
+    "label": "Our Story", "title": "About The Lobby",
+    "subtitle": "Craft tiki culture on Pier View Way. Inside The Brick Hotel, steps from the Oceanside pier.",
+    "imageAlt": "The Lobby Tiki Bar interior Oceanside CA"
+  },
+  "concept": {
+    "label": "The Concept", "title": "Where Tiki Meets Craft",
+    "body": [
+      "The Lobby Tiki Bar is Oceanside&rsquo;s dedicated tiki destination. Situated inside The Brick Hotel on Pier View Way, we built a space that takes the rum program seriously and the atmosphere even more so.",
+      "Every cocktail on the menu is crafted with intention &mdash; house rum blends, fresh juices, house-made syrups, and spirits chosen for the role they play. The food is island-inspired and built to complement what&rsquo;s in the glass, not compete with it.",
+      "Tiki Taco Tuesdays, daily happy hour specials, private events, and a bar program that earns return visits. The Lobby is built for Oceanside to come as they are and drink well."
+    ],
+    "imageAlt": "The Lobby Tiki Bar full venue interior — bar, tiki atmosphere, Oceanside CA"
+  },
+  "stats": [
+    { "value": "200+", "label": "Seats Available" },
+    { "value": "20+", "label": "Tiki Cocktails" },
+    { "value": "4.7★", "label": "Google Rating" },
+    { "value": "Mon–Sun", "label": "Open Weekly" }
+  ],
+  "illustration": {
+    "imageAlt": "The Lobby Tiki Bar — craft tiki culture in Oceanside California",
+    "label": "Oceanside, California", "title": "Craft Tiki in the", "scriptLine": "Heart of Oceanside",
+    "subtitle": "The Lobby Tiki Bar brings serious craft cocktail culture to Oceanside's Pier View Way. An extensive rum program, signature tiki drinks, and island-inspired food served in a space that transports you somewhere worth going."
+  },
+  "portfolio": {
+    "label": "Part of the Portfolio", "title": "Grind & Prosper Hospitality",
+    "body": [
+      "The Lobby is part of the Grind &amp; Prosper Hospitality portfolio &mdash; a collection of distinct venues at The Brick Hotel on Pier View Way, Oceanside. Each is built with its own identity and program, anchored by the same commitment to craft and atmosphere.",
+      "Above The Lobby, Coco Cabana occupies the rooftop &mdash; an open-air Caribbean-influenced bar with views across Downtown Oceanside to the coast. Two venues, same building, entirely different experiences."
+    ]
+  },
+  "faq": { "label": "About The Lobby", "title": "Common Questions" },
+  "cta": { "title": "Come Experience It", "subtitle": "408 Pier View Way, Oceanside. Inside The Brick Hotel." }
+}

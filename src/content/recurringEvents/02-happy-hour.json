@@ -1,0 +1,10 @@
+{
+  "order": 2,
+  "slug": "happy-hour",
+  "name": "Happy Hour",
+  "day": "Monday – Friday",
+  "time": "Mon: All Day · Tue–Fri: 3:00 PM – 5:00 PM",
+  "highlight": "Daily Deals",
+  "description": "Discounted cocktails, beers, wine and bites Monday through Friday. Monday is all-day happy hour; Tuesday through Friday runs 3:00 PM to 5:00 PM.",
+  "image": "../../assets/images/drink-dsc06150.jpg"
+}

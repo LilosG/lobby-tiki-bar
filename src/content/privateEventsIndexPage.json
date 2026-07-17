@@ -1,0 +1,20 @@
+{
+  "seo": {
+    "title": "Private Events Oceanside | The Lobby Tiki Bar",
+    "description": "Book a private event at The Lobby Tiki Bar in Oceanside CA. Birthdays, corporate events, bar buyouts, rehearsal dinners. 408 Pier View Way inside The Brick Hotel.",
+    "image": "/images/venue-interior-2.jpg"
+  },
+  "hero": {
+    "label": "Group Bookings", "title": "Private Events in Oceanside",
+    "subtitle": "The Lobby provides a private event space your guests will actually talk about. Full bar program, island-inspired food, and tiki atmosphere that handles the ambiance.",
+    "imageAlt": "Private event venue at The Lobby Tiki Bar Oceanside"
+  },
+  "events": { "label": "What We Host", "title": "Events Worth Talking About" },
+  "stats": [
+    { "label": "Capacity", "value": "200+", "note": "Full venue" },
+    { "label": "Bar Program", "value": "Full", "note": "Tiki cocktails + rum" },
+    { "label": "Location", "value": "Pier View Way", "note": "Oceanside CA" }
+  ],
+  "faq": { "label": "Common Questions", "title": "Private Events FAQ" },
+  "form": { "title": "Plan Your Private Event", "subtitle": "Tell us your occasion, group size, and date. We'll put together a package that works for you." }
+}

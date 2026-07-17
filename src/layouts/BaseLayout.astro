@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
-import { SITE } from '../data/site';
+import { getEntry } from 'astro:content';
 import MobileStickyBar from '../components/MobileStickyBar.astro';
+
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 
 interface Props {
   title: string;
