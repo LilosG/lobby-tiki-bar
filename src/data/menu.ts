@@ -10,18 +10,15 @@ import drinkToucanSlam     from '../assets/images/drink-toucan-slam.jpg';
 import drinkHootHollar     from '../assets/images/drink-hoot-hollar.jpg';
 import drinkHavanaGoodTime from '../assets/images/drink-havana-good-time.jpg';
 
-import foodCrabRangoon       from '../assets/images/food-crab-rangoon.jpg';
 import foodCoconutShrimp     from '../assets/images/food-coconut-shrimp.jpg';
 import foodPokeInariBombs    from '../assets/images/food-poke-inari-bombs.jpg';
-import foodCeviche           from '../assets/images/food-ceviche.jpg';
-import foodPineappleSkewers  from '../assets/images/food-pineapple-skewers.jpg';
-import foodHuliWings         from '../assets/images/food-huli-wings.jpg';
 import foodWings             from '../assets/images/food-wings.jpg';
-import foodKaluaTacos        from '../assets/images/food-kalua-tacos-plate.jpg';
-import foodHuliHuliChicken   from '../assets/images/food-huli-huli-chicken.jpg';
 import foodLocoMoco          from '../assets/images/food-loco-moco.jpg';
 import foodTropicana         from '../assets/images/food-tropicana-burger.jpg';
-import foodIslandCatch       from '../assets/images/food-island-catch.jpg';
+import foodCubano            from '../assets/images/food-cubano.jpg';
+import foodWingsBasket       from '../assets/images/food-wings-basket.jpg';
+import foodCrispyChickenSando from '../assets/images/food-crispy-chicken-sando.jpg';
+import foodSpamMusubi        from '../assets/images/food-spam-musubi.jpg';
 
 import brunchKaluaScramble from '../assets/images/brunch-kalua-scramble.jpg';
 import brunchAvocadoToast  from '../assets/images/brunch-avocado-toast.jpg';
@@ -87,18 +84,14 @@ export interface FoodItem {
 }
 
 export const FOOD: FoodItem[] = [
-  { name: 'Crab Rangoon',              description: 'Crispy wontons, cream cheese crab filling, sweet chili dipping sauce',                            category: 'starters', image: foodCrabRangoon      },
-  { name: 'Coconut Shrimp',            description: 'Crispy coconut-crusted shrimp with dipping sauce',                                                category: 'starters', image: foodCoconutShrimp    },
-  { name: 'Poke Inari Bombs',          description: 'Fresh poke tucked into crispy inari tofu pockets',                                                category: 'starters', image: foodPokeInariBombs   },
-  { name: 'Ceviche',                   description: 'Fresh fish, citrus cure, coconut milk, habanero, crispy taro chips',                              category: 'starters', image: foodCeviche          },
-  { name: 'Pineapple Express Skewers', description: 'Grilled chicken, fresh pineapple, bell pepper, teriyaki glaze',                                   category: 'starters', image: foodPineappleSkewers },
-  { name: 'Huli Wings',                description: 'Crispy chicken wings tossed in Hawaiian huli sauce',                                              category: 'starters', image: foodHuliWings        },
-  { name: 'SNP Wings',                 description: 'Crispy chicken wings, sweet and spicy island glaze',                                              category: 'starters', image: foodWings            },
-  { name: 'Kalua Tacos',               description: 'Slow-roasted kalua pork, island slaw, fresh salsa, warm flour tortillas',                         category: 'tacos',    image: foodKaluaTacos       },
-  { name: 'Huli Huli Chicken',         description: 'Hawaiian-style grilled chicken with sweet teriyaki glaze',                                        category: 'entrees',  image: foodHuliHuliChicken  },
-  { name: 'Loco Moco',                 description: 'Rice, beef patty, sunny-side egg, brown gravy, island seasoning',                                 category: 'entrees',  image: foodLocoMoco         },
-  { name: 'Tropicana Burger',          description: 'Beef patty, grilled pineapple, teriyaki glaze, lettuce, tomato on a brioche bun',                 category: 'entrees',  image: foodTropicana        },
-  { name: 'Island Style Catch',        description: 'Fresh catch prepared island-style with seasonal accompaniments',                                   category: 'entrees',  image: foodIslandCatch      },
+  { name: 'Coconut Shrimp',       description: 'Crispy coconut-crusted shrimp with dipping sauce',                                                                                                category: 'starters', image: foodCoconutShrimp      },
+  { name: 'SNP Wings',            description: 'Crispy chicken wings, sweet and spicy island glaze',                                                                                                  category: 'starters', image: foodWings              },
+  { name: 'Wings',                description: '8 seasoned baked & fried wings tossed in your choice of sauce with a side of ranch',                                                                  category: 'starters', image: foodWingsBasket        },
+  { name: 'Spam Musubi',          description: 'Grilled spam, steamed rice, nori, served with sriracha aioli',                                                                                        category: 'starters', image: foodSpamMusubi         },
+  { name: 'Poke Bowl',            description: 'Ahi, cucumbers, avocado, pineapple, mango, cucumber, wonton, serrano, crushed wasabi peas drizzled with sriracha aioli & served on seasoned rice',    category: 'starters', image: foodPokeInariBombs     },
+  { name: 'Cubano',               description: 'House braised pulled kalua pork, sliced smoked ham, swiss cheese, sweet pickles, mustard aioli, on a pressed cuban roll',                             category: 'entrees',  image: foodCubano             },
+  { name: 'Crispy Chicken Sando', description: 'Fried chicken, jalapeno slaw, pickles, huli huli sauce, toasted bun served w/ fries',                                                                 category: 'entrees',  image: foodCrispyChickenSando },
+  { name: "Miss B's Burger",      description: "All natural 1/3 lb. Angus beef patty, LTO, bread & butter pickles, spiced mustard, roasted garlic cilantro aioli, kolache roll, choice of cheese: cheddar, swiss or pepper jack", category: 'entrees',  image: foodTropicana          },
 ];
 
 export interface BrunchItem {

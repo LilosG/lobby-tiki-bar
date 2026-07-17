@@ -33,7 +33,7 @@ export const MENU_FAQS: FAQ[] = [
   },
   {
     q: 'Does The Lobby Tiki Bar serve food?',
-    a: 'Yes. The Lobby Tiki Bar serves island-inspired food including Crab Rangoon, Coconut Shrimp, Poke Inari Bombs, Kalua Tacos, Huli Huli Chicken, Loco Moco, and the Tropicana Burger.',
+    a: 'Yes. The Lobby Tiki Bar serves island-inspired food including Coconut Shrimp, Spam Musubi, the Poke Bowl, the Cubano, Crispy Chicken Sando, and Miss B\'s Burger.',
   },
   {
     q: 'Does The Lobby Tiki Bar have a brunch menu?',
@@ -60,7 +60,7 @@ export const BRUNCH_FAQS: FAQ[] = [
   },
   {
     q: 'What food is on the brunch menu at The Lobby Tiki Bar?',
-    a: 'The brunch menu features island-inspired plates including Loco Moco, Coconut French Toast, Kalua Scramble, Avocado Toast, and seasonal specials — all built to complement the cocktail program.',
+    a: 'The brunch menu features island-inspired plates including Loco Moco, Breakfast Burrito, Kalua Scramble, Avocado Toast, and seasonal specials — all built to complement the cocktail program.',
   },
   {
     q: 'Are tiki cocktails available during brunch?',
