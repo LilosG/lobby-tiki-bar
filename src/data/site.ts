@@ -31,21 +31,21 @@ export const SITE = {
   },
 
   // `hours` = display strings used in UI components
-  // `opens` / `closes` = ISO 24h format required by schema.org
+  // `opens` / `closes` = ISO 24h format required by schema.org (24:00 = midnight, per schema.org Time spec)
   hours: [
-    { day: 'Monday',    open: true,  hours: '3:00 PM – 8:00 PM',   opens: '15:00', closes: '20:00' },
-    { day: 'Tuesday',   open: true,  hours: '3:00 PM – 8:00 PM',   opens: '15:00', closes: '20:00' },
-    { day: 'Wednesday', open: true,  hours: '3:00 PM – 8:00 PM',   opens: '15:00', closes: '20:00' },
-    { day: 'Thursday',  open: true,  hours: '3:00 PM – 9:00 PM',   opens: '15:00', closes: '21:00' },
-    { day: 'Friday',    open: true,  hours: '3:00 PM – 10:00 PM',  opens: '15:00', closes: '22:00' },
-    { day: 'Saturday',  open: true,  hours: '10:00 AM – 10:00 PM', opens: '10:00', closes: '22:00' },
+    { day: 'Monday',    open: true,  hours: '3:00 PM – 9:00 PM',   opens: '15:00', closes: '21:00' },
+    { day: 'Tuesday',   open: true,  hours: '3:00 PM – 9:00 PM',   opens: '15:00', closes: '21:00' },
+    { day: 'Wednesday', open: true,  hours: '3:00 PM – 9:00 PM',   opens: '15:00', closes: '21:00' },
+    { day: 'Thursday',  open: true,  hours: '3:00 PM – 10:00 PM',  opens: '15:00', closes: '22:00' },
+    { day: 'Friday',    open: true,  hours: '3:00 PM – 12:00 AM',  opens: '15:00', closes: '24:00' },
+    { day: 'Saturday',  open: true,  hours: '10:00 AM – 12:00 AM', opens: '10:00', closes: '24:00' },
     { day: 'Sunday',    open: true,  hours: '10:00 AM – 8:00 PM',  opens: '10:00', closes: '20:00' },
   ],
 
   happyHour: {
     days: 'Monday – Friday',
-    hours: '3:00 PM – 5:00 PM',
-    note: 'Daily specials all week. See happy hour page for full schedule.',
+    hours: 'Mon: All Day · Tue–Fri: 3–5 PM',
+    note: 'Weekly specials vary by day — see full happy hour schedule.',
   },
 
   brunch: {

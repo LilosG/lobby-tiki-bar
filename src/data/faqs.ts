@@ -83,7 +83,7 @@ export const VENUE_FAQS: FAQ[] = [
   },
   {
     q: 'What are the hours at The Lobby Tiki Bar?',
-    a: 'The Lobby Tiki Bar is open Monday through Friday from 3:00 PM, and Saturday and Sunday from 10:00 AM. Closing times vary: Thursday until 9:00 PM, Friday and Saturday until 10:00 PM, Monday through Wednesday and Sunday until 8:00 PM.',
+    a: 'The Lobby Tiki Bar is open Monday through Friday from 3:00 PM, and Saturday and Sunday from 10:00 AM. Closing times vary: Monday through Wednesday until 9:00 PM, Thursday until 10:00 PM, Friday and Saturday until midnight, and Sunday until 8:00 PM.',
   },
   {
     q: 'Does The Lobby Tiki Bar take reservations?',
@@ -125,7 +125,7 @@ export const EVENTS_FAQS: FAQ[] = [
   },
   {
     q: 'What is Tiki Taco Tuesday at The Lobby?',
-    a: 'Tiki Taco Tuesday is every Tuesday at The Lobby Tiki Bar featuring 30% off all rum drinks from open to close, plus island-inspired tacos. No reservation required.',
+    a: 'Tiki Taco Tuesday is every Tuesday at The Lobby Tiki Bar featuring $6 tacos and $5 wells from open to close, plus island-inspired tacos. No reservation required.',
   },
   {
     q: 'Does The Lobby Tiki Bar have live music?',

@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import { SITE } from '../data/site';
 import { COCKTAILS, FOOD } from '../data/menu';
 import { RECURRING_EVENTS } from '../data/events';
+import { WEEKLY_SPECIALS } from '../data/happyHour';
 
 import venueInterior1 from '../assets/images/venue-interior-1.jpg';
 import venueInterior2 from '../assets/images/venue-interior-2.jpg';
@@ -22,7 +23,7 @@ const todayHours = (() => {
 
 <BaseLayout
   title="The Lobby Tiki Bar | Tiki Cocktails in Oceanside, CA"
-  description="Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. The Lobby Tiki Bar inside The Brick Hotel on Pier View Way. Open Tue–Sun."
+  description="Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. The Lobby Tiki Bar inside The Brick Hotel on Pier View Way. Open daily."
   image="/images/venue-interior-1.jpg"
   heroImage={venueInterior1.src}
 >
@@ -166,19 +167,16 @@ const todayHours = (() => {
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Daily Deals</p>
       <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] mb-4">Happy Hour</h2>
       <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-8">in Oceanside</p>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 max-w-2xl mx-auto">
-        <div class="border border-[var(--color-sand)]/20 p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Days</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">{SITE.happyHour.days}</p>
-        </div>
-        <div class="border border-[var(--color-sand)]/20 p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Hours</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">{SITE.happyHour.hours}</p>
-        </div>
-        <div class="border border-[var(--color-amber)]/40 p-6 bg-[var(--color-amber)]/10">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Thursday</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">$6 Mai Tais</p>
-        </div>
+      <div class="grid grid-cols-1 sm:grid-cols-5 gap-px bg-[var(--color-sand)]/10 mb-10 max-w-3xl mx-auto border border-[var(--color-sand)]/20">
+        {WEEKLY_SPECIALS.map((item) => (
+          <div class="bg-[var(--color-jungle)] p-5 text-center">
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{item.short}</p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm leading-tight">{item.deal}</p>
+            {item.note && (
+              <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-xs mt-1">{item.note}</p>
+            )}
+          </div>
+        ))}
       </div>
       <a href="/happy-hour"
         class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
@@ -296,7 +294,7 @@ const todayHours = (() => {
         { number: '4.7★',    label: 'Google Rating'  },
         { number: '200+',    label: 'Seats Available' },
         { number: '20+',     label: 'Tiki Cocktails'  },
-        { number: 'Tue–Sun', label: 'Open Weekly'     },
+        { number: 'Mon–Sun', label: 'Open Weekly'     },
       ].map((stat) => (
         <div>
           <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-amber)] mb-2">{stat.number}</p>
