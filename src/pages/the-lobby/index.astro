@@ -9,30 +9,21 @@ import StatsBar from "../../components/StatsBar.astro";
 import SectionHeader from "../../components/SectionHeader.astro";
 import IllustrationBand from "../../components/IllustrationBand.astro";
 import CTASection from "../../components/CTASection.astro";
-import { SITE } from "../../data/site";
-import { VENUE_FAQS } from '../../data/faqs';
+import { getOrderedCollection, getSingleton, rawBlock } from '../../lib/content';
 import FAQSection from '../../components/FAQSection.astro';
 
 import venueRoomFull      from '../../assets/images/venue-room-full.jpg';
 import venueCurtainWide   from '../../assets/images/venue-curtain-wide.jpg';
-import venueCurtainEdit   from '../../assets/images/venue-curtain-edit.jpg';
-import venueBooth         from '../../assets/images/venue-booth-landscape.jpg';
-import venueRoomPortrait  from '../../assets/images/venue-room-portrait.jpg';
-import venueBoothPortrait from '../../assets/images/venue-booth-portrait.jpg';
 import drinkCobraKai      from '../../assets/images/drink-cobra-kai.jpg';
 import drinkDsc01014      from '../../assets/images/drink-dsc01014.jpg';
 import drinkToucanSlam    from '../../assets/images/drink-toucan-slam.jpg';
 import drinkDsc07144      from '../../assets/images/drink-dsc07144.jpg';
 import tikiIllustration   from '../../assets/images/tiki-illustration-volcano.jpg';
 
-const stats = [
-  { value: "200+",    label: "Seats"          },
-  { value: "20+",     label: "Tiki Cocktails" },
-  { value: "4.7★",    label: "Google Rating"  },
-  { value: "Tue–Sun", label: "Open Weekly"    },
-];
-
-const faqs = VENUE_FAQS;
+const SITE = await getSingleton('siteSettings');
+const copy = await getSingleton('venuePage');
+const stats = copy.stats;
+const faqs = await getOrderedCollection('faqsVenue');
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -46,20 +37,20 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Tiki Bar Venue in Oceanside CA | The Lobby"
-  description="The Lobby Tiki Bar is inside The Brick Hotel at 408 Pier View Way in Oceanside CA. Bamboo, tiki carvings, an extensive rum program, and a space built to transport you."
-  image="/images/venue-interior-1.jpg"
+  title={copy.seo.title}
+  description={copy.seo.description}
+  image={copy.seo.image}
   heroImage={venueRoomFull.src}
   pageSchema={faqSchema}
 >
   <Nav />
 
   <PageHero
-    label="The Venue"
-    title="The Venue"
-    subtitle="Inside The Brick Hotel on Pier View Way. Tiki decor, an extensive rum program, and a space built to transport you."
+    label={copy.hero.label}
+    title={copy.hero.title}
+    subtitle={copy.hero.subtitle}
     image={venueRoomFull}
-    imageAlt="The Lobby Tiki Bar interior Oceanside CA — full venue, bamboo ceiling, tiki bar atmosphere"
+    imageAlt={copy.hero.imageAlt}
     overlay="gradient"
     align="bottom-left"
   />
@@ -69,15 +60,11 @@ const faqSchema = {
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <SectionHeader label="The Space" title="A Tiki Bar Built Right" align="left" />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The Lobby occupies the ground floor of The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The space is designed to feel like a destination &mdash; bamboo, tiki carvings, beaded curtains, tropical foliage, and warm golden light that sets the tone from the moment you walk in.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
-          The bar program is anchored by an extensive rum selection. Every spirit is chosen to serve a role in the cocktail program &mdash; nothing is here by accident. The island-inspired kitchen runs alongside, with plates built to complement what&rsquo;s in the glass.
-        </p>
+        <SectionHeader label={copy.intro.label} title={copy.intro.title} align="left" />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={rawBlock(copy.intro.body[0])} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8" set:html={rawBlock(copy.intro.body[1])} />
         <ul class="space-y-3">
-          {["Extensive rum program","Craft tiki cocktails","Island-inspired food menu","200+ capacity","Private event space available","Daily happy hour specials"].map((item) => (
+          {copy.intro.features.map((item: string) => (
             <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm">
               <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
               {item}
@@ -100,17 +87,11 @@ const faqSchema = {
   <section class="py-24 px-6 bg-[var(--color-jungle)]/20">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <SectionHeader label="The Bar Program" title="The Rum Program" align="left" />
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The rum selection at The Lobby is built to serve the cocktail menu, not the other way around. Every bottle earns its place &mdash; Jamaican pot still rums for the Cobra Kai, aged Barbados rum for depth, agricole for brightness, overproof for float work.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
-          Falernum, orgeat, Fassionola, coconut cream &mdash; the modifiers are as intentional as the spirits. Fresh juice throughout. This is how tiki is supposed to be done.
-        </p>
+        <SectionHeader label={copy.rum.label} title={copy.rum.title} align="left" />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={rawBlock(copy.rum.body[0])} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8" set:html={rawBlock(copy.rum.body[1])} />
         <a href="/menu"
-          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
-          View the Full Menu
-        </a>
+          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors" set:html={rawBlock(copy.rum.cta)} />
       </div>
       <div class="grid grid-cols-2 gap-3">
         <Image src={drinkCobraKai}   alt="Cobra Kai cocktail at The Lobby Tiki Bar Oceanside"       class="w-full aspect-square object-cover" width={350} height={350} />
@@ -124,16 +105,11 @@ const faqSchema = {
   <!-- VENUE GALLERY -->
   <section class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-      <SectionHeader label="The Space" title="Inside The Lobby" />
+      <SectionHeader label={copy.gallery.label} title={copy.gallery.title} />
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {[
-          { img: venueCurtainEdit,   alt: "The Lobby Tiki Bar Oceanside — beaded curtains and warm tiki lighting"   },
-          { img: venueBooth,         alt: "Booth seating at The Lobby Tiki Bar Oceanside CA"                         },
-          { img: venueRoomPortrait,  alt: "Full venue interior at The Lobby Tiki Bar Oceanside CA"                   },
-          { img: venueBoothPortrait, alt: "Private booth detail at The Lobby Tiki Bar Oceanside CA"                  },
-        ].map((item) => (
+        {copy.gallery.items.map((item: any) => (
           <div class="aspect-square overflow-hidden">
-            <Image src={item.img} alt={item.alt}
+            <Image src={item.image} alt={item.alt}
               class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               width={500} height={500} />
           </div>
@@ -145,11 +121,11 @@ const faqSchema = {
   <IllustrationBand
     image={tikiIllustration}
     imageAlt="The Lobby Tiki Bar — craft tiki destination in Oceanside California"
-    label="408 Pier View Way · Oceanside, CA"
-    title="Inside The"
-    scriptLine="Brick Hotel"
-    subtitle="Steps from the Oceanside Pier. Open Tuesday through Sunday. Come for happy hour, stay for the Cobra Kai."
-    ctaLabel="Reserve a Table"
+    label={copy.illustration.label}
+    title={copy.illustration.title}
+    scriptLine={copy.illustration.scriptLine}
+    subtitle={copy.illustration.subtitle}
+    ctaLabel={copy.illustration.ctaLabel}
     ctaHref={SITE.reservations.url}
     ctaExternal={true}
     minHeight="45vh"
@@ -159,29 +135,27 @@ const faqSchema = {
   <!-- LOCATION -->
   <section class="py-20 px-6">
     <div class="max-w-4xl mx-auto text-center">
-      <SectionHeader label="Location" title="Inside The Brick Hotel" />
+      <SectionHeader label={copy.location.label} title={copy.location.title} />
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 mb-2">{SITE.address.full}</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-8">Steps from the Oceanside Pier</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-8">{copy.location.note}</p>
       <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
-        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
-        Get Directions
-      </a>
+        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors" set:html={rawBlock(copy.location.cta)} />
     </div>
   </section>
 
   <FAQSection
     faqs={faqs}
-    label="Good to Know"
-    title="Venue FAQ"
+    label={copy.faq.label}
+    title={copy.faq.title}
     background="muted"
   />
 
   <CTASection
-    title="Come See For Yourself"
-    subtitle="Reserve a table or walk in. Open Tuesday through Sunday."
-    primaryLabel="Reserve a Table"
+    title={copy.cta.title}
+    subtitle={copy.cta.subtitle}
+    primaryLabel={copy.cta.primaryLabel}
     primaryHref={SITE.reservations.url}
-    secondaryLabel="View the Menu"
+    secondaryLabel={copy.cta.secondaryLabel}
     secondaryHref="/menu"
   />
 

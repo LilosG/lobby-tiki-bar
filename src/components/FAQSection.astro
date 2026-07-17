@@ -1,5 +1,8 @@
 ---
-import type { FAQ } from '../data/faqs';
+interface FAQ {
+  q: string;
+  a: string;
+}
 
 interface Props {
   faqs: FAQ[];

@@ -3,27 +3,34 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { SITE } from '../data/site';
-import { COCKTAILS, FOOD } from '../data/menu';
-import { RECURRING_EVENTS } from '../data/events';
+import { getOrderedCollection, getSingleton, rawBlock } from '../lib/content';
 
 import venueInterior1 from '../assets/images/venue-interior-1.jpg';
 import venueInterior2 from '../assets/images/venue-interior-2.jpg';
 import drinkDsc06150  from '../assets/images/drink-dsc06150.jpg';
 
-const featuredCocktails = COCKTAILS.filter((c) => c.featured).slice(0, 4);
+const SITE = await getSingleton('siteSettings');
+const copy = await getSingleton('home');
+const COCKTAILS = await getOrderedCollection('cocktails');
+const FOOD = [
+  ...await getOrderedCollection('foodStarters'),
+  ...await getOrderedCollection('foodTacos'),
+  ...await getOrderedCollection('foodEntrees'),
+];
+const RECURRING_EVENTS = await getOrderedCollection('recurringEvents');
+const featuredCocktails = COCKTAILS.filter((c: any) => c.featured).slice(0, 4);
 const featuredFood = FOOD.slice(0, 4);
 const todayHours = (() => {
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const h = SITE.hours.find(d => d.day === days[new Date().getDay()]);
+  const h = SITE.hours.find((d: any) => d.day === days[new Date().getDay()]);
   return h?.hours ?? 'Closed';
 })();
 ---
 
 <BaseLayout
-  title="The Lobby Tiki Bar | Tiki Cocktails in Oceanside, CA"
-  description="Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. The Lobby Tiki Bar inside The Brick Hotel on Pier View Way. Open Tue–Sun."
-  image="/images/venue-interior-1.jpg"
+  title={copy.seo.title}
+  description={copy.seo.description}
+  image={copy.seo.image}
   heroImage={venueInterior1.src}
 >
   <Nav />
@@ -38,21 +45,15 @@ const todayHours = (() => {
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/70 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6">Oceanside, California</p>
-      <h1 class="font-[family-name:var(--font-script)] text-7xl sm:text-8xl lg:text-9xl text-[var(--color-sand)] leading-none mb-4">The Lobby</h1>
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/80 text-lg sm:text-xl tracking-widest uppercase mb-4">Tiki Bar &amp; Grill</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-        Craft tiki cocktails, island-inspired food, and Oceanside's best happy hour. Inside The Brick Hotel on Pier View Way.
-      </p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6">{copy.hero.label}</p>
+      <h1 class="font-[family-name:var(--font-script)] text-7xl sm:text-8xl lg:text-9xl text-[var(--color-sand)] leading-none mb-4">{copy.hero.title}</h1>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/80 text-lg sm:text-xl tracking-widest uppercase mb-4">{copy.hero.eyebrow}</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 text-base sm:text-lg max-w-xl mx-auto mb-10 leading-relaxed" set:html={rawBlock(copy.hero.body)} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-          class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors duration-200">
-          Reserve a Table
-        </a>
+          class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors duration-200" set:html={rawBlock(copy.hero.primaryLabel)} />
         <a href="/menu"
-          class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors duration-200">
-          View the Menu
-        </a>
+          class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors duration-200" set:html={rawBlock(copy.hero.secondaryLabel)} />
       </div>
     </div>
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
@@ -67,27 +68,25 @@ const todayHours = (() => {
     <div class="absolute bottom-0 left-0 right-0 h-px bg-[var(--color-amber)] opacity-30"></div>
     <div class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-2 lg:grid-cols-4">
       <div class="text-center py-2 border-r border-white/10 px-4">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Hours Today</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">{copy.quickInfo.hoursLabel}</p>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium">{todayHours}</p>
       </div>
       <div class="text-center py-2 border-r border-white/10 px-4">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Happy Hour</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">{copy.quickInfo.happyHourLabel}</p>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium">{SITE.happyHour.days}</p>
         <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-xs opacity-60 mt-0.5">{SITE.happyHour.hours}</p>
       </div>
       <div class="text-center py-2 border-r border-white/10 px-4">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Location</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">{copy.quickInfo.locationLabel}</p>
         <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
           class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium hover:text-[var(--color-amber)] transition-colors">
           {SITE.address.street}, Oceanside
         </a>
       </div>
       <div class="text-center py-2 px-4">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">Reservations</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-2">{copy.quickInfo.reservationsLabel}</p>
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-          class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium hover:text-[var(--color-amber)] transition-colors">
-          Book Online
-        </a>
+          class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm font-medium hover:text-[var(--color-amber)] transition-colors" set:html={rawBlock(copy.quickInfo.reservationsText)} />
       </div>
     </div>
   </section>
@@ -96,21 +95,15 @@ const todayHours = (() => {
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Where Oceanside Comes to Drink Well</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6">
-          Craft Tiki in the<br />
-          <em class="not-italic font-[family-name:var(--font-script)] text-5xl sm:text-6xl text-[var(--color-amber)]">Heart of Oceanside</em>
-        </h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6">
-          The Lobby Tiki Bar brings serious craft cocktail culture to Oceanside's Pier View Way. An extensive rum program, signature tiki drinks, and island-inspired food served in a space that transports you somewhere worth going.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-8">
-          Inside The Brick Hotel, steps from the Oceanside pier. Come for happy hour. Stay for the Cobra Kai.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.brand.label}</p>
+        <h2
+          class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6"
+          set:html={`\n${copy.brand.title}<br> <em class="not-italic font-[family-name:var(--font-script)] text-5xl sm:text-6xl text-[var(--color-amber)]">${copy.brand.scriptLine}</em> `}
+        />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={rawBlock(copy.brand.body[0])} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-8" set:html={rawBlock(copy.brand.body[1])} />
         <a href="/the-lobby"
-          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
-          Discover The Venue
-        </a>
+          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors" set:html={rawBlock(copy.brand.cta)} />
       </div>
       <div class="relative">
         <Image src={venueInterior2}
@@ -125,9 +118,9 @@ const todayHours = (() => {
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">It's Lei'd Back</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Signature Tiki Cocktails</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto">An extensive rum program and craft tiki drinks that earn their names.</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3" set:html={copy.cocktails.label} />
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{copy.cocktails.title}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto">{copy.cocktails.body}</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {featuredCocktails.map((drink) => (
@@ -148,9 +141,7 @@ const todayHours = (() => {
       </div>
       <div class="text-center mt-12">
         <a href="/menu"
-          class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
-          Full Menu
-        </a>
+          class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors" set:html={rawBlock(copy.cocktails.cta)} />
       </div>
     </div>
   </section>
@@ -163,27 +154,25 @@ const todayHours = (() => {
       <div class="absolute inset-0 bg-[var(--color-jungle)]/80"></div>
     </div>
     <div class="relative z-10 max-w-4xl mx-auto text-center">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Daily Deals</p>
-      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] mb-4">Happy Hour</h2>
-      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-8">in Oceanside</p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.happyHour.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl lg:text-7xl text-[var(--color-sand)] mb-4">{copy.happyHour.title}</h2>
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-8">{copy.happyHour.scriptLine}</p>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 max-w-2xl mx-auto">
         <div class="border border-[var(--color-sand)]/20 p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Days</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.happyHour.daysLabel}</p>
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">{SITE.happyHour.days}</p>
         </div>
         <div class="border border-[var(--color-sand)]/20 p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Hours</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.happyHour.hoursLabel}</p>
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">{SITE.happyHour.hours}</p>
         </div>
         <div class="border border-[var(--color-amber)]/40 p-6 bg-[var(--color-amber)]/10">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Thursday</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">$6 Mai Tais</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.happyHour.specialDay}</p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]">{copy.happyHour.special}</p>
         </div>
       </div>
       <a href="/happy-hour"
-        class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
-        See Happy Hour Details
-      </a>
+        class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.happyHour.cta)} />
     </div>
   </section>
 
@@ -192,12 +181,10 @@ const todayHours = (() => {
     <div class="max-w-7xl mx-auto">
       <div class="grid lg:grid-cols-2 gap-16 items-center mb-16">
         <div>
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">Island Kitchen</p>
-          <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight">Food Worth<br />Staying For</h2>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">{copy.food.label}</p>
+          <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight">{copy.food.title}<br />{copy.food.titleLine2}</h2>
         </div>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 leading-relaxed">
-          Island-inspired plates built to complement the rum program. Brunch on weekends, bar bites and full plates all week.
-        </p>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 leading-relaxed" set:html={rawBlock(copy.food.body)} />
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {featuredFood.map((item) => (
@@ -214,9 +201,7 @@ const todayHours = (() => {
       </div>
       <div class="text-center mt-10">
         <a href="/menu"
-          class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
-          Full Food Menu
-        </a>
+          class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors" set:html={rawBlock(copy.food.cta)} />
       </div>
     </div>
   </section>
@@ -225,8 +210,8 @@ const todayHours = (() => {
   <section class="py-24 bg-[var(--color-espresso-light)]/20 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">Weekly & Special</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Events at The Lobby</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3" set:html={copy.events.label} />
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{copy.events.title}</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {RECURRING_EVENTS.map((event) => (
@@ -251,9 +236,7 @@ const todayHours = (() => {
       </div>
       <div class="text-center mt-10">
         <a href="/events"
-          class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
-          All Events
-        </a>
+          class="inline-block border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors" set:html={rawBlock(copy.events.cta)} />
       </div>
     </div>
   </section>
@@ -268,13 +251,11 @@ const todayHours = (() => {
         <div class="absolute -top-4 -left-4 w-full h-full border border-[var(--color-amber)]/20 -z-10"></div>
       </div>
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Group Bookings</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6">Private Events<br />in Oceanside</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6">
-          Birthdays, corporate events, bar buyouts, and intimate gatherings. The Lobby provides a setting your guests will actually talk about.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.privateEvents.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] leading-tight mb-6">{copy.privateEvents.title}<br />{copy.privateEvents.titleLine2}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={rawBlock(copy.privateEvents.body)} />
         <ul class="space-y-3 mb-8">
-          {['Birthday Parties', 'Corporate Events', 'Bar Buyouts', 'Rehearsal Dinners'].map((item) => (
+          {copy.privateEvents.items.map((item: string) => (
             <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 text-sm">
               <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
               {item}
@@ -282,9 +263,7 @@ const todayHours = (() => {
           ))}
         </ul>
         <a href="/private-events"
-          class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
-          Inquire About Your Event
-        </a>
+          class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.privateEvents.cta)} />
       </div>
     </div>
   </section>
@@ -292,12 +271,7 @@ const todayHours = (() => {
   <!-- STATS -->
   <section class="py-16 bg-[var(--color-jungle)]/40 border-y border-white/10 px-6">
     <div class="max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-      {[
-        { number: '4.7★',    label: 'Google Rating'  },
-        { number: '200+',    label: 'Seats Available' },
-        { number: '20+',     label: 'Tiki Cocktails'  },
-        { number: 'Tue–Sun', label: 'Open Weekly'     },
-      ].map((stat) => (
+      {copy.stats.map((stat: any) => (
         <div>
           <p class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-amber)] mb-2">{stat.number}</p>
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)]/60 text-xs tracking-widest uppercase">{stat.label}</p>
@@ -309,17 +283,15 @@ const todayHours = (() => {
   <!-- FIND US -->
   <section class="py-24 px-6">
     <div class="max-w-5xl mx-auto text-center">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">Get Here</p>
-      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">Find Us on Pier View Way</h2>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">{copy.findUs.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">{copy.findUs.title}</h2>
       <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-2">
         <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
           class="hover:text-[var(--color-amber)] transition-colors">{SITE.address.full}</a>
       </p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-10">Inside The Brick Hotel &bull; Steps from the Oceanside Pier</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mb-10" set:html={copy.findUs.note} />
       <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
-        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
-        Get Directions
-      </a>
+        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors" set:html={rawBlock(copy.findUs.cta)} />
     </div>
   </section>
 

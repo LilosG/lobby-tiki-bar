@@ -1,8 +1,10 @@
 ---
 import { Image } from 'astro:assets';
-import { SITE } from '../data/site';
+import { getSingleton } from '../lib/content';
 import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../data/gphNetwork';
 import logoCrema from '../assets/images/logo-cream.png';
+const SITE = await getSingleton('siteSettings');
+const navigation = await getSingleton('navigation');
 const year = new Date().getFullYear();
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const todayName = dayNames[new Date().getDay()];
@@ -43,7 +45,7 @@ const portfolio = GPH_NETWORK.filter((venue) => venue.url !== SITE.url);
     <div>
       <h3 class="font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase text-[var(--color-amber)] mb-6">Explore</h3>
       <ul class="space-y-3">
-        {SITE.nav.map((item) => (
+        {navigation.links.map((item: any) => (
           <li>
             <a href={item.href}
               class="text-[var(--color-sand)]/60 hover:text-[var(--color-sand)] text-sm font-[family-name:var(--font-body)] transition-colors">
@@ -59,7 +61,7 @@ const portfolio = GPH_NETWORK.filter((venue) => venue.url !== SITE.url);
     <div>
       <h3 class="font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase text-[var(--color-amber)] mb-6">Hours</h3>
       <ul class="space-y-2">
-        {SITE.hours.map((h) => (
+        {SITE.hours.map((h: any) => (
           <li class:list={[
             'flex justify-between text-sm gap-4',
             h.day === todayName ? 'text-[var(--color-sand)] font-medium' : 'text-[var(--color-sand)]/60'

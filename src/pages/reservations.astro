@@ -2,36 +2,34 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import { SITE } from "../data/site";
+import { getSingleton, rawBlock } from '../lib/content';
+const SITE = await getSingleton('siteSettings');
+const copy = await getSingleton('reservations');
 const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const todayName = dayNames[new Date().getDay()];
 ---
 <BaseLayout
-  title="Reservations | The Lobby Tiki Bar | Oceanside CA"
-  description="Reserve a table at The Lobby Tiki Bar in Oceanside CA. Book online or call (858) 304-7725. 408 Pier View Way inside The Brick Hotel."
+  title={copy.seo.title}
+  description={copy.seo.description}
 >
   <Nav />
   <section class="min-h-screen pt-32 pb-24 px-6 flex flex-col items-center justify-center text-center">
-    <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Book Your Spot</p>
-    <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] mb-4">Reservations</h1>
-    <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl mb-8">at The Lobby</p>
-    <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-lg mx-auto mb-10 leading-relaxed">
-      Reserve your table online. Walk-ins always welcome — we recommend booking ahead on weekends and for Tiki Taco Tuesdays.
-    </p>
+    <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.hero.label}</p>
+    <h1 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] mb-4">{copy.hero.title}</h1>
+    <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl mb-8">{copy.hero.scriptLine}</p>
+    <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 max-w-lg mx-auto mb-10 leading-relaxed" set:html={rawBlock(copy.hero.body)} />
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
       <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-        class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-10 py-4 hover:bg-[var(--color-sand)] transition-colors">
-        Book Online
-      </a>
+        class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-10 py-4 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.hero.primaryLabel)} />
       <a href={`tel:${SITE.phone.tel}`}
         class="border border-white/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-10 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
         {SITE.phone.display}
       </a>
     </div>
     <div class="w-full max-w-sm border border-white/10 p-8">
-      <h2 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Hours</h2>
+      <h2 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">{copy.hoursTitle}</h2>
       <ul class="space-y-3">
-        {SITE.hours.map((h) => (
+        {SITE.hours.map((h: any) => (
           <li class:list={["flex justify-between font-[family-name:var(--font-body)] text-sm", h.day === todayName ? "text-[var(--color-sand)]" : "text-[var(--color-sand)] opacity-50"]}>
             <span>{h.day}</span>
             <span>{h.hours}</span>

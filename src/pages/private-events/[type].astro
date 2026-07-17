@@ -10,12 +10,13 @@ import IllustrationBand from '../../components/IllustrationBand.astro';
 import CTASection from '../../components/CTASection.astro';
 import CateringForm from '../../components/CateringForm.astro';
 import FAQSection from '../../components/FAQSection.astro';
-import { SITE } from '../../data/site';
-import { PRIVATE_EVENT_TYPES } from '../../data/privateEvents';
+import { getOrderedCollection, getSingleton } from '../../lib/content';
 
 import tikiIllustration from '../../assets/images/tiki-illustration-volcano.jpg';
+const SITE = await getSingleton('siteSettings');
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const PRIVATE_EVENT_TYPES = await getOrderedCollection('privateEventTypes');
   return PRIVATE_EVENT_TYPES.map((event) => ({
     params: { type: event.slug },
     props: { event },
@@ -27,7 +28,7 @@ const { event } = Astro.props;
 const faqSchemaNode = {
   '@type': 'FAQPage',
   '@id': `${SITE.url}/private-events/${event.slug}/#faq`,
-  mainEntity: event.faqs.map((faq) => ({
+  mainEntity: event.faqs.map((faq: any) => ({
     '@type': 'Question',
     name: faq.q,
     acceptedAnswer: { '@type': 'Answer', text: faq.a },
@@ -68,7 +69,7 @@ const faqSchemaNode = {
   <!-- QUICK INFO STRIP -->
   <section class="bg-[var(--color-jungle)] border-y border-white/10">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 sm:grid-cols-5 divide-x divide-white/10">
-      {event.details.map((d) => (
+      {event.details.map((d: any) => (
         <div class="text-center py-7 px-4">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-1">{d.label}</p>
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm leading-snug">{d.value}</p>
@@ -83,11 +84,11 @@ const faqSchemaNode = {
       <div>
         <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Venue</p>
         <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-8 leading-tight">The Lobby Tiki Bar<br />in Oceanside, CA</h2>
-        {event.intro.map((para) => (
+        {event.intro.map((para: string) => (
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-5">{para}</p>
         ))}
         <ul class="space-y-3 mt-8">
-          {event.features.map((feature) => (
+          {event.features.map((feature: string) => (
             <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm">
               <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
               {feature}
@@ -100,7 +101,7 @@ const faqSchemaNode = {
         </a>
       </div>
       <div class="grid grid-cols-2 gap-3">
-        {event.gallery.map((item, i) => (
+        {event.gallery.map((item: any, i: number) => (
           <div class:list={["overflow-hidden", i === 0 ? "col-span-2 aspect-video" : "aspect-square"]}>
             <Image src={item.img} alt={item.alt}
               class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
@@ -118,7 +119,7 @@ const faqSchemaNode = {
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
         <SectionHeader label="Private Events" title={event.whyTitle} align="left" />
-        {event.whyBody.map((para) => (
+        {event.whyBody.map((para: string) => (
           <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-5">{para}</p>
         ))}
         <a href={`mailto:${SITE.email}?subject=Private Event Inquiry — ${event.h1}`}
@@ -130,7 +131,7 @@ const faqSchemaNode = {
         <div class="border border-white/10 p-8">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">What's Included</p>
           <ul class="space-y-3">
-            {event.features.map((feature) => (
+            {event.features.map((feature: string) => (
               <li class="flex items-center gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">
                 <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0"></span>
                 {feature}

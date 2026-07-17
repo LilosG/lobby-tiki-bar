@@ -1,7 +1,9 @@
 ---
 import { Image } from 'astro:assets';
-import { SITE } from '../data/site';
+import { getSingleton } from '../lib/content';
 import logoCrema from '../assets/images/logo-cream.png';
+const SITE = await getSingleton('siteSettings');
+const navigation = await getSingleton('navigation');
 const pathname = Astro.url.pathname;
 ---
 
@@ -14,7 +16,7 @@ const pathname = Astro.url.pathname;
     </a>
 
     <nav class="hidden lg:flex items-center gap-5" aria-label="Main navigation">
-      {SITE.nav.map((item) => (
+      {navigation.links.map((item: any) => (
         <a
           href={item.href}
           class:list={[
@@ -61,7 +63,7 @@ const pathname = Astro.url.pathname;
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
     </svg>
   </button>
-  {SITE.nav.map((item) => (
+      {navigation.links.map((item: any) => (
     <a href={item.href}
       class="font-[family-name:var(--font-stamp)] text-xl tracking-widest uppercase text-[var(--color-sand)] hover:text-[var(--color-amber)] transition-colors">
       {item.label}

@@ -5,19 +5,17 @@ import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
 import IllustrationBand from '../../components/IllustrationBand.astro';
-import { SITE } from '../../data/site';
-import { BRUNCH_FAQS } from '../../data/faqs';
+import { getOrderedCollection, getSingleton, rawBlock } from '../../lib/content';
 import FAQSection from '../../components/FAQSection.astro';
-import { BRUNCH } from '../../data/menu';
 
 import brunchPlate2    from '../../assets/images/brunch-plate-2.jpg';
 import drinkBarLifestyle    from '../../assets/images/drink-bar-lifestyle.jpg';
 import tikiIllustrationLuau from '../../assets/images/tiki-illustration-luau.jpg';
-import brunchPlate3    from '../../assets/images/brunch-plate-3.jpg';
-import brunchPlate4    from '../../assets/images/brunch-plate-4.jpg';
-import venueInterior3  from '../../assets/images/venue-interior-3.jpg';
 
-const faqs = BRUNCH_FAQS;
+const SITE = await getSingleton('siteSettings');
+const copy = await getSingleton('brunchPage');
+const BRUNCH = await getOrderedCollection('brunchItems');
+const faqs = await getOrderedCollection('faqsBrunch');
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -31,9 +29,9 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Brunch Oceanside | The Lobby Tiki Bar | Saturday & Sunday"
-  description="Weekend brunch at The Lobby Tiki Bar in Oceanside CA. Saturday and Sunday 10 AM – 3 PM. Island-inspired brunch plates and tiki cocktails inside The Brick Hotel."
-  image="/images/brunch-spread.jpg"
+  title={copy.seo.title}
+  description={copy.seo.description}
+  image={copy.seo.image}
   heroImage={brunchPlate2.src}
   pageSchema={faqSchema}
 >
@@ -46,21 +44,15 @@ const faqSchema = {
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/60 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
     <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6">Saturday & Sunday</p>
-      <h1 class="font-[family-name:var(--font-display)] text-6xl sm:text-7xl lg:text-8xl text-[var(--color-sand)] leading-none mb-4">Brunch</h1>
-      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-6">at The Lobby</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 max-w-lg mx-auto leading-relaxed mb-10">
-        Island-inspired brunch plates and craft tiki cocktails every Saturday and Sunday. Inside The Brick Hotel on Pier View Way.
-      </p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-sm tracking-[0.3em] uppercase mb-6" set:html={copy.hero.label} />
+      <h1 class="font-[family-name:var(--font-display)] text-6xl sm:text-7xl lg:text-8xl text-[var(--color-sand)] leading-none mb-4">{copy.hero.title}</h1>
+      <p class="font-[family-name:var(--font-script)] text-[var(--color-amber)] text-3xl sm:text-4xl mb-6">{copy.hero.scriptLine}</p>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 max-w-lg mx-auto leading-relaxed mb-10" set:html={rawBlock(copy.hero.body)} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-          class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
-          Reserve a Table
-        </a>
+          class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.hero.primaryLabel)} />
         <a href="/menu"
-          class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
-          View Full Menu
-        </a>
+          class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors" set:html={rawBlock(copy.hero.secondaryLabel)} />
       </div>
     </div>
   </section>
@@ -68,16 +60,16 @@ const faqSchema = {
   <section class="bg-[var(--color-jungle)] border-y border-white/10">
     <div class="max-w-4xl mx-auto px-6 grid grid-cols-3 divide-x divide-white/10">
       <div class="text-center py-8 px-6">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Days</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.quickInfo[0].label}</p>
         <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">{SITE.brunch.days}</p>
       </div>
       <div class="text-center py-8 px-6">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Hours</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.quickInfo[1].label}</p>
         <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">{SITE.brunch.hours}</p>
       </div>
       <div class="text-center py-8 px-6">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Location</p>
-        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">Pier View Way</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.quickInfo[2].label}</p>
+        <p class="font-[family-name:var(--font-display)] text-xl text-[var(--color-sand)]">{copy.quickInfo[2].value}</p>
       </div>
     </div>
   </section>
@@ -85,11 +77,9 @@ const faqSchema = {
   <section class="py-28 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Kitchen</p>
-        <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">Brunch Plates</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto leading-relaxed">
-          Island-inspired morning plates. Built for the atmosphere, designed to hold up against the rum program.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.plates.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)]">{copy.plates.title}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/60 mt-4 max-w-xl mx-auto leading-relaxed" set:html={rawBlock(copy.plates.body)} />
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {BRUNCH.map((item, i) => (
@@ -120,18 +110,12 @@ const faqSchema = {
     <div class="grid lg:grid-cols-2 min-h-[600px]">
       <div class="bg-[var(--color-jungle)]/20 flex items-center px-10 py-16 lg:px-20 order-2 lg:order-1">
         <div class="max-w-md">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Brunch Cocktails</p>
-          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">Tiki Before Noon</h2>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6">
-            The full cocktail program runs through brunch. Painkillers, Mai Tais, and the Cobra Kai don't care what time it is. Neither should you.
-          </p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-10">
-            Weekend brunch is the right time to start with a Lobby Mai Tai and see where the afternoon takes you.
-          </p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.cocktails.label}</p>
+          <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">{copy.cocktails.title}</h2>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-6" set:html={rawBlock(copy.cocktails.body[0])} />
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)]/70 leading-relaxed mb-10" set:html={rawBlock(copy.cocktails.body[1])} />
           <a href="/menu#cocktails"
-            class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
-            Full Cocktail Menu
-          </a>
+            class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors" set:html={rawBlock(copy.cocktails.cta)} />
         </div>
       </div>
       <div class="relative overflow-hidden min-h-[400px] order-1 lg:order-2">
@@ -151,32 +135,26 @@ const faqSchema = {
       <div class="absolute inset-0 bg-[var(--color-espresso)]/70"></div>
     </div>
     <div class="relative z-10 text-center px-6 py-20">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Saturday &amp; Sunday &middot; 10 AM &ndash; 3 PM</p>
-      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-6">
-        Brunch on<br /><em class="not-italic font-[family-name:var(--font-script)] text-6xl text-[var(--color-amber)]">Pier View Way</em>
-      </h2>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4" set:html={copy.illustration.label} />
+      <h2
+        class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-6"
+        set:html={`\n${copy.illustration.title}<br><em class="not-italic font-[family-name:var(--font-script)] text-6xl text-[var(--color-amber)]">${copy.illustration.scriptLine}</em> `}
+      />
       <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-        class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
-        Reserve a Table
-      </a>
+        class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.illustration.cta)} />
     </div>
   </section>
 
   <section class="py-24 px-6 bg-[var(--color-espresso-light)]/20">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">The Setting</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Saturday & Sunday</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.gallery.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]" set:html={copy.gallery.title} />
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {[
-          { img: brunchPlate3,   alt: 'Brunch plate at The Lobby Tiki Bar Oceanside'    },
-          { img: brunchPlate4,   alt: 'Island brunch dish at The Lobby Oceanside'       },
-          { img: venueInterior3, alt: 'The Lobby Tiki Bar interior Oceanside CA'        },
-          { img: brunchPlate2,   alt: 'Weekend brunch at The Lobby Tiki Bar'            },
-        ].map((item) => (
+        {copy.gallery.items.map((item: any) => (
           <div class="aspect-square overflow-hidden">
-            <Image src={item.img} alt={item.alt}
+            <Image src={item.image} alt={item.alt}
               class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
               width={400} height={400} />
           </div>
@@ -187,17 +165,17 @@ const faqSchema = {
 
   <FAQSection
     faqs={faqs}
-    label="Good to Know"
-    title="Brunch FAQ"
+    label={copy.faq.label}
+    title={copy.faq.title}
     background="muted"
   />
 
   <CTASection
-    title="Join Us for Weekend Brunch"
-    subtitle="Saturday & Sunday, 10 AM – 3 PM. 408 Pier View Way, Oceanside."
-    primaryLabel="Reserve a Table"
+    title={copy.cta.title}
+    subtitle={copy.cta.subtitle}
+    primaryLabel={copy.cta.primaryLabel}
     primaryHref={SITE.reservations.url}
-    secondaryLabel="See Full Menu"
+    secondaryLabel={copy.cta.secondaryLabel}
     secondaryHref="/menu"
     background="jungle"
   />

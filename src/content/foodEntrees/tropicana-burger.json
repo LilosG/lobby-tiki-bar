@@ -1,0 +1,7 @@
+{
+  "order": 3,
+  "name": "Tropicana Burger",
+  "description": "Beef patty, grilled pineapple, teriyaki glaze, lettuce, tomato on a brioche bun",
+  "category": "entrees",
+  "image": "../../assets/images/food-tropicana-burger.jpg"
+}

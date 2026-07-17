@@ -6,15 +6,17 @@ import TrustBar from '../../components/TrustBar.astro';
 import Footer from '../../components/Footer.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTASection from '../../components/CTASection.astro';
-import { SITE } from '../../data/site';
-import { EVENTS_FAQS } from '../../data/faqs';
+import { getOrderedCollection, getSingleton, rawBlock } from '../../lib/content';
 import FAQSection from '../../components/FAQSection.astro';
-import { RECURRING_EVENTS, UPCOMING_EVENTS } from '../../data/events';
 
 import venueCurtainEdit from '../../assets/images/venue-curtain-edit.jpg';
 import venueRoomFull    from '../../assets/images/venue-room-full.jpg';
 
-const faqs = EVENTS_FAQS;
+const SITE = await getSingleton('siteSettings');
+const copy = await getSingleton('eventsIndexPage');
+const RECURRING_EVENTS = await getOrderedCollection('recurringEvents');
+const UPCOMING_EVENTS = await getOrderedCollection('upcomingEvents');
+const faqs = await getOrderedCollection('faqsEvents');
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -28,20 +30,20 @@ const faqSchema = {
 ---
 
 <BaseLayout
-  title="Tiki Taco Tuesday & Events | The Lobby Tiki Bar Oceanside"
-  description="Weekly events at The Lobby Tiki Bar in Oceanside CA. Tiki Taco Tuesdays, happy hour specials, and private events. 408 Pier View Way inside The Brick Hotel."
-  image="/images/venue-interior-1.jpg"
+  title={copy.seo.title}
+  description={copy.seo.description}
+  image={copy.seo.image}
   heroImage={venueCurtainEdit.src}
   pageSchema={faqSchema}
 >
   <Nav />
 
   <PageHero
-    label="Weekly &amp; Special"
-    title="Events at The Lobby"
-    subtitle="Tiki Taco Tuesdays, happy hour specials, and more. Something happening every week on Pier View Way."
+    label={copy.hero.label}
+    title={copy.hero.title}
+    subtitle={copy.hero.subtitle}
     image={venueCurtainEdit}
-    imageAlt="Events at The Lobby Tiki Bar Oceanside CA — tiki atmosphere and weekly events"
+    imageAlt={copy.hero.imageAlt}
     overlay="gradient"
   />
 
@@ -50,8 +52,8 @@ const faqSchema = {
   <section class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Week</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Weekly Events</h2>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.weekly.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{copy.weekly.title}</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {RECURRING_EVENTS.map((event) => (
@@ -70,7 +72,7 @@ const faqSchema = {
               <h3 class="font-[family-name:var(--font-display)] text-2xl sm:text-3xl text-[var(--color-sand)] mb-2">{event.name}</h3>
               <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] opacity-60 text-xs tracking-wider uppercase mb-3">{event.day} &bull; {event.time}</p>
               <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm leading-relaxed">{event.description}</p>
-              <p class="mt-4 font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase group-hover:underline">View Details &rarr;</p>
+              <p class="mt-4 font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase group-hover:underline" set:html={copy.weekly.detailLabel} />
             </div>
           </a>
         ))}
@@ -81,7 +83,7 @@ const faqSchema = {
   {UPCOMING_EVENTS.length > 0 && (
     <section class="py-20 bg-[var(--color-espresso-light)]/20 px-6">
       <div class="max-w-7xl mx-auto">
-        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12">Upcoming Events</h2>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-12">{copy.upcomingTitle}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {UPCOMING_EVENTS.map((event) => (
             <div class="border border-white/10 p-6 hover:border-[var(--color-amber)]/30 transition-colors">
@@ -90,9 +92,7 @@ const faqSchema = {
               <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm mb-4">{event.description}</p>
               {event.ticketUrl && (
                 <a href={event.ticketUrl} target="_blank" rel="noopener noreferrer"
-                  class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase hover:text-[var(--color-sand)] transition-colors">
-                  Get Tickets &rarr;
-                </a>
+                  class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase hover:text-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.ticketsLabel)} />
               )}
             </div>
           ))}
@@ -105,18 +105,12 @@ const faqSchema = {
   <section class="py-24 px-6 bg-[var(--color-jungle)]/20">
     <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">408 Pier View Way, Oceanside</p>
-        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">Weekly Events in Oceanside, CA</h2>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4">
-          The Lobby Tiki Bar keeps the week moving. Every Tuesday is Tiki Taco Tuesday &mdash; 30% off all rum drinks from open to close, paired with island-inspired tacos. Monday through Friday we run happy hour with discounted cocktails, beer, wine, and bites.
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8">
-          Inside The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The kind of weekly ritual a neighborhood bar is supposed to provide.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.seoCopy.label}</p>
+        <h2 class="font-[family-name:var(--font-display)] text-4xl text-[var(--color-sand)] mb-6">{copy.seoCopy.title}</h2>
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-4" set:html={rawBlock(copy.seoCopy.body[0])} />
+        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 leading-relaxed mb-8" set:html={rawBlock(copy.seoCopy.body[1])} />
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-          class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
-          Reserve a Table
-        </a>
+          class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.seoCopy.cta)} />
       </div>
       <div class="relative overflow-hidden">
         <Image src={venueRoomFull}
@@ -129,8 +123,8 @@ const faqSchema = {
 
   <FAQSection
     faqs={faqs}
-    label="Good to Know"
-    title="Events FAQ"
+    label={copy.faq.label}
+    title={copy.faq.title}
     background="muted"
   />
 
@@ -138,20 +132,14 @@ const faqSchema = {
   <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-[var(--color-espresso-light)]/30"></div>
     <div class="relative z-10 text-center px-6 py-20 max-w-2xl mx-auto">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Group Bookings</p>
-      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">Host a Private Event</h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed mb-10 max-w-lg mx-auto">
-        Book The Lobby for your next birthday, corporate event, bar buyout, or rehearsal dinner. Full bar program, island-inspired food, tiki atmosphere.
-      </p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.privateEvents.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)] mb-6">{copy.privateEvents.title}</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 leading-relaxed mb-10 max-w-lg mx-auto" set:html={rawBlock(copy.privateEvents.body)} />
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/private-events"
-          class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
-          Inquire About Events
-        </a>
+          class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.privateEvents.primaryLabel)} />
         <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-          class="border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
-          Reserve a Table
-        </a>
+          class="border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors" set:html={rawBlock(copy.privateEvents.secondaryLabel)} />
       </div>
     </div>
   </section>

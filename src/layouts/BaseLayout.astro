@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
-import { SITE } from '../data/site';
+import { getSingleton } from '../lib/content';
 import MobileStickyBar from '../components/MobileStickyBar.astro';
+
+const SITE = await getSingleton('siteSettings');
 
 interface Props {
   title: string;
@@ -67,8 +69,8 @@ const businessNode = {
   hasMap: SITE.address.mapsUrl,
   sameAs: Object.values(SITE.social),
   openingHoursSpecification: SITE.hours
-    .filter(h => h.open)
-    .map(h => ({
+    .filter((h: any) => h.open)
+    .map((h: any) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: `https://schema.org/${h.day}`,
       opens: h.opens,

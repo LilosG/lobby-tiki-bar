@@ -2,8 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
-import { SITE } from "../data/site";
+import { getSingleton, rawBlock } from '../lib/content';
 
+const SITE = await getSingleton('siteSettings');
+const copy = await getSingleton('contact');
 const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const todayName = dayNames[new Date().getDay()];
 
@@ -11,8 +13,8 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
 ---
 
 <BaseLayout
-  title="Contact | The Lobby Tiki Bar | 408 Pier View Way Oceanside CA"
-  description="Find The Lobby Tiki Bar at 408 Pier View Way, Oceanside CA 92054. Call (858) 304-7725. Open Tue-Sun. Inside The Brick Hotel steps from the Oceanside Pier."
+  title={copy.seo.title}
+  description={copy.seo.description}
 >
   <Nav />
 
@@ -21,21 +23,21 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
 
       <!-- Info column -->
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Come Find Us</p>
-        <h1 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-10">Contact</h1>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.hero.label}</p>
+        <h1 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-10">{copy.hero.title}</h1>
 
         <address class="not-italic space-y-8">
           <div>
-            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Address</p>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.labels.address}</p>
             <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
               class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 hover:opacity-100 transition-opacity leading-relaxed">
               {SITE.address.street}<br />{SITE.address.city}, {SITE.address.state} {SITE.address.zip}
             </a>
-            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mt-1">Inside The Brick Hotel</p>
+            <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mt-1">{copy.addressNote}</p>
           </div>
 
           <div>
-            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Phone</p>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.labels.phone}</p>
             <a href={`tel:${SITE.phone.tel}`}
               class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 hover:opacity-100 transition-opacity">
               {SITE.phone.display}
@@ -43,9 +45,9 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
           </div>
 
           <div>
-            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Hours</p>
+            <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">{copy.labels.hours}</p>
             <ul class="space-y-2">
-              {SITE.hours.map((h) => (
+              {SITE.hours.map((h: any) => (
                 <li class:list={[
                   "flex gap-8 font-[family-name:var(--font-body)] text-sm",
                   h.day === todayName ? "text-[var(--color-sand)]" : "text-[var(--color-sand)] opacity-50",
@@ -60,25 +62,17 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
 
         <div class="flex flex-wrap gap-4 mt-10">
           <a href={SITE.address.mapsUrl} target="_blank" rel="noopener noreferrer"
-            class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-sand)] transition-colors">
-            Get Directions
-          </a>
+            class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.primaryLabel)} />
           <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-            class="border border-white/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
-            Reserve a Table
-          </a>
+            class="border border-white/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-6 py-3 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors" set:html={rawBlock(copy.secondaryLabel)} />
         </div>
 
         <!-- Private events prompt -->
         <div class="mt-12 border border-white/10 p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">Private Events</p>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm leading-relaxed mb-4">
-            Looking to book a birthday, buyout, or corporate event? We'd love to hear about it.
-          </p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-2">{copy.privateEvents.label}</p>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm leading-relaxed mb-4" set:html={rawBlock(copy.privateEvents.body)} />
           <a href="/private-events"
-            class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase hover:text-[var(--color-sand)] transition-colors">
-            Inquire About Your Event →
-          </a>
+            class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase hover:text-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.privateEvents.cta)} />
         </div>
       </div>
 
@@ -93,18 +87,13 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
             allowfullscreen
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="The Lobby Tiki Bar on Google Maps"
+            title={copy.mapTitle}
           ></iframe>
         </div>
         <div class="border border-white/10 p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Getting Here</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">{copy.gettingHere.label}</p>
           <ul class="space-y-2">
-            {[
-              "Steps from the Oceanside Pier",
-              "Ground floor of The Brick Hotel",
-              "Pier View Way, Downtown Oceanside",
-              "Street parking on Pier View Way & nearby lots",
-            ].map((note) => (
+            {copy.gettingHere.items.map((note: string) => (
               <li class="flex items-start gap-3 font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm">
                 <span class="w-1.5 h-1.5 bg-[var(--color-amber)] rounded-full flex-shrink-0 mt-1.5"></span>
                 {note}

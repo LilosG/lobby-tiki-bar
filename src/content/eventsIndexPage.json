@@ -1,0 +1,40 @@
+{
+  "seo": {
+    "title": "Tiki Taco Tuesday & Events | The Lobby Tiki Bar Oceanside",
+    "description": "Weekly events at The Lobby Tiki Bar in Oceanside CA. Tiki Taco Tuesdays, happy hour specials, and private events. 408 Pier View Way inside The Brick Hotel.",
+    "image": "/images/venue-interior-1.jpg"
+  },
+  "hero": {
+    "label": "Weekly & Special",
+    "title": "Events at The Lobby",
+    "subtitle": "Tiki Taco Tuesdays, happy hour specials, and more. Something happening every week on Pier View Way.",
+    "imageAlt": "Events at The Lobby Tiki Bar Oceanside CA — tiki atmosphere and weekly events"
+  },
+  "weekly": {
+    "label": "Every Week",
+    "title": "Weekly Events",
+    "detailLabel": "View Details &rarr;"
+  },
+  "upcomingTitle": "Upcoming Events",
+  "ticketsLabel": "Get Tickets &rarr;",
+  "seoCopy": {
+    "label": "408 Pier View Way, Oceanside",
+    "title": "Weekly Events in Oceanside, CA",
+    "body": [
+      "The Lobby Tiki Bar keeps the week moving. Every Tuesday is Tiki Taco Tuesday &mdash; 30% off all rum drinks from open to close, paired with island-inspired tacos. Monday through Friday we run happy hour with discounted cocktails, beer, wine, and bites.",
+      "Inside The Brick Hotel on Pier View Way, steps from the Oceanside Pier. The kind of weekly ritual a neighborhood bar is supposed to provide."
+    ],
+    "cta": "Reserve a Table"
+  },
+  "faq": {
+    "label": "Good to Know",
+    "title": "Events FAQ"
+  },
+  "privateEvents": {
+    "label": "Group Bookings",
+    "title": "Host a Private Event",
+    "body": "Book The Lobby for your next birthday, corporate event, bar buyout, or rehearsal dinner. Full bar program, island-inspired food, tiki atmosphere.",
+    "primaryLabel": "Inquire About Events",
+    "secondaryLabel": "Reserve a Table"
+  }
+}

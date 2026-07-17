@@ -15,23 +15,26 @@ export default defineConfig({
     sitemap({
       serialize(item) {
         const url = item.url;
+        const lastmod = /** @type {string} */ (/** @type {unknown} */ (new Date()));
+        const weekly = /** @type {any} */ ('weekly');
+        const monthly = /** @type {any} */ ('monthly');
 
         if (url === `${SITE_URL}/` || url === SITE_URL) {
-          return { ...item, changefreq: 'weekly', priority: 1.0, lastmod: new Date() };
+          return { ...item, changefreq: weekly, priority: 1.0, lastmod };
         }
         if (/\/(menu|happy-hour|brunch|events)\/?$/.test(url)) {
-          return { ...item, changefreq: 'weekly', priority: 0.9, lastmod: new Date() };
+          return { ...item, changefreq: weekly, priority: 0.9, lastmod };
         }
         if (url.includes('/private-events')) {
-          return { ...item, changefreq: 'monthly', priority: 0.8, lastmod: new Date() };
+          return { ...item, changefreq: monthly, priority: 0.8, lastmod };
         }
         if (url.endsWith('/blog/')) {
-          return { ...item, changefreq: 'weekly', priority: 0.8, lastmod: new Date() };
+          return { ...item, changefreq: weekly, priority: 0.8, lastmod };
         }
         if (url.includes('/blog/')) {
-          return { ...item, changefreq: 'monthly', priority: 0.7, lastmod: new Date() };
+          return { ...item, changefreq: monthly, priority: 0.7, lastmod };
         }
-        return { ...item, changefreq: 'monthly', priority: 0.7, lastmod: new Date() };
+        return { ...item, changefreq: monthly, priority: 0.7, lastmod };
       },
     }),
     mdx(),

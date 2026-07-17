@@ -1,13 +1,14 @@
 ---
 import { Image } from 'astro:assets';
-import { RECURRING_EVENTS } from '../../data/events';
+import { getOrderedCollection, getSingleton } from '../../lib/content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
-import { SITE } from '../../data/site';
+const SITE = await getSingleton('siteSettings');
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const RECURRING_EVENTS = await getOrderedCollection('recurringEvents');
   return RECURRING_EVENTS.map((event) => ({
     params: { slug: event.slug },
     props: { event },

@@ -1,0 +1,10 @@
+{
+  "order": 2,
+  "slug": "happy-hour",
+  "name": "Happy Hour",
+  "day": "Tuesday – Friday",
+  "time": "3:00 PM – 6:00 PM",
+  "highlight": "Daily Deals",
+  "description": "Discounted cocktails, beers, wine and bites every weekday afternoon. The best way to start the evening on Pier View Way.",
+  "image": "../../assets/images/drink-dsc06150.jpg"
+}

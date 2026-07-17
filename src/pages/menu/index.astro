@@ -4,8 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import CTASection from "../../components/CTASection.astro";
-import { SITE } from "../../data/site";
-import { COCKTAILS, NON_ALCOHOLIC, DRAFT_BEER, CANS_BOTTLES, WINE, FOOD } from "../../data/menu";
+import { getOrderedCollection, getSingleton, rawBlock } from '../../lib/content';
 
 import drinkCollection from '../../assets/images/drink-collection.jpg';
 import drinkDsc06150Page from '../../assets/images/drink-dsc06150.jpg';
@@ -13,12 +12,23 @@ import foodKaluaTacos2 from '../../assets/images/food-kalua-tacos-2.jpg';
 import drinkLobbyGlass2 from '../../assets/images/drink-lobby-glass-2.jpg';
 import drinkCopperPineapple from '../../assets/images/drink-copper-pineapple.jpg';
 import drinkBarLifestyle from '../../assets/images/drink-bar-lifestyle.jpg';
-import { MENU_FAQS } from '../../data/faqs';
 import FAQSection from '../../components/FAQSection.astro';
 
 
 
-const faqs = MENU_FAQS;
+const SITE = await getSingleton('siteSettings');
+const copy = await getSingleton('menuPage');
+const COCKTAILS = await getOrderedCollection('cocktails');
+const NON_ALCOHOLIC = await getOrderedCollection('nonAlcoholicDrinks');
+const DRAFT_BEER = await getOrderedCollection('draftBeers');
+const CANS_BOTTLES = await getOrderedCollection('cansBottles');
+const WINE = await getOrderedCollection('wines');
+const FOOD = [
+  ...await getOrderedCollection('foodStarters'),
+  ...await getOrderedCollection('foodTacos'),
+  ...await getOrderedCollection('foodEntrees'),
+];
+const faqs = await getOrderedCollection('faqsMenu');
 
 const faqSchema = {
   '@type': 'FAQPage',
@@ -30,15 +40,15 @@ const faqSchema = {
   })),
 };
 
-const featuredCocktails  = COCKTAILS.filter((c) => c.featured && c.image !== null);
-const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === null);
+const featuredCocktails  = COCKTAILS.filter((c: any) => c.featured && c.image !== null);
+const remainingCocktails = COCKTAILS.filter((c: any) => !c.featured || c.image === null);
 
 ---
 
 <BaseLayout
-  title="Tiki Cocktails & Island Food Menu | The Lobby Oceanside"
-  description="Full menu at The Lobby Tiki Bar in Oceanside CA. Tiki cocktails, island-inspired food, beer and wine. 408 Pier View Way inside The Brick Hotel."
-  image="/images/drink-cobra-kai.jpg"
+  title={copy.seo.title}
+  description={copy.seo.description}
+  image={copy.seo.image}
   heroImage={drinkCollection.src}
   pageSchema={faqSchema}
 >
@@ -52,23 +62,21 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
       <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)]/90 via-[var(--color-espresso)]/40 to-transparent"></div>
     </div>
     <div class="relative z-10 w-full px-16 sm:px-24 pb-32"><div class="max-w-xl">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">408 Pier View Way · Oceanside</p>
-      <h1 class="font-[family-name:var(--font-display)] text-7xl sm:text-8xl text-[var(--color-sand)] leading-none mb-4">The Menu</h1>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 max-w-md leading-relaxed mb-8">Craft tiki cocktails, island-inspired plates, and all the happy hour specials.</p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.hero.label}</p>
+      <h1 class="font-[family-name:var(--font-display)] text-7xl sm:text-8xl text-[var(--color-sand)] leading-none mb-4">{copy.hero.title}</h1>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 max-w-md leading-relaxed mb-8">{copy.hero.body}</p>
       <a href={SITE.reservations.url} target="_blank" rel="noopener noreferrer"
-        class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors">
-        Reserve a Table
-      </a>
+        class="inline-block bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-sand)] transition-colors" set:html={rawBlock(copy.hero.cta)} />
     </div></div>
   </section>
 
   <!-- STICKY NAV -->
   <div class="sticky top-16 z-30 bg-[var(--color-espresso)] border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 flex gap-8 overflow-x-auto py-4">
-      {[["cocktails","Cocktails"],["food","Food"],["beer-wine","Beer & Wine"],["non-alcoholic","Non-Alcoholic"]].map(([id, label]) => (
-        <a href={`#${id}`}
+      {copy.nav.map((item: any) => (
+        <a href={`#${item.id}`}
           class="font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase text-[var(--color-sand)] opacity-60 hover:opacity-100 hover:text-[var(--color-amber)] transition-all whitespace-nowrap">
-          {label}
+          {item.label}
         </a>
       ))}
     </div>
@@ -77,8 +85,8 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
   <!-- EXPLORE THE BAR -->
   <section class="max-w-7xl mx-auto px-6 pt-20 pb-0">
     <div class="mb-10">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">The Lobby Tiki Bar</p>
-      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">Explore the Bar</h2>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">{copy.explore.label}</p>
+      <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{copy.explore.title}</h2>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <a href="#cocktails" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
@@ -88,9 +96,9 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
             width={700} height={467} />
         </div>
         <div class="p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">The Bar Program</p>
-          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Tiki Cocktails</h3>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">20+ craft tiki cocktails. House rum blends, fresh juice, house-made syrups.</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">{copy.explore.cards[0].label}</p>
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{copy.explore.cards[0].title}</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">{copy.explore.cards[0].body}</p>
         </div>
       </a>
       <a href="/happy-hour" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
@@ -100,9 +108,9 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
             width={700} height={467} />
         </div>
         <div class="p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">Tue &ndash; Fri</p>
-          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Happy Hour</h3>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">3 PM &ndash; 5 PM. Discounted cocktails, wells, and bites every weekday.</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2" set:html={copy.explore.cards[1].label} />
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{copy.explore.cards[1].title}</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed" set:html={copy.explore.cards[1].body} />
         </div>
       </a>
       <a href="/brunch" class="group block overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/40 transition-colors duration-300">
@@ -112,9 +120,9 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
             width={700} height={467} />
         </div>
         <div class="p-6">
-          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">Saturday &amp; Sunday</p>
-          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">Weekend Brunch</h3>
-          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed">10 AM &ndash; 3 PM. Island plates, morning cocktails, and the full bar program.</p>
+          <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.25em] uppercase mb-2">{copy.explore.cards[2].label}</p>
+          <h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-2">{copy.explore.cards[2].title}</h3>
+          <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-50 text-sm leading-relaxed" set:html={copy.explore.cards[2].body} />
         </div>
       </a>
     </div>
@@ -129,13 +137,15 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
     <div class="absolute inset-0 bg-gradient-to-r from-[var(--color-espresso)]/80 via-[var(--color-espresso)]/20 to-transparent"></div>
     <div class="absolute inset-0 flex items-center px-16 sm:px-24">
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">The Bar Program</p>
-        <p class="font-[family-name:var(--font-display)] text-3xl sm:text-6xl text-[var(--color-sand)] leading-tight">
-          20+ Tiki<br />Cocktails
-        </p>
-        <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm max-w-xs leading-relaxed mt-4 hidden sm:block">
-          House rum blends, fresh juice,<br />house-made syrups.
-        </p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-3">{copy.lineup.label}</p>
+        <p
+          class="font-[family-name:var(--font-display)] text-3xl sm:text-6xl text-[var(--color-sand)] leading-tight"
+          set:html={rawBlock(`${copy.lineup.title}<br>${copy.lineup.titleLine2}`)}
+        />
+        <p
+          class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 text-sm max-w-xs leading-relaxed mt-4 hidden sm:block"
+          set:html={rawBlock(`${copy.lineup.body[0]}<br>${copy.lineup.body[1]}`)}
+        />
       </div>
     </div>
   </section>
@@ -143,8 +153,8 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
   <!-- COCKTAILS GRID + FOOD -->
   <div class="max-w-7xl mx-auto px-6 pt-16 pb-20 space-y-28">
     <section id="cocktails">
-      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-2">Tiki Cocktails</h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-10">An ID may be required with specialty vessels.</p>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-2">{copy.cocktails.title}</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-10">{copy.cocktails.note}</p>
 
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
         {featuredCocktails.map((drink) => (
@@ -167,7 +177,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
       </div>
 
       <div>
-        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Also on the Menu</p>
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">{copy.cocktails.remainingLabel}</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           {remainingCocktails.map((drink) => (
             <div class="p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
@@ -184,8 +194,8 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
 
     <!-- FOOD -->
     <section id="food">
-      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">Island Kitchen</h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">Island-inspired plates built to complement the rum program.</p>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">{copy.food.title}</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">{copy.food.body}</p>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {FOOD.map((item) => (
@@ -205,9 +215,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
 
       <div class="text-center">
         <a href="/brunch"
-          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors">
-          Weekend Brunch Menu →
-        </a>
+          class="inline-block border border-[var(--color-teal)] text-[var(--color-teal)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-teal)] hover:text-[var(--color-espresso)] transition-colors" set:html={rawBlock(copy.food.cta)} />
       </div>
     </section>
 
@@ -221,15 +229,14 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
       <div class="absolute inset-0 bg-[var(--color-espresso)]/65"></div>
     </div>
     <div class="relative z-10 text-center px-6 py-24">
-      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">Every Tuesday</p>
-      <h2 class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-4">
-        Tiki Taco<br />Tuesday
-      </h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-base mb-8">$6 Tacos · $5 Wells · All Day</p>
+      <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.3em] uppercase mb-4">{copy.tacoTuesday.label}</p>
+      <h2
+        class="font-[family-name:var(--font-display)] text-5xl sm:text-6xl text-[var(--color-sand)] leading-tight mb-4"
+        set:html={rawBlock(`${copy.tacoTuesday.title}<br>${copy.tacoTuesday.titleLine2}`)}
+      />
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-base mb-8">{copy.tacoTuesday.body}</p>
       <a href="/happy-hour"
-        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors">
-        View Happy Hour Specials
-      </a>
+        class="inline-block border border-[var(--color-amber)] text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-8 py-3 hover:bg-[var(--color-amber)] hover:text-[var(--color-espresso)] transition-colors" set:html={rawBlock(copy.tacoTuesday.cta)} />
     </div>
   </section>
 
@@ -237,18 +244,18 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
   <div class="max-w-7xl mx-auto px-6 pt-20 pb-20 space-y-28">
 
     <section id="beer-wine">
-      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-12">Beer &amp; Wine</h2>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-12">{copy.beerWine.title}</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="border border-white/10 p-8">
-          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Draft Beer</h3>
+          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">{copy.beerWine.draftLabel}</h3>
           <ul class="space-y-3">
-            {DRAFT_BEER.map((b) => (
-              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">{b}</li>
+            {DRAFT_BEER.map((b: any) => (
+              <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">{b.name}</li>
             ))}
           </ul>
         </div>
         <div class="border border-white/10 p-8">
-          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Cans &amp; Bottles</h3>
+          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">{copy.beerWine.cansLabel}</h3>
           <ul class="space-y-3">
             {CANS_BOTTLES.map((b) => (
               <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">{b.name}</li>
@@ -256,7 +263,7 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
           </ul>
         </div>
         <div class="border border-white/10 p-8">
-          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Wine</h3>
+          <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">{copy.beerWine.wineLabel}</h3>
           <ul class="space-y-3">
             {WINE.map((w) => (
               <li class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-70 text-sm pb-3 border-b border-white/10 last:border-b-0">{w.name}</li>
@@ -267,8 +274,8 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
     </section>
 
     <section id="non-alcoholic">
-      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">Non-Alcoholic</h2>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">All the flavor. None of the rum.</p>
+      <h2 class="font-[family-name:var(--font-display)] text-5xl text-[var(--color-sand)] mb-4">{copy.nonAlcoholic.title}</h2>
+      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-40 text-sm mb-12">{copy.nonAlcoholic.body}</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {NON_ALCOHOLIC.map((d) => (
           <div class="p-6 border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors">
@@ -283,16 +290,16 @@ const remainingCocktails = COCKTAILS.filter((c) => !c.featured || c.image === nu
 
   <FAQSection
     faqs={faqs}
-    label="Common Questions"
-    title="Menu FAQ"
+    label={copy.faq.label}
+    title={copy.faq.title}
     background="muted"
   />
   <CTASection
-    title="Ready to Order?"
-    subtitle="Reserve your table or come on in."
-    primaryLabel="Reserve a Table"
+    title={copy.cta.title}
+    subtitle={copy.cta.subtitle}
+    primaryLabel={copy.cta.primaryLabel}
     primaryHref={SITE.reservations.url}
-    secondaryLabel="Book Private Event"
+    secondaryLabel={copy.cta.secondaryLabel}
     secondaryHref="/private-events"
   />
   <Footer />

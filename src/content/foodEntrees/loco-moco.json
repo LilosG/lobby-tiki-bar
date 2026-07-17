@@ -1,0 +1,7 @@
+{
+  "order": 2,
+  "name": "Loco Moco",
+  "description": "Rice, beef patty, sunny-side egg, brown gravy, island seasoning",
+  "category": "entrees",
+  "image": "../../assets/images/food-loco-moco.jpg"
+}

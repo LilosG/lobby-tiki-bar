@@ -1,5 +1,6 @@
 ---
-import { SITE } from "../data/site";
+import { getSingleton } from "../lib/content";
+const SITE = await getSingleton('siteSettings');
 interface Props {
   title?: string;
   subtitle?: string;
