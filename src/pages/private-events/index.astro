@@ -10,10 +10,10 @@ import FAQSection from '../../components/FAQSection.astro';
 import CateringForm from '../../components/CateringForm.astro';
 
 import venueInterior2      from '../../assets/images/venue-interior-2.jpg';
-import venueBoothLandscape from '../../assets/images/venue-booth-landscape.jpg';
 import venueCurtainEdit    from '../../assets/images/venue-curtain-edit.jpg';
-import venueRoomPortrait   from '../../assets/images/venue-room-portrait.jpg';
 import venueBoothPortrait  from '../../assets/images/venue-booth-portrait.jpg';
+import illustrationVolcanoLuau    from '../../assets/images/tiki-illustration-luau.jpg';
+import illustrationVolcanoVillage from '../../assets/images/tiki-illustration-volcano.jpg';
 
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 const content = (await getEntry('privateEventsIndexPage', 'privateeventsindexpage'))!.data;
@@ -58,7 +58,13 @@ const faqSchema = {
         <h2 class="font-[family-name:var(--font-display)] text-4xl sm:text-5xl text-[var(--color-sand)]">{content.events.title}</h2>
       </div>
       {(() => {
-        const cardImages = [venueBoothLandscape, venueCurtainEdit, venueRoomPortrait, venueBoothPortrait];
+        // Birthday Party and Bar Buyout now use the two new volcano illustration
+        // graphics; Corporate Events and Rehearsal Dinner keep their venue photos.
+        const cardImages = [illustrationVolcanoLuau, venueCurtainEdit, illustrationVolcanoVillage, venueBoothPortrait];
+        // Both illustrations are portrait-sourced with their scene concentrated
+        // in the lower half (sky/clouds fill the top) -- anchor the aspect-video
+        // crop to the bottom so the actual subject stays in frame.
+        const cardObjectPosition = ['object-bottom', 'object-center', 'object-bottom', 'object-center'];
         return (
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {PRIVATE_EVENT_TYPES.map((event, i) => (
@@ -66,7 +72,7 @@ const faqSchema = {
                 class="group relative overflow-hidden border border-white/10 hover:border-[var(--color-amber)]/30 transition-colors block">
                 <div class="aspect-video overflow-hidden">
                   <Image src={cardImages[i]} alt={event.heroImageAlt}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80"
+                    class:list={["w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80", cardObjectPosition[i]]}
                     width={800} height={450} />
                 </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/50 to-transparent"></div>
