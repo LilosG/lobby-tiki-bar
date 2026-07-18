@@ -182,6 +182,72 @@ import Analytics from '../components/Analytics.astro';
 
     <script type="application/ld+json" set:html={JSON.stringify(fullSchema)} />
     <Analytics />
+
+    <!--
+      Business hours are keyed by day name and rendered the same on every
+      request (fine — they don't change). "Today" is different: computing
+      it in frontmatter (new Date().getDay()) runs once at BUILD time on
+      Vercel's server, and gets frozen into the static HTML until the next
+      deploy — so it silently goes stale and shows whatever day it was last
+      built on, regardless of who's viewing the page or when.
+
+      Fix: ship the full week's hours as data, and compute "today" in the
+      visitor's browser, on every page load, using the business's actual
+      timezone (Oceanside, CA) rather than build time or the visitor's own
+      device timezone (which would give a wrong answer near midnight for
+      anyone browsing from outside Pacific time).
+
+      Usage in templates:
+        - <span data-hours-today>fallback</span>      -> textContent set to today's hours
+        - <li data-day="Monday" data-today-class="..." data-default-class="...">
+          -> className set to whichever matches today
+    -->
+    <script type="application/json" id="lobby-hours-data" set:html={JSON.stringify(SITE.hours ?? [])} />
+    <script is:inline>
+      (function () {
+        function getTodayName() {
+          try {
+            return new Intl.DateTimeFormat('en-US', {
+              timeZone: 'America/Los_Angeles',
+              weekday: 'long',
+            }).format(new Date());
+          } catch {
+            const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            return days[new Date().getDay()];
+          }
+        }
+
+        function syncTodayHours() {
+          const dataEl = document.getElementById('lobby-hours-data');
+          if (!dataEl) return;
+          let hours;
+          try {
+            hours = JSON.parse(dataEl.textContent);
+          } catch {
+            return;
+          }
+          const todayName = getTodayName();
+          const todayEntry = hours.find((h) => h.day === todayName);
+          const todayText = todayEntry ? todayEntry.hours : 'Closed';
+
+          document.querySelectorAll('[data-hours-today]').forEach((el) => {
+            el.textContent = todayText;
+          });
+
+          document.querySelectorAll('[data-day]').forEach((el) => {
+            const isToday = el.getAttribute('data-day') === todayName;
+            const cls = isToday ? el.getAttribute('data-today-class') : el.getAttribute('data-default-class');
+            if (cls !== null) el.className = cls;
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', syncTodayHours);
+        } else {
+          syncTodayHours();
+        }
+      })();
+    </script>
 </head>
   <body class="pb-[60px] lg:pb-0">
     <slot />

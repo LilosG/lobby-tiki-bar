@@ -51,7 +51,11 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
             <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Hours</p>
             <ul class="space-y-2">
               {hours.map((h) => (
-                <li class:list={[
+                <li
+                  data-day={h.day}
+                  data-today-class="flex gap-8 font-[family-name:var(--font-body)] text-sm text-[var(--color-sand)]"
+                  data-default-class="flex gap-8 font-[family-name:var(--font-body)] text-sm text-[var(--color-sand)] opacity-50"
+                  class:list={[
                   "flex gap-8 font-[family-name:var(--font-body)] text-sm",
                   h.day === todayName ? "text-[var(--color-sand)]" : "text-[var(--color-sand)] opacity-50",
                 ]}>

@@ -11,7 +11,7 @@ const todayHours = (SITE.hours ?? []).find(h => h.day === todayName)?.hours ?? '
   <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
     <div class="text-center py-6 px-4">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-1">Hours Today</p>
-      <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm">{todayHours}</p>
+      <p data-hours-today class="font-[family-name:var(--font-body)] text-[var(--color-sand)] text-sm">{todayHours}</p>
     </div>
     <div class="text-center py-6 px-4">
       <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-[0.2em] uppercase mb-1">Happy Hour</p>

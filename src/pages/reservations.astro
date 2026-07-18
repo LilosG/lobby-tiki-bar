@@ -33,7 +33,11 @@ const todayName = dayNames[new Date().getDay()];
       <h2 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-6">Hours</h2>
       <ul class="space-y-3">
         {hours.map((h) => (
-          <li class:list={["flex justify-between font-[family-name:var(--font-body)] text-sm", h.day === todayName ? "text-[var(--color-sand)]" : "text-[var(--color-sand)] opacity-50"]}>
+          <li
+            data-day={h.day}
+            data-today-class="flex justify-between font-[family-name:var(--font-body)] text-sm text-[var(--color-sand)]"
+            data-default-class="flex justify-between font-[family-name:var(--font-body)] text-sm text-[var(--color-sand)] opacity-50"
+            class:list={["flex justify-between font-[family-name:var(--font-body)] text-sm", h.day === todayName ? "text-[var(--color-sand)]" : "text-[var(--color-sand)] opacity-50"]}>
             <span>{h.day}</span>
             <span>{h.hours}</span>
           </li>

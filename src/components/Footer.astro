@@ -63,10 +63,14 @@ const portfolio = GPH_NETWORK.filter((venue) => venue.url !== SITE.url);
       <h3 class="font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase text-[var(--color-amber)] mb-6">Hours</h3>
       <ul class="space-y-2">
         {hours.map((h) => (
-          <li class:list={[
-            'flex justify-between text-sm gap-4',
-            h.day === todayName ? 'text-[var(--color-sand)] font-medium' : 'text-[var(--color-sand)]/60'
-          ]}>
+          <li
+            data-day={h.day}
+            data-today-class="flex justify-between text-sm gap-4 text-[var(--color-sand)] font-medium"
+            data-default-class="flex justify-between text-sm gap-4 text-[var(--color-sand)]/60"
+            class:list={[
+              'flex justify-between text-sm gap-4',
+              h.day === todayName ? 'text-[var(--color-sand)] font-medium' : 'text-[var(--color-sand)]/60'
+            ]}>
             <span class="font-[family-name:var(--font-body)]">{h.day.slice(0,3)}</span>
             <span class="font-[family-name:var(--font-body)]">{h.hours}</span>
           </li>
