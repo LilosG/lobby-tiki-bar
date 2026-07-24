@@ -1,6 +1,6 @@
 {
   "name": "Purple Church",
   "description": "Gin, Chinola, velvet Falernum, orgeat, lemon",
-  "featured": false,
+  "featured": true,
   "image": "../../assets/images/cms/cocktails/image/07-purple-church/image.jpeg"
 }
