@@ -1,7 +1,7 @@
 {
   "name": "Painkiller",
   "description": "House rum blend, pineapple orange cordial, coconut cream, nutmeg",
-  "note": "Available in three levels of intensity",
   "featured": true,
-  "image": "../../assets/images/drink-painkiller.jpg"
+  "image": "../../assets/images/cms/cocktails/image/06-painkiller/image.jpeg",
+  "note": "Available in three levels of intensity"
 }
