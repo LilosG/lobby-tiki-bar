@@ -1,6 +1,6 @@
 {
   "name": "Hoot & Hollar",
   "description": "White rum, Fassionola, lemon, cinnamon",
-  "featured": false,
+  "featured": true,
   "image": "../../assets/images/cms/cocktails/image/10-hoot-and-hollar/image.jpg"
 }
