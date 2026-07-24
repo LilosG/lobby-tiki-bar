@@ -1,6 +1,6 @@
 {
   "name": "Havana Good Time",
   "description": "Mango vodka, guava, lemon, simple, cava, soda",
-  "featured": false,
+  "featured": true,
   "image": "../../assets/images/cms/cocktails/image/12-havana-good-time/image.jpg"
 }
