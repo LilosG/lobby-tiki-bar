@@ -59,7 +59,7 @@ const faqSchema = {
           class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
           Reserve a Table
         </a>
-        <a href="/menu"
+        <a href={SITE.order.url} target="_blank" rel="noopener noreferrer"
           class="border border-[var(--color-sand)]/40 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
           View Full Menu
         </a>
@@ -191,7 +191,7 @@ const faqSchema = {
     primaryLabel="Reserve a Table"
     primaryHref={SITE.reservations.url}
     secondaryLabel="See Full Menu"
-    secondaryHref="/menu"
+    secondaryHref={SITE.order.url}
     background="jungle"
   />
 
