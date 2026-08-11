@@ -143,6 +143,7 @@ const fullSchema = {
   '@graph': graphNodes,
 };
 import Analytics from '../components/Analytics.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 ---
 
 <!doctype html>
@@ -252,5 +253,6 @@ import Analytics from '../components/Analytics.astro';
   <body class="pb-[60px] lg:pb-0">
     <slot />
     <MobileStickyBar />
+    <ConsentBanner siteName="The Lobby Tiki Bar" />
   </body>
 </html>
