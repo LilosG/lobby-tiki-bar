@@ -1,3 +1,8 @@
+@import "@fontsource-variable/playfair-display/wght.css";
+@import "@fontsource-variable/playfair-display/wght-italic.css";
+@import "@fontsource-variable/dancing-script";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/oswald";
 @import "tailwindcss";
 
 @theme {
@@ -9,10 +14,10 @@
   --color-jungle:         #1B4A3F;
   --color-teal:           #7ECFBF;
 
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-script:  "Dancing Script", cursive;
-  --font-body:    "DM Sans", sans-serif;
-  --font-stamp:   "Oswald", sans-serif;
+  --font-display: "Playfair Display Variable", Georgia, serif;
+  --font-script:  "Dancing Script Variable", cursive;
+  --font-body:    "DM Sans Variable", sans-serif;
+  --font-stamp:   "Oswald Variable", sans-serif;
 }
 
 @layer base {

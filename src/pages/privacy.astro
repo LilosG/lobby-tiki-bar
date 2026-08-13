@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
+
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+---
+
+<BaseLayout
+  title={`Privacy Policy | ${SITE.name}`}
+  description={`Privacy policy and notice at collection for ${SITE.name}, Oceanside, CA.`}
+>
+  <Nav />
+
+  <section class="pt-32 pb-24 px-6">
+    <div class="max-w-3xl mx-auto">
+
+      <header class="mb-12">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Legal</p>
+        <h1 class="font-[family-name:var(--font-display)] text-4xl md:text-5xl text-[var(--color-sand)] mb-4">Privacy Policy</h1>
+        <p class="text-[var(--color-sand)]/60 font-[family-name:var(--font-body)] text-sm">Last updated: August 2025</p>
+      </header>
+
+      <div class="prose-lobby space-y-10">
+
+        <!-- Notice at Collection -->
+        <div>
+          <h2 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">Notice at Collection</h2>
+          <div class="space-y-4 text-[var(--color-sand)]/80 font-[family-name:var(--font-body)] text-sm leading-relaxed">
+            <p>
+              <strong class="text-[var(--color-sand)]">What we collect.</strong> When you visit this website, Google Analytics collects internet and network activity information: pages viewed, the referring website, your approximate location derived from your IP address, and your device and browser type. It also collects online identifiers such as cookie IDs assigned by Google Analytics.
+            </p>
+            <p>
+              <strong class="text-[var(--color-sand)]">Why we collect it.</strong> Solely to measure site traffic and improve the website. We use this information for no other purpose.
+            </p>
+            <p>
+              <strong class="text-[var(--color-sand)]">Who receives it.</strong> Google, acting as a service provider under Google's data processing terms. We do not sell this information to any third party.
+            </p>
+            <p>
+              <strong class="text-[var(--color-sand)]">What we do not do.</strong> We do not sell your personal information. We do not share it for cross-context behavioral advertising. Google signals and ads personalization are disabled on this property — meaning Google cannot use your activity on this site to build advertising profiles or show you ads elsewhere.
+            </p>
+            <p>
+              <strong class="text-[var(--color-sand)]">Retention.</strong> Google Analytics event data is retained for 14 months, after which it is automatically deleted.
+            </p>
+          </div>
+        </div>
+
+        <!-- Your Choices -->
+        <div id="choices">
+          <h2 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">Your Privacy Choices</h2>
+          <div class="space-y-4 text-[var(--color-sand)]/80 font-[family-name:var(--font-body)] text-sm leading-relaxed">
+            <p>
+              You can opt out of Google Analytics at any time using the control below. Your choice is stored in your browser and does not expire.
+            </p>
+            <p>
+              If your browser or browser extension sends a <a href="https://globalprivacycontrol.org/" target="_blank" rel="noopener noreferrer" class="text-[var(--color-amber)] underline underline-offset-2">Global Privacy Control</a> signal, we honor it automatically — no action needed on your part.
+            </p>
+
+            <!-- Inline opt-out toggle -->
+            <div class="border border-white/10 p-5 flex flex-col sm:flex-row sm:items-center gap-4">
+              <div class="flex-1">
+                <p class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-xs tracking-widest uppercase mb-1">Analytics opt-out</p>
+                <p id="privacy-status" class="text-[var(--color-sand)]/60 text-xs font-[family-name:var(--font-body)]">Checking status…</p>
+              </div>
+              <button
+                type="button"
+                id="privacy-toggle"
+                class="font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase px-5 py-2.5 border border-white/20 text-[var(--color-sand)]/60 hover:text-[var(--color-sand)] hover:border-white/40 transition-colors"
+              >
+                …
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- California Rights -->
+        <div>
+          <h2 class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-4">California Residents</h2>
+          <div class="space-y-4 text-[var(--color-sand)]/80 font-[family-name:var(--font-body)] text-sm leading-relaxed">
+            <p>
+              Under the California Consumer Privacy Act (CCPA), California residents have the right to know what personal information we collect, to request deletion of that information, and to request correction of inaccurate information.
+            </p>
+            <p>
+              As described above, the only personal information this website collects is internet and network activity through Google Analytics. We do not sell that information.
+            </p>
+            <p>
+              To exercise your rights, contact us:
+            </p>
+            <address class="not-italic space-y-1">
+              <p><strong class="text-[var(--color-sand)]">{SITE.name}</strong></p>
+              <p>{SITE.address.full}</p>
+              <p><a href={`mailto:${SITE.email}`} class="text-[var(--color-amber)] underline underline-offset-2">{SITE.email}</a></p>
+              <p><a href={`tel:${SITE.phone.tel}`} class="text-[var(--color-amber)] underline underline-offset-2">{SITE.phone.display}</a></p>
+            </address>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    var GA_ID = typeof PUBLIC_GA_MEASUREMENT_ID !== 'undefined' ? PUBLIC_GA_MEASUREMENT_ID : null;
+    var statusEl = document.getElementById('privacy-status');
+    var toggleBtn = document.getElementById('privacy-toggle');
+
+    function isOptedOut() {
+      if (typeof window.lilosPrivacy !== 'undefined') {
+        return window.lilosPrivacy.isOptedOut();
+      }
+      try {
+        var rec = JSON.parse(localStorage.getItem('lilos-privacy-v1') || 'null');
+        return rec && rec.optOut === true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function render() {
+      var optedOut = isOptedOut();
+      if (statusEl) {
+        statusEl.textContent = optedOut
+          ? 'You are opted out. Google Analytics is not active on this browser.'
+          : 'You are opted in. Google Analytics is active on this browser.';
+      }
+      if (toggleBtn) {
+        toggleBtn.textContent = optedOut ? 'Opt back in' : 'Opt out';
+      }
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', function () {
+        var optedOut = isOptedOut();
+        if (optedOut) {
+          if (window.lilosPrivacy) window.lilosPrivacy.optIn();
+          else {
+            try { localStorage.setItem('lilos-privacy-v1', JSON.stringify({ optOut: false, ts: Date.now() })); } catch (e) {}
+          }
+        } else {
+          if (window.lilosPrivacy) window.lilosPrivacy.optOut();
+          else {
+            try { localStorage.setItem('lilos-privacy-v1', JSON.stringify({ optOut: true, ts: Date.now() })); } catch (e) {}
+          }
+        }
+        render();
+      });
+    }
+
+    render();
+  })();
+</script>

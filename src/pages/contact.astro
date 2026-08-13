@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import MapEmbed from "../components/MapEmbed.astro";
 import { getEntry } from 'astro:content';
 
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
@@ -91,18 +92,12 @@ const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.addre
 
       <!-- Map column -->
       <div class="flex flex-col gap-6">
-        <div class="w-full aspect-square overflow-hidden border border-white/10">
-          <iframe
-            src={embedUrl}
-            width="100%"
-            height="100%"
-            style="border:0; filter: grayscale(30%) invert(90%) hue-rotate(170deg) brightness(0.85) contrast(0.9);"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title={content.mapTitle}
-          ></iframe>
-        </div>
+        <MapEmbed
+          src={embedUrl}
+          title={content.mapTitle}
+          containerClass="w-full aspect-square overflow-hidden border border-white/10"
+          style="border:0; filter: grayscale(30%) invert(90%) hue-rotate(170deg) brightness(0.85) contrast(0.9);"
+        />
         <div class="border border-white/10 p-6">
           <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">{content.gettingHere.title}</p>
           <ul class="space-y-2">
