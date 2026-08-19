@@ -9,7 +9,8 @@
     "state": "CA",
     "zip": "92054",
     "full": "408 Pier View Way, Oceanside, CA 92054",
-    "mapsUrl": "https://maps.google.com/?q=408+Pier+View+Way+Oceanside+CA+92054"
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query_place_id=ChIJrVliGDdu3IARdFgJ4BVoYec",
+    "mapsPlaceId": "ChIJrVliGDdu3IARdFgJ4BVoYec"
   },
   "phone": {
     "display": "(858) 304-7725",
@@ -87,7 +88,8 @@
   "social": {
     "instagram": "https://instagram.com/lobbytikibar",
     "facebook": "https://facebook.com/lobbytikibar",
-    "yelp": "https://yelp.com/biz/the-lobby-tiki-bar-oceanside"
+    "yelp": "https://yelp.com/biz/the-lobby-tiki-bar-oceanside",
+    "google": "https://www.google.com/maps/place/?q=place_id:ChIJrVliGDdu3IARdFgJ4BVoYec"
   },
   "schema": {
     "type": "BarOrPub",
