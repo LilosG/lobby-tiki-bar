@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { getEntry } from 'astro:content';
 import MobileStickyBar from '../components/MobileStickyBar.astro';
+import ratingData from '../data/google-rating.json';
 
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 
@@ -42,6 +43,10 @@ const SEGMENT_LABELS: Record<string, string> = {
 
 // ─── Schema nodes ─────────────────────────────────────────────────────────────
 
+const aggregateRating = (ratingData.rating && ratingData.count > 0)
+  ? { '@type': 'AggregateRating', ratingValue: ratingData.rating, bestRating: 5, worstRating: 1, reviewCount: ratingData.count }
+  : null;
+
 const businessNode = {
   '@type': SITE.schema.type,
   '@id': SITE.schema.id,
@@ -49,6 +54,7 @@ const businessNode = {
   description: SITE.description,
   url: SITE.url,
   telephone: SITE.phone.tel,
+  email: SITE.email,
   image: SITE.schema.image,
   hasMenu: SITE.schema.menuUrl,
   address: {
@@ -76,6 +82,11 @@ const businessNode = {
       opens: h.opens,
       closes: h.closes,
     })),
+  areaServed: [
+    { '@type': 'Place', name: 'Downtown Oceanside' },
+    { '@type': 'City', name: 'Oceanside' },
+  ],
+  ...(aggregateRating && { aggregateRating }),
 };
 
 const websiteNode = {

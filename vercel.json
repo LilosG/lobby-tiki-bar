@@ -1,0 +1,26 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/oceanside-happenings",             "destination": "/events",          "permanent": true },
+    { "source": "/the-happenings",                   "destination": "/events",          "permanent": true },
+    { "source": "/find-us-directions",               "destination": "/contact",         "permanent": true },
+    { "source": "/join-our-team",                    "destination": "/contact",         "permanent": true },
+    { "source": "/accessibility",                    "destination": "/contact",         "permanent": true },
+    { "source": "/catering",                         "destination": "/private-events",  "permanent": true },
+    { "source": "/brunch-menu",                      "destination": "/brunch",          "permanent": true },
+    { "source": "/drink-menu",                       "destination": "/menu",            "permanent": true },
+    { "source": "/menu-v2",                          "destination": "/menu",            "permanent": true },
+    { "source": "/popmenu-order",                    "destination": "/menu",            "permanent": true },
+    { "source": "/home-v2",                          "destination": "/",                "permanent": true },
+    { "source": "/gift-cards",                       "destination": "/",                "permanent": true },
+    { "source": "/press",                            "destination": "/",                "permanent": true },
+    { "source": "/reviews",                          "destination": "/",                "permanent": true },
+    { "source": "/webpack/production/",              "destination": "/",                "permanent": true },
+    { "source": "/items/:path*",                     "destination": "/menu",            "permanent": true },
+    { "source": "/menus/:path*",                     "destination": "/menu",            "permanent": true },
+    { "source": "/events/:path+",                    "destination": "/events",          "permanent": true }
+  ]
+}
