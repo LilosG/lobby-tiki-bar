@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -41,10 +41,14 @@ const todayHours = (() => {
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
       {content.hero?.imageAlt && (
-        <Image src={venueInterior1}
+        <Picture src={venueInterior1}
+          formats={['avif', 'webp']}
           alt={content.hero.imageAlt}
           class="w-full h-full object-cover object-center"
-          width={1800} height={1200} loading="eager" />
+          width={1800} height={1200}
+          loading="eager"
+          fetchpriority="high"
+          sizes="100vw" />
       )}
       <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-espresso)]/70 via-[var(--color-espresso)]/50 to-[var(--color-espresso)]"></div>
     </div>
@@ -121,7 +125,8 @@ const todayHours = (() => {
       <div class="relative">
         <Image src={venueInterior2}
           alt={content.brand.imageAlt}
-          class="w-full aspect-[4/5] object-cover" width={800} height={1000} />
+          class="w-full aspect-[4/5] object-cover" width={800} height={1000}
+          sizes="(min-width: 1024px) 50vw, 100vw" />
         <div class="absolute -bottom-4 -right-4 w-full h-full border border-[var(--color-amber)]/30 -z-10"></div>
       </div>
     </div>
@@ -142,7 +147,8 @@ const todayHours = (() => {
               <div class="aspect-[4/3] overflow-hidden">
                 <Image src={drink.image} alt={`${drink.name} tiki cocktail at The Lobby Tiki Bar Oceanside`}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  width={400} height={300} />
+                  width={400} height={300}
+                  sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw" />
               </div>
             )}
             <div class="p-6">
@@ -165,7 +171,8 @@ const todayHours = (() => {
   <section class="relative py-28 overflow-hidden px-6">
     <div class="absolute inset-0">
       <Image src={drinkDsc06150} alt={content.happyHour.imageAlt}
-        class="w-full h-full object-cover opacity-20" width={1400} height={900} />
+        class="w-full h-full object-cover opacity-20" width={1400} height={900}
+        sizes="100vw" />
       <div class="absolute inset-0 bg-[var(--color-jungle)]/80"></div>
     </div>
     <div class="relative z-10 max-w-4xl mx-auto text-center">
@@ -205,7 +212,8 @@ const todayHours = (() => {
           <div class="group relative overflow-hidden aspect-square">
             <Image src={item.image} alt={`${item.name} at The Lobby Tiki Bar Oceanside CA`}
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              width={500} height={500} />
+              width={500} height={500}
+              sizes="(min-width: 1024px) 25vw, 50vw" />
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)]/90 via-transparent to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-4">
               <h3 class="font-[family-name:var(--font-stamp)] text-[var(--color-sand)] text-sm tracking-wide">{item.name}</h3>
@@ -236,7 +244,8 @@ const todayHours = (() => {
             <div class="aspect-video overflow-hidden">
               <Image src={event.image} alt={`${event.name} at The Lobby Tiki Bar Oceanside`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
-                width={800} height={450} />
+                width={800} height={450}
+                sizes="(min-width: 768px) 50vw, 100vw" />
             </div>
             <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-8">
@@ -265,7 +274,8 @@ const todayHours = (() => {
       <div class="relative">
         <Image src={venueInterior1}
           alt={content.privateEvents.imageAlt}
-          class="w-full aspect-[4/3] object-cover" width={800} height={600} />
+          class="w-full aspect-[4/3] object-cover" width={800} height={600}
+          sizes="(min-width: 1024px) 50vw, 100vw" />
         <div class="absolute -top-4 -left-4 w-full h-full border border-[var(--color-amber)]/20 -z-10"></div>
       </div>
       <div>
