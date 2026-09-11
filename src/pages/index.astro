@@ -3,6 +3,8 @@ import { Image, Picture } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import PromotionModal from '../components/PromotionModal.astro';
+import { PROMOTION_CONFIG } from '../config/promotion';
 import { getCollection, getEntry } from 'astro:content';
 
 import venueInterior1 from '../assets/images/venue-interior-1.jpg';
@@ -35,6 +37,8 @@ const todayHours = (() => {
   image={content.seo.image}
   heroImage={venueInterior1.src}
 >
+  <PromotionModal siteSlug={PROMOTION_CONFIG.venueSlug} />
+
   <Nav />
 
   <!-- HERO -->
