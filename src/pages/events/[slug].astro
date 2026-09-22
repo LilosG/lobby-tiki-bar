@@ -43,7 +43,7 @@ const eventSchema = {
 <BaseLayout
   title={`${event.name} | The Lobby Tiki Bar Oceanside`}
   description={event.description}
-  image={`/images/${event.image.src.split('/').pop()}`}
+  image={event.image.src}
   heroImage={event.image.src}
   pageSchema={eventSchema}
 >
