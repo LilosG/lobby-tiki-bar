@@ -1,4 +1,5 @@
 ---
+import { getEntry } from 'astro:content';
 interface Props {
   title?: string;
   subtitle?: string;
@@ -7,6 +8,7 @@ const {
   title = "Request Your Event",
   subtitle = "Tell us about your group, occasion, and date. We'll put together a package that works.",
 } = Astro.props;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 ---
 
 <section class="py-24 px-6" id="book-event">
@@ -31,7 +33,7 @@ const {
       Prefer to reach us directly?
       <a href="mailto:info@lobbytikibar.com" class="hover:text-[var(--color-amber)] transition-colors underline">info@lobbytikibar.com</a>
       &nbsp;&middot;&nbsp;
-      <a href="tel:+17604965535" class="hover:text-[var(--color-amber)] transition-colors underline">(760) 496-5535</a>
+      <a href={`tel:${SITE.phone.tel}`} class="hover:text-[var(--color-amber)] transition-colors underline">{SITE.phone.display}</a>
     </p>
   </div>
 </section>
