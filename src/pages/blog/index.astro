@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { resolveBlogImage } from '../../utils/blog-images';
 import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
@@ -36,14 +38,7 @@ const posts = allPosts.sort(
           ]}
         >
           <div class:list={['overflow-hidden', i === 0 ? 'aspect-[21/9]' : 'aspect-video']}>
-            <img
-              src={post.data.image}
-              alt={post.data.imageAlt ?? post.data.title}
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70"
-              width={i === 0 ? 1200 : 600}
-              height={i === 0 ? 514 : 338}
-              loading={i === 0 ? 'eager' : 'lazy'}
-            />
+            {resolveBlogImage(post.data.image) ? <Image src={resolveBlogImage(post.data.image)!} alt={post.data.imageAlt ?? post.data.title} widths={[480,768,1080]} sizes="(min-width:768px) 50vw,100vw" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading={i === 0 ? 'eager' : 'lazy'} /> : <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" width="1200" height="675" loading={i === 0 ? 'eager' : 'lazy'} />}
           </div>
           <div class="p-6">
             <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] opacity-70 text-xs tracking-widest uppercase mb-2">

@@ -21,7 +21,7 @@ const overlayClass = {
 <section class:list={["relative min-h-[70vh] overflow-hidden", align === 'bottom-left' ? 'flex items-end' : 'flex items-center']}>
   {image && (
     <div class="absolute inset-0">
-      <Image src={image} alt={imageAlt} class="w-full h-full object-cover" width={1800} height={1000} loading="eager" />
+      <Image src={image} alt={imageAlt} class="w-full h-full object-cover" widths={[640, 960, 1280, 1800]} sizes="100vw" loading="eager" fetchpriority="high" />
       <div class:list={["absolute inset-0", overlayClass]}></div>
     </div>
   )}

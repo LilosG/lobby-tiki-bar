@@ -1,6 +1,7 @@
 import { createElement } from "react";
 import { collection, config, fields, singleton } from "@keystatic/core";
 
+import giftCardsPageData from "./src/content/giftCardsPage.json";
 import siteSettingsData from "./src/content/siteSettings.json";
 import navigationData from "./src/content/navigation.json";
 import homeData from "./src/content/home.json";
@@ -421,6 +422,7 @@ export default config({
     navigation: {
       Website: [
         "home",
+        "giftCardsPage",
         "about",
         "contact",
         "reservations",
@@ -463,6 +465,14 @@ export default config({
     },
   },
   singletons: {
+    giftCardsPage: singleton({
+      label: "Gift Cards", path: "src/content/giftCardsPage", format: { data: "json" },
+      schema: {
+        ...schemaFromSample(giftCardsPageData, { namespace: "giftCardsPage", path: [], imageStorage: "public" }),
+        heroImage: fields.image({ label: "Hero Image", directory: "src/assets/images/giftCards", publicPath: "../assets/images/giftCards/", validation: { isRequired: true } }),
+        introImage: fields.image({ label: "Introduction Image", directory: "src/assets/images/giftCards", publicPath: "../assets/images/giftCards/", validation: { isRequired: true } }),
+      },
+    }),
     siteSettings: jsonSingleton(
       "Site Settings",
       "siteSettings",
@@ -898,7 +908,7 @@ export default config({
         }),
         image: requiredImageField(
           "blog/image",
-          "public",
+          "asset",
           "Main Post Image",
           "Required large landscape image shown with this article.",
         ),
@@ -906,6 +916,10 @@ export default config({
           "Image Description for Accessibility",
           "Describe the post image for screen readers and search engines.",
         ),
+        seoTitle: optionalText("Search Result Title", "Optional concise search result title."),
+        answerSummary: optionalText("Quick Answer", "Optional short answer displayed above the article.", true),
+        giftCardCta: fields.checkbox({ label: "Show Gift Card Invitation", defaultValue: false }),
+        faqs: fields.array(fields.object({ question: requiredText("Question", "Visible article question."), answer: requiredText("Answer", "Visible article answer.", true) }), { label: "Article FAQs", itemLabel: props => props.fields.question.value }),
         content: fields.mdx({
           label: "Post Content",
           description:

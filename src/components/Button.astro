@@ -1,0 +1,5 @@
+---
+interface Props { href: string; variant?: 'primary' | 'outline'; external?: boolean; }
+const { href, variant = 'primary', external = false } = Astro.props;
+---
+<a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} class:list={['inline-flex items-center justify-center px-8 py-4 font-[family-name:var(--font-stamp)] text-xs tracking-widest uppercase transition-colors', variant === 'primary' ? 'bg-[var(--color-amber)] text-[var(--color-espresso)] hover:bg-[var(--color-sand)]' : 'border border-[var(--color-sand)]/40 text-[var(--color-sand)] hover:border-[var(--color-amber)] hover:text-[var(--color-amber)]']}><slot /></a>

@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Button from '../components/Button.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import FAQSection from '../components/FAQSection.astro';
+import GiftCardCta from '../components/GiftCardCta.astro';
+const page = (await getCollection('giftCardsPage'))[0].data;
+const pageSchema = { '@type': 'FAQPage', mainEntity: page.faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+---
+<BaseLayout title={page.seo.title} description={page.seo.description} image={page.heroImage.src} pageSchema={pageSchema}>
+  <Nav />
+  <PageHero {...page.hero} image={page.heroImage} imageAlt={page.heroImageAlt}>
+    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8"><Button href={page.purchaseUrl}>{page.purchaseLabel}</Button><Button href={page.balanceUrl} variant="outline">{page.balanceLabel}</Button></div>
+  </PageHero>
+  <p class="px-6 py-5 text-center text-sm text-[var(--color-sand)]/65 border-y border-white/10">{page.checkoutNote}</p>
+  <section class="grid lg:grid-cols-2 overflow-hidden">
+    <div class="relative min-h-80"><Image src={page.introImage} alt={page.introImageAlt} widths={[480,768,1080]} sizes="(min-width:1024px) 50vw,100vw" class="absolute inset-0 w-full h-full object-cover" loading="lazy" /></div>
+    <div class="px-8 sm:px-14 py-20 lg:py-28"><SectionHeader label={page.intro.label} title={page.intro.title} align="left" /><p class="text-[var(--color-sand)]/70 leading-relaxed mb-8">{page.intro.body}</p><Button href="/menu" variant="outline">Explore Food & Cocktails</Button></div>
+  </section>
+  <section class="px-6 py-20 bg-[var(--color-jungle)]/20"><div class="max-w-6xl mx-auto"><SectionHeader title={page.stepsHeading} /><ol class="grid md:grid-cols-3 gap-10">{page.steps.map((step,i) => <li class="border-t border-white/15 pt-6"><span aria-hidden="true" class="text-[var(--color-amber)] font-[family-name:var(--font-stamp)] text-3xl">0{i+1}</span><h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mt-5 mb-4">{step.title}</h3><p class="text-[var(--color-sand)]/70 leading-relaxed">{step.body}</p></li>)}</ol></div></section>
+  <section class="px-6 py-20"><div class="max-w-5xl mx-auto"><SectionHeader title={page.guidesHeading} /><div class="grid md:grid-cols-2 gap-6">{page.guides.map(guide => <a href={guide.href} class="block border border-white/15 p-8 hover:border-[var(--color-amber)] transition-colors"><p class="font-[family-name:var(--font-stamp)] text-xs uppercase tracking-widest text-[var(--color-amber)] mb-4">From The Lobby Journal</p><h3 class="font-[family-name:var(--font-display)] text-2xl text-[var(--color-sand)] mb-6">{guide.label}</h3><span class="text-sm text-[var(--color-sand)]/70 underline underline-offset-4">Read the guide →</span></a>)}</div></div></section>
+  <FAQSection faqs={page.faqs} title={page.faqTitle} />
+  <GiftCardCta purchase />
+  <Footer />
+</BaseLayout>
