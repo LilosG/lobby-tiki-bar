@@ -15,7 +15,6 @@
     { "source": "/menu-v2",                          "destination": "/menu",            "permanent": true },
     { "source": "/popmenu-order",                    "destination": "/menu",            "permanent": true },
     { "source": "/home-v2",                          "destination": "/",                "permanent": true },
-    { "source": "/gift-cards",                       "destination": "/",                "permanent": true },
     { "source": "/press",                            "destination": "/",                "permanent": true },
     { "source": "/reviews",                          "destination": "/",                "permanent": true },
     { "source": "/webpack/production/",              "destination": "/",                "permanent": true },
