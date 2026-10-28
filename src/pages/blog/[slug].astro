@@ -4,6 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import CTASection from '../../components/CTASection.astro';
+import { Image } from 'astro:assets';
+import { resolveBlogImage } from '../../utils/blog-images';
+import GiftCardCta from '../../components/GiftCardCta.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import { getEntry } from 'astro:content';
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 
@@ -17,6 +21,8 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const featuredImage = resolveBlogImage(post.data.image);
+const socialImage = featuredImage?.src ?? post.data.image;
 
 const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
   month: 'long',
@@ -25,14 +31,16 @@ const formattedDate = new Date(post.data.date).toLocaleDateString('en-US', {
 });
 
 const slug = post.id.replace(/\.mdx$/, '');
-const pageUrl = `${SITE.url}/blog/${slug}/`;
+const pageUrl = new URL(Astro.url.pathname, SITE.url).href;
+const faqs = post.data.giftCardCta ? (post.data.faqs ?? []).map(f => ({ q: f.question, a: f.answer })) : [];
+const faqSchema = faqs.length ? { '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) } : null;
 
 const blogPostSchema = {
   '@type': 'BlogPosting',
   '@id': `${pageUrl}#article`,
   headline: post.data.title,
   description: post.data.description,
-  image: post.data.image.startsWith('http') ? post.data.image : `${SITE.url}${post.data.image}`,
+  image: new URL(socialImage, SITE.url).href,
   datePublished: new Date(post.data.date).toISOString(),
   dateModified: new Date(post.data.date).toISOString(),
   author: {
@@ -50,23 +58,16 @@ const blogPostSchema = {
 ---
 
 <BaseLayout
-  title={`${post.data.title} | The Lobby Tiki Bar`}
+  title={post.data.seoTitle ?? `${post.data.title} | The Lobby Tiki Bar`}
   description={post.data.description}
-  image={post.data.image}
-  heroImage={post.data.image}
-  pageSchema={blogPostSchema}
+  image={socialImage}
+  pageSchema={[blogPostSchema, ...(faqSchema ? [faqSchema] : [])]}
 >
   <Nav />
 
   <section class="relative pt-32 pb-20 px-6 overflow-hidden">
     <div class="absolute inset-0">
-      <img
-        src={post.data.image}
-        alt={post.data.imageAlt ?? post.data.title}
-        class="w-full h-full object-cover"
-        width="1800" height="600"
-        fetchpriority="high"
-      />
+      {featuredImage ? <Image src={featuredImage} alt={post.data.imageAlt ?? post.data.title} widths={[640,960,1280,1800]} sizes="100vw" class="w-full h-full object-cover" loading="eager" fetchpriority="high" /> : <img src={post.data.image} alt={post.data.imageAlt ?? post.data.title} class="w-full h-full object-cover" width="1800" height="600" fetchpriority="high" />}
       <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-espresso)] via-[var(--color-espresso)]/60 to-transparent"></div>
     </div>
     <div class="relative z-10 w-full"><div class="max-w-7xl mx-auto px-8 sm:px-16 pb-20">
@@ -81,18 +82,22 @@ const blogPostSchema = {
 
   <article class="py-16 px-6">
     <div class="max-w-2xl mx-auto article-body">
+      {post.data.answerSummary && <aside aria-label="Quick answer" class="border-l-2 border-[var(--color-amber)] pl-5 mb-10 text-[var(--color-sand)]/85 leading-relaxed">{post.data.answerSummary}</aside>}
       <Content />
     </div>
   </article>
 
-  <CTASection
+  <FAQSection faqs={faqs} />
+  {post.data.giftCardCta && <GiftCardCta />}
+
+  {!post.data.giftCardCta && <CTASection
     title="Come See For Yourself"
     subtitle="408 Pier View Way, Oceanside. Inside The Brick Hotel."
     primaryLabel="Reserve a Table"
     primaryHref={SITE.reservations.url}
     secondaryLabel="View the Menu"
     secondaryHref="/menu"
-  />
+  />}
 
   <Footer />
 </BaseLayout>

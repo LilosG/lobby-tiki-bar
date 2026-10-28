@@ -17,6 +17,10 @@ const faqs = (name: string) => defineCollection({
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
   schema: z.object({
+    seoTitle: z.string().optional(),
+    answerSummary: z.string().optional(),
+    giftCardCta: z.boolean().default(false),
+    faqs: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
     title:       z.string(),
     description: z.string(),
     date:        z.string(),
@@ -137,6 +141,20 @@ const privateEventTypes = defineCollection({
 
 export const collections = {
   blog,
+  giftCardsPage: defineCollection({
+    loader: singleton('giftCardsPage'),
+    schema: ({ image }) => z.object({
+      seo: z.object({ title: z.string(), description: z.string() }),
+      hero: z.object({ label: z.string(), title: z.string(), subtitle: z.string() }),
+      heroImage: image(), heroImageAlt: z.string(), introImage: image(), introImageAlt: z.string(),
+      intro: z.object({ label: z.string(), title: z.string(), body: z.string() }),
+      purchaseUrl: z.url(), balanceUrl: z.url(), purchaseLabel: z.string(), balanceLabel: z.string(), checkoutNote: z.string(),
+      stepsHeading: z.string(), steps: z.array(z.object({ title: z.string(), body: z.string() })).length(3),
+      guidesHeading: z.string(), guides: z.array(z.object({ label: z.string(), href: z.string() })).length(2),
+      faqTitle: z.string(), faqs: z.array(z.object({ q: z.string(), a: z.string() })),
+      final: z.object({ title: z.string(), subtitle: z.string() }),
+    }),
+  }),
   siteSettings,
   navigation,
   home: pageSingleton('home'),

@@ -1,5 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
+import Button from './Button.astro';
 const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
 interface Props {
   title?: string;
@@ -26,16 +27,8 @@ const bgClass = { jungle: "bg-[var(--color-jungle)]/30", espresso: "bg-[var(--co
     <h2 class="font-[family-name:var(--font-display)] text-3xl sm:text-4xl text-[var(--color-sand)] mb-4">{title}</h2>
     {subtitle && <p class="font-[family-name:var(--font-body)] text-[var(--color-sand)] opacity-60 mb-8 leading-relaxed">{subtitle}</p>}
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href={primaryHref} target={primaryHref.startsWith("http") ? "_blank" : undefined} rel={primaryHref.startsWith("http") ? "noopener noreferrer" : undefined}
-        class="bg-[var(--color-amber)] text-[var(--color-espresso)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:bg-[var(--color-sand)] transition-colors">
-        {primaryLabel}
-      </a>
-      {secondaryLabel && secondaryHref && (
-        <a href={secondaryHref} target={secondaryHref.startsWith("http") ? "_blank" : undefined} rel={secondaryHref.startsWith("http") ? "noopener noreferrer" : undefined}
-          class="border border-[var(--color-sand)]/30 text-[var(--color-sand)] font-[family-name:var(--font-stamp)] text-sm tracking-widest uppercase px-8 py-4 hover:border-[var(--color-amber)] hover:text-[var(--color-amber)] transition-colors">
-          {secondaryLabel}
-        </a>
-      )}
+      <Button href={primaryHref} external={primaryHref.startsWith('http')}>{primaryLabel}</Button>
+      {secondaryLabel && secondaryHref && <Button href={secondaryHref} variant="outline" external={secondaryHref.startsWith('http')}>{secondaryLabel}</Button>}
     </div>
   </div>
 </section>

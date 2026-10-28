@@ -1,0 +1,74 @@
+{
+  "purchaseUrl": "https://order.toasttab.com/egiftcards/the-brick-project-408-pier-view-way",
+  "balanceUrl": "https://www.toasttab.com//the-brick-project-408-pier-view-way/findcard",
+  "purchaseLabel": "Buy a Gift Card",
+  "balanceLabel": "Check Gift Card Balance",
+  "checkoutNote": "Secure checkout through Toast. Look for \u201cThe Lobby Tiki Bar/CocoCabana Gift Card\u201d on the purchase page.",
+  "stepsHeading": "A personal touch. A simple delivery.",
+  "steps": [
+    {
+      "title": "Choose the gift",
+      "body": "Select an amount in the shared The Lobby Tiki Bar/CocoCabana checkout on Toast."
+    },
+    {
+      "title": "Add your message",
+      "body": "Personalize it with their name and a note. Choose email, text or delivery to yourself first."
+    },
+    {
+      "title": "Pick the moment",
+      "body": "Send today or schedule a later delivery. They receive a digital gift card and choose their next visit."
+    }
+  ],
+  "faqTitle": "Gift Card Questions",
+  "faqs": [
+    {
+      "q": "Why does Toast show both venue names?",
+      "a": "Cococabana and The Lobby Tiki Bar share this Toast gift-card checkout. The purchase page is titled \u201cThe Lobby Tiki Bar/CocoCabana Gift Card,\u201d so you are in the right place."
+    },
+    {
+      "q": "Can I send the gift card by email or text?",
+      "a": "Yes. Toast offers email, text and delivery to yourself first, with a personal message. Choose today or a later delivery date during checkout."
+    },
+    {
+      "q": "How do I check my gift card balance?",
+      "a": "Use the Check Gift Card Balance link to open the shared Toast balance form. Have your gift card details ready."
+    },
+    {
+      "q": "Does buying a gift card reserve a table?",
+      "a": "No. Gift cards and reservations are separate. Check current menus, hours and event details when arranging your visit."
+    }
+  ],
+  "guidesHeading": "A gift that feels like them.",
+  "seo": {
+    "title": "The Lobby Tiki Bar Gift Cards | Oceanside, CA",
+    "description": "Give a taste of the tropics in Oceanside. Buy The Lobby Tiki Bar/CocoCabana digital gift card through Toast, with email, text and scheduled delivery."
+  },
+  "hero": {
+    "label": "The Lobby Tiki Bar \u00b7 Oceanside",
+    "title": "Gift Cards, Island Style",
+    "subtitle": "Tiki cocktails, island-inspired plates and the people worth making plans with. Give them a digital gift card for their next visit."
+  },
+  "heroImage": "../assets/images/giftCards/heroImage.jpg",
+  "heroImageAlt": "Tropical interior and seating at The Lobby Tiki Bar in Oceanside",
+  "intro": {
+    "label": "A good gift has atmosphere",
+    "title": "Some Gifts Belong Around a Table",
+    "body": "For the cocktail enthusiast, the friend who brings the group together or the couple overdue for a night out. The Lobby brings island-inspired food and a distinctive tiki setting to The Brick Hotel on Pier View Way. Give them a reason to choose their own little escape."
+  },
+  "introImage": "../assets/images/giftCards/introImage.jpg",
+  "introImageAlt": "A collection of tiki cocktails at The Lobby Tiki Bar",
+  "guides": [
+    {
+      "label": "Tiki Bar Gift Cards in Oceanside: A Gift with Personality",
+      "href": "/blog/tiki-bar-gift-cards-oceanside"
+    },
+    {
+      "label": "A Thoughtful Thank-You Gift in Oceanside",
+      "href": "/blog/thank-you-gifts-oceanside-dining"
+    }
+  ],
+  "final": {
+    "title": "Give Them a Night to Look Forward To",
+    "subtitle": "A personal note. A little island spirit. A digital gift sent through the shared The Lobby Tiki Bar/CocoCabana Toast checkout."
+  }
+}

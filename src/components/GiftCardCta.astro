@@ -1,0 +1,7 @@
+---
+import { getCollection } from 'astro:content';
+import CTASection from './CTASection.astro';
+const { purchase = false } = Astro.props;
+const page = (await getCollection('giftCardsPage'))[0].data;
+---
+<CTASection {...page.final} primaryLabel={purchase ? page.purchaseLabel : 'Explore The Lobby Gift Cards'} primaryHref={purchase ? page.purchaseUrl : '/gift-cards'} secondaryLabel={purchase ? page.balanceLabel : undefined} secondaryHref={purchase ? page.balanceUrl : undefined} />
