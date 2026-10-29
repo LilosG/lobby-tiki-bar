@@ -1,0 +1,44 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const SITE = (await getEntry('siteSettings', 'sitesettings'))!.data;
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+---
+<BaseLayout title={`${title} | ${SITE.name}`} description={description}>
+  <Nav />
+  <main class="legal-page pt-32 pb-24 px-6" aria-labelledby="legal-title">
+    <div class="max-w-3xl mx-auto">
+      <header class="mb-12">
+        <p class="font-[family-name:var(--font-stamp)] text-[var(--color-amber)] text-xs tracking-widest uppercase mb-3">Legal</p>
+        <h1 id="legal-title" class="font-[family-name:var(--font-display)] text-4xl md:text-5xl text-[var(--color-sand)] mb-4">{title}</h1>
+        <p class="text-[var(--color-sand)]/70 font-[family-name:var(--font-body)] text-sm">Last updated: <time datetime="2026-10-29">October 29, 2026</time></p>
+        <nav aria-label="Legal information" class="flex flex-wrap gap-x-6 gap-y-3 mt-6 text-sm">
+          <a href="/privacy" aria-current={currentPath === '/privacy' ? 'page' : undefined}>Privacy Policy</a>
+          <a href="/terms" aria-current={currentPath === '/terms' ? 'page' : undefined}>Terms of Service</a>
+          <a href="/privacy#choices">Your Privacy Choices</a>
+        </nav>
+      </header>
+      <div class="legal-content"><slot /></div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+<style>
+  @layer components {
+    .legal-page { overflow-wrap: anywhere; }
+    .legal-page :global(a) { color: var(--color-amber); text-decoration: underline; text-underline-offset: 3px; }
+    .legal-page :global(a:hover) { color: var(--color-sand); }
+    .legal-page :global(a:focus-visible), .legal-page :global(button:focus-visible) { outline: 2px solid var(--color-amber); outline-offset: 4px; }
+    .legal-content :global(h2) { font-family: var(--font-stamp); font-size: 0.875rem; font-weight: 500; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-amber); margin: 2.5rem 0 1rem; }
+    .legal-content :global(p), .legal-content :global(address), .legal-content :global(li) { font-family: var(--font-body); font-size: 1rem; line-height: 1.75; color: color-mix(in srgb, var(--color-sand) 85%, transparent); }
+    .legal-content :global(p) { margin-bottom: 1.25rem; }
+    .legal-content :global(address) { font-style: normal; }
+    .legal-content :global(ul) { padding-left: 1.5rem; list-style: disc; margin-bottom: 1.25rem; }
+    .legal-content :global(li) { margin-bottom: 0.5rem; }
+    .legal-content :global([id]) { scroll-margin-top: 6rem; }
+  }
+</style>
